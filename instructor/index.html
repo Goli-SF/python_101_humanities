@@ -99,8 +99,7 @@
           <button class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             More <i data-feather="chevron-down"></i>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><hr><li><a class="dropdown-item" href="reference.html">Reference</a></li>
-          </ul></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><hr></ul></li>
       </ul></div>
     <!--
     <form class="d-flex col-md-2 search-form">
@@ -238,8 +237,7 @@
                       <li>
                         <a href="../instructor/images.html">Extract All Images</a>
                       </li>
-                      <hr><li><a class="dropdown-item" href="reference.html">Reference</a></li>
-                    </ul></div>
+                      <hr></ul></div>
                 </div>
               </div>
             </div>
@@ -266,14 +264,11 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><h1 class="schedule-heading">Summary and Schedule</h1>
       
-
-<p>This is a new lesson built with <a href="https://carpentries.github.io/sandpaper-docs" class="external-link">The Carpentries
-Workbench</a>.</p>
-<!--
+<p>In this lesson, you will learn the basics of data analysis and
+computational humanities using python. <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
- -->
-
+ --></p>
 
       <section id="schedule"><table class="table table schedule table-striped" role="presentation"><tbody><tr><td></td><td><a href="#setup">Setup Instructions</a></td><td> Download files required for the lesson</td>
           </tr><tr><td>
@@ -299,28 +294,52 @@ any links that you are not going to use.
  --></tbody></table><p>
       The actual schedule may vary slightly depending on the topics and exercises chosen by the instructor.
       </p>
-      </section><section id="setup"><p>FIXME: Setup instructions live in this document. Please specify the
-tools and the data sets the Learner needs to have installed.</p>
-<section><h2 class="section-heading" id="data-sets">Data Sets<a class="anchor" aria-label="anchor" href="#data-sets"></a></h2>
-<hr class="half-width"><!--
-FIXME: place any data you want learners to use in `episodes/data` and then use
-       a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
-       link to it, replacing the example.com link.
---><p>Download the <a href="https://example.com/FIXME" class="external-link">data zip file</a>
-and unzip it to your Desktop</p>
+      </section><section id="setup"><div id="what-background-knowledge-do-you-need-for-this-lesson" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="what-background-knowledge-do-you-need-for-this-lesson" class="callout-inner">
+<h3 class="callout-title">What background knowledge do you need for this
+lesson?</h3>
+<div class="callout-content">
+<ol style="list-style-type: decimal"><li>Basic acquaintance with Python: you should know how to import Python
+packages and load data into your code. You also need basic familiarity
+with Python syntax.</li>
+<li>Basic mathematical background: you need a basic understanding of
+statistics and probabilities.</li>
+<li>Curiosity to learn more about Python programming, statistics and
+data storytelling</li>
+</ol></div>
+</div>
+</div>
+<section><h2 class="section-heading" id="dataset">Dataset<a class="anchor" aria-label="anchor" href="#dataset"></a></h2>
+<hr class="half-width"><p>The dataset we are working with in this lesson originates from <a href="https://www.kaggle.com/datasets/levyedgar44/income-and-happiness-correction" class="external-link">Kaggle</a>.
+If you wish to save the the dataset on your computer, go ahead and
+download the <a href="../data/income_happiness_correlation.csv">Income and
+Happiness Correlation dataset</a> and save it to your working directory.
+Otherwise, you can directly load it into your code later using the
+following link:</p>
+<pre><code>https://raw.githubusercontent.com/carpentries-incubator/stat_inf_data_vis/main/episodes/data/income_happiness_correlation.csv</code></pre>
 </section><section><h2 class="section-heading" id="software-setup">Software Setup<a class="anchor" aria-label="anchor" href="#software-setup"></a></h2>
-<hr class="half-width"><div id="details" class="callout discussion">
+<hr class="half-width"><div id="python-and-jupyter-notebookgoogle-colab" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<div id="details" class="callout-inner">
-<h3 class="callout-title">Details</h3>
+<div id="python-and-jupyter-notebookgoogle-colab" class="callout-inner">
+<h3 class="callout-title">Python and Jupyter Notebook/Google Colab</h3>
 <div class="callout-content">
-<p>Setup for different systems can be presented in dropdown menus via a
-<code>spoiler</code> tag. They will join to this discussion block, so
-you can give a general overview of the software used in this lesson here
-and fill out the individual operating systems (and potentially add more,
-e.g. online setup) in the solutions blocks.</p>
+<p>To do the exercises in this lesson, you need an IDE (Integrated
+Development Environment). We recommend you use Jupyter Notebook or
+cloud-based equivalent such as <a href="https://colab.google/" class="external-link">Google
+Colab</a>.</p>
+<p>If you’re using Google Colab, you don’t need any installation. Just
+create a Google account - if you don’t have one already -, create a new
+Colab Notebook by clicking on <kbd>New Notebook</kbd> in the above link,
+and start coding.</p>
+<p>Otherwise, to install Jupyter Notebook and Python on your computer
+together, we recommend using <a href="https://www.anaconda.com/download/success" class="external-link">Anaconda</a>. To do so,
+click on your operating system from the list below and follow the
+instructions.</p>
 </div>
 </div>
 </div>
@@ -332,9 +351,18 @@ e.g. online setup) in the solutions blocks.</p>
   Windows
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
-<p>Use PuTTY</p>
+<ol style="list-style-type: decimal"><li>Open <a href="https://www.anaconda.com/download/success" class="external-link uri">https://www.anaconda.com/download/success</a> with your web
+browser.</li>
+<li>Download the Anaconda for Windows installer with Python 3. (If you
+are not sure which version to choose, you probably want the 64-bit
+Graphical Installer <em>Anaconda3-…-Windows-x86_64.exe</em>.)</li>
+<li>Install Python 3 by running the Anaconda Installer, using all of the
+defaults for installation <em>except</em> make sure to check <strong>Add
+Anaconda to my PATH environment variable</strong>.</li>
+</ol><p>This <a href="https://www.youtube.com/watch?v=xxQ0mzZ8UvA" class="external-link">video
+tutorial</a> can help you with the installation.</p>
 </div>
 </div>
 </div>
@@ -347,9 +375,16 @@ e.g. online setup) in the solutions blocks.</p>
   MacOS
   </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
 <div class="accordion-body">
-<p>Use Terminal.app</p>
+<ol style="list-style-type: decimal"><li>Open <a href="https://www.anaconda.com/download/success" class="external-link uri">https://www.anaconda.com/download/success</a> with your web
+browser.</li>
+<li>Download the Anaconda Installer with Python 3 for macOS (you can
+either use the Graphical or the Command Line Installer).</li>
+<li>Install Python 3 by running the Anaconda Installer using all of the
+defaults for installation.</li>
+</ol><p>This <a href="https://www.youtube.com/watch?v=TcSAln46u9U" class="external-link">video
+tutorial</a> can help you with the installation.</p>
 </div>
 </div>
 </div>
@@ -362,17 +397,39 @@ e.g. online setup) in the solutions blocks.</p>
   Linux
   </h3>
 </button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler3" aria-labelledby="headingSpoiler3">
 <div class="accordion-body">
-<p>Use Terminal</p>
+<ol style="list-style-type: decimal"><li>Open <a href="https://www.anaconda.com/download/success" class="external-link uri">https://www.anaconda.com/download/success</a> with your web
+browser.</li>
+<li>Download the Anaconda Installer with Python 3 for Linux. (The
+installation requires using the shell. If you aren’t comfortable doing
+the installation yourself stop here and request help at the
+workshop.)</li>
+<li>Open a terminal window and navigate to the directory where the
+executable is downloaded (e.g., <code>cd ~/Downloads</code>).</li>
+<li>Type <code>bash Anaconda3-</code> and then press <kbd>Tab</kbd> to
+autocomplete the full file name. The name of file you just downloaded
+should appear.</li>
+<li>Press <kbd>Enter</kbd> (or <kbd>Return</kbd> depending on your
+keyboard). You will follow the text-only prompts. To move through the
+text, press <kbd>Spacebar</kbd>. Type <code>yes</code> and press
+<kbd>Enter</kbd> (or <kbd>Return</kbd>) to approve the license. Press
+<kbd>Enter</kbd> (or <kbd>Return</kbd>) to approve the default location
+for the files. Type <code>yes</code> and press <kbd>Enter</kbd> (or
+<kbd>Return</kbd>) to prepend Anaconda to your <code>PATH</code> (this
+makes the Anaconda distribution the default Python).</li>
+<li>Close the terminal window.</li>
+</ol></div>
 </div>
 </div>
 </div>
-</div>
-<!--
+<p>After installing Python and Anaconda, make sure to install the Python
+libraries that we are using in this lesson. If you haven’t installed
+Python libraries on your computer before, ask the instructors for
+support. <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
- -->
+ --></p>
 </section></section></main><nav class="bottom-pagination mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link float-end" href="../instructor/introduction.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
