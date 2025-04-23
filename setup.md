@@ -25,12 +25,12 @@ version that I previously downloaded on April 9, 2025. This version is stored in
 repository for this lesson, ensuring that the results you see during live coding match 
 exactly what is demonstrated in the lesson.
 
-You can access the specific MoMA dataset used in this lesson here:
+To load the data from this lesson’s repository into your code, use the following URL:
 
 <span style="color:red">Link to be updated.</span>
 
 ```
-https://raw.githubusercontent.com/carpentries-incubator/stat_inf_data_vis/main/episodes/data/income_happiness_correlation.csv
+https://raw.githubusercontent.com/Goli-SF/python_101_humanities/main/episodes/data/moma_artworks.csv
 ```
 
 ## Software Setup
