@@ -211,15 +211,13 @@ moma_df.head()
 ```
 ::::::::::::::::::
 
-## Step 3 - Analyzing Tabular Data
+## Step 3 - Counting and Searching
 
 This dataset contains several aspects that can contribute to research in art history. 
 We will perform three distinct processes — **counting**, **searching**, and **visualizing** — 
 which, as mentioned earlier, could potentially aid in quantitative humanities research. 
 After completing each step, we will analyze the results and discuss whether they provide 
 meaningful insights for scientific research or if they lack scientific significance.
-
-#### Counting and Searching
 
 You can count all or a selected group of data points in a DataFrame. To start, let's get 
 an overview of the counts and data types present in the DataFrame. To do this, we’ll use 
@@ -388,7 +386,7 @@ artist_info
 ::::::::::::::::::::::::::::::::::::::: discussion
 #### Let's analyze the code above
 
-``` python
+``` 
 artist_details = moma_df.groupby('Artist')[['Gender', 'Nationality']].first().reset_index()
 ```
 
@@ -404,7 +402,7 @@ it becomes part of the DataFrame again.
 - The result is saved in a new DataFrame called `artist_details`, which contains one row 
 per artist along with their gender and nationality.
 
-``` python
+``` 
 artist_counts = moma_df['Artist'].value_counts().reset_index()
 artist_counts.columns = ['Artist', 'Number of Works']
 ```
@@ -416,7 +414,7 @@ to count how many times each artist appears, and then use `.reset_index()` to tu
 artist names back into a column.
 - The columns are renamed to 'Artist' and 'Number of Works'.
 
-``` python
+``` 
 artist_info = artist_counts.merge(artist_details, on='Artist', how='left')
 ```
 
@@ -451,9 +449,88 @@ gender_distribution
 ::::
 :::::::::::::::::::::::::::::::::::::::::::::::::
 
+It appears that MoMA holds four times as many works by male artists as by female artists, 
+highlighting a significant gender imbalance. However, other gender-related factors should also 
+be considered. For instance, the gender of 1,129 artists remains unspecified — possibly because 
+the artists are unknown or the work was created by a collective.
+
+Additionally, there are entries with gender labels such as "() (male) (male) (male) () (male) 
+(male) (female)", which likely indicate that the artwork was produced by a group of individuals 
+with the listed genders. To clarify this, let’s examine the `moma_df` dataset to identify the 
+artist and corresponding artwork associated with this particular gender entry.
+
+::::::::::::::::::::::::::::::::::::: challenge
+#### Challenge
+
+Write the pseudocode to find the artist and the artwork that correspond to the gender
+"() (male) (male) (male) () (male) (male) (female)".
+
+:::: solution
+
+- Define the specific gender pattern as a string.
+- Filter the dataset to find all rows where the 'Gender' column exactly matches this pattern.
+- Store the filtered rows in a new DataFrame.
+
+::::
+:::::::::::::::::::::::::::::::::::::::::::::::::
+
+Let's translate the pseudocode into Python code: 
+
+``` python
+gender= "() (male) (male) (male) () (male) (male) (female)"
+matching_artworks = moma_df[moma_df['Gender'] == gender]
+matching_artworks
+```
+
+::::::::::::::::::::::::::::::::::::::: discussion
+#### Let's analyze the code above
+
+`matching_artworks = moma_df[moma_df['Gender'] == gender]` filters the `moma_df` DataFrame 
+to include only the rows where the Gender column exactly matches the gender string defined 
+earlier. `moma_df['Gender']` selects the Gender column from the DataFrame, and `== gender` 
+checks whether the value in that column is exactly equal to the specified gender string.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+
+![](fig/output_07.png)
+
+As you can see, the artists' name is not completely readable in the table. Let’s 
+try to access the complete artist name for this specific artwork by adding 
+some more pseudocode and Python code. The pseudocode for this step would look like this: 
+
+```
+- Access the first row of the matching results.
+- Retrieve the artist’s name from this row.
+```
+
+which translates into one line of Python code: 
+
+```python
+matching_artworks.iloc[0]['Artist']
+```
+![](fig/output_08.png)
+
+
+::::::::::::::::::::::::::::::::::::::: discussion
+#### Let's analyze the code above
+
+Having filtered the data to include only the rows with the specified gender, we want to 
+work with the first one that meets the condition. `.iloc[0]` in `matching_artworks.iloc[0]` 
+allows us to do this. It accesses the first row in the `matching_artworks` DataFrame. 
+`.iloc[]` is used for index-based access in a DataFrame, meaning it retrieves rows based 
+on their position (in this case, 0 refers to the first row).
+
+After accessing the first row using `.iloc[0]`, `matching_artworks.iloc[0]['Artist']` 
+selects the 'Artist' column from that row. This line extracts the artist's name from the 
+first row that matches the gender pattern, effectively identifying the artist who created 
+the artwork with the specified gender description.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 **<span style="color:red">WE ARE HERE </span>**
 
-<span style="color:red">Add more challenges. The learners should now count somethind different. </span>
+## Step 4 - Visualizing
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 - Formulate appropriate research questions when working with tabular data
