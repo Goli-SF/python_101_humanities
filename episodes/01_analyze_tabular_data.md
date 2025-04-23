@@ -103,15 +103,15 @@ create a variable called `a_number` and store a number in it, like this:
 
 ``` python
 a_number = 12
-print (a_number)
+a_number
 ```
 
 I can also store a string (a sequence of characters, including letters, numbers, and 
 other symbols) in a variable, which I'll call `a_string`, like this:"
 
 ``` python
-a_string= "This is a string, consisting of numbers (like 13), letthers and other signs!"
-print (a_string)
+a_string= "This is a string, consisting of numbers (like 13), letters and other signs!"
+a_string
 ```
 Notice that you should put the value of the string inside double or single quotes, but you shouldn't do it for numbers. 
 
@@ -126,7 +126,196 @@ Notice that you should put the value of the string inside double or single quote
 
 ::::::::::::::::::
 
-<span style="color:red">WE ARE HERE</span>
+You can either assign a value to a variable directly in your code, as you just did, or you can
+load data that already exists on your computer or online, and store it in the variable. This is
+what we are doing right now:
+
+``` python
+data_path= 'https://raw.githubusercontent.com/HERMES-DKZ/python_101_humanities/main/episodes/data/moma_artworks.csv'
+```
+
+You already know that CSV files actually represent tabular data. To make our `.csv` file look 
+like a table and become more readable and easier to work with, we are going to load it into a `DataFrame`.
+
+DataFrames are powerful table-like data structures that can be created and manipulated using the `pandas` 
+library, which we have previously imported into our code. A DataFrame organizes data into 
+rows and columns, similar to a spreadsheet or database table. Each column in a DataFrame has 
+a name (often taken from the header row of the CSV file), and each row represents an individual 
+record or observation.
+
+DataFrames are especially useful because they allow us to apply powerful functions and methods 
+that simplify working with structured data. Whether you're analyzing trends, generating summaries, 
+or preparing data for visualization, DataFrames provide a convenient and flexible way to manage your data.
+
+In the following code snippet, we use the `read_csv()` function from `pandas` to load the 
+contents of the CSV file. This function reads the file and automatically turns it into a DataFrame. 
+In this example, I am passing only one argument to the `read_csv()` function: the address 
+of the `.csv` file that I want to load. I have already saved this address in the variable `data_path`. 
+`moma_df` is the variable where we store the resulting DataFrame. Once the data is in a DataFrame, 
+we can easily explore it, filter rows, select specific columns, clean the data, and perform 
+many types of analysis.
+
+Here's how the code looks:
+
+``` python
+moma_df= pd.read_csv(data_path)
+moma_df
+```
+
+![](fig/output_01.png)
+
+As you can see, this is a large DataFrame, containing 158,688 rows and 30 columns. For now, 
+we’re only interested in viewing the first few rows to get a quick overview of its structure — 
+specifically the column names and the types of values stored in each column. To do this, we’ll 
+use the DataFrame’s `.head()` method, like so:
+
+``` python
+moma_df.head()
+```
+
+![](fig/output_02.png)
+
+`.head()` is a method, which means it's a type of function that's associated with a specific 
+object — in this case, a DataFrame. Like regular functions, methods can accept arguments 
+placed within the parentheses that follow them. If you don’t provide one, `.head()` will return 
+the first five rows by default. If you pass a number (e.g., `moma_df.head(2)`), it will return 
+that many rows from the top of the DataFrame.
+
+:::::::::::::::: callout
+#### Writing pseudocode
+
+By now, you can see that writing code follows a clear and logical workflow. As a beginner, 
+it's good practice to start by writing pseudocode — a rough outline of your steps in plain, 
+natural language — before translating it into actual code. This helps you plan your approach 
+and stay focused on the logic behind each step.
+
+For example, the steps we’ve taken so far might look like this in pseudocode:
+
+``` 
+- Import the necessary libraries.
+- Save the file path where the data is stored in a variable.
+- Load the data into the program.
+- Convert the data into a table format that’s easier to explore.
+- Display only the first few rows of the table to avoid overwhelming output.
+```
+
+This pseudocode translates into the following Python code, which brings together all 
+the lines we've written so far:
+
+``` python
+import pandas as pd
+
+data_path= "../data/moma_artworks.csv"
+moma_df= pd.read_csv(data_path)
+moma_df.head()
+```
+::::::::::::::::::
+
+## Step 3 - Analyzing Tabular Data
+
+This dataset contains several aspects that can contribute to research in art history. 
+We will perform three distinct processes — **counting**, **searching**, and **visualizing** — 
+which, as mentioned earlier, could potentially aid in quantitative humanities research. 
+After completing each step, we will analyze the results and discuss whether they provide 
+meaningful insights for scientific research or if they lack scientific significance.
+
+#### Counting and Searching
+
+You can count all or a selected group of data points in a DataFrame. To start, let's get 
+an overview of the counts and data types present in the DataFrame. To do this, we’ll use 
+the `.info()` method on the DataFrame:
+
+``` python
+moma_df.info()
+```
+
+![](fig/output_03.png)
+
+This method provides valuable information about the DataFrame in a tabular format. 
+
+:::::::::::::::: callout
+#### Insights from the `.info()` Method
+
+In the first column of the resulting table, you can see the names and numbers of all the columns in the DataFrame. 
+As shown here, the first column, "Title", is numbered as "0". REMEMBER: In Python, indexing 
+and counting always start from zero. This concept is important to keep in mind when working 
+with lists, strings, Series, DataFrames, dictionaries, and other data structures.
+
+The second column in the table displays the number of "non-null" values in each DataFrame column. 
+If you refer back to the first five rows of the DataFrame, you’ll notice that "NaN" appears 
+quite frequently. "NaN" stands for "Not a Number" and is a special value used to represent missing, 
+undefined, or unrepresentable numerical data.
+
+When preparing datasets, like the one from MoMA, it’s crucial for people working at GLAM 
+(Galleries, Libraries, Archives, Museums) institutions not to leave any cells empty. If left 
+blank, users may mistakenly believe that the value was simply forgotten. By using "NaN", the data 
+preparers are indicating that they have no information about a particular data point. For example, 
+when "NaN" appears under the "Circumference" column of an artwork, it means there is no available 
+measurement for the artwork’s circumference.
+
+Some providers of DataSets use other values instead of "NaN" to imply a missing value, such as: 
+
+|Situation |Missing Value |
+|--- |--- |
+|Numeric data |NaN or None |
+|Text data |None or "Unknown" |
+|Database tables |NULL |
+|External systems (e.g. Excel) |"N/A", #N/A, blank |
+
+Returning to the DataFrame info, "non-null" values refer to values that are not NaN, NULL, N/A, 
+or their equivalents. In other words, these are the useful values that contain meaningful information.
+
+The third column in the info table shows the data type of the values in each column. A data type 
+tells Python (or, in this case, pandas) what kind of value something is, so it knows how to handle it. 
+In this dataset, we have three main data types: "object", "int64", and "float64".
+
+- "int" stands for integer — whole numbers without decimals (e.g., 1, 2, 3, ...). The "64" in "int64" 
+refers to the number of bits used to store the integer in memory: 64 bits. Larger sizes allow for the 
+storage of larger numbers more accurately.
+- "float" stands for floating-point number (or decimal number), such as 1.345, 12.34878, or -0.1. 
+Floats are used for measurements, percentages, or any values that aren't whole numbers. Similarly, "64" in 
+"float64" indicates the size of the number in memory, using 64 bits to store each decimal.
+
+Finally, in `pandas`, anything that isn't clearly a number is categorized as an "object". Examples 
+of objects in pandas include:
+
+- Strings (text): "apple", "John", "abc123"
+- Lists with mixed values: ["hello", 3, None]
+- Python objects
+
+::::::::::::::::::
+
+The DataFrame info has already provided us with valuable insights into the data types in the DataFrame 
+and how they should be handled during analysis. It has also performed some counting for us. 
+Now, we can begin counting more specific elements within the DataFrame. For example, we can identify 
+all the artist names in the DataFrame and determine how many works by each artist are included in 
+MoMA's collection.
+
+::::::::::::::::::::::::::::::::::::: challenge 
+#### Challenge
+
+How do you think we should proceed? Can you break down this task into single steps and write the 
+pseudocodefor each step?
+
+:::::::::::::::::::::::: solution 
+
+To achieve this, we can create a new DataFrame that contains artist names and the corresponding 
+count of how many times each artist appears in `moma_df`. Before diving into the actual Python code, 
+let’s outline the pseudocode for this task:
+
+- Look at the column "Artist" in `moma_df` and find individual artist names.
+- Count the number of times each individual artist name appears in `moma_df`.
+- Store the artist names and the number of their mentions in a new DataFrame called `artist_counts`.
+
+:::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+  **<span style="color:red">WE ARE HERE </span>**
+
+
+
+
+<span style="color:red">Add more challenges. The learners should now count somethind different. </span>
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 - Formulate appropriate research questions when working with tabular data
