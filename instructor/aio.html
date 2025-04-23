@@ -812,7 +812,7 @@ brings together all the lines we’ve written so far:</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="step-3---analyzing-tabular-data">Step 3 - Analyzing Tabular Data<a class="anchor" aria-label="anchor" href="#step-3---analyzing-tabular-data"></a>
+</section><section><h2 class="section-heading" id="step-3---counting-and-searching">Step 3 - Counting and Searching<a class="anchor" aria-label="anchor" href="#step-3---counting-and-searching"></a>
 </h2>
 <hr class="half-width">
 <p>This dataset contains several aspects that can contribute to research
@@ -823,9 +823,6 @@ potentially aid in quantitative humanities research. After completing
 each step, we will analyze the results and discuss whether they provide
 meaningful insights for scientific research or if they lack scientific
 significance.</p>
-<div class="section level4">
-<h4 id="counting-and-searching">Counting and Searching<a class="anchor" aria-label="anchor" href="#counting-and-searching"></a>
-</h4>
 <p>You can count all or a selected group of data points in a DataFrame.
 To start, let’s get an overview of the counts and data types present in
 the DataFrame. To do this, we’ll use the <code>.info()</code> method on
@@ -1086,11 +1083,7 @@ artist information with their work counts.</li>
 <div id="lets-analyze-the-code-above-1" class="callout-inner">
 <h3 class="callout-title">Let’s analyze the code above</h3>
 <div class="callout-content">
-<div class="codewrapper sourceCode" id="cb13">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>artist_details <span class="op">=</span> moma_df.groupby(<span class="st">'Artist'</span>)[[<span class="st">'Gender'</span>, <span class="st">'Nationality'</span>]].first().reset_index()</span></code></pre>
-</div>
+<pre><code>artist_details = moma_df.groupby('Artist')[['Gender', 'Nationality']].first().reset_index()</code></pre>
 <ul>
 <li>
 <code>moma_df.groupby('Artist')</code> groups the DataFrame by the
@@ -1113,12 +1106,8 @@ again.</li>
 <code>artist_details</code>, which contains one row per artist along
 with their gender and nationality.</li>
 </ul>
-<div class="codewrapper sourceCode" id="cb14">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>artist_counts <span class="op">=</span> moma_df[<span class="st">'Artist'</span>].value_counts().reset_index()</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>artist_counts.columns <span class="op">=</span> [<span class="st">'Artist'</span>, <span class="st">'Number of Works'</span>]</span></code></pre>
-</div>
+<pre><code>artist_counts = moma_df['Artist'].value_counts().reset_index()
+artist_counts.columns = ['Artist', 'Number of Works']</code></pre>
 <ul>
 <li>This code creates another DataFrame, <code>artist_counts</code>,
 containing the number of works associated with each artist in
@@ -1129,11 +1118,7 @@ appears, and then use <code>.reset_index()</code> to turn the artist
 names back into a column.</li>
 <li>The columns are renamed to ‘Artist’ and ‘Number of Works’.</li>
 </ul>
-<div class="codewrapper sourceCode" id="cb15">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>artist_info <span class="op">=</span> artist_counts.merge(artist_details, on<span class="op">=</span><span class="st">'Artist'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span></code></pre>
-</div>
+<pre><code><span><span class="va">artist_info</span> <span class="op">=</span> <span class="fu">artist_counts.merge</span><span class="op">(</span><span class="va">artist_details</span>, on<span class="op">=</span><span class="st">'Artist'</span>, how<span class="op">=</span><span class="st">'left'</span><span class="op">)</span></span></code></pre>
 <ul>
 <li>Now we merge the two DataFrames, <code>artist_counts</code> and
 <code>artist_details</code>, into one comprehensive DataFrame called
@@ -1184,9 +1169,111 @@ are attributed to artists of different genders.</p>
 </div>
 </div>
 </div>
+<p>It appears that MoMA holds four times as many works by male artists
+as by female artists, highlighting a significant gender imbalance.
+However, other gender-related factors should also be considered. For
+instance, the gender of 1,129 artists remains unspecified — possibly
+because the artists are unknown or the work was created by a
+collective.</p>
+<p>Additionally, there are entries with gender labels such as “() (male)
+(male) (male) () (male) (male) (female)”, which likely indicate that the
+artwork was produced by a group of individuals with the listed genders.
+To clarify this, let’s examine the <code>moma_df</code> dataset to
+identify the artist and corresponding artwork associated with this
+particular gender entry.</p>
+<div id="challenge-3" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="challenge-3" class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Write the pseudocode to find the artist and the artwork that
+correspond to the gender “() (male) (male) (male) () (male) (male)
+(female)”.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div class="accordion-body">
+<ul>
+<li>Define the specific gender pattern as a string.</li>
+<li>Filter the dataset to find all rows where the ‘Gender’ column
+exactly matches this pattern.</li>
+<li>Store the filtered rows in a new DataFrame.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<p>Let’s translate the pseudocode into Python code:</p>
+<div class="codewrapper sourceCode" id="cb17">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>gender<span class="op">=</span> <span class="st">"() (male) (male) (male) () (male) (male) (female)"</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>matching_artworks <span class="op">=</span> moma_df[moma_df[<span class="st">'Gender'</span>] <span class="op">==</span> gender]</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>matching_artworks</span></code></pre>
+</div>
+<div id="lets-analyze-the-code-above-2" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="lets-analyze-the-code-above-2" class="callout-inner">
+<h3 class="callout-title">Let’s analyze the code above</h3>
+<div class="callout-content">
+<p><code>matching_artworks = moma_df[moma_df['Gender'] == gender]</code>
+filters the <code>moma_df</code> DataFrame to include only the rows
+where the Gender column exactly matches the gender string defined
+earlier. <code>moma_df['Gender']</code> selects the Gender column from
+the DataFrame, and <code>== gender</code> checks whether the value in
+that column is exactly equal to the specified gender string.</p>
+</div>
+</div>
+</div>
+<figure><img src="../fig/output_07.png" class="figure mx-auto d-block"></figure><p>As you can see, the artists’ name is not completely readable in the
+table. Let’s try to access the complete artist name for this specific
+artwork by adding some more pseudocode and Python code. The pseudocode
+for this step would look like this:</p>
+<pre><code>- Access the first row of the matching results.
+- Retrieve the artist’s name from this row.</code></pre>
+<p>which translates into one line of Python code:</p>
+<div class="codewrapper sourceCode" id="cb19">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>matching_artworks.iloc[<span class="dv">0</span>][<span class="st">'Artist'</span>]</span></code></pre>
+</div>
+<figure><img src="../fig/output_08.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-above-3" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="lets-analyze-the-code-above-3" class="callout-inner">
+<h3 class="callout-title">Let’s analyze the code above</h3>
+<div class="callout-content">
+<p>Having filtered the data to include only the rows with the specified
+gender, we want to work with the first one that meets the condition.
+<code>.iloc[0]</code> in <code>matching_artworks.iloc[0]</code> allows
+us to do this. It accesses the first row in the
+<code>matching_artworks</code> DataFrame. <code>.iloc[]</code> is used
+for index-based access in a DataFrame, meaning it retrieves rows based
+on their position (in this case, 0 refers to the first row).</p>
+<p>After accessing the first row using <code>.iloc[0]</code>,
+<code>matching_artworks.iloc[0]['Artist']</code> selects the ‘Artist’
+column from that row. This line extracts the artist’s name from the
+first row that matches the gender pattern, effectively identifying the
+artist who created the artwork with the specified gender
+description.</p>
+</div>
+</div>
+</div>
 <p><strong><span style="color:red">WE ARE HERE </span></strong></p>
-<p><span style="color:red">Add more challenges. The learners should now
-count somethind different. </span></p>
+</section><section><h2 class="section-heading" id="step-4---visualizing">Step 4 - Visualizing<a class="anchor" aria-label="anchor" href="#step-4---visualizing"></a>
+</h2>
+<hr class="half-width">
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1209,7 +1296,6 @@ computer logic, and implement them in code</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</div>
 </section></section>
 </div>
     </main>
