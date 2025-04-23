@@ -226,6 +226,7 @@
       <div class="accordion-body">
         <ul><li><a href="#step-1---importing-the-necessary-python-libraries">Step 1 - Importing the Necessary Python Libraries</a></li>
 <li><a href="#step-2---loading-the-data-into-your-code">Step 2 - Loading the Data into Your Code</a></li>
+<li><a href="#step-3---analyzing-tabular-data">Step 3 - Analyzing Tabular Data</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -422,7 +423,7 @@ this:</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>a_number <span class="op">=</span> <span class="dv">12</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="bu">print</span> (a_number)</span></code></pre>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>a_number</span></code></pre>
 </div>
 <p>I can also store a string (a sequence of characters, including
 letters, numbers, and other symbols) in a variable, which I’ll call
@@ -430,8 +431,8 @@ letters, numbers, and other symbols) in a variable, which I’ll call
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>a_string<span class="op">=</span> <span class="st">"This is a string, consisting of numbers (like 13), letthers and other signs!"</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="bu">print</span> (a_string)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>a_string<span class="op">=</span> <span class="st">"This is a string, consisting of numbers (like 13), letters and other signs!"</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>a_string</span></code></pre>
 </div>
 <p>Notice that you should put the value of the string inside double or
 single quotes, but you shouldn’t do it for numbers.</p>
@@ -455,7 +456,228 @@ and <code>MyVar</code> are two different variables.</li>
 </ul></div>
 </div>
 </div>
-<p><span style="color:red">WE ARE HERE</span></p>
+<p>You can either assign a value to a variable directly in your code, as
+you just did, or you can load data that already exists on your computer
+or online, and store it in the variable. This is what we are doing right
+now:</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>data_path<span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/HERMES-DKZ/python_101_humanities/main/episodes/data/moma_artworks.csv'</span></span></code></pre>
+</div>
+<p>You already know that CSV files actually represent tabular data. To
+make our <code>.csv</code> file look like a table and become more
+readable and easier to work with, we are going to load it into a
+<code>DataFrame</code>.</p>
+<p>DataFrames are powerful table-like data structures that can be
+created and manipulated using the <code>pandas</code> library, which we
+have previously imported into our code. A DataFrame organizes data into
+rows and columns, similar to a spreadsheet or database table. Each
+column in a DataFrame has a name (often taken from the header row of the
+CSV file), and each row represents an individual record or
+observation.</p>
+<p>DataFrames are especially useful because they allow us to apply
+powerful functions and methods that simplify working with structured
+data. Whether you’re analyzing trends, generating summaries, or
+preparing data for visualization, DataFrames provide a convenient and
+flexible way to manage your data.</p>
+<p>In the following code snippet, we use the <code>read_csv()</code>
+function from <code>pandas</code> to load the contents of the CSV file.
+This function reads the file and automatically turns it into a
+DataFrame. In this example, I am passing only one argument to the
+<code>read_csv()</code> function: the address of the <code>.csv</code>
+file that I want to load. I have already saved this address in the
+variable <code>data_path</code>. <code>moma_df</code> is the variable
+where we store the resulting DataFrame. Once the data is in a DataFrame,
+we can easily explore it, filter rows, select specific columns, clean
+the data, and perform many types of analysis.</p>
+<p>Here’s how the code looks:</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>moma_df<span class="op">=</span> pd.read_csv(data_path)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>moma_df</span></code></pre>
+</div>
+<figure><img src="fig/output_01.png" class="figure mx-auto d-block"></figure><p>As you can see, this is a large DataFrame, containing 158,688 rows
+and 30 columns. For now, we’re only interested in viewing the first few
+rows to get a quick overview of its structure — specifically the column
+names and the types of values stored in each column. To do this, we’ll
+use the DataFrame’s <code>.head()</code> method, like so:</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>moma_df.head()</span></code></pre>
+</div>
+<figure><img src="fig/output_02.png" class="figure mx-auto d-block"></figure><p><code>.head()</code> is a method, which means it’s a type of function
+that’s associated with a specific object — in this case, a DataFrame.
+Like regular functions, methods can accept arguments placed within the
+parentheses that follow them. If you don’t provide one,
+<code>.head()</code> will return the first five rows by default. If you
+pass a number (e.g., <code>moma_df.head(2)</code>), it will return that
+many rows from the top of the DataFrame.</p>
+<div id="writing-pseudocode" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="writing-pseudocode" class="callout-inner">
+<h3 class="callout-title">Writing pseudocode</h3>
+<div class="callout-content">
+<p>By now, you can see that writing code follows a clear and logical
+workflow. As a beginner, it’s good practice to start by writing
+pseudocode — a rough outline of your steps in plain, natural language —
+before translating it into actual code. This helps you plan your
+approach and stay focused on the logic behind each step.</p>
+<p>For example, the steps we’ve taken so far might look like this in
+pseudocode:</p>
+<pre><code>- Import the necessary libraries.
+- Save the file path where the data is stored in a variable.
+- Load the data into the program.
+- Convert the data into a table format that’s easier to explore.
+- Display only the first few rows of the table to avoid overwhelming output.</code></pre>
+<p>This pseudocode translates into the following Python code, which
+brings together all the lines we’ve written so far:</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>data_path<span class="op">=</span> <span class="st">"../data/moma_artworks.csv"</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>moma_df<span class="op">=</span> pd.read_csv(data_path)</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>moma_df.head()</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="step-3---analyzing-tabular-data">Step 3 - Analyzing Tabular Data<a class="anchor" aria-label="anchor" href="#step-3---analyzing-tabular-data"></a></h2>
+<hr class="half-width"><p>This dataset contains several aspects that can contribute to research
+in art history. We will perform three distinct processes —
+<strong>counting</strong>, <strong>searching</strong>, and
+<strong>visualizing</strong> — which, as mentioned earlier, could
+potentially aid in quantitative humanities research. After completing
+each step, we will analyze the results and discuss whether they provide
+meaningful insights for scientific research or if they lack scientific
+significance.</p>
+<div class="section level4">
+<h4 id="counting-and-searching">Counting and Searching<a class="anchor" aria-label="anchor" href="#counting-and-searching"></a></h4>
+<p>You can count all or a selected group of data points in a DataFrame.
+To start, let’s get an overview of the counts and data types present in
+the DataFrame. To do this, we’ll use the <code>.info()</code> method on
+the DataFrame:</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>moma_df.info()</span></code></pre>
+</div>
+<figure><img src="fig/output_03.png" class="figure mx-auto d-block"></figure><p>This method provides valuable information about the DataFrame in a
+tabular format.</p>
+<div id="insights-from-the-.info-method" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="insights-from-the-.info-method" class="callout-inner">
+<h3 class="callout-title">Insights from the <code>.info()</code>
+Method</h3>
+<div class="callout-content">
+<p>In the first column of the resulting table, you can see the names and
+numbers of all the columns in the DataFrame. As shown here, the first
+column, “Title”, is numbered as “0”. REMEMBER: In Python, indexing and
+counting always start from zero. This concept is important to keep in
+mind when working with lists, strings, Series, DataFrames, dictionaries,
+and other data structures.</p>
+<p>The second column in the table displays the number of “non-null”
+values in each DataFrame column. If you refer back to the first five
+rows of the DataFrame, you’ll notice that “NaN” appears quite
+frequently. “NaN” stands for “Not a Number” and is a special value used
+to represent missing, undefined, or unrepresentable numerical data.</p>
+<p>When preparing datasets, like the one from MoMA, it’s crucial for
+people working at GLAM (Galleries, Libraries, Archives, Museums)
+institutions not to leave any cells empty. If left blank, users may
+mistakenly believe that the value was simply forgotten. By using “NaN”,
+the data preparers are indicating that they have no information about a
+particular data point. For example, when “NaN” appears under the
+“Circumference” column of an artwork, it means there is no available
+measurement for the artwork’s circumference.</p>
+<p>Some providers of DataSets use other values instead of “NaN” to imply
+a missing value, such as:</p>
+<table class="table"><thead><tr class="header"><th>Situation</th>
+<th>Missing Value</th>
+</tr></thead><tbody><tr class="odd"><td>Numeric data</td>
+<td>NaN or None</td>
+</tr><tr class="even"><td>Text data</td>
+<td>None or “Unknown”</td>
+</tr><tr class="odd"><td>Database tables</td>
+<td>NULL</td>
+</tr><tr class="even"><td>External systems (e.g. Excel)</td>
+<td>“N/A”, #N/A, blank</td>
+</tr></tbody></table><p>Returning to the DataFrame info, “non-null” values refer to values
+that are not NaN, NULL, N/A, or their equivalents. In other words, these
+are the useful values that contain meaningful information.</p>
+<p>The third column in the info table shows the data type of the values
+in each column. A data type tells Python (or, in this case, pandas) what
+kind of value something is, so it knows how to handle it. In this
+dataset, we have three main data types: “object”, “int64”, and
+“float64”.</p>
+<ul><li>“int” stands for integer — whole numbers without decimals (e.g., 1,
+2, 3, …). The “64” in “int64” refers to the number of bits used to store
+the integer in memory: 64 bits. Larger sizes allow for the storage of
+larger numbers more accurately.</li>
+<li>“float” stands for floating-point number (or decimal number), such
+as 1.345, 12.34878, or -0.1. Floats are used for measurements,
+percentages, or any values that aren’t whole numbers. Similarly, “64” in
+“float64” indicates the size of the number in memory, using 64 bits to
+store each decimal.</li>
+</ul><p>Finally, in <code>pandas</code>, anything that isn’t clearly a number
+is categorized as an “object”. Examples of objects in pandas
+include:</p>
+<ul><li>Strings (text): “apple”, “John”, “abc123”</li>
+<li>Lists with mixed values: [“hello”, 3, None]</li>
+<li>Python objects</li>
+</ul></div>
+</div>
+</div>
+<p>The DataFrame info has already provided us with valuable insights
+into the data types in the DataFrame and how they should be handled
+during analysis. It has also performed some counting for us. Now, we can
+begin counting more specific elements within the DataFrame. For example,
+we can identify all the artist names in the DataFrame and determine how
+many works by each artist are included in MoMA’s collection.</p>
+<div id="challenge" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="challenge" class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>How do you think we should proceed? Can you break down this task into
+single steps and write the pseudocodefor each step?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>To achieve this, we can create a new DataFrame that contains artist
+names and the corresponding count of how many times each artist appears
+in <code>moma_df</code>. Before diving into the actual Python code,
+let’s outline the pseudocode for this task:</p>
+<ul><li>Look at the column “Artist” in <code>moma_df</code> and find
+individual artist names.</li>
+<li>Count the number of times each individual artist name appears in
+<code>moma_df</code>.</li>
+<li>Store the artist names and the number of their mentions in a new
+DataFrame called <code>artist_counts</code>.</li>
+</ul></div>
+</div>
+</div>
+</div>
+<p><strong><span style="color:red">WE ARE HERE </span></strong></p>
+<p><span style="color:red">Add more challenges. The learners should now
+count somethind different. </span></p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
