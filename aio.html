@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<title>Lesson Title: All in One View</title>
+<title>Introduction to data analysis basics with Python for the humanities: All in One View</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="assets/themetoggle.js"></script><link rel="stylesheet" type="text/css" href="assets/styles.css">
 <script src="assets/scripts.js" type="text/javascript"></script><!-- mathjax --><script type="text/x-mathjax-config">
@@ -34,7 +34,7 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="incubator-logo" alt="Lesson Description" src="assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
+        <img id="incubator-logo" alt="In this lesson, you will learn the basics of data analysis and computational humanities using python." src="assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
           <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
             <a href="https://cdh.carpentries.org/the-lesson-life-cycle.html#early-development-pre-alpha-through-alpha" class="external-link alert-link">
               <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
@@ -91,10 +91,10 @@
       <span class="menu-title">Menu</span>
     </button>
     <div class="nav-logo">
-      <img class="small-logo" alt="Lesson Description" src="assets/images/incubator-logo-sm.svg">
+      <img class="small-logo" alt="In this lesson, you will learn the basics of data analysis and computational humanities using python." src="assets/images/incubator-logo-sm.svg">
 </div>
     <div class="lesson-title-md">
-      Lesson Title
+      Introduction to data analysis basics with Python for the humanities
     </div>
     <div class="search-icon-sm">
       <!-- TODO: do not show until we have search
@@ -105,7 +105,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 <li class="nav-item">
           <span class="lesson-title">
-            Lesson Title
+            Introduction to data analysis basics with Python for the humanities
           </span>
         </li>
         <li class="nav-item">
@@ -139,7 +139,7 @@
   </div>
 <!--/div.container-fluid -->
 </nav><div class="col-md-12 mobile-title">
-  Lesson Title
+  Introduction to data analysis basics with Python for the humanities
 </div>
 
 <aside class="col-md-12 lesson-progress"><div style="width: %" class="percentage">
@@ -241,7 +241,19 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="introduction.html">1. Introduction</a>
+        <a href="00_introduction.html">1. Introduction</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush3">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading3">
+        <a href="01_analyze_tabular_data.html">2. Analyzing Tabular Data</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -304,11 +316,11 @@
     <main id="main-content" class="main-content"><div class="container lesson-content">
         
         
-<section id="aio-introduction"><p>Content from <a href="introduction.html">Introduction</a></p>
+<section id="aio-00_introduction"><p>Content from <a href="00_introduction.html">Introduction</a></p>
 <hr>
 <p>Last updated on 2025-04-23 |
 
-        <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/Goli-SF/python_101_humanities/edit/main/episodes/00_introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -424,30 +436,91 @@ Python.</p>
 <hr class="half-width">
 <p>In humanities research, quantitative data analysis is only logical
 and legitimate when:</p>
-<p>It reveals new insights: This method should uncover information that
-was previously unknown. If your research merely confirms what is already
-well-established, it lacks value. For example, we already know that
-women have historically been underrepresented in the documentation of
-human achievements. If we take a book on the history of art, create a
-list of all the artists mentioned, count how many are women, and
-conclude that female artists are less frequent in the book than male
-artists, our effort provides no new knowledge.</p>
-<p>The data is too extensive for manual analysis: The data to be
-analyzed is so vast that it is either impossible for human intellect to
-process it in a reasonable time frame, or it would require an
-impractical amount of resources for individuals to analyze it. For
-instance, counting how many of the 50 names in a list are female does
-not require programming; it can easily be done by an individual.
-However, analyzing large datasets, like millions of records, would
-require quantitative methods.</p>
-<p>Avoiding the temptation to overuse “digital analysis”: In today’s
+<ul>
+<li><p><strong>It reveals new insights:</strong> This method should
+uncover information that was previously unknown. If your research merely
+confirms what is already well-established, it lacks value. For example,
+we already know that women have historically been underrepresented in
+the documentation of human achievements. If we take a book on the
+history of art, create a list of all the artists mentioned, count how
+many are women, and conclude that female artists are less frequent in
+the book than male artists, our effort provides no new
+knowledge.</p></li>
+<li><p><strong>The data is too extensive for manual analysis:</strong>
+The data to be analyzed is so vast that it is either impossible for
+human intellect to process it in a reasonable time frame, or it would
+require an impractical amount of resources for individuals to analyze
+it. For instance, counting how many of the 50 country names in a list
+belong to African Countries does not require programming; it can easily
+be done by an individual. However, analyzing large datasets, like
+millions of records, would require quantitative methods.</p></li>
+</ul>
+<div id="caution" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="caution" class="callout-inner">
+<h3 class="callout-title">Caution!</h3>
+<div class="callout-content">
+<p>Avoid the temptation to overuse “digital analysis”! In today’s
 academic environment, there is a temptation to include “digital
 analysis” in grant proposals or PhD theses simply to make them sound
 modern and sophisticated. It’s crucial not to fall into this trap and
 produce work that, in the end, won’t be meaningful or taken seriously.
 Remember: merely adding a table or graph to your research doesn’t
 automatically make you a digital humanist or a quantitative data
-analyst.</p>
+analyst. Always think of the points above and ask yourself whether it is
+insightful and meaningful to perform quantitative data analysis using
+programming or software and call it “research with digital methods”.</p>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="what-do-we-do-when-we-perform-quantitative-data-analysis">What do we do, when we perform quantitative data analysis”?<a class="anchor" aria-label="anchor" href="#what-do-we-do-when-we-perform-quantitative-data-analysis"></a>
+</h2>
+<hr class="half-width">
+<div class="section level3">
+<h3 id="types-of-data-in-digital-humanities">Types of Data in Digital Humanities<a class="anchor" aria-label="anchor" href="#types-of-data-in-digital-humanities"></a>
+</h3>
+<p>Data used for analysis can take various forms, including:</p>
+<ul>
+<li>Tabular data (containing text, numbers, dates, etc.)</li>
+<li>Text</li>
+<li>Images</li>
+<li>Sound</li>
+<li>Audiovisual data</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="workflow-for-quantitative-humanities-research">Workflow for Quantitative Humanities Research<a class="anchor" aria-label="anchor" href="#workflow-for-quantitative-humanities-research"></a>
+</h3>
+<p>When conducting quantitative research in the humanities using Python,
+the typical workflow involves the following steps:</p>
+<ul>
+<li>Acquiring the data</li>
+<li>Initiating a Python script</li>
+<li>Loading the data into the script</li>
+<li>Performing operations such as exploring and cleaning the data as
+well as counting, comparing, searching, pattern recognition,
+classification, or visual representation</li>
+<li>Generating new knowledge from these processes</li>
+<li>Documenting the insights gained</li>
+<li>Presenting the insights in the context of a scientific research</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="required-knowledge-for-data-analysis-in-the-humanities">Required Knowledge for Data Analysis in the Humanities<a class="anchor" aria-label="anchor" href="#required-knowledge-for-data-analysis-in-the-humanities"></a>
+</h3>
+<p>To effectively analyze data in quantitative humanities research, it
+is important to have the following knowledge:</p>
+<ul>
+<li>A solid understanding of the data itself and how computers interpret
+and process it</li>
+<li>Clear insight into the specific aspects of the data to be analyzed
+and the type of knowledge or insights one aims to extract</li>
+<li>The ability to interact with computers to produce meaningful results
+— this requires proficiency in a programming language or familiarity
+with relevant software tools.</li>
+</ul>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -470,6 +543,204 @@ using Python programming.</p></li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</div>
+</section></section><section id="aio-01_analyze_tabular_data"><p>Content from <a href="01_analyze_tabular_data.html">Analyzing Tabular Data</a></p>
+<hr>
+<p>Last updated on 2025-04-23 |
+
+        <a href="https://github.com/Goli-SF/python_101_humanities/edit/main/episodes/01_analyze_tabular_data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>What quantitative analysis operations can be performed on tabular
+data?</li>
+<li>How can these operations be translated into Python code?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Learn how to initiate the analysis of tabular data</li>
+<li>Understand which aspects of a tabular dataset can be analyzed
+quantitatively</li>
+<li>Learn to break down the analysis into smaller tasks, think in terms
+of computer logic, and translate these tasks into code</li>
+<li>Develop proficiency in using the Python library Pandas for tabular
+data analysis</li>
+<li>Learn to use the Python library Plotly to visualize tabular
+data</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Let’s take on the role of an art historian in this chapter and
+analyze the MoMA dataset introduced in the “Summary and Setup” section.
+We’ll assume that we are completely unfamiliar with the dataset, its
+contents, structure, or potential usefulness for our research. The first
+step would be to look at this dataset and get familiar with its shape,
+dimension and different aspects. This initial stage of investigation is
+known as <em>exploratory data analysis</em>.</p>
+<p>To begin, we first need to open an IDE (Integrated Development
+Environment), select the programming language we’ll use, and load the
+dataset into the environment to start working with it. In this case,
+we’ll be using Jupyter Notebook as our IDE and Python as our programming
+language.</p>
+<section><h2 class="section-heading" id="step-1---importing-the-necessary-python-libraries">Step 1 - Importing the Necessary Python Libraries<a class="anchor" aria-label="anchor" href="#step-1---importing-the-necessary-python-libraries"></a>
+</h2>
+<hr class="half-width">
+<p>Modern computers operate using only ones and zeros — binary code.
+These binary digits can be combined to represent letters, numbers,
+images, and all other forms of data. At the most fundamental level, this
+is the only type of information a computer can process.</p>
+<p>However, when you’re writing code to analyze data or build
+applications, you don’t want to start from scratch — managing raw binary
+data or even working solely with basic characters and numbers. That
+would be extremely time-consuming and complex. Fortunately, others have
+already done much of this foundational work for us. Over the years,
+developers have created collections of pre-written code that simplify
+programming. You can think of these collections as toolboxes containing
+functions and methods that perform complex tasks with just a line or two
+of code. In Python, these toolboxes are called <em>libraries</em>.</p>
+<p>Some Python libraries come built into the language, while others must
+be installed separately. Most external libraries can be easily installed
+via the <a href="https://swcarpentry.github.io/shell-novice/" class="external-link">terminal</a> using a
+tool called <code>pip</code>.</p>
+<p>Many Python libraries have quirky or creative names — part of the fun
+and culture of the programming world! For example, there’s a library
+called <code>BeautifulSoup</code> for working with web data, and another
+called <code>pandas</code> for data analysis. Sometimes the name hints
+at the library’s purpose, and sometimes it doesn’t — but you’ll get used
+to them over time. As you gain experience, you’ll learn what each
+library is for, the tools it provides, and when to use them.</p>
+<p>To use a library in your code, you first need to ensure it is
+installed on your computer. Then, you must import it into your script.
+If the library’s name is long or cumbersome, you can assign it a shorter
+alias when importing it. For instance, in the example below, the
+<code>pandas</code> library is imported and abbreviated as
+<code>pd</code>. While you’re free to choose any abbreviation, many
+libraries have common conventions that help make your code more readable
+to other programmers. In the case of <code>pandas</code>,
+<code>pd</code> is the widely recognized standard.</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre>
+</div>
+</section><section><h2 class="section-heading" id="step-2---loading-the-data-into-your-code">Step 2 - Loading the Data into Your Code<a class="anchor" aria-label="anchor" href="#step-2---loading-the-data-into-your-code"></a>
+</h2>
+<hr class="half-width">
+<div class="section level3">
+<h3 id="understand-the-data-type">Understand the data type<a class="anchor" aria-label="anchor" href="#understand-the-data-type"></a>
+</h3>
+<p>The MoMA dataset we will be working with is stored in a
+<code>.csv</code> file. Go ahead and download it from the link provided
+in the “Summary and Setup” section.</p>
+<p>CSV stands for “comma-separated values.” When you double-click to
+open the file, the name makes perfect sense: it contains information
+arranged in rows, with each value in a row separated by a comma.
+Essentially, it’s a way to represent a table using a simple text
+file.</p>
+<p>Each line in a CSV file corresponds to a row in the table, and each
+comma-separated value on that line represents a cell in the row. The
+first line often contains headers — the names of the columns — which
+describe what kind of data is stored in each column. For instance, a CSV
+file containing student information might include headers like “Name”,
+“Age”, “Grade”, and “Email”.</p>
+<p>Because CSV files are plain text, they’re easy to create and read
+using basic tools like text editors or spreadsheet programs. They’re
+also widely supported by programming languages and data analysis tools,
+making them a popular and convenient format for storing and exchanging
+tabular data.</p>
+<p>The data you want to analyze is typically stored either locally on
+your computer or hosted online. Regardless of where it’s located, the
+first step in working with it is to load it into your code so you can
+analyze or manipulate it.</p>
+</div>
+<div class="section level3">
+<h3 id="store-the-data-in-a-variable">Store the data in a variable<a class="anchor" aria-label="anchor" href="#store-the-data-in-a-variable"></a>
+</h3>
+<p>When you load data into your code, you should store it in a
+<em>variable</em>. A variable functions like a container that can
+contain any type of data that you think of. For example, I can create a
+variable called <code>a_number</code> and store a number in it, like
+this:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>a_number <span class="op">=</span> <span class="dv">12</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="bu">print</span> (a_number)</span></code></pre>
+</div>
+<p>I can also store a string (a sequence of characters, including
+letters, numbers, and other symbols) in a variable, which I’ll call
+<code>a_string</code>, like this:”</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>a_string<span class="op">=</span> <span class="st">"This is a string, consisting of numbers (like 13), letthers and other signs!"</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="bu">print</span> (a_string)</span></code></pre>
+</div>
+<p>Notice that you should put the value of the string inside double or
+single quotes, but you shouldn’t do it for numbers.</p>
+<div id="when-naming-a-variable-note-that" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="when-naming-a-variable-note-that" class="callout-inner">
+<h3 class="callout-title">When naming a variable, note that:</h3>
+<div class="callout-content">
+<ul>
+<li>Only letters (a-z, A-Z), digits (0-9), and underscores (_) are
+allowed.</li>
+<li>The name cannot start with a digit.</li>
+<li>No spaces or special characters (like !, @, #, etc.) are
+allowed.</li>
+<li>Variable names are case-sensitive. For example, <code>myvar</code>
+and <code>MyVar</code> are two different variables.</li>
+<li>You cannot use Python reserved keywords like: <code>if</code>,
+<code>else</code>, <code>for</code>, <code>class</code>,
+<code>return</code>, etc. as variable names.</li>
+</ul>
+</div>
+</div>
+</div>
+<p><span style="color:red">WE ARE HERE</span></p>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points</h3>
+<div class="callout-content">
+<ul>
+<li>Formulate appropriate research questions when working with tabular
+data</li>
+<li>Identify the quantitative analysis methods best suited to answering
+these questions</li>
+<li>Break down the analysis into smaller tasks, translate them into
+computer logic, and implement them in code</li>
+</ul>
+</div>
+</div>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
+</div>
 </section></section>
 </div>
     </main>
@@ -483,12 +754,12 @@ any links that you are not going to use.
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
 
-        <a href="https://github.com/carpentries/workbench-template-md/edit/main/README.md" class="external-link">Edit on GitHub</a>
+        <a href="https://github.com/Goli-SF/python_101_humanities/edit/main/README.md" class="external-link">Edit on GitHub</a>
 
 	
-        | <a href="https://github.com/carpentries/workbench-template-md/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
-        | <a href="https://github.com/carpentries/workbench-template-md/" class="external-link">Source</a></p>
-				<p><a href="https://github.com/carpentries/workbench-template-md/blob/main/CITATION.cff" class="external-link">Cite</a> | <a href="mailto:team@carpentries.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
+        | <a href="https://github.com/Goli-SF/python_101_humanities/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
+        | <a href="https://github.com/Goli-SF/python_101_humanities/" class="external-link">Source</a></p>
+				<p><a href="https://github.com/Goli-SF/python_101_humanities/blob/main/CITATION.cff" class="external-link">Cite</a> | <a href="mailto:golnaz.sarkarfarshi@uni-marburg.de">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
 
@@ -508,16 +779,16 @@ any links that you are not going to use.
     {
   "@context": "https://schema.org",
   "@type": "TrainingMaterial",
-  "@id": "https://carpentries.github.io/workbench-template-md/aio.html",
+  "@id": "https://Goli-SF.github.io/python_101_humanities/aio.html",
   "inLanguage": "en",
   "dct:conformsTo": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
-  "keywords": "software, data, lesson, The Carpentries",
+  "keywords": "python, humanities, quantitative analysis, digital humanities",
   "name": "All in One View",
   "creativeWorkStatus": "active",
-  "url": "https://carpentries.github.io/workbench-template-md/aio.html",
-  "identifier": "https://carpentries.github.io/workbench-template-md/aio.html",
-  "dateCreated": "2025-04-23",
+  "url": "https://Goli-SF.github.io/python_101_humanities/aio.html",
+  "identifier": "https://Goli-SF.github.io/python_101_humanities/aio.html",
+  "dateCreated": "2025-05-08",
   "dateModified": "2025-04-23",
   "datePublished": "2025-04-23"
 }
