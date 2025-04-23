@@ -15,17 +15,13 @@
 carpentry: 'incubator'
 
 # Alt-text description of the lesson.
-carpentry_description: 'The main goal of this lesson is to familiarize Humanities students and scholars with quantitative methods 
-and data analysis basics. To make the concentps and methods of digital data analysis more concrete and 
-demonstrate their use case, this lesso also introduces the learners to the programming language Python. Using 
-Python on different datasets consisting of tables, text, images and sounds, the learners explore the 
-possibilities of digital data analysis for the porpose of humanities research. '
+carpentry_description: 'In this lesson, you will learn the basics of data analysis and computational humanities using python.' #FIXME
 
 # Overall title for pages.
 title: 'Introduction to data analysis basics with Python for the humanities' 
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: ~ # FIXME
+created: '2025-05-08' # FIXME
 
 # Comma-separated list of keywords for the lesson
 keywords: 'python, humanities, quantitative analysis, digital humanities' # FIXME
@@ -38,13 +34,13 @@ life_cycle: 'pre-alpha' # FIXME
 license: 'CC-BY 4.0'
 
 # Link to the source repository for this lesson
-source: 'https://github.com/carpentries/workbench-template-md' # FIXME
+source: 'https://github.com/Goli-SF/python_101_humanities'
 
 # Default branch of your lesson
 branch: 'main'
 
 # Who to contact if there are any issues
-contact: 'golnaz.sarkarfarshi@uni-marburg.de' # FIXME
+contact: 'golnaz.sarkarfarshi@uni-marburg.de'
 
 # Navigation ------------------------------------------------
 #

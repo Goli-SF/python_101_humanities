@@ -30,7 +30,7 @@ To load the data from this lesson’s repository into your code, use the followi
 <span style="color:red">Link to be updated.</span>
 
 ```
-https://raw.githubusercontent.com/Goli-SF/python_101_humanities/main/episodes/data/moma_artworks.csv
+https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/moma_artworks.csv
 ```
 
 ## Software Setup
