@@ -323,7 +323,7 @@ artist_counts
 ::::::::::::::::::::::::::::::::::::::: discussion
 #### Let's analyze the code above
 
-When you use the `.value_counts()` method in pandas, it returns a Series where:
+When you use the `.value_counts()` method in `pandas`, it returns a Series where:
 
 - The index consists of the unique values from the original column in `moma_df` (in this case, 
 from the "Artist" column).
@@ -333,7 +333,7 @@ While this format is informative, it's not as flexible for further analysis beca
 not a DataFrame with named columns. By adding `.reset_index()`, you're instructing pandas to 
 convert the index (artist names) into a regular column. After that, we rename the columns using:
 
-``` python
+``` 
 artist_counts.columns = ['Artist', 'Number of Works']
 ```
 
@@ -482,6 +482,8 @@ matching_artworks = moma_df[moma_df['Gender'] == gender]
 matching_artworks
 ```
 
+![](fig/output_07.png)
+
 ::::::::::::::::::::::::::::::::::::::: discussion
 #### Let's analyze the code above
 
@@ -491,8 +493,6 @@ earlier. `moma_df['Gender']` selects the Gender column from the DataFrame, and `
 checks whether the value in that column is exactly equal to the specified gender string.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
-
-![](fig/output_07.png)
 
 As you can see, the artists' name is not completely readable in the table. Let’s 
 try to access the complete artist name for this specific artwork by adding 
