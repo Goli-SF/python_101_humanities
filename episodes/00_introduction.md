@@ -1,6 +1,6 @@
 ---
 title: "Introduction"
-teaching: 10
+teaching: 15
 exercises: 0
 ---
 
@@ -50,7 +50,6 @@ This is the domain of data analysis for humanities research — and this is wher
 
 
 ::::::::::::::::::::::::::::::::::::::: discussion
-
 ## Critical Reflections
 
 Although the term "digital scholarship" is becoming increasingly widespread and popular, I avoid 
@@ -75,18 +74,72 @@ By "quantitative data analysis," I refer to a range of methods, including:
 Quantitative data analysis is a task that can be automated using a computer. It can be performed 
 with existing software designed for specific analysis tasks or by writing your own code using a programming 
 language. In this lesson, we will be taking the second approach, using Python.
-
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## When is it legitimate to practice quantitative data analysis?
 
 In humanities research, quantitative data analysis is only logical and legitimate when:
 
-It reveals new insights: This method should uncover information that was previously unknown. If your research merely confirms what is already well-established, it lacks value. For example, we already know that women have historically been underrepresented in the documentation of human achievements. If we take a book on the history of art, create a list of all the artists mentioned, count how many are women, and conclude that female artists are less frequent in the book than male artists, our effort provides no new knowledge.
+- **It reveals new insights:** This method should uncover information that was previously unknown. If your 
+research merely confirms what is already well-established, it lacks value. For example, we already know 
+that women have historically been underrepresented in the documentation of human achievements. If we take 
+a book on the history of art, create a list of all the artists mentioned, count how many are women, and 
+conclude that female artists are less frequent in the book than male artists, our effort provides no 
+new knowledge.
 
-The data is too extensive for manual analysis: The data to be analyzed is so vast that it is either impossible for human intellect to process it in a reasonable time frame, or it would require an impractical amount of resources for individuals to analyze it. For instance, counting how many of the 50 names in a list are female does not require programming; it can easily be done by an individual. However, analyzing large datasets, like millions of records, would require quantitative methods.
+- **The data is too extensive for manual analysis:** The data to be analyzed is so vast that it is either 
+impossible for human intellect to process it in a reasonable time frame, or it would require an impractical 
+amount of resources for individuals to analyze it. For instance, counting how many of the 50 country names in a 
+list belong to African Countries does not require programming; it can easily be done by an individual. 
+However, analyzing large datasets, like millions of records, would require quantitative methods.
 
-Avoiding the temptation to overuse "digital analysis": In today’s academic environment, there is a temptation to include “digital analysis” in grant proposals or PhD theses simply to make them sound modern and sophisticated. It's crucial not to fall into this trap and produce work that, in the end, won't be meaningful or taken seriously. Remember: merely adding a table or graph to your research doesn’t automatically make you a digital humanist or a quantitative data analyst.
+:::::::::::::::: callout
+## Caution!
+
+Avoid the temptation to overuse "digital analysis"! In today’s academic environment, there is a temptation 
+to include “digital analysis” in grant proposals or PhD theses simply to make them sound modern and sophisticated. 
+It's crucial not to fall into this trap and produce work that, in the end, won't be meaningful or taken seriously. 
+Remember: merely adding a table or graph to your research doesn’t automatically make you a digital humanist 
+or a quantitative data analyst. Always think of the points above and ask yourself whether it is insightful and 
+meaningful to perform quantitative data analysis using programming or software and call it "research with 
+digital methods".
+::::::::::::::::::
+
+## What do we do, when we perform quantitative data analysis"?
+
+### Types of Data in Digital Humanities
+
+Data used for analysis can take various forms, including:
+
+- Tabular data (containing text, numbers, dates, etc.)
+- Text
+- Images
+- Sound
+- Audiovisual data
+
+### Workflow for Quantitative Humanities Research
+
+When conducting quantitative research in the humanities using Python, the typical workflow involves the 
+following steps:
+
+- Acquiring the data
+- Initiating a Python script
+- Loading the data into the script
+- Performing operations such as exploring and cleaning the data as well as counting, comparing, searching, 
+pattern recognition, classification, or visual representation
+- Generating new knowledge from these processes
+- Documenting the insights gained
+- Presenting the insights in the context of a scientific research
+
+### Required Knowledge for Data Analysis in the Humanities
+
+To effectively analyze data in quantitative humanities research, it is important to have the following knowledge:
+
+- A solid understanding of the data itself and how computers interpret and process it
+- Clear insight into the specific aspects of the data to be analyzed and the type of knowledge or insights 
+one aims to extract
+- The ability to interact with computers to produce meaningful results — this requires proficiency in a 
+programming language or familiarity with relevant software tools.
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
