@@ -15,16 +15,16 @@
 carpentry: 'incubator'
 
 # Alt-text description of the lesson.
-carpentry_description: 'Lesson Description'
+carpentry_description: 'In this lesson, you will learn the basics of data analysis and computational humanities using python.' #FIXME
 
 # Overall title for pages.
-title: 'Lesson Title' # FIXME
+title: 'Introduction to data analysis basics with Python for the humanities' 
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: ~ # FIXME
+created: '2025-05-08' # FIXME
 
 # Comma-separated list of keywords for the lesson
-keywords: 'software, data, lesson, The Carpentries' # FIXME
+keywords: 'python, humanities, quantitative analysis, digital humanities' # FIXME
 
 # Life cycle stage of the lesson
 # possible values: pre-alpha, alpha, beta, stable
@@ -34,13 +34,13 @@ life_cycle: 'pre-alpha' # FIXME
 license: 'CC-BY 4.0'
 
 # Link to the source repository for this lesson
-source: 'https://github.com/carpentries/workbench-template-md' # FIXME
+source: 'https://github.com/Goli-SF/python_101_humanities'
 
 # Default branch of your lesson
 branch: 'main'
 
 # Who to contact if there are any issues
-contact: 'team@carpentries.org' # FIXME
+contact: 'golnaz.sarkarfarshi@uni-marburg.de'
 
 # Navigation ------------------------------------------------
 #
@@ -66,7 +66,8 @@ contact: 'team@carpentries.org' # FIXME
 
 # Order of episodes in your lesson
 episodes: 
-- introduction.md
+- 00_introduction.md
+- 01_analyze_tabular_data.md
 
 # Information for Learners
 learners: 
