@@ -697,9 +697,9 @@ letters, numbers, and other symbols) in a variable, which I’ll call
 </div>
 <p>Notice that you should put the value of the string inside double or
 single quotes, but you shouldn’t do it for numbers.</p>
-<div id="when-naming-a-variable-note-that" class="callout">
+<div id="when-naming-a-variable-note-that" class="callout caution">
 <div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
+<i class="callout-icon" data-feather="alert-triangle"></i>
 </div>
 <div id="when-naming-a-variable-note-that" class="callout-inner">
 <h3 class="callout-title">When naming a variable, note that:</h3>
@@ -837,9 +837,9 @@ the DataFrame:</p>
 </div>
 <figure><img src="../fig/output_03.png" class="figure mx-auto d-block"></figure><p>This method provides valuable information about the DataFrame in a
 tabular format.</p>
-<div id="insights-from-the-.info-method" class="callout">
+<div id="insights-from-the-.info-method" class="callout discussion">
 <div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
+<i class="callout-icon" data-feather="message-circle"></i>
 </div>
 <div id="insights-from-the-.info-method" class="callout-inner">
 <h3 class="callout-title">Insights from the <code>.info()</code>
@@ -934,7 +934,20 @@ many works by each artist are included in MoMA’s collection.</p>
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>How do you think we should proceed? Can you break down this task into
-single steps and write the pseudocodefor each step?</p>
+single steps and write the pseudocode for each step?</p>
+</div>
+</div>
+</div>
+<div id="accordionHint1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
+  <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
+</button>
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div class="accordion-body">
+<p><strong>HINT:</strong> We need to create a new DataFrame based on
+<code>moma_df</code> and regarding the task at hand.</p>
+</div>
 </div>
 </div>
 </div>
@@ -957,6 +970,216 @@ individual artist names.</li>
 <li>Store the artist names and the number of their mentions in a new
 DataFrame called <code>artist_counts</code>.</li>
 </ul>
+</div>
+</div>
+</div>
+</div>
+<p>Let’s translate the pseudocode into Python code:</p>
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>artist_counts <span class="op">=</span> moma_df[<span class="st">'Artist'</span>].value_counts().reset_index()</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>artist_counts.columns <span class="op">=</span> [<span class="st">'Artist'</span>, <span class="st">'Number of Works'</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>artist_counts</span></code></pre>
+</div>
+<figure><img src="../fig/output_04.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-above" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="lets-analyze-the-code-above" class="callout-inner">
+<h3 class="callout-title">Let’s analyze the code above</h3>
+<div class="callout-content">
+<p>When you use the <code>.value_counts()</code> method in pandas, it
+returns a Series where:</p>
+<ul>
+<li>The index consists of the unique values from the original column in
+<code>moma_df</code> (in this case, from the “Artist” column).</li>
+<li>The values represent how many times each artist appears in that
+column.</li>
+</ul>
+<p>While this format is informative, it’s not as flexible for further
+analysis because it’s not a DataFrame with named columns. By adding
+<code>.reset_index()</code>, you’re instructing pandas to convert the
+index (artist names) into a regular column. After that, we rename the
+columns using:</p>
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>artist_counts.columns <span class="op">=</span> [<span class="st">'Artist'</span>, <span class="st">'Number of Works'</span>]</span></code></pre>
+</div>
+<p>Here, we’re assigning a list of two strings to rename the columns
+appropriately.</p>
+</div>
+</div>
+</div>
+<p>Now that we’ve created the <code>artist_counts</code> DataFrame, we
+can perform statistical operations on it. While such statistical
+insights may not be significant for scholarly research in art history —
+since MoMA’s collection does not comprehensively represent global or
+regional art histories — they do shed light on the scope and patterns of
+MoMA’s collection practices.</p>
+<p>To deepen our statistical analysis, it would be helpful to have
+additional information about the artists — such as their nationality and
+gender. Let’s create a new DataFrame that includes these details and
+name it <code>artist_info</code>.</p>
+<div id="challenge-1" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="challenge-1" class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Can you break down this task into single steps and write the
+pseudocode for each step?</p>
+</div>
+</div>
+</div>
+<div id="accordionHint2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
+  <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
+</button>
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div class="accordion-body">
+<p><strong>HINT:</strong> In the new DataFrame, we need more information
+than just “Artist” and “Number of Works”. We also need “Gender” and
+“Nationality” for this task.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p>Here’s the pseudocode for solving this challenge:</p>
+<ul>
+<li>Extract a new DataFrame from <code>moma_df</code> that includes only
+the artist names, their gender, and nationality.</li>
+<li>Create another DataFrame from <code>moma_df</code> that includes
+artist names along with the count of how many times each artist
+appears.</li>
+<li>Merge these two DataFrames into a third DataFrame that combines the
+artist information with their work counts.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<p>Again, let’s translate the pseudocode to Python code:</p>
+<div class="codewrapper sourceCode" id="cb12">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>artist_details <span class="op">=</span> moma_df.groupby(<span class="st">'Artist'</span>)[[<span class="st">'Gender'</span>, <span class="st">'Nationality'</span>]].first().reset_index()</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>artist_counts <span class="op">=</span> moma_df[<span class="st">'Artist'</span>].value_counts().reset_index()</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>artist_counts.columns <span class="op">=</span> [<span class="st">'Artist'</span>, <span class="st">'Number of Works'</span>]</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>artist_info <span class="op">=</span> artist_counts.merge(artist_details, on<span class="op">=</span><span class="st">'Artist'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>artist_info</span></code></pre>
+</div>
+<figure><img src="../fig/output_05.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-above-1" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="lets-analyze-the-code-above-1" class="callout-inner">
+<h3 class="callout-title">Let’s analyze the code above</h3>
+<div class="callout-content">
+<div class="codewrapper sourceCode" id="cb13">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>artist_details <span class="op">=</span> moma_df.groupby(<span class="st">'Artist'</span>)[[<span class="st">'Gender'</span>, <span class="st">'Nationality'</span>]].first().reset_index()</span></code></pre>
+</div>
+<ul>
+<li>
+<code>moma_df.groupby('Artist')</code> groups the DataFrame by the
+‘Artist’ column. Each group contains all rows associated with a single
+artist.</li>
+<li>
+<code>[['Gender', 'Nationality']]</code> selects only the ‘Gender’
+and ‘Nationality’ columns from these groups, as we’re interested in
+these attributes.</li>
+<li>
+<code>.first()</code> extracts the first non-null row from each
+group. This is useful when an artist appears multiple times with
+inconsistent or missing gender/nationality data — we simply take the
+first available record.</li>
+<li>
+<code>.reset_index()</code> converts the grouped index (‘Artist’)
+back into a standard column, so it becomes part of the DataFrame
+again.</li>
+<li>The result is saved in a new DataFrame called
+<code>artist_details</code>, which contains one row per artist along
+with their gender and nationality.</li>
+</ul>
+<div class="codewrapper sourceCode" id="cb14">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>artist_counts <span class="op">=</span> moma_df[<span class="st">'Artist'</span>].value_counts().reset_index()</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>artist_counts.columns <span class="op">=</span> [<span class="st">'Artist'</span>, <span class="st">'Number of Works'</span>]</span></code></pre>
+</div>
+<ul>
+<li>This code creates another DataFrame, <code>artist_counts</code>,
+containing the number of works associated with each artist in
+<code>moma_df</code>.</li>
+<li>The is the same step as we took in the previous task. We use the
+method <code>.value_counts()</code> to count how many times each artist
+appears, and then use <code>.reset_index()</code> to turn the artist
+names back into a column.</li>
+<li>The columns are renamed to ‘Artist’ and ‘Number of Works’.</li>
+</ul>
+<div class="codewrapper sourceCode" id="cb15">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>artist_info <span class="op">=</span> artist_counts.merge(artist_details, on<span class="op">=</span><span class="st">'Artist'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span></code></pre>
+</div>
+<ul>
+<li>Now we merge the two DataFrames, <code>artist_counts</code> and
+<code>artist_details</code>, into one comprehensive DataFrame called
+<code>artist_info</code>.</li>
+<li>The <code>on='Artist'</code> argument tells <code>pandas</code> to
+merge the data based on matching values in the ‘Artist’ column.</li>
+<li>
+<code>how='left'</code> specifies a left join: all artists from
+<code>artist_counts</code> are kept, and any matching rows from
+<code>artist_details</code> are added. If no match is found, the missing
+fields will be filled with <code>NaN</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+<p>With the <code>artist_info</code> DataFrame ready, we can start
+exploring the composition of MoMA’s collection. Let’s begin by examining
+how many works are attributed to artists of different genders. This will
+give us a basic understanding of gender representation in the museum’s
+holdings.</p>
+<div id="challenge-2" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="challenge-2" class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Write the Python code that shows how many works in MoMA’s collection
+are attributed to artists of different genders.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb16">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>gender_distribution <span class="op">=</span> artist_info[<span class="st">'Gender'</span>].value_counts()</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>gender_distribution</span></code></pre>
+</div>
+<figure><img src="../fig/output_06.png" class="figure mx-auto d-block"></figure>
 </div>
 </div>
 </div>
