@@ -115,7 +115,7 @@ a_string
 ```
 Notice that you should put the value of the string inside double or single quotes, but you shouldn't do it for numbers. 
 
-:::::::::::::::: callout
+:::::::::::::::: caution
 #### When naming a variable, note that:
 
 - Only letters (a-z, A-Z), digits (0-9), and underscores (_) are allowed.
@@ -233,7 +233,7 @@ moma_df.info()
 
 This method provides valuable information about the DataFrame in a tabular format. 
 
-:::::::::::::::: callout
+:::::::::::::::: discussion
 #### Insights from the `.info()` Method
 
 In the first column of the resulting table, you can see the names and numbers of all the columns in the DataFrame. 
@@ -291,29 +291,167 @@ Now, we can begin counting more specific elements within the DataFrame. For exam
 all the artist names in the DataFrame and determine how many works by each artist are included in 
 MoMA's collection.
 
-::::::::::::::::::::::::::::::::::::: challenge 
+::::::::::::::::::::::::::::::::::::: challenge
 #### Challenge
 
 How do you think we should proceed? Can you break down this task into single steps and write the 
-pseudocodefor each step?
+pseudocode for each step?
 
-:::::::::::::::::::::::: solution 
+:::: hint
+**HINT:** We need to create a new DataFrame based on `moma_df` and regarding the task at hand. 
+::::
 
+:::: solution
 To achieve this, we can create a new DataFrame that contains artist names and the corresponding 
 count of how many times each artist appears in `moma_df`. Before diving into the actual Python code, 
 let’s outline the pseudocode for this task:
 
-- Look at the column "Artist" in `moma_df` and find individual artist names.
+- Look at the column "Artist" in `moma_df` and find individual artist names. 
 - Count the number of times each individual artist name appears in `moma_df`.
 - Store the artist names and the number of their mentions in a new DataFrame called `artist_counts`.
+::::
+:::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::
+Let's translate the pseudocode into Python code: 
 
-  **<span style="color:red">WE ARE HERE </span>**
+``` python
+artist_counts = moma_df['Artist'].value_counts().reset_index()
+artist_counts.columns = ['Artist', 'Number of Works']
+artist_counts
+```
 
+![](fig/output_04.png)
 
+::::::::::::::::::::::::::::::::::::::: discussion
+#### Let's analyze the code above
 
+When you use the `.value_counts()` method in pandas, it returns a Series where:
+
+- The index consists of the unique values from the original column in `moma_df` (in this case, 
+from the "Artist" column).
+- The values represent how many times each artist appears in that column.
+
+While this format is informative, it's not as flexible for further analysis because it's 
+not a DataFrame with named columns. By adding `.reset_index()`, you're instructing pandas to 
+convert the index (artist names) into a regular column. After that, we rename the columns using:
+
+``` python
+artist_counts.columns = ['Artist', 'Number of Works']
+```
+
+Here, we're assigning a list of two strings to rename the columns appropriately.
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Now that we've created the `artist_counts` DataFrame, we can perform statistical operations 
+on it. While such statistical insights may not be significant for scholarly research in art history — 
+since MoMA’s collection does not comprehensively represent global or regional art histories — 
+they do shed light on the scope and patterns of MoMA’s collection practices.
+
+To deepen our statistical analysis, it would be helpful to have additional information 
+about the artists — such as their nationality and gender. Let's create a new DataFrame 
+that includes these details and name it `artist_info`.
+
+::::::::::::::::::::::::::::::::::::: challenge
+#### Challenge
+
+Can you break down this task into single steps and write the pseudocode for each step?
+
+:::: hint
+**HINT:** In the new DataFrame, we need more information than just "Artist" and "Number of Works". 
+We also need "Gender" and "Nationality" for this task. 
+::::
+
+:::: solution
+Here's the pseudocode for solving this challenge:
+
+- Extract a new DataFrame from `moma_df` that includes only the artist names, their gender, 
+and nationality.
+- Create another DataFrame from `moma_df` that includes artist names along with the count 
+of how many times each artist appears.
+- Merge these two DataFrames into a third DataFrame that combines the artist information 
+with their work counts.
+::::
+:::::::::::::::::::::::::::::::::::::::::::::::::
+
+Again, let's translate the pseudocode to Python code: 
+
+``` python
+artist_details = moma_df.groupby('Artist')[['Gender', 'Nationality']].first().reset_index()
+artist_counts = moma_df['Artist'].value_counts().reset_index()
+artist_counts.columns = ['Artist', 'Number of Works']
+artist_info = artist_counts.merge(artist_details, on='Artist', how='left')
+artist_info
+```
+
+![](fig/output_05.png)
+
+::::::::::::::::::::::::::::::::::::::: discussion
+#### Let's analyze the code above
+
+``` python
+artist_details = moma_df.groupby('Artist')[['Gender', 'Nationality']].first().reset_index()
+```
+
+- `moma_df.groupby('Artist')` groups the DataFrame by the 'Artist' column. Each group contains 
+all rows associated with a single artist.
+- `[['Gender', 'Nationality']]` selects only the 'Gender' and 'Nationality' columns from these 
+groups, as we're interested in these attributes.
+- `.first()` extracts the first non-null row from each group. This is useful when an artist appears 
+multiple times with inconsistent or missing gender/nationality data — we simply take the first 
+available record.
+- `.reset_index()` converts the grouped index ('Artist') back into a standard column, so 
+it becomes part of the DataFrame again.
+- The result is saved in a new DataFrame called `artist_details`, which contains one row 
+per artist along with their gender and nationality.
+
+``` python
+artist_counts = moma_df['Artist'].value_counts().reset_index()
+artist_counts.columns = ['Artist', 'Number of Works']
+```
+
+- This code creates another DataFrame, `artist_counts`, containing the number of works 
+associated with each artist in `moma_df`.
+- The is the same step as we took in the previous task. We use the method `.value_counts()` 
+to count how many times each artist appears, and then use `.reset_index()` to turn the 
+artist names back into a column.
+- The columns are renamed to 'Artist' and 'Number of Works'.
+
+``` python
+artist_info = artist_counts.merge(artist_details, on='Artist', how='left')
+```
+
+- Now we merge the two DataFrames, `artist_counts` and `artist_details`, into one comprehensive 
+DataFrame called `artist_info`.
+- The `on='Artist'` argument tells `pandas` to merge the data based on matching values in the 
+'Artist' column.
+- `how='left'` specifies a left join: all artists from `artist_counts` are kept, and any 
+matching rows from `artist_details` are added. If no match is found, the missing fields 
+will be filled with `NaN`.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+
+With the `artist_info` DataFrame ready, we can start exploring the composition of MoMA’s collection. 
+Let’s begin by examining how many works are attributed to artists of different genders. This will give 
+us a basic understanding of gender representation in the museum’s holdings.
+
+::::::::::::::::::::::::::::::::::::: challenge
+#### Challenge
+
+Write the Python code that shows how many works in MoMA's collection are attributed to 
+artists of different genders.
+
+:::: solution
+``` python
+gender_distribution = artist_info['Gender'].value_counts()
+gender_distribution
+```
+
+![](fig/output_06.png)
+
+::::
+:::::::::::::::::::::::::::::::::::::::::::::::::
+
+**<span style="color:red">WE ARE HERE </span>**
 
 <span style="color:red">Add more challenges. The learners should now count somethind different. </span>
 
