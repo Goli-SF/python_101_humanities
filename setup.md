@@ -5,18 +5,29 @@ title: Setup
 :::::::::::::::: callout
 ### What background knowledge do you need for this lesson?
 
-1. Basic acquaintance with Python: you should know how to import Python packages and load data into your code.
-You also need basic familiarity with Python syntax. 
-2. Basic mathematical background: you need a basic understanding of statistics and probabilities. 
-3. Curiosity to learn more about Python programming, statistics and data storytelling
+1. Basic mathematical background
+2. Familiarity with quantitative research methods
+2. Curiosity to learn about quantitative data analysis and Python programming
 ::::::::::::::::::
 
-## Dataset
+## Datasets
 
-The dataset we are working with in this lesson originates from [Kaggle](https://www.kaggle.com/datasets/levyedgar44/income-and-happiness-correction). 
-If you wish to save the the dataset on your computer, go ahead and download the 
-[Income and Happiness Correlation dataset](data/income_happiness_correlation.csv) and save it to your working directory. 
-Otherwise, you can directly load it into your code later using the following link:
+In this lesson, we will work with multiple datasets. Each dataset represents a specific 
+type of data that is suited to particular methods of quantitative analysis.
+
+### 1. Artworks from MoMA
+
+The metadata for artworks in the [Museum of Modern Art (MoMA)](https://www.moma.org/) collection 
+can be downloaded from the museum's [GitHub Repository](https://github.com/MuseumofModernArt/collection). 
+
+Since the data in this GitHub repository is continuously updated, I will be working with a 
+version that I previously downloaded on April 9, 2025. This version is stored in the GitHub 
+repository for this lesson, ensuring that the results you see during live coding match 
+exactly what is demonstrated in the lesson.
+
+You can access the specific MoMA dataset used in this lesson here:
+
+<span style="color:red">Link to be updated.</span>
 
 ```
 https://raw.githubusercontent.com/carpentries-incubator/stat_inf_data_vis/main/episodes/data/income_happiness_correlation.csv
