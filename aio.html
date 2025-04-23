@@ -938,7 +938,7 @@ single steps and write the pseudocode for each step?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p><strong>HINT:</strong> We need to create a new DataFrame based on
 <code>moma_df</code> and regarding the task at hand.</p>
@@ -951,7 +951,7 @@ single steps and write the pseudocode for each step?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>To achieve this, we can create a new DataFrame that contains artist
 names and the corresponding count of how many times each artist appears
@@ -984,8 +984,8 @@ DataFrame called <code>artist_counts</code>.</li>
 <div id="lets-analyze-the-code-above" class="callout-inner">
 <h3 class="callout-title">Let’s analyze the code above</h3>
 <div class="callout-content">
-<p>When you use the <code>.value_counts()</code> method in pandas, it
-returns a Series where:</p>
+<p>When you use the <code>.value_counts()</code> method in
+<code>pandas</code>, it returns a Series where:</p>
 <ul>
 <li>The index consists of the unique values from the original column in
 <code>moma_df</code> (in this case, from the “Artist” column).</li>
@@ -997,11 +997,7 @@ analysis because it’s not a DataFrame with named columns. By adding
 <code>.reset_index()</code>, you’re instructing pandas to convert the
 index (artist names) into a regular column. After that, we rename the
 columns using:</p>
-<div class="codewrapper sourceCode" id="cb11">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>artist_counts.columns <span class="op">=</span> [<span class="st">'Artist'</span>, <span class="st">'Number of Works'</span>]</span></code></pre>
-</div>
+<pre><code>artist_counts.columns = ['Artist', 'Number of Works']</code></pre>
 <p>Here, we’re assigning a list of two strings to rename the columns
 appropriately.</p>
 </div>
@@ -1034,7 +1030,7 @@ pseudocode for each step?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
 <div class="accordion-body">
 <p><strong>HINT:</strong> In the new DataFrame, we need more information
 than just “Artist” and “Number of Works”. We also need “Gender” and
@@ -1048,7 +1044,7 @@ than just “Artist” and “Number of Works”. We also need “Gender” and
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Here’s the pseudocode for solving this challenge:</p>
 <ul>
@@ -1154,7 +1150,7 @@ are attributed to artists of different genders.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1197,7 +1193,7 @@ correspond to the gender “() (male) (male) (male) () (male) (male)
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <ul>
 <li>Define the specific gender pattern as a string.</li>
@@ -1217,7 +1213,7 @@ exactly matches this pattern.</li>
 <span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>matching_artworks <span class="op">=</span> moma_df[moma_df[<span class="st">'Gender'</span>] <span class="op">==</span> gender]</span>
 <span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>matching_artworks</span></code></pre>
 </div>
-<div id="lets-analyze-the-code-above-2" class="callout discussion">
+<figure><img src="fig/output_07.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-above-2" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
@@ -1233,7 +1229,7 @@ that column is exactly equal to the specified gender string.</p>
 </div>
 </div>
 </div>
-<figure><img src="fig/output_07.png" class="figure mx-auto d-block"></figure><p>As you can see, the artists’ name is not completely readable in the
+<p>As you can see, the artists’ name is not completely readable in the
 table. Let’s try to access the complete artist name for this specific
 artwork by adding some more pseudocode and Python code. The pseudocode
 for this step would look like this:</p>
