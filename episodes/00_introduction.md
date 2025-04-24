@@ -23,7 +23,7 @@ exercises: 0
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-## Why take this lesson?
+## 1.1. Why take this lesson?
 
 This lesson is designed for absolute beginners in digital humanities research. Its goal is to help 
 humanities scholars understand when, why, and how programming can be a valuable tool for data 
@@ -36,7 +36,7 @@ research data. You’ll also be able to evaluate whether digitizing, processing,
 existing analog or material data could benefit your own research and contribute to the broader 
 scholarly community.
 
-## Where does this lesson fit within the broader spectrum of the so-called “digital humanities”?
+## 1.2. Where does this lesson fit within the broader spectrum of the so-called “digital humanities”?
 
 In the field commonly known as digital humanities, there are generally two major directions you can pursue:
 
@@ -50,7 +50,7 @@ This is the domain of data analysis for humanities research — and this is wher
 
 
 ::::::::::::::::::::::::::::::::::::::: discussion
-## Critical Reflections
+## 1.3. Critical Reflections
 
 Although the term "digital scholarship" is becoming increasingly widespread and popular, I avoid 
 using it for several reasons:
@@ -76,7 +76,7 @@ with existing software designed for specific analysis tasks or by writing your o
 language. In this lesson, we will be taking the second approach, using Python.
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## When is it legitimate to practice quantitative data analysis?
+## 1.3. When is it legitimate to practice quantitative data analysis?
 
 In humanities research, quantitative data analysis is only logical and legitimate when:
 
@@ -105,7 +105,7 @@ meaningful to perform quantitative data analysis using programming or software a
 digital methods".
 ::::::::::::::::::
 
-## What do we do, when we perform quantitative data analysis"?
+## 1.4. What do we do, when we perform quantitative data analysis"?
 
 ### Types of Data in Digital Humanities
 
