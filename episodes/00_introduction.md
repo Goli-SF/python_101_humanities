@@ -50,7 +50,7 @@ This is the domain of data analysis for humanities research — and this is wher
 
 
 ::::::::::::::::::::::::::::::::::::::: discussion
-## 1.3. Critical Reflections
+### Critical Reflection
 
 Although the term "digital scholarship" is becoming increasingly widespread and popular, I avoid 
 using it for several reasons:
@@ -93,8 +93,9 @@ amount of resources for individuals to analyze it. For instance, counting how ma
 list belong to African Countries does not require programming; it can easily be done by an individual. 
 However, analyzing large datasets, like millions of records, would require quantitative methods.
 
-:::::::::::::::: callout
-## Caution!
+
+:::::::::::::::: caution
+### Caution!
 
 Avoid the temptation to overuse "digital analysis"! In today’s academic environment, there is a temptation 
 to include “digital analysis” in grant proposals or PhD theses simply to make them sound modern and sophisticated. 
