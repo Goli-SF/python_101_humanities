@@ -23,7 +23,7 @@ exercises: 0
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-## Why take this lesson?
+## 1.1. Why take this lesson?
 
 This lesson is designed for absolute beginners in digital humanities research. Its goal is to help 
 humanities scholars understand when, why, and how programming can be a valuable tool for data 
@@ -36,7 +36,7 @@ research data. You’ll also be able to evaluate whether digitizing, processing,
 existing analog or material data could benefit your own research and contribute to the broader 
 scholarly community.
 
-## Where does this lesson fit within the broader spectrum of the so-called “digital humanities”?
+## 1.2. Where does this lesson fit within the broader spectrum of the so-called “digital humanities”?
 
 In the field commonly known as digital humanities, there are generally two major directions you can pursue:
 
@@ -50,7 +50,7 @@ This is the domain of data analysis for humanities research — and this is wher
 
 
 ::::::::::::::::::::::::::::::::::::::: discussion
-## Critical Reflections
+### Critical Reflection
 
 Although the term "digital scholarship" is becoming increasingly widespread and popular, I avoid 
 using it for several reasons:
@@ -76,7 +76,7 @@ with existing software designed for specific analysis tasks or by writing your o
 language. In this lesson, we will be taking the second approach, using Python.
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## When is it legitimate to practice quantitative data analysis?
+## 1.3. When is it legitimate to practice quantitative data analysis?
 
 In humanities research, quantitative data analysis is only logical and legitimate when:
 
@@ -93,8 +93,9 @@ amount of resources for individuals to analyze it. For instance, counting how ma
 list belong to African Countries does not require programming; it can easily be done by an individual. 
 However, analyzing large datasets, like millions of records, would require quantitative methods.
 
-:::::::::::::::: callout
-## Caution!
+
+:::::::::::::::: caution
+### Caution!
 
 Avoid the temptation to overuse "digital analysis"! In today’s academic environment, there is a temptation 
 to include “digital analysis” in grant proposals or PhD theses simply to make them sound modern and sophisticated. 
@@ -105,7 +106,7 @@ meaningful to perform quantitative data analysis using programming or software a
 digital methods".
 ::::::::::::::::::
 
-## What do we do, when we perform quantitative data analysis"?
+## 1.4. What do we do, when we perform quantitative data analysis"?
 
 ### Types of Data in Digital Humanities
 

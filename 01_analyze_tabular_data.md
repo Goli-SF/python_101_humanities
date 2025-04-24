@@ -528,9 +528,228 @@ the artwork with the specified gender description.
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-**<span style="color:red">WE ARE HERE </span>**
+
+::::::::::::::::::::::::::::::::::::: challenge
+Let's take a look at which artist nationalities are most represented in `artist_info`. 
+Write a python code that outputs the top 10 artist nationalities from the dataset. 
+
+:::: solution
+
+``` python
+top_10_nationalities = artist_info['Nationality'].value_counts().head(10)
+top_10_nationalities
+``` 
+
+![](fig/output_09.png)
+
+::::
+:::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge
+Now write a code that outputs the ten least represented artist nationalities in `artist_info`. 
+
+:::: solution
+
+``` python
+bottom_10_nationalities = artist_info['Nationality'].value_counts().tail(10)
+bottom_10_nationalities
+``` 
+
+![](fig/output_10.png)
+
+::::
+:::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::: discussion
+### Discussion
+
+Discuss the results with your peers in a group: 
+
+- Reflect on the insights you've gained through your analysis of gender, nationality, and 
+other metadata of artworks in MoMA's collection. 
+- Consider how the processes of searching and counting contributed to these insights. 
+- How would you interpret the numbers and other information you've extracted from the dataset? 
+What do they reveal about the nature and composition of MoMA's collection? 
+- Finally, think about whether this information could serve as a foundation for scientific 
+or critical research.
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Don't stop here. To practice further, explore other features from `moma_df`. Ask your own 
+questions about these features and apply the Python functions and methods you've learned so 
+far to investigate them and observe the results.
+
+::::::::::::::::::::::::::::::::::: caution
+Up to this point, we've only been conducting exploratory data analysis (EDA). 
+This type of analysis is meant to help you become more familiar with the dataset. EDA gains 
+scientific value only when it's used to support a well-defined scientific argument.
+:::::::::::::::::::::::::::::::::::::::::::
+
 
 ## Step 4 - Visualizing
+
+Visualizing data is a key part of conducting quantitative analysis. Different visualization 
+methods serve different analytical purposes, such as: 
+
+- Exploring relationships between features in the dataset
+- Comparing trends and measurements
+- Examining distributions
+- Identifying patterns
+- Drawing comparisons across categories or time
+- Understanding statistical inference
+- Enhancing data storytelling
+
+among others. To dive deeper into data visualization for statistical inference and storytelling, 
+take a look at [this Carpentries lesson](https://carpentries-incubator.github.io/hermes_stat_inf_data_vis/).
+
+Let's dive into two data visualization exercises using `moma_df`. But before we create the 
+visualizations, it's essential to define why we're making them, because the purpose of a 
+visualization guides how we build it. 
+
+We're going to focus on two specific goals:
+
+- Visualize the distribution of artistic media over time in MoMA’s collection
+- Compare the number of artworks in the collection by country and epoch
+
+There are many chart types suited to different kinds of data and questions. Likewise, Python 
+has several powerful libraries for visualizing data. For this exercise, we'll use `plotly.express`, 
+a submodule of the broader `plotly` library. Think of `plotly` as the full toolbox, and 
+`plotly.express` as the quick-access drawer with the most commonly used tools. It’s especially 
+great if you’re new to coding or just want to get nice results with less code.
+
+The pseudocode for both visualization code snippets that we are going to write looks 
+like this: 
+
+``` 
+- import the necessary libraries.
+- create a new DataFrame based on `moma_df` that contains the features that we want to 
+analyze and/or visualize.
+- choose a propor graph type from `plotly.express` that best demonstrates the features 
+we want to analyze.
+- visualize the graph using the created DataFrame.
+``` 
+
+Let's first import the libraries we need:
+
+``` python
+import plotly.express as px
+import pandas as pd
+``` 
+
+Now, let's visualize the distribution of artistic media over time in MoMA's collection. 
+To keep the graph clear and easy to read, we'll focus only on the top eight most common 
+artistic media found in `moma_df`.
+
+``` python
+top_media = moma_df['Medium'].value_counts().nlargest(8).index
+medium_df = moma_df[moma_df['Medium'].isin(top_media)]
+
+fig = px.histogram(medium_df, x='Date', color='Medium',
+                   nbins=50,
+                   title='Trends in Medium Usage Over Time',
+                   labels={'Date': 'Year', 'count': 'Number of Artworks'})
+fig.show()
+``` 
+
+![](fig/output_11.png)
+
+
+::::::::::::::::::::::::::::::::::::: challenge
+By now, you should have gained a basic understanding of the logic behind Python syntax. 
+In your group, discuss how the above code works and what each function, method, and argument does. 
+Play with the arguments, change them, and see what happens. 
+
+Keep in mind that all Python libraries, along with their functions and methods, are well-documented. 
+You can read these documentations to understand other people's code or learn how to implement 
+new libraries in your own code. 
+
+:::: hint
+To understand how the `histogram` function from the `plotly.express` module functions, check 
+out the documentation of plotly.express.histogram 
+[here](https://plotly.github.io/plotly.py-docs/generated/plotly.express.histogram.html). 
+::::
+
+:::: solution
+Here's a line-by-line explanation of the above code: 
+
+```
+top_media = moma_df['Medium'].value_counts().nlargest(8).index
+```
+`moma_df['Medium']` Selects the "Medium" column from the DataFrame `moma_df`, which contains 
+the artistic media for each artwork. 
+`.value_counts()` counts the number of occurrences 
+of each unique value in the "Medium" column (i.e., how many artworks belong to each medium).
+`.nlargest(8)` selects the top 8 most frequent media types based on their counts.
+`.index` extracts the index (the actual medium types) from the result of `nlargest`, which 
+gives us the top 8 artistic media.
+
+```
+medium_df = moma_df[moma_df['Medium'].isin(top_media)]
+```
+`moma_df['Medium'].isin(top_media)` checks which rows in the "Medium" column of `moma_df` 
+contain one of the top 8 media from the `top_media` list.
+The result is stored in a new DataFrame called `medium_df`, which contains only the artworks 
+with the top 8 most frequent media.
+
+```
+fig = px.histogram(medium_df, x='Date', color='Medium', nbins=50, title='Trends in Medium 
+Usage Over Time', labels={'Date': 'Year', 'count': 'Number of Artworks'})
+```
+
+The `px.histogram()` function from `plotly.express` creates a histogram. It takes the 
+following arguments:
+
+- `medium_df`: The data to visualize (i.e., the filtered DataFrame with the top 8 media)
+- `x='Date'`: The variable to be plotted on the x-axis, which is the "Date" column. 
+This represents the year each artwork was created.
+- `color='Medium'`: This argument colors the bars by the "Medium" column, so you can 
+distinguish between the different artistic media.
+- `nbins=50`: Specifies the number of bins for the histogram (i.e., how the years will be grouped).
+- `title='Trends in Medium Usage Over Time'`: The title of the plot.
+- `labels={'Date': 'Year', 'count': 'Number of Artworks'}`: Customizes the labels of the axes for better clarity.
+
+
+```
+fig.show()
+```
+This line displays the plot created by `plotly.express`. It renders the histogram in an 
+interactive format, allowing you to hover over the bars to view detailed information.
+
+::::
+:::::::::::::::::::::::::::::::::::::::::::::::::
+
+Try reading and interpreting the graph. Explain what it shows in simple, natural language. 
+Based on the graph, draw a conclusion about MoMA's collection.
+
+
+::::::::::::::::::::::::::::::::::::: challenge
+Now, let's visualize a second graph using the MoMA database. This time, the process will 
+be a bit more complex. It's up to you to understand the functionality of the code and what 
+information the resulting graph will represent.
+
+``` python
+df = moma_df.copy()
+df['Date'] = pd.to_numeric(df['Date'], errors='coerce')
+df = df.dropna(subset=['Date', 'Nationality'])
+
+grouped = df.groupby(['Date', 'Nationality']).size().reset_index(name='Count')
+top_nationalities = df['Nationality'].value_counts().nlargest(7).index
+grouped = grouped[grouped['Nationality'].isin(top_nationalities)]
+
+fig = px.scatter(grouped, x='Date', y='Nationality', size='Count', color='Nationality',
+                 title='Frequency of Artworks by Nationality Over Time',
+                 labels={'Date': 'Year'})
+fig.show()
+```
+
+![](fig/output_12.png)
+
+:::: solution
+provide solution
+::::
+:::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+**<span style="color:red">WE ARE HERE </span>**
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 - Formulate appropriate research questions when working with tabular data
