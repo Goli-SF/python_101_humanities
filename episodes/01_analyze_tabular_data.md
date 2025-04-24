@@ -744,17 +744,80 @@ fig.show()
 ![](fig/output_12.png)
 
 :::: solution
-provide solution
+```
+df = moma_df.copy()
+```
+
+- Creates a copy of the DataFrame `moma_df` and assigns it to `df`. This is often done to 
+preserve the original DataFrame in case you want to modify it without affecting the source.
+
+
+```
+df['Date'] = pd.to_numeric(df['Date'], errors='coerce')
+```
+
+- If you remember, the dates in the 'Date' column were objects as `moma_df.info()` showed. 
+This line of code converts the values in the 'Date' column to numeric format.
+- Any values that can't be converted (like strings or invalid dates) are set to NaN 
+(missing values) because errors='coerce'.
+
+```
+df = df.dropna(subset=['Date', 'Nationality'])
+```
+
+- Removes rows from `df` where either 'Date' or 'Nationality' is missing (NaN).
+- Ensures that the data used for analysis is clean and has valid date and nationality info.
+
+```
+grouped = df.groupby(['Date', 'Nationality']).size().reset_index(name='Count')
+```
+- This line should already be familiar to you. It groups the cleaned DataFrame by 
+'Date' and 'Nationality'.
+- `.size()` counts how many entries fall into each group.
+- `.reset_index(name='Count')` turns the grouped result into a new DataFrame with columns: 'Date', 'Nationality', and 'Count'.
+
+
+```
+top_nationalities = df['Nationality'].value_counts().nlargest(7).index
+```
+- Finds the 7 most common nationalities in the dataset by counting occurrences in the 
+'Nationality' column.
+- Returns the index (i.e. the nationality names) of the top 7.
+
+```
+grouped = grouped[grouped['Nationality'].isin(top_nationalities)]
+```
+
+- Filters the grouped DataFrame to only include rows where the 'Nationality' is one of the top 7 
+most frequent ones.
+- Helps focus the plot on the most represented nationalities.
+
+```
+fig = px.scatter(grouped, x='Date', y='Nationality', size='Count', color='Nationality',
+                 title='Frequency of Artworks by Nationality Over Time',
+                 labels={'Date': 'Year'})
+fig.show()
+```
+
+- Uses `plotly.express` (px) to create a scatter plot.
+  - `x='Date'`: places dates on the x-axis.
+  - `y='Nationality'`: places nationalities on the y-axis.
+  - `size='Count'`: size of the points represents how many artworks fall into each 
+  (date, nationality) combo.
+  - `color='Nationality'`: assigns different colors to different nationalities.
+- `title`: sets the chart title.
+- `labels={'Date': 'Year'}`: renames the x-axis label.
+- `fig.show()`: displays the interactive plot.
+
 ::::
 :::::::::::::::::::::::::::::::::::::::::::::::::
 
-
-**<span style="color:red">WE ARE HERE </span>**
-
 ::::::::::::::::::::::::::::::::::::: keypoints 
-- Formulate appropriate research questions when working with tabular data
-- Identify the quantitative analysis methods best suited to answering these questions
+- Formulate appropriate research questions when working with tabular data.
+- Identify the quantitative analysis methods best suited to answering these questions.
 - Break down the analysis into smaller tasks, translate them into computer logic, and 
-implement them in code
+implement them in code.
+- Use `pandas` for conting and searching values in tabular datasets. 
+- Use `plotly.express` for visualizing tabular data. 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
