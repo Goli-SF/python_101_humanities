@@ -1570,12 +1570,83 @@ resulting graph will represent.</p>
 </button>
 <div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
 <div class="accordion-body">
-<p>provide solution</p>
+<pre><code><span><span class="va">df</span> <span class="op">=</span> <span class="fu">moma_df.copy</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+<ul>
+<li>Creates a copy of the DataFrame <code>moma_df</code> and assigns it
+to <code>df</code>. This is often done to preserve the original
+DataFrame in case you want to modify it without affecting the
+source.</li>
+</ul>
+<pre><code><span><span class="va">df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span> <span class="op">=</span> <span class="fu">pd.to_numeric</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span>, errors<span class="op">=</span><span class="st">'coerce'</span><span class="op">)</span></span></code></pre>
+<ul>
+<li>If you remember, the dates in the ‘Date’ column were objects as
+<code>moma_df.info()</code> showed. This line of code converts the
+values in the ‘Date’ column to numeric format.</li>
+<li>Any values that can’t be converted (like strings or invalid dates)
+are set to NaN (missing values) because errors=‘coerce’.</li>
+</ul>
+<pre><code>df = df.dropna(subset=['Date', 'Nationality'])</code></pre>
+<ul>
+<li>Removes rows from <code>df</code> where either ‘Date’ or
+‘Nationality’ is missing (NaN).</li>
+<li>Ensures that the data used for analysis is clean and has valid date
+and nationality info.</li>
+</ul>
+<pre><code>grouped = df.groupby(['Date', 'Nationality']).size().reset_index(name='Count')</code></pre>
+<ul>
+<li>This line should already be familiar to you. It groups the cleaned
+DataFrame by ‘Date’ and ‘Nationality’.</li>
+<li>
+<code>.size()</code> counts how many entries fall into each
+group.</li>
+<li>
+<code>.reset_index(name='Count')</code> turns the grouped result
+into a new DataFrame with columns: ‘Date’, ‘Nationality’, and
+‘Count’.</li>
+</ul>
+<pre><code>top_nationalities = df['Nationality'].value_counts().nlargest(7).index</code></pre>
+<ul>
+<li>Finds the 7 most common nationalities in the dataset by counting
+occurrences in the ‘Nationality’ column.</li>
+<li>Returns the index (i.e. the nationality names) of the top 7.</li>
+</ul>
+<pre><code>grouped = grouped[grouped['Nationality'].isin(top_nationalities)]</code></pre>
+<ul>
+<li>Filters the grouped DataFrame to only include rows where the
+‘Nationality’ is one of the top 7 most frequent ones.</li>
+<li>Helps focus the plot on the most represented nationalities.</li>
+</ul>
+<pre><code><span><span class="va">fig</span> <span class="op">=</span> <span class="fu">px.scatter</span><span class="op">(</span><span class="va">grouped</span>, x<span class="op">=</span><span class="st">'Date'</span>, y<span class="op">=</span><span class="st">'Nationality'</span>, size<span class="op">=</span><span class="st">'Count'</span>, color<span class="op">=</span><span class="st">'Nationality'</span>,</span>
+<span>                 title<span class="op">=</span><span class="st">'Frequency of Artworks by Nationality Over Time'</span>,</span>
+<span>                 labels<span class="op">=</span><span class="op">{</span><span class="st">'Date'</span><span class="op">:</span> <span class="st">'Year'</span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="fu">fig.show</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+<ul>
+<li>Uses <code>plotly.express</code> (px) to create a scatter plot.
+<ul>
+<li>
+<code>x='Date'</code>: places dates on the x-axis.</li>
+<li>
+<code>y='Nationality'</code>: places nationalities on the
+y-axis.</li>
+<li>
+<code>size='Count'</code>: size of the points represents how many
+artworks fall into each (date, nationality) combo.</li>
+<li>
+<code>color='Nationality'</code>: assigns different colors to
+different nationalities.</li>
+</ul>
+</li>
+<li>
+<code>title</code>: sets the chart title.</li>
+<li>
+<code>labels={'Date': 'Year'}</code>: renames the x-axis label.</li>
+<li>
+<code>fig.show()</code>: displays the interactive plot.</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
-<p><strong><span style="color:red">WE ARE HERE </span></strong></p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1585,11 +1656,14 @@ resulting graph will represent.</p>
 <div class="callout-content">
 <ul>
 <li>Formulate appropriate research questions when working with tabular
-data</li>
+data.</li>
 <li>Identify the quantitative analysis methods best suited to answering
-these questions</li>
+these questions.</li>
 <li>Break down the analysis into smaller tasks, translate them into
-computer logic, and implement them in code</li>
+computer logic, and implement them in code.</li>
+<li>Use <code>pandas</code> for conting and searching values in tabular
+datasets.</li>
+<li>Use <code>plotly.express</code> for visualizing tabular data.</li>
 </ul>
 </div>
 </div>
