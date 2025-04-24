@@ -291,7 +291,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Analyzing Tabular Data</h1>
-        <p>Last updated on 2025-04-23 |
+        <p>Last updated on 2025-04-24 |
 
         <a href="https://github.com/Goli-SF/python_101_humanities/edit/main/episodes/01_analyze_tabular_data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -970,9 +970,302 @@ description.</p>
 </div>
 </div>
 </div>
-<p><strong><span style="color:red">WE ARE HERE </span></strong></p>
+<div id="challenge5" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Let’s take a look at which artist nationalities are most represented
+in <code>artist_info</code>. Write a python code that outputs the top 10
+artist nationalities from the dataset.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
+  <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
+</button>
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb20">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>top_10_nationalities <span class="op">=</span> artist_info[<span class="st">'Nationality'</span>].value_counts().head(<span class="dv">10</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>top_10_nationalities</span></code></pre>
+</div>
+<figure><img src="../fig/output_09.png" class="figure mx-auto d-block"></figure></div>
+</div>
+</div>
+</div>
+<div id="challenge6" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Now write a code that outputs the ten least represented artist
+nationalities in <code>artist_info</code>.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution6" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
+  <h4 class="accordion-header" id="headingSolution6"> Show me the solution </h4>
+</button>
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb21">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>bottom_10_nationalities <span class="op">=</span> artist_info[<span class="st">'Nationality'</span>].value_counts().tail(<span class="dv">10</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>bottom_10_nationalities</span></code></pre>
+</div>
+<figure><img src="../fig/output_10.png" class="figure mx-auto d-block"></figure></div>
+</div>
+</div>
+</div>
+<div id="discussion" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="discussion" class="callout-inner">
+<h3 class="callout-title">Discussion</h3>
+<div class="callout-content">
+<p>Discuss the results with your peers in a group:</p>
+<ul><li>Reflect on the insights you’ve gained through your analysis of
+gender, nationality, and other metadata of artworks in MoMA’s
+collection.</li>
+<li>Consider how the processes of searching and counting contributed to
+these insights.</li>
+<li>How would you interpret the numbers and other information you’ve
+extracted from the dataset? What do they reveal about the nature and
+composition of MoMA’s collection?</li>
+<li>Finally, think about whether this information could serve as a
+foundation for scientific or critical research.</li>
+</ul></div>
+</div>
+</div>
+<p>Don’t stop here. To practice further, explore other features from
+<code>moma_df</code>. Ask your own questions about these features and
+apply the Python functions and methods you’ve learned so far to
+investigate them and observe the results.</p>
+<div id="caution2" class="callout caution">
+<div class="callout-square">
+<i class="callout-icon" data-feather="alert-triangle"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Caution</h3>
+<div class="callout-content">
+<p>Up to this point, we’ve only been conducting exploratory data
+analysis (EDA). This type of analysis is meant to help you become more
+familiar with the dataset. EDA gains scientific value only when it’s
+used to support a well-defined scientific argument.</p>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="step-4---visualizing">Step 4 - Visualizing<a class="anchor" aria-label="anchor" href="#step-4---visualizing"></a></h2>
-<hr class="half-width"><div id="keypoints1" class="callout keypoints">
+<hr class="half-width"><p>Visualizing data is a key part of conducting quantitative analysis.
+Different visualization methods serve different analytical purposes,
+such as:</p>
+<ul><li>Exploring relationships between features in the dataset</li>
+<li>Comparing trends and measurements</li>
+<li>Examining distributions</li>
+<li>Identifying patterns</li>
+<li>Drawing comparisons across categories or time</li>
+<li>Understanding statistical inference</li>
+<li>Enhancing data storytelling</li>
+</ul><p>among others. To dive deeper into data visualization for statistical
+inference and storytelling, take a look at <a href="https://carpentries-incubator.github.io/hermes_stat_inf_data_vis/" class="external-link">this
+Carpentries lesson</a>.</p>
+<p>Let’s dive into two data visualization exercises using
+<code>moma_df</code>. But before we create the visualizations, it’s
+essential to define why we’re making them, because the purpose of a
+visualization guides how we build it.</p>
+<p>We’re going to focus on two specific goals:</p>
+<ul><li>Visualize the distribution of artistic media over time in MoMA’s
+collection</li>
+<li>Compare the number of artworks in the collection by country and
+epoch</li>
+</ul><p>There are many chart types suited to different kinds of data and
+questions. Likewise, Python has several powerful libraries for
+visualizing data. For this exercise, we’ll use
+<code>plotly.express</code>, a submodule of the broader
+<code>plotly</code> library. Think of <code>plotly</code> as the full
+toolbox, and <code>plotly.express</code> as the quick-access drawer with
+the most commonly used tools. It’s especially great if you’re new to
+coding or just want to get nice results with less code.</p>
+<p>The pseudocode for both visualization code snippets that we are going
+to write looks like this:</p>
+<pre><code>- import the necessary libraries.
+- create a new DataFrame based on `moma_df` that contains the features that we want to
+analyze and/or visualize.
+- choose a propor graph type from `plotly.express` that best demonstrates the features
+we want to analyze.
+- visualize the graph using the created DataFrame.</code></pre>
+<p>Let’s first import the libraries we need:</p>
+<div class="codewrapper sourceCode" id="cb23">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre>
+</div>
+<p>Now, let’s visualize the distribution of artistic media over time in
+MoMA’s collection. To keep the graph clear and easy to read, we’ll focus
+only on the top eight most common artistic media found in
+<code>moma_df</code>.</p>
+<div class="codewrapper sourceCode" id="cb24">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>top_media <span class="op">=</span> moma_df[<span class="st">'Medium'</span>].value_counts().nlargest(<span class="dv">8</span>).index</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>medium_df <span class="op">=</span> moma_df[moma_df[<span class="st">'Medium'</span>].isin(top_media)]</span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>fig <span class="op">=</span> px.histogram(medium_df, x<span class="op">=</span><span class="st">'Date'</span>, color<span class="op">=</span><span class="st">'Medium'</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>                   nbins<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>                   title<span class="op">=</span><span class="st">'Trends in Medium Usage Over Time'</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>                   labels<span class="op">=</span>{<span class="st">'Date'</span>: <span class="st">'Year'</span>, <span class="st">'count'</span>: <span class="st">'Number of Artworks'</span>})</span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a>fig.show()</span></code></pre>
+</div>
+<figure><img src="../fig/output_11.png" class="figure mx-auto d-block"></figure><div id="challenge7" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>By now, you should have gained a basic understanding of the logic
+behind Python syntax. In your group, discuss how the above code works
+and what each function, method, and argument does. Play with the
+arguments, change them, and see what happens.</p>
+<p>Keep in mind that all Python libraries, along with their functions
+and methods, are well-documented. You can read these documentations to
+understand other people’s code or learn how to implement new libraries
+in your own code.</p>
+</div>
+</div>
+</div>
+<div id="accordionHint3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
+  <h4 class="accordion-header" id="headingHint3"> Give me a hint </h4>
+</button>
+<div id="collapseHint3" class="accordion-collapse collapse" aria-labelledby="headingHint3" data-bs-parent="#accordionHint3">
+<div class="accordion-body">
+<p>To understand how the <code>histogram</code> function from the
+<code>plotly.express</code> module functions, check out the
+documentation of plotly.express.histogram <a href="https://plotly.github.io/plotly.py-docs/generated/plotly.express.histogram.html" class="external-link">here</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution7" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
+  <h4 class="accordion-header" id="headingSolution7"> Show me the solution </h4>
+</button>
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
+<div class="accordion-body">
+<p>Here’s a line-by-line explanation of the above code:</p>
+<pre><code>top_media = moma_df['Medium'].value_counts().nlargest(8).index</code></pre>
+<p><code>moma_df['Medium']</code> Selects the “Medium” column from the
+DataFrame <code>moma_df</code>, which contains the artistic media for
+each artwork. <code>.value_counts()</code> counts the number of
+occurrences of each unique value in the “Medium” column (i.e., how many
+artworks belong to each medium). <code>.nlargest(8)</code> selects the
+top 8 most frequent media types based on their counts.
+<code>.index</code> extracts the index (the actual medium types) from
+the result of <code>nlargest</code>, which gives us the top 8 artistic
+media.</p>
+<pre><code>medium_df = moma_df[moma_df['Medium'].isin(top_media)]</code></pre>
+<p><code>moma_df['Medium'].isin(top_media)</code> checks which rows in
+the “Medium” column of <code>moma_df</code> contain one of the top 8
+media from the <code>top_media</code> list. The result is stored in a
+new DataFrame called <code>medium_df</code>, which contains only the
+artworks with the top 8 most frequent media.</p>
+<pre><code>fig = px.histogram(medium_df, x='Date', color='Medium', nbins=50, title='Trends in Medium
+Usage Over Time', labels={'Date': 'Year', 'count': 'Number of Artworks'})</code></pre>
+<p>The <code>px.histogram()</code> function from
+<code>plotly.express</code> creates a histogram. It takes the following
+arguments:</p>
+<ul><li>
+<code>medium_df</code>: The data to visualize (i.e., the filtered
+DataFrame with the top 8 media)</li>
+<li>
+<code>x='Date'</code>: The variable to be plotted on the x-axis,
+which is the “Date” column. This represents the year each artwork was
+created.</li>
+<li>
+<code>color='Medium'</code>: This argument colors the bars by the
+“Medium” column, so you can distinguish between the different artistic
+media.</li>
+<li>
+<code>nbins=50</code>: Specifies the number of bins for the
+histogram (i.e., how the years will be grouped).</li>
+<li>
+<code>title='Trends in Medium Usage Over Time'</code>: The title of
+the plot.</li>
+<li>
+<code>labels={'Date': 'Year', 'count': 'Number of Artworks'}</code>:
+Customizes the labels of the axes for better clarity.</li>
+</ul><pre><code><span><span class="fu">fig.show</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+<p>This line displays the plot created by <code>plotly.express</code>.
+It renders the histogram in an interactive format, allowing you to hover
+over the bars to view detailed information.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Try reading and interpreting the graph. Explain what it shows in
+simple, natural language. Based on the graph, draw a conclusion about
+MoMA’s collection.</p>
+<div id="challenge8" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Now, let’s visualize a second graph using the MoMA database. This
+time, the process will be a bit more complex. It’s up to you to
+understand the functionality of the code and what information the
+resulting graph will represent.</p>
+<div class="codewrapper sourceCode" id="cb29">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>df <span class="op">=</span> moma_df.copy()</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>df[<span class="st">'Date'</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">'Date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a>df <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">'Date'</span>, <span class="st">'Nationality'</span>])</span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>grouped <span class="op">=</span> df.groupby([<span class="st">'Date'</span>, <span class="st">'Nationality'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'Count'</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>top_nationalities <span class="op">=</span> df[<span class="st">'Nationality'</span>].value_counts().nlargest(<span class="dv">7</span>).index</span>
+<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>grouped <span class="op">=</span> grouped[grouped[<span class="st">'Nationality'</span>].isin(top_nationalities)]</span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(grouped, x<span class="op">=</span><span class="st">'Date'</span>, y<span class="op">=</span><span class="st">'Nationality'</span>, size<span class="op">=</span><span class="st">'Count'</span>, color<span class="op">=</span><span class="st">'Nationality'</span>,</span>
+<span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a>                 title<span class="op">=</span><span class="st">'Frequency of Artworks by Nationality Over Time'</span>,</span>
+<span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a>                 labels<span class="op">=</span>{<span class="st">'Date'</span>: <span class="st">'Year'</span>})</span>
+<span id="cb29-12"><a href="#cb29-12" tabindex="-1"></a>fig.show()</span></code></pre>
+</div>
+<figure><img src="../fig/output_12.png" class="figure mx-auto d-block"></figure></div>
+</div>
+</div>
+<div id="accordionSolution8" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution8" aria-expanded="false" aria-controls="collapseSolution8">
+  <h4 class="accordion-header" id="headingSolution8"> Show me the solution </h4>
+</button>
+<div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
+<div class="accordion-body">
+<p>provide solution</p>
+</div>
+</div>
+</div>
+</div>
+<p><strong><span style="color:red">WE ARE HERE </span></strong></p>
+<div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -1050,8 +1343,8 @@ any links that you are not going to use.
   "url": "https://Goli-SF.github.io/python_101_humanities/instructor/01_analyze_tabular_data.html",
   "identifier": "https://Goli-SF.github.io/python_101_humanities/instructor/01_analyze_tabular_data.html",
   "dateCreated": "2025-05-08",
-  "dateModified": "2025-04-23",
-  "datePublished": "2025-04-23"
+  "dateModified": "2025-04-24",
+  "datePublished": "2025-04-24"
 }
 
   </script><script>
