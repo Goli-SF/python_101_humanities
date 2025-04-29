@@ -18,7 +18,7 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="incubator-logo" alt="In this lesson, you will learn the basics of data analysis and computational humanities using python." src="../assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
+        <img id="incubator-logo" alt="In this lesson, you will learn the basics of data analysis and computational humanities using Python." src="../assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
           <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
             <a href="https://cdh.carpentries.org/the-lesson-life-cycle.html#early-development-pre-alpha-through-alpha" class="external-link alert-link">
               <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
@@ -71,7 +71,7 @@
       <span class="menu-title">Menu</span>
     </button>
     <div class="nav-logo">
-      <img class="small-logo" alt="In this lesson, you will learn the basics of data analysis and computational humanities using python." src="../assets/images/incubator-logo-sm.svg"></div>
+      <img class="small-logo" alt="In this lesson, you will learn the basics of data analysis and computational humanities using Python." src="../assets/images/incubator-logo-sm.svg"></div>
     <div class="lesson-title-md">
       Introduction to data analysis basics with Python for the humanities
     </div>
@@ -291,7 +291,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Analyzing Tabular Data</h1>
-        <p>Last updated on 2025-04-24 |
+        <p>Last updated on 2025-04-29 |
 
         <a href="https://github.com/Goli-SF/python_101_humanities/edit/main/episodes/01_analyze_tabular_data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -327,9 +327,9 @@ data?</li>
 quantitatively</li>
 <li>Learn to break down the analysis into smaller tasks, think in terms
 of computer logic, and translate these tasks into code</li>
-<li>Develop proficiency in using the Python library Pandas for tabular
-data analysis</li>
-<li>Learn to use the Python library Plotly to visualize tabular
+<li>Learn using the Python library Pandas for analyzing tabular
+data</li>
+<li>Learn using the Python library Plotly for visualizing tabular
 data</li>
 </ul></div>
 </div>
@@ -337,12 +337,13 @@ data</li>
 </div>
 </div>
 <p>Let’s take on the role of an art historian in this chapter and
-analyze the MoMA dataset introduced in the “Summary and Setup” section.
-We’ll assume that we are completely unfamiliar with the dataset, its
-contents, structure, or potential usefulness for our research. The first
-step would be to look at this dataset and get familiar with its shape,
-dimension and different aspects. This initial stage of investigation is
-known as <em>exploratory data analysis</em>.</p>
+analyze the MoMA dataset introduced in the <strong>Summary and
+Setup</strong> section. We’ll assume that we are completely unfamiliar
+with the dataset, its contents, structure, or potential usefulness for
+our research. The first step would be to look at this dataset and get
+familiar with its shape, dimension and different aspects. This initial
+stage of investigation is known as <a href="https://www.geeksforgeeks.org/what-is-exploratory-data-analysis/" class="external-link">exploratory
+data analysis</a>.</p>
 <p>To begin, we first need to open an IDE (Integrated Development
 Environment), select the programming language we’ll use, and load the
 dataset into the environment to start working with it. In this case,
@@ -392,8 +393,8 @@ to other programmers. In the case of <code>pandas</code>,
 <h3 id="understand-the-data-type">Understand the data type<a class="anchor" aria-label="anchor" href="#understand-the-data-type"></a></h3>
 <p>The MoMA dataset we will be working with is stored in a
 <code>.csv</code> file. Go ahead and download it from the link provided
-in the “Summary and Setup” section.</p>
-<p>CSV stands for “comma-separated values.” When you double-click to
+in the <strong>Summary and Setup</strong> section.</p>
+<p>CSV stands for “comma-separated values”. When you double-click to
 open the file, the name makes perfect sense: it contains information
 arranged in rows, with each value in a row separated by a comma.
 Essentially, it’s a way to represent a table using a simple text
@@ -460,8 +461,8 @@ and <code>MyVar</code> are two different variables.</li>
 </div>
 <p>You can either assign a value to a variable directly in your code, as
 you just did, or you can load data that already exists on your computer
-or online, and store it in the variable. This is what we are doing right
-now:</p>
+or online, and store it in the variable. This is what we are going to do
+right now:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -470,7 +471,7 @@ now:</p>
 <p>You already know that CSV files actually represent tabular data. To
 make our <code>.csv</code> file look like a table and become more
 readable and easier to work with, we are going to load it into a
-<code>DataFrame</code>.</p>
+<em>DataFrame</em>.</p>
 <p>DataFrames are powerful table-like data structures that can be
 created and manipulated using the <code>pandas</code> library, which we
 have previously imported into our code. A DataFrame organizes data into
@@ -484,16 +485,15 @@ data. Whether you’re analyzing trends, generating summaries, or
 preparing data for visualization, DataFrames provide a convenient and
 flexible way to manage your data.</p>
 <p>In the following code snippet, we use the <code>read_csv()</code>
-function from <code>pandas</code> to load the contents of the CSV file.
-This function reads the file and automatically turns it into a
-DataFrame. In this example, I am passing only one argument to the
-<code>read_csv()</code> function: the address of the <code>.csv</code>
-file that I want to load. I have already saved this address in the
-variable <code>data_path</code>. <code>moma_df</code> is the variable
-where we store the resulting DataFrame. Once the data is in a DataFrame,
-we can easily explore it, filter rows, select specific columns, clean
-the data, and perform many types of analysis.</p>
-<p>Here’s how the code looks:</p>
+function from <code>pandas</code> to load the contents of the CSV file
+into a DataFrame. This function reads the file and automatically turns
+it into a DataFrame. In this example, I am passing only one argument to
+the <code>read_csv()</code> function: the address of the
+<code>.csv</code> file that I want to load. I have already saved this
+address in the variable <code>data_path</code>. <code>moma_df</code> is
+the variable where we store the resulting DataFrame. Once the data is in
+a DataFrame, we can easily explore it, filter rows, select specific
+columns, clean the data, and perform many types of analysis.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -517,6 +517,7 @@ parentheses that follow them. If you don’t provide one,
 <code>.head()</code> will return the first five rows by default. If you
 pass a number (e.g., <code>moma_df.head(2)</code>), it will return that
 many rows from the top of the DataFrame.</p>
+<p><span style="color:red">WE ARE HERE </span></p>
 <div id="writing-pseudocode" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -1395,13 +1396,13 @@ any links that you are not going to use.
   "inLanguage": "en",
   "dct:conformsTo": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
-  "keywords": "python, humanities, quantitative analysis, digital humanities",
+  "keywords": "python, humanities, quantitative data analysis, digital humanities",
   "name": "Analyzing Tabular Data",
   "creativeWorkStatus": "active",
   "url": "https://Goli-SF.github.io/python_101_humanities/instructor/01_analyze_tabular_data.html",
   "identifier": "https://Goli-SF.github.io/python_101_humanities/instructor/01_analyze_tabular_data.html",
   "dateCreated": "2025-05-08",
-  "dateModified": "2025-04-24",
+  "dateModified": "2025-04-29",
   "datePublished": "2025-04-29"
 }
 
