@@ -17,17 +17,17 @@ exercises: 0
 - Understand which aspects of a tabular dataset can be analyzed quantitatively
 - Learn to break down the analysis into smaller tasks, think in terms of computer logic, 
 and translate these tasks into code
-- Develop proficiency in using the Python library Pandas for tabular data analysis
-- Learn to use the Python library Plotly to visualize tabular data
+- Learn using the Python library Pandas for analyzing tabular data
+- Learn using the Python library Plotly for visualizing tabular data
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 Let’s take on the role of an art historian in this chapter and analyze the MoMA dataset 
-introduced in the “Summary and Setup” section. We’ll assume that we are completely 
+introduced in the **Summary and Setup** section. We’ll assume that we are completely 
 unfamiliar with the dataset, its contents, structure, or potential usefulness for our 
 research. The first step would be to look at this dataset and get familiar with its 
 shape, dimension and different aspects. This initial stage of investigation is known 
-as *exploratory data analysis*.
+as [exploratory data analysis](https://www.geeksforgeeks.org/what-is-exploratory-data-analysis/).
 
 To begin, we first need to open an IDE (Integrated Development Environment), select the 
 programming language we’ll use, and load the dataset into the environment to start 
@@ -75,9 +75,9 @@ import pandas as pd
 ### Understand the data type
 
 The MoMA dataset we will be working with is stored in a `.csv` file. Go ahead and download it 
-from the link provided in the “Summary and Setup” section. 
+from the link provided in the **Summary and Setup** section. 
 
-CSV stands for "comma-separated values." When you double-click to open the file, the name 
+CSV stands for "comma-separated values". When you double-click to open the file, the name 
 makes perfect sense: it contains information arranged in rows, with each value in a row 
 separated by a comma. Essentially, it’s a way to represent a table using a simple text file.
 
@@ -128,14 +128,15 @@ Notice that you should put the value of the string inside double or single quote
 
 You can either assign a value to a variable directly in your code, as you just did, or you can
 load data that already exists on your computer or online, and store it in the variable. This is
-what we are doing right now:
+what we are going to do right now:
 
 ``` python
 data_path= 'https://raw.githubusercontent.com/HERMES-DKZ/python_101_humanities/main/episodes/data/moma_artworks.csv'
 ```
 
 You already know that CSV files actually represent tabular data. To make our `.csv` file look 
-like a table and become more readable and easier to work with, we are going to load it into a `DataFrame`.
+like a table and become more readable and easier to work with, we are going to load it into a 
+*DataFrame*.
 
 DataFrames are powerful table-like data structures that can be created and manipulated using the `pandas` 
 library, which we have previously imported into our code. A DataFrame organizes data into 
@@ -148,14 +149,12 @@ that simplify working with structured data. Whether you're analyzing trends, gen
 or preparing data for visualization, DataFrames provide a convenient and flexible way to manage your data.
 
 In the following code snippet, we use the `read_csv()` function from `pandas` to load the 
-contents of the CSV file. This function reads the file and automatically turns it into a DataFrame. 
+contents of the CSV file into a DataFrame. This function reads the file and automatically turns it into a DataFrame. 
 In this example, I am passing only one argument to the `read_csv()` function: the address 
 of the `.csv` file that I want to load. I have already saved this address in the variable `data_path`. 
 `moma_df` is the variable where we store the resulting DataFrame. Once the data is in a DataFrame, 
 we can easily explore it, filter rows, select specific columns, clean the data, and perform 
 many types of analysis.
-
-Here's how the code looks:
 
 ``` python
 moma_df= pd.read_csv(data_path)
@@ -180,6 +179,8 @@ object — in this case, a DataFrame. Like regular functions, methods can accept
 placed within the parentheses that follow them. If you don’t provide one, `.head()` will return 
 the first five rows by default. If you pass a number (e.g., `moma_df.head(2)`), it will return 
 that many rows from the top of the DataFrame.
+
+<span style="color:red">WE ARE HERE </span>
 
 :::::::::::::::: callout
 #### Writing pseudocode

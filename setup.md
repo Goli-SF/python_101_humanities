@@ -20,8 +20,8 @@ type of data that is suited to particular methods of quantitative analysis.
 The metadata for artworks in the [Museum of Modern Art (MoMA)](https://www.moma.org/) collection 
 can be downloaded from the museum's [GitHub Repository](https://github.com/MuseumofModernArt/collection). 
 
-Since the data in this GitHub repository is continuously updated, I will be working with a 
-version that I previously downloaded on April 9, 2025. This version is stored in the GitHub 
+Since the data in this GitHub repository is continuously updated, we will be working with a 
+version previously downloaded on April 9, 2025. This version is stored in the GitHub 
 repository for this lesson, ensuring that the results you see during live coding match 
 exactly what is demonstrated in the lesson.
 

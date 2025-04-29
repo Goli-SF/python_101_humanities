@@ -18,7 +18,7 @@ exercises: 0
 - Learn the basic principles and methods of quantitative data analysis for the humanities, regardless of your programming experience
 - Understand which aspects of different types of datasets can be analyzed quantitatively in humanities research
 - Learn how to perform basic analyses on various types of data using Python
-- Gain an understanding of the fundamental principles of writing Python scripts
+- Understand the fundamental principles of writing Python scripts
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -33,7 +33,7 @@ By the end of this lesson, you will have learned the basic principles of data an
 on quantitative research in the humanities using Python. You will be better equipped to determine 
 whether incorporating programming and quantitative methods is meaningful for analyzing your 
 research data. You’ll also be able to evaluate whether digitizing, processing, and publishing 
-existing analog or material data could benefit your own research and contribute to the broader 
+existing analog data could benefit your own research and contribute to the broader 
 scholarly community.
 
 ## 1.2. Where does this lesson fit within the broader spectrum of the so-called “digital humanities”?
@@ -106,11 +106,11 @@ meaningful to perform quantitative data analysis using programming or software a
 digital methods".
 ::::::::::::::::::
 
-## 1.4. What do we do, when we perform quantitative data analysis"?
+## 1.4. What do we do, when we perform quantitative data analysis?
 
 ### Types of Data in Digital Humanities
 
-Data used for analysis can take various forms, including:
+Data used for quantitative analysis can take various forms, including:
 
 - Tabular data (containing text, numbers, dates, etc.)
 - Text
@@ -145,7 +145,8 @@ programming language or familiarity with relevant software tools.
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
 - Determine whether the type and volume of your research data, as well as your research question, 
-justify the use of quantitative data analysis.
+justify the use of quantitative data analysis. Avoid performing quantitative data analysis merely for 
+the sake of having done something "digital"! 
 
 - If you choose to pursue quantitative data analysis, consider what insights you want to extract 
 from your data and how you can achieve this using Python programming.

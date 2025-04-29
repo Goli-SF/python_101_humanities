@@ -15,7 +15,8 @@
 carpentry: 'incubator'
 
 # Alt-text description of the lesson.
-carpentry_description: 'In this lesson, you will learn the basics of data analysis and computational humanities using python.' #FIXME
+carpentry_description: 'In this lesson, you will learn the basics of data analysis and 
+computational humanities using Python.' #FIXME
 
 # Overall title for pages.
 title: 'Introduction to data analysis basics with Python for the humanities' 
@@ -24,7 +25,7 @@ title: 'Introduction to data analysis basics with Python for the humanities'
 created: '2025-05-08' # FIXME
 
 # Comma-separated list of keywords for the lesson
-keywords: 'python, humanities, quantitative analysis, digital humanities' # FIXME
+keywords: 'python, humanities, quantitative data analysis, digital humanities'
 
 # Life cycle stage of the lesson
 # possible values: pre-alpha, alpha, beta, stable
