@@ -318,7 +318,7 @@
         
 <section id="aio-00_introduction"><p>Content from <a href="00_introduction.html">Introduction</a></p>
 <hr>
-<p>Last updated on 2025-04-29 |
+<p>Last updated on 2025-05-01 |
 
         <a href="https://github.com/Goli-SF/python_101_humanities/edit/main/episodes/00_introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -507,10 +507,13 @@ classification, or visual representation</li>
 <li>Documenting the insights gained</li>
 <li>Presenting the insights in the context of a scientific research</li>
 </ul>
+<div id="required-knowledge-for-data-analysis-in-the-humanities" class="callout prereq">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check"></i>
 </div>
-<div class="section level3">
-<h3 id="required-knowledge-for-data-analysis-in-the-humanities">Required Knowledge for Data Analysis in the Humanities<a class="anchor" aria-label="anchor" href="#required-knowledge-for-data-analysis-in-the-humanities"></a>
-</h3>
+<div id="required-knowledge-for-data-analysis-in-the-humanities" class="callout-inner">
+<h3 class="callout-title">Required Knowledge for Data Analysis in the Humanities</h3>
+<div class="callout-content">
 <p>To effectively analyze data in quantitative humanities research, it
 is important to have the following knowledge:</p>
 <ul>
@@ -522,6 +525,9 @@ and the type of knowledge or insights one aims to extract</li>
 — this requires proficiency in a programming language or familiarity
 with relevant software tools.</li>
 </ul>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -548,7 +554,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-01_analyze_tabular_data"><p>Content from <a href="01_analyze_tabular_data.html">Analyzing Tabular Data</a></p>
 <hr>
-<p>Last updated on 2025-04-29 |
+<p>Last updated on 2025-05-01 |
 
         <a href="https://github.com/Goli-SF/python_101_humanities/edit/main/episodes/01_analyze_tabular_data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -616,8 +622,45 @@ would be extremely time-consuming and complex. Fortunately, others have
 already done much of this foundational work for us. Over the years,
 developers have created collections of pre-written code that simplify
 programming. You can think of these collections as toolboxes containing
-functions and methods that perform complex tasks with just a line or two
-of code. In Python, these toolboxes are called <em>libraries</em>.</p>
+<em>functions</em> and <em>methods</em> that perform complex tasks with
+just a line or two of code. In Python, these toolboxes are called
+<em>libraries</em>.</p>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What are Python functions and methods? </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div class="accordion-body">
+<p>A <strong>function</strong> is a reusable block of code that performs
+a specific task. You write it once and can use it multiple times. Think
+of it like a kitchen recipe: you follow the same steps every time you
+want to bake a cake. Functions help make your code cleaner, shorter, and
+easier to manage.</p>
+<p>A <strong>method</strong> is just like a function, but it “belongs”
+to something — usually an object like a string, list, or number. You use
+methods to perform actions on those objects.</p>
+<p>An <strong>argument</strong> is a value you give to a function or
+method so it can do its job using that value.</p>
+<p>When you define a function, you can set it up to accept input values.
+These inputs are called <strong>parameters</strong>. When you actually
+call the function and give it real values, those are called arguments.
+For example, in the following code, I am defining a function called
+<code>greet</code>. The function takes the name of a person and says
+hello to that person. Here, <code>name</code> is a parameter, whereas
+<code>Alice</code> is an argument:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="kw">def</span> greet(name):</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Hello, "</span> <span class="op">+</span> name)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>greet(<span class="st">"Alice"</span>)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <p>Some Python libraries come built into the language, while others must
 be installed separately. Most external libraries can be easily installed
 via the <a href="https://swcarpentry.github.io/shell-novice/" class="external-link">terminal</a> using a
@@ -638,10 +681,10 @@ alias when importing it. For instance, in the example below, the
 libraries have common conventions that help make your code more readable
 to other programmers. In the case of <code>pandas</code>,
 <code>pd</code> is the widely recognized standard.</p>
-<div class="codewrapper sourceCode" id="cb1">
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre>
 </div>
 </section><section><h2 class="section-heading" id="step-2---loading-the-data-into-your-code">Step 2 - Loading the Data into Your Code<a class="anchor" aria-label="anchor" href="#step-2---loading-the-data-into-your-code"></a>
 </h2>
@@ -681,20 +724,20 @@ analyze or manipulate it.</p>
 contain any type of data that you think of. For example, I can create a
 variable called <code>a_number</code> and store a number in it, like
 this:</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>a_number <span class="op">=</span> <span class="dv">12</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>a_number</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>a_number <span class="op">=</span> <span class="dv">12</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>a_number</span></code></pre>
 </div>
 <p>I can also store a string (a sequence of characters, including
 letters, numbers, and other symbols) in a variable, which I’ll call
 <code>a_string</code>, like this:”</p>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>a_string<span class="op">=</span> <span class="st">"This is a string, consisting of numbers (like 13), letters and other signs!"</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>a_string</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>a_string<span class="op">=</span> <span class="st">"This is a string, consisting of numbers (like 13), letters and other signs!"</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>a_string</span></code></pre>
 </div>
 <p>Notice that you should put the value of the string inside double or
 single quotes, but you shouldn’t do it for numbers.</p>
@@ -724,10 +767,10 @@ and <code>MyVar</code> are two different variables.</li>
 you just did, or you can load data that already exists on your computer
 or online, and store it in the variable. This is what we are going to do
 right now:</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>data_path<span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/HERMES-DKZ/python_101_humanities/main/episodes/data/moma_artworks.csv'</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>data_path<span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/HERMES-DKZ/Python_101_humanities/main/episodes/data/moma_artworks.csv'</span></span></code></pre>
 </div>
 <p>You already know that CSV files actually represent tabular data. To
 make our <code>.csv</code> file look like a table and become more
@@ -755,21 +798,21 @@ address in the variable <code>data_path</code>. <code>moma_df</code> is
 the variable where we store the resulting DataFrame. Once the data is in
 a DataFrame, we can easily explore it, filter rows, select specific
 columns, clean the data, and perform many types of analysis.</p>
-<div class="codewrapper sourceCode" id="cb5">
+<div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>moma_df<span class="op">=</span> pd.read_csv(data_path)</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>moma_df</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>moma_df<span class="op">=</span> pd.read_csv(data_path)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>moma_df</span></code></pre>
 </div>
 <figure><img src="fig/output_01.png" class="figure mx-auto d-block"></figure><p>As you can see, this is a large DataFrame, containing 158,688 rows
 and 30 columns. For now, we’re only interested in viewing the first few
 rows to get a quick overview of its structure — specifically the column
 names and the types of values stored in each column. To do this, we’ll
 use the DataFrame’s <code>.head()</code> method, like so:</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>moma_df.head()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>moma_df.head()</span></code></pre>
 </div>
 <figure><img src="fig/output_02.png" class="figure mx-auto d-block"></figure><p><code>.head()</code> is a method, which means it’s a type of function
 that’s associated with a specific object — in this case, a DataFrame.
@@ -778,7 +821,6 @@ parentheses that follow them. If you don’t provide one,
 <code>.head()</code> will return the first five rows by default. If you
 pass a number (e.g., <code>moma_df.head(2)</code>), it will return that
 many rows from the top of the DataFrame.</p>
-<p><span style="color:red">WE ARE HERE </span></p>
 <div id="writing-pseudocode" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -795,27 +837,23 @@ approach and stay focused on the logic behind each step.</p>
 pseudocode:</p>
 <pre><code>- Import the necessary libraries.
 - Save the file path where the data is stored in a variable.
-- Load the data into the program.
+- Load the data into the program from that path.
 - Convert the data into a table format that’s easier to explore.
 - Display only the first few rows of the table to avoid overwhelming output.</code></pre>
 <p>This pseudocode translates into the following Python code, which
 brings together all the lines we’ve written so far:</p>
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>data_path<span class="op">=</span> <span class="st">"../data/moma_artworks.csv"</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>moma_df<span class="op">=</span> pd.read_csv(data_path)</span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>moma_df.head()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>data_path<span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/HERMES-DKZ/Python_101_humanities/main/episodes/data/moma_artworks.csv'</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>moma_df<span class="op">=</span> pd.read_csv(data_path)</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>moma_df.head()</span></code></pre>
 </div>
 </div>
 </div>
 </div>
-</div>
-</section><section><h2 class="section-heading" id="step-3---counting-and-searching">Step 3 - Counting and Searching<a class="anchor" aria-label="anchor" href="#step-3---counting-and-searching"></a>
-</h2>
-<hr class="half-width">
 <p>This dataset contains several aspects that can contribute to research
 in art history. We will perform three distinct processes —
 <strong>counting</strong>, <strong>searching</strong>, and
@@ -824,14 +862,18 @@ potentially aid in quantitative humanities research. After completing
 each step, we will analyze the results and discuss whether they provide
 meaningful insights for scientific research or if they lack scientific
 significance.</p>
+</div>
+</section><section><h2 class="section-heading" id="step-3---counting-and-searching">Step 3 - Counting and Searching<a class="anchor" aria-label="anchor" href="#step-3---counting-and-searching"></a>
+</h2>
+<hr class="half-width">
 <p>You can count all or a selected group of data points in a DataFrame.
 To start, let’s get an overview of the counts and data types present in
 the DataFrame. To do this, we’ll use the <code>.info()</code> method on
 the DataFrame:</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>moma_df.info()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>moma_df.info()</span></code></pre>
 </div>
 <figure><img src="fig/output_03.png" class="figure mx-auto d-block"></figure><p>This method provides valuable information about the DataFrame in a
 tabular format.</p>
@@ -843,17 +885,21 @@ tabular format.</p>
 <h3 class="callout-title">Insights from the <code>.info()</code>
 Method</h3>
 <div class="callout-content">
-<p>In the first column of the resulting table, you can see the names and
-numbers of all the columns in the DataFrame. As shown here, the first
-column, “Title”, is numbered as “0”. REMEMBER: In Python, indexing and
-counting always start from zero. This concept is important to keep in
-mind when working with lists, strings, Series, DataFrames, dictionaries,
-and other data structures.</p>
-<p>The second column in the table displays the number of “non-null”
-values in each DataFrame column. If you refer back to the first five
-rows of the DataFrame, you’ll notice that “NaN” appears quite
+<ul>
+<li><p>In the first column of the resulting table, you can see the names
+and numbers of all the columns in the DataFrame. As shown here, the
+first column, “Title”, is numbered as “0”. REMEMBER: In Python, indexing
+and counting always start from zero. This concept is important to keep
+in mind when working with lists, strings, Series, DataFrames,
+dictionaries, and other data structures.</p></li>
+<li><p>The second column in the table displays the number of “non-null”
+(non-empty) values in each DataFrame column. If you refer back to the
+first five rows of the DataFrame, you’ll notice that “NaN” appears quite
 frequently. “NaN” stands for “Not a Number” and is a special value used
-to represent missing, undefined, or unrepresentable numerical data.</p>
+to represent missing, undefined, or unrepresentable numerical
+data.</p></li>
+</ul>
+<div style="margin-left: 30px;">
 <p>When preparing datasets, like the one from MoMA, it’s crucial for
 people working at GLAM (Galleries, Libraries, Archives, Museums)
 institutions not to leave any cells empty. If left blank, users may
@@ -891,39 +937,45 @@ a missing value, such as:</p>
 <p>Returning to the DataFrame info, “non-null” values refer to values
 that are not NaN, NULL, N/A, or their equivalents. In other words, these
 are the useful values that contain meaningful information.</p>
-<p>The third column in the info table shows the data type of the values
-in each column. A data type tells Python (or, in this case, pandas) what
-kind of value something is, so it knows how to handle it. In this
-dataset, we have three main data types: “object”, “int64”, and
+</div>
+<ul>
+<li>
+<p>The third column in the info table shows the data type of the
+values in each column. A data type tells Python (or, in this case,
+pandas) what kind of value something is, so it knows how to handle it.
+In this dataset, we have three main data types: “object”, “int64”, and
 “float64”.</p>
 <ul>
 <li>“int” stands for integer — whole numbers without decimals (e.g., 1,
 2, 3, …). The “64” in “int64” refers to the number of bits used to store
 the integer in memory: 64 bits. Larger sizes allow for the storage of
 larger numbers more accurately.</li>
-<li>“float” stands for floating-point number (or decimal number), such
-as 1.345, 12.34878, or -0.1. Floats are used for measurements,
-percentages, or any values that aren’t whole numbers. Similarly, “64” in
-“float64” indicates the size of the number in memory, using 64 bits to
-store each decimal.</li>
+<li>“float” stands for floating-point numbers (or decimal numbers), such
+as 1.345, 12.34878, or -0.1. Similarly, “64” in “float64” indicates the
+size of the number in memory, using 64 bits to store each decimal.</li>
 </ul>
-<p>Finally, in <code>pandas</code>, anything that isn’t clearly a number
-is categorized as an “object”. Examples of objects in pandas
+</li>
+<li>
+<p>Finally, in <code>pandas</code>, anything that isn’t clearly a
+number is categorized as an “object”. Examples of objects in pandas
 include:</p>
 <ul>
 <li>Strings (text): “apple”, “John”, “abc123”</li>
 <li>Lists with mixed values: [“hello”, 3, None]</li>
 <li>Python objects</li>
 </ul>
+</li>
+</ul>
 </div>
 </div>
 </div>
-<p>The DataFrame info has already provided us with valuable insights
-into the data types in the DataFrame and how they should be handled
-during analysis. It has also performed some counting for us. Now, we can
-begin counting more specific elements within the DataFrame. For example,
-we can identify all the artist names in the DataFrame and determine how
-many works by each artist are included in MoMA’s collection.</p>
+<p>The <code>.info()</code> method has already provided us with valuable
+insights into the data types in <code>moma_df</code> and how they should
+be handled during analysis. It has also performed some counting for us.
+Now, we can begin counting more specific elements within this DataFrame.
+For example, we can identify all the artist names in the DataFrame and
+determine how many works by each artist are included in MoMA’s
+collection.</p>
 <div id="challenge" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -941,10 +993,12 @@ single steps and write the pseudocode for each step?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <p><strong>HINT:</strong> We need to create a new DataFrame based on
-<code>moma_df</code> and regarding the task at hand.</p>
+<code>moma_df</code> regarding the task at hand. This new DataFrame
+should contain two columns: the artist names and number of times each
+name appears in <code>moma_df</code>.</p>
 </div>
 </div>
 </div>
@@ -954,39 +1008,32 @@ single steps and write the pseudocode for each step?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
-<p>To achieve this, we can create a new DataFrame that contains artist
-names and the corresponding count of how many times each artist appears
-in <code>moma_df</code>. Before diving into the actual Python code,
-let’s outline the pseudocode for this task:</p>
-<ul>
-<li>Look at the column “Artist” in <code>moma_df</code> and find
-individual artist names.</li>
-<li>Count the number of times each individual artist name appears in
-<code>moma_df</code>.</li>
-<li>Store the artist names and the number of their mentions in a new
-DataFrame called <code>artist_counts</code>.</li>
-</ul>
+<p>The pseudocode for this task looks something like this:</p>
+<pre><code>- Look at the column "Artist" in moma_df and find individual artist names.
+- Count the number of times each individual artist name appears in moma_df.
+- Store the artist names and the number of their mentions in a new DataFrame called artist_counts.</code></pre>
 </div>
 </div>
 </div>
 </div>
 <p>Let’s translate the pseudocode into Python code:</p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>artist_counts <span class="op">=</span> moma_df[<span class="st">'Artist'</span>].value_counts().reset_index()</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>artist_counts.columns <span class="op">=</span> [<span class="st">'Artist'</span>, <span class="st">'Number of Works'</span>]</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>artist_counts</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>artist_counts <span class="op">=</span> moma_df[<span class="st">'Artist'</span>].value_counts().reset_index()</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>artist_counts.columns <span class="op">=</span> [<span class="st">'Artist'</span>, <span class="st">'Number of Works'</span>]</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>artist_counts</span></code></pre>
 </div>
-<figure><img src="fig/output_04.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-above" class="callout discussion">
+<figure><img src="fig/output_04.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-line-by-line" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<div id="lets-analyze-the-code-above" class="callout-inner">
-<h3 class="callout-title">Let’s analyze the code above</h3>
+<div id="lets-analyze-the-code-line-by-line" class="callout-inner">
+<h3 class="callout-title">Let’s analyze the code line by line</h3>
 <div class="callout-content">
+<pre><code>artist_counts = moma_df['Artist'].value_counts().reset_index()</code></pre>
 <p>When you use the <code>.value_counts()</code> method in
 <code>pandas</code>, it returns a Series where:</p>
 <ul>
@@ -998,14 +1045,15 @@ column.</li>
 <p>While this format is informative, it’s not as flexible for further
 analysis because it’s not a DataFrame with named columns. By adding
 <code>.reset_index()</code>, you’re instructing pandas to convert the
-index (artist names) into a regular column. After that, we rename the
-columns using:</p>
+index (artist names) into a regular column. Afterwards, we rename the
+columns like this:</p>
 <pre><code>artist_counts.columns = ['Artist', 'Number of Works']</code></pre>
 <p>Here, we’re assigning a list of two strings to rename the columns
 appropriately.</p>
 </div>
 </div>
 </div>
+<p><span style="color:red">WE ARE HERE </span></p>
 <p>Now that we’ve created the <code>artist_counts</code> DataFrame, we
 can perform statistical operations on it. While such statistical
 insights may not be significant for scholarly research in art history —
@@ -1033,7 +1081,7 @@ pseudocode for each step?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
 <p><strong>HINT:</strong> In the new DataFrame, we need more information
 than just “Artist” and “Number of Works”. We also need “Gender” and
@@ -1047,7 +1095,7 @@ than just “Artist” and “Number of Works”. We also need “Gender” and
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Here’s the pseudocode for solving this challenge:</p>
 <ul>
@@ -1064,20 +1112,20 @@ artist information with their work counts.</li>
 </div>
 </div>
 <p>Again, let’s translate the pseudocode to Python code:</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>artist_details <span class="op">=</span> moma_df.groupby(<span class="st">'Artist'</span>)[[<span class="st">'Gender'</span>, <span class="st">'Nationality'</span>]].first().reset_index()</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>artist_counts <span class="op">=</span> moma_df[<span class="st">'Artist'</span>].value_counts().reset_index()</span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>artist_counts.columns <span class="op">=</span> [<span class="st">'Artist'</span>, <span class="st">'Number of Works'</span>]</span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>artist_info <span class="op">=</span> artist_counts.merge(artist_details, on<span class="op">=</span><span class="st">'Artist'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>artist_info</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>artist_details <span class="op">=</span> moma_df.groupby(<span class="st">'Artist'</span>)[[<span class="st">'Gender'</span>, <span class="st">'Nationality'</span>]].first().reset_index()</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>artist_counts <span class="op">=</span> moma_df[<span class="st">'Artist'</span>].value_counts().reset_index()</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>artist_counts.columns <span class="op">=</span> [<span class="st">'Artist'</span>, <span class="st">'Number of Works'</span>]</span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>artist_info <span class="op">=</span> artist_counts.merge(artist_details, on<span class="op">=</span><span class="st">'Artist'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>artist_info</span></code></pre>
 </div>
-<figure><img src="fig/output_05.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-above-1" class="callout discussion">
+<figure><img src="fig/output_05.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-above" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<div id="lets-analyze-the-code-above-1" class="callout-inner">
+<div id="lets-analyze-the-code-above" class="callout-inner">
 <h3 class="callout-title">Let’s analyze the code above</h3>
 <div class="callout-content">
 <pre><code>artist_details = moma_df.groupby('Artist')[['Gender', 'Nationality']].first().reset_index()</code></pre>
@@ -1153,13 +1201,13 @@ are attributed to artists of different genders.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>gender_distribution <span class="op">=</span> artist_info[<span class="st">'Gender'</span>].value_counts()</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>gender_distribution</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>gender_distribution <span class="op">=</span> artist_info[<span class="st">'Gender'</span>].value_counts()</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>gender_distribution</span></code></pre>
 </div>
 <figure><img src="fig/output_06.png" class="figure mx-auto d-block"></figure>
 </div>
@@ -1196,7 +1244,7 @@ correspond to the gender “() (male) (male) (male) () (male) (male)
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <ul>
 <li>Define the specific gender pattern as a string.</li>
@@ -1209,18 +1257,18 @@ exactly matches this pattern.</li>
 </div>
 </div>
 <p>Let’s translate the pseudocode into Python code:</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>gender<span class="op">=</span> <span class="st">"() (male) (male) (male) () (male) (male) (female)"</span></span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>matching_artworks <span class="op">=</span> moma_df[moma_df[<span class="st">'Gender'</span>] <span class="op">==</span> gender]</span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>matching_artworks</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>gender<span class="op">=</span> <span class="st">"() (male) (male) (male) () (male) (male) (female)"</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>matching_artworks <span class="op">=</span> moma_df[moma_df[<span class="st">'Gender'</span>] <span class="op">==</span> gender]</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>matching_artworks</span></code></pre>
 </div>
-<figure><img src="fig/output_07.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-above-2" class="callout discussion">
+<figure><img src="fig/output_07.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-above-1" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<div id="lets-analyze-the-code-above-2" class="callout-inner">
+<div id="lets-analyze-the-code-above-1" class="callout-inner">
 <h3 class="callout-title">Let’s analyze the code above</h3>
 <div class="callout-content">
 <p><code>matching_artworks = moma_df[moma_df['Gender'] == gender]</code>
@@ -1239,16 +1287,16 @@ for this step would look like this:</p>
 <pre><code>- Access the first row of the matching results.
 - Retrieve the artist’s name from this row.</code></pre>
 <p>which translates into one line of Python code:</p>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>matching_artworks.iloc[<span class="dv">0</span>][<span class="st">'Artist'</span>]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>matching_artworks.iloc[<span class="dv">0</span>][<span class="st">'Artist'</span>]</span></code></pre>
 </div>
-<figure><img src="fig/output_08.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-above-3" class="callout discussion">
+<figure><img src="fig/output_08.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-above-2" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<div id="lets-analyze-the-code-above-3" class="callout-inner">
+<div id="lets-analyze-the-code-above-2" class="callout-inner">
 <h3 class="callout-title">Let’s analyze the code above</h3>
 <div class="callout-content">
 <p>Having filtered the data to include only the rows with the specified
@@ -1275,7 +1323,7 @@ description.</p>
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>Let’s take a look at which artist nationalities are most represented
-in <code>artist_info</code>. Write a python code that outputs the top 10
+in <code>artist_info</code>. Write a Python code that outputs the top 10
 artist nationalities from the dataset.</p>
 </div>
 </div>
@@ -1285,13 +1333,13 @@ artist nationalities from the dataset.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>top_10_nationalities <span class="op">=</span> artist_info[<span class="st">'Nationality'</span>].value_counts().head(<span class="dv">10</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>top_10_nationalities</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>top_10_nationalities <span class="op">=</span> artist_info[<span class="st">'Nationality'</span>].value_counts().head(<span class="dv">10</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>top_10_nationalities</span></code></pre>
 </div>
 <figure><img src="fig/output_09.png" class="figure mx-auto d-block"></figure>
 </div>
@@ -1315,13 +1363,13 @@ nationalities in <code>artist_info</code>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6"> Show me the solution </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb21">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>bottom_10_nationalities <span class="op">=</span> artist_info[<span class="st">'Nationality'</span>].value_counts().tail(<span class="dv">10</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>bottom_10_nationalities</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>bottom_10_nationalities <span class="op">=</span> artist_info[<span class="st">'Nationality'</span>].value_counts().tail(<span class="dv">10</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>bottom_10_nationalities</span></code></pre>
 </div>
 <figure><img src="fig/output_10.png" class="figure mx-auto d-block"></figure>
 </div>
@@ -1415,27 +1463,27 @@ analyze and/or visualize.
 we want to analyze.
 - visualize the graph using the created DataFrame.</code></pre>
 <p>Let’s first import the libraries we need:</p>
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre>
 </div>
 <p>Now, let’s visualize the distribution of artistic media over time in
 MoMA’s collection. To keep the graph clear and easy to read, we’ll focus
 only on the top eight most common artistic media found in
 <code>moma_df</code>.</p>
-<div class="codewrapper sourceCode" id="cb24">
+<div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>top_media <span class="op">=</span> moma_df[<span class="st">'Medium'</span>].value_counts().nlargest(<span class="dv">8</span>).index</span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>medium_df <span class="op">=</span> moma_df[moma_df[<span class="st">'Medium'</span>].isin(top_media)]</span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>fig <span class="op">=</span> px.histogram(medium_df, x<span class="op">=</span><span class="st">'Date'</span>, color<span class="op">=</span><span class="st">'Medium'</span>,</span>
-<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>                   nbins<span class="op">=</span><span class="dv">50</span>,</span>
-<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>                   title<span class="op">=</span><span class="st">'Trends in Medium Usage Over Time'</span>,</span>
-<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>                   labels<span class="op">=</span>{<span class="st">'Date'</span>: <span class="st">'Year'</span>, <span class="st">'count'</span>: <span class="st">'Number of Artworks'</span>})</span>
-<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a>fig.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>top_media <span class="op">=</span> moma_df[<span class="st">'Medium'</span>].value_counts().nlargest(<span class="dv">8</span>).index</span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>medium_df <span class="op">=</span> moma_df[moma_df[<span class="st">'Medium'</span>].isin(top_media)]</span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a>fig <span class="op">=</span> px.histogram(medium_df, x<span class="op">=</span><span class="st">'Date'</span>, color<span class="op">=</span><span class="st">'Medium'</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>                   nbins<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a>                   title<span class="op">=</span><span class="st">'Trends in Medium Usage Over Time'</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a>                   labels<span class="op">=</span>{<span class="st">'Date'</span>: <span class="st">'Year'</span>, <span class="st">'count'</span>: <span class="st">'Number of Artworks'</span>})</span>
+<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a>fig.show()</span></code></pre>
 </div>
 <figure><img src="fig/output_11.png" class="figure mx-auto d-block"></figure><div id="challenge7" class="callout challenge">
 <div class="callout-square">
@@ -1460,7 +1508,7 @@ in your own code.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
   <h4 class="accordion-header" id="headingHint3"> Give me a hint </h4>
 </button>
-<div id="collapseHint3" class="accordion-collapse collapse" aria-labelledby="headingHint3" data-bs-parent="#accordionHint3">
+<div id="collapseHint3" class="accordion-collapse collapse" data-bs-parent="#accordionHint3" aria-labelledby="headingHint3">
 <div class="accordion-body">
 <p>To understand how the <code>histogram</code> function from the
 <code>plotly.express</code> module functions, check out the
@@ -1474,7 +1522,7 @@ documentation of plotly.express.histogram <a href="https://plotly.github.io/plot
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
   <h4 class="accordion-header" id="headingSolution7"> Show me the solution </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
 <div class="accordion-body">
 <p>Here’s a line-by-line explanation of the above code:</p>
 <pre><code>top_media = moma_df['Medium'].value_counts().nlargest(8).index</code></pre>
@@ -1542,21 +1590,21 @@ MoMA’s collection.</p>
 time, the process will be a bit more complex. It’s up to you to
 understand the functionality of the code and what information the
 resulting graph will represent.</p>
-<div class="codewrapper sourceCode" id="cb29">
+<div class="codewrapper sourceCode" id="cb32">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>df <span class="op">=</span> moma_df.copy()</span>
-<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>df[<span class="st">'Date'</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">'Date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
-<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a>df <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">'Date'</span>, <span class="st">'Nationality'</span>])</span>
-<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>grouped <span class="op">=</span> df.groupby([<span class="st">'Date'</span>, <span class="st">'Nationality'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'Count'</span>)</span>
-<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>top_nationalities <span class="op">=</span> df[<span class="st">'Nationality'</span>].value_counts().nlargest(<span class="dv">7</span>).index</span>
-<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>grouped <span class="op">=</span> grouped[grouped[<span class="st">'Nationality'</span>].isin(top_nationalities)]</span>
-<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a></span>
-<span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(grouped, x<span class="op">=</span><span class="st">'Date'</span>, y<span class="op">=</span><span class="st">'Nationality'</span>, size<span class="op">=</span><span class="st">'Count'</span>, color<span class="op">=</span><span class="st">'Nationality'</span>,</span>
-<span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a>                 title<span class="op">=</span><span class="st">'Frequency of Artworks by Nationality Over Time'</span>,</span>
-<span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a>                 labels<span class="op">=</span>{<span class="st">'Date'</span>: <span class="st">'Year'</span>})</span>
-<span id="cb29-12"><a href="#cb29-12" tabindex="-1"></a>fig.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>df <span class="op">=</span> moma_df.copy()</span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>df[<span class="st">'Date'</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">'Date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a>df <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">'Date'</span>, <span class="st">'Nationality'</span>])</span>
+<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a>grouped <span class="op">=</span> df.groupby([<span class="st">'Date'</span>, <span class="st">'Nationality'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'Count'</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a>top_nationalities <span class="op">=</span> df[<span class="st">'Nationality'</span>].value_counts().nlargest(<span class="dv">7</span>).index</span>
+<span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a>grouped <span class="op">=</span> grouped[grouped[<span class="st">'Nationality'</span>].isin(top_nationalities)]</span>
+<span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(grouped, x<span class="op">=</span><span class="st">'Date'</span>, y<span class="op">=</span><span class="st">'Nationality'</span>, size<span class="op">=</span><span class="st">'Count'</span>, color<span class="op">=</span><span class="st">'Nationality'</span>,</span>
+<span id="cb32-10"><a href="#cb32-10" tabindex="-1"></a>                 title<span class="op">=</span><span class="st">'Frequency of Artworks by Nationality Over Time'</span>,</span>
+<span id="cb32-11"><a href="#cb32-11" tabindex="-1"></a>                 labels<span class="op">=</span>{<span class="st">'Date'</span>: <span class="st">'Year'</span>})</span>
+<span id="cb32-12"><a href="#cb32-12" tabindex="-1"></a>fig.show()</span></code></pre>
 </div>
 <figure><img src="fig/output_12.png" class="figure mx-auto d-block"></figure>
 </div>
@@ -1567,7 +1615,7 @@ resulting graph will represent.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution8" aria-expanded="false" aria-controls="collapseSolution8">
   <h4 class="accordion-header" id="headingSolution8"> Show me the solution </h4>
 </button>
-<div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
+<div id="collapseSolution8" class="accordion-collapse collapse" data-bs-parent="#accordionSolution8" aria-labelledby="headingSolution8">
 <div class="accordion-body">
 <pre><code><span><span class="va">df</span> <span class="op">=</span> <span class="fu">moma_df.copy</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 <ul>
@@ -1719,8 +1767,8 @@ any links that you are not going to use.
   "url": "https://Goli-SF.github.io/python_101_humanities/aio.html",
   "identifier": "https://Goli-SF.github.io/python_101_humanities/aio.html",
   "dateCreated": "2025-05-08",
-  "dateModified": "2025-04-29",
-  "datePublished": "2025-04-29"
+  "dateModified": "2025-05-01",
+  "datePublished": "2025-05-01"
 }
 
   </script><script>
