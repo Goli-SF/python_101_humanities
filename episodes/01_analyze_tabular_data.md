@@ -45,8 +45,37 @@ to start from scratch — managing raw binary data or even working solely with b
 and numbers. That would be extremely time-consuming and complex. Fortunately, others 
 have already done much of this foundational work for us. Over the years, developers have 
 created collections of pre-written code that simplify programming. You can think of these 
-collections as toolboxes containing functions and methods that perform complex tasks with 
+collections as toolboxes containing *functions* and *methods* that perform complex tasks with 
 just a line or two of code. In Python, these toolboxes are called *libraries*.
+
+:::::::::::::::::::::::::::::::::::::::::: spoiler
+### What are Python functions and methods?
+
+A **function** is a reusable block of code that performs a specific task. You write it 
+once and can use it multiple times. Think of it like a kitchen recipe: you follow the 
+same steps every time you want to bake a cake. Functions help make your code cleaner, 
+shorter, and easier to manage.
+
+A **method** is just like a function, but it "belongs" to something — usually an object 
+like a string, list, or number. You use methods to perform actions on those objects.
+
+An **argument** is a value you give to a function or method so it can do its job using 
+that value.
+
+When you define a function, you can set it up to accept input values. These inputs are 
+called **parameters**. When you actually call the function and give it real values, 
+those are called arguments. For example, in the following code, I am defining a function
+called `greet`. The function takes the name of a person and says hello to 
+that person. Here, `name` is a parameter, whereas `Alice` is an argument: 
+
+``` Python
+def greet(name):
+    print("Hello, " + name)
+
+greet("Alice")
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Some Python libraries come built into the language, while others must be installed separately. 
 Most external libraries can be easily installed via the [terminal](https://swcarpentry.github.io/shell-novice/) 
@@ -66,7 +95,7 @@ the `pandas` library is imported and abbreviated as `pd`. While you're free to c
 abbreviation, many libraries have common conventions that help make your code more readable 
 to other programmers. In the case of `pandas`, `pd` is the widely recognized standard.
 
-```python
+```Python
 import pandas as pd
 ```
 
@@ -101,7 +130,7 @@ When you load data into your code, you should store it in a *variable*. A variab
 like a container that can contain any type of data that you think of. For example, I can 
 create a variable called `a_number` and store a number in it, like this:
 
-``` python
+``` Python
 a_number = 12
 a_number
 ```
@@ -109,11 +138,12 @@ a_number
 I can also store a string (a sequence of characters, including letters, numbers, and 
 other symbols) in a variable, which I'll call `a_string`, like this:"
 
-``` python
+``` Python
 a_string= "This is a string, consisting of numbers (like 13), letters and other signs!"
 a_string
 ```
-Notice that you should put the value of the string inside double or single quotes, but you shouldn't do it for numbers. 
+Notice that you should put the value of the string inside double or single quotes, but you 
+shouldn't do it for numbers. 
 
 :::::::::::::::: caution
 #### When naming a variable, note that:
@@ -130,8 +160,8 @@ You can either assign a value to a variable directly in your code, as you just d
 load data that already exists on your computer or online, and store it in the variable. This is
 what we are going to do right now:
 
-``` python
-data_path= 'https://raw.githubusercontent.com/HERMES-DKZ/python_101_humanities/main/episodes/data/moma_artworks.csv'
+``` Python
+data_path= 'https://raw.githubusercontent.com/HERMES-DKZ/Python_101_humanities/main/episodes/data/moma_artworks.csv'
 ```
 
 You already know that CSV files actually represent tabular data. To make our `.csv` file look 
@@ -156,7 +186,7 @@ of the `.csv` file that I want to load. I have already saved this address in the
 we can easily explore it, filter rows, select specific columns, clean the data, and perform 
 many types of analysis.
 
-``` python
+``` Python
 moma_df= pd.read_csv(data_path)
 moma_df
 ```
@@ -168,7 +198,7 @@ we’re only interested in viewing the first few rows to get a quick overview of
 specifically the column names and the types of values stored in each column. To do this, we’ll 
 use the DataFrame’s `.head()` method, like so:
 
-``` python
+``` Python
 moma_df.head()
 ```
 
@@ -179,8 +209,6 @@ object — in this case, a DataFrame. Like regular functions, methods can accept
 placed within the parentheses that follow them. If you don’t provide one, `.head()` will return 
 the first five rows by default. If you pass a number (e.g., `moma_df.head(2)`), it will return 
 that many rows from the top of the DataFrame.
-
-<span style="color:red">WE ARE HERE </span>
 
 :::::::::::::::: callout
 #### Writing pseudocode
@@ -195,7 +223,7 @@ For example, the steps we’ve taken so far might look like this in pseudocode:
 ``` 
 - Import the necessary libraries.
 - Save the file path where the data is stored in a variable.
-- Load the data into the program.
+- Load the data into the program from that path.
 - Convert the data into a table format that’s easier to explore.
 - Display only the first few rows of the table to avoid overwhelming output.
 ```
@@ -203,16 +231,14 @@ For example, the steps we’ve taken so far might look like this in pseudocode:
 This pseudocode translates into the following Python code, which brings together all 
 the lines we've written so far:
 
-``` python
+``` Python
 import pandas as pd
 
-data_path= "../data/moma_artworks.csv"
+data_path= 'https://raw.githubusercontent.com/HERMES-DKZ/Python_101_humanities/main/episodes/data/moma_artworks.csv'
 moma_df= pd.read_csv(data_path)
 moma_df.head()
 ```
 ::::::::::::::::::
-
-## Step 3 - Counting and Searching
 
 This dataset contains several aspects that can contribute to research in art history. 
 We will perform three distinct processes — **counting**, **searching**, and **visualizing** — 
@@ -220,11 +246,14 @@ which, as mentioned earlier, could potentially aid in quantitative humanities re
 After completing each step, we will analyze the results and discuss whether they provide 
 meaningful insights for scientific research or if they lack scientific significance.
 
+
+## Step 3 - Counting and Searching
+
 You can count all or a selected group of data points in a DataFrame. To start, let's get 
 an overview of the counts and data types present in the DataFrame. To do this, we’ll use 
 the `.info()` method on the DataFrame:
 
-``` python
+``` Python
 moma_df.info()
 ```
 
@@ -235,15 +264,18 @@ This method provides valuable information about the DataFrame in a tabular forma
 :::::::::::::::: discussion
 #### Insights from the `.info()` Method
 
-In the first column of the resulting table, you can see the names and numbers of all the columns in the DataFrame. 
-As shown here, the first column, "Title", is numbered as "0". REMEMBER: In Python, indexing 
-and counting always start from zero. This concept is important to keep in mind when working 
-with lists, strings, Series, DataFrames, dictionaries, and other data structures.
+- In the first column of the resulting table, you can see the names and numbers of all the columns 
+in the DataFrame. As shown here, the first column, "Title", is numbered as "0". REMEMBER: 
+In Python, indexing and counting always start from zero. This concept is important to keep 
+in mind when working with lists, strings, Series, DataFrames, dictionaries, and other 
+data structures.
 
-The second column in the table displays the number of "non-null" values in each DataFrame column. 
-If you refer back to the first five rows of the DataFrame, you’ll notice that "NaN" appears 
-quite frequently. "NaN" stands for "Not a Number" and is a special value used to represent missing, 
-undefined, or unrepresentable numerical data.
+- The second column in the table displays the number of "non-null" (non-empty) values in each 
+DataFrame column. If you refer back to the first five rows of the DataFrame, you’ll notice 
+that "NaN" appears quite frequently. "NaN" stands for "Not a Number" and is a special value 
+used to represent missing, undefined, or unrepresentable numerical data.
+
+<div style="margin-left: 30px;">
 
 When preparing datasets, like the one from MoMA, it’s crucial for people working at GLAM 
 (Galleries, Libraries, Archives, Museums) institutions not to leave any cells empty. If left 
@@ -264,29 +296,31 @@ Some providers of DataSets use other values instead of "NaN" to imply a missing 
 Returning to the DataFrame info, "non-null" values refer to values that are not NaN, NULL, N/A, 
 or their equivalents. In other words, these are the useful values that contain meaningful information.
 
-The third column in the info table shows the data type of the values in each column. A data type 
+</div>
+
+- The third column in the info table shows the data type of the values in each column. A data type 
 tells Python (or, in this case, pandas) what kind of value something is, so it knows how to handle it. 
 In this dataset, we have three main data types: "object", "int64", and "float64".
 
-- "int" stands for integer — whole numbers without decimals (e.g., 1, 2, 3, ...). The "64" in "int64" 
+  - "int" stands for integer — whole numbers without decimals (e.g., 1, 2, 3, ...). The "64" in "int64" 
 refers to the number of bits used to store the integer in memory: 64 bits. Larger sizes allow for the 
 storage of larger numbers more accurately.
-- "float" stands for floating-point number (or decimal number), such as 1.345, 12.34878, or -0.1. 
-Floats are used for measurements, percentages, or any values that aren't whole numbers. Similarly, "64" in 
-"float64" indicates the size of the number in memory, using 64 bits to store each decimal.
+  - "float" stands for floating-point numbers (or decimal numbers), such as 1.345, 12.34878, or -0.1. 
+Similarly, "64" in "float64" indicates the size of the number in memory, using 64 bits to 
+store each decimal.
 
-Finally, in `pandas`, anything that isn't clearly a number is categorized as an "object". Examples 
+- Finally, in `pandas`, anything that isn't clearly a number is categorized as an "object". Examples 
 of objects in pandas include:
 
-- Strings (text): "apple", "John", "abc123"
-- Lists with mixed values: ["hello", 3, None]
-- Python objects
+  - Strings (text): "apple", "John", "abc123"
+  - Lists with mixed values: ["hello", 3, None]
+  - Python objects
 
 ::::::::::::::::::
 
-The DataFrame info has already provided us with valuable insights into the data types in the DataFrame 
+The `.info()` method has already provided us with valuable insights into the data types in `moma_df` 
 and how they should be handled during analysis. It has also performed some counting for us. 
-Now, we can begin counting more specific elements within the DataFrame. For example, we can identify 
+Now, we can begin counting more specific elements within this DataFrame. For example, we can identify 
 all the artist names in the DataFrame and determine how many works by each artist are included in 
 MoMA's collection.
 
@@ -297,23 +331,26 @@ How do you think we should proceed? Can you break down this task into single ste
 pseudocode for each step?
 
 :::: hint
-**HINT:** We need to create a new DataFrame based on `moma_df` and regarding the task at hand. 
+**HINT:** We need to create a new DataFrame based on `moma_df` regarding the task at hand. 
+This new DataFrame should contain two columns: the artist names and number of times each name
+appears in `moma_df`.
 ::::
 
 :::: solution
-To achieve this, we can create a new DataFrame that contains artist names and the corresponding 
-count of how many times each artist appears in `moma_df`. Before diving into the actual Python code, 
-let’s outline the pseudocode for this task:
+The pseudocode for this task looks something like this:
 
-- Look at the column "Artist" in `moma_df` and find individual artist names. 
-- Count the number of times each individual artist name appears in `moma_df`.
-- Store the artist names and the number of their mentions in a new DataFrame called `artist_counts`.
+```
+- Look at the column "Artist" in moma_df and find individual artist names. 
+- Count the number of times each individual artist name appears in moma_df.
+- Store the artist names and the number of their mentions in a new DataFrame called artist_counts.
+```
+
 ::::
 :::::::::::::::::::::::::::::::::::::::::::::::::
 
 Let's translate the pseudocode into Python code: 
 
-``` python
+``` Python
 artist_counts = moma_df['Artist'].value_counts().reset_index()
 artist_counts.columns = ['Artist', 'Number of Works']
 artist_counts
@@ -322,7 +359,11 @@ artist_counts
 ![](fig/output_04.png)
 
 ::::::::::::::::::::::::::::::::::::::: discussion
-#### Let's analyze the code above
+#### Let's analyze the code line by line
+
+```
+artist_counts = moma_df['Artist'].value_counts().reset_index()
+```
 
 When you use the `.value_counts()` method in `pandas`, it returns a Series where:
 
@@ -332,7 +373,7 @@ from the "Artist" column).
 
 While this format is informative, it's not as flexible for further analysis because it's 
 not a DataFrame with named columns. By adding `.reset_index()`, you're instructing pandas to 
-convert the index (artist names) into a regular column. After that, we rename the columns using:
+convert the index (artist names) into a regular column. Afterwards, we rename the columns like this:
 
 ``` 
 artist_counts.columns = ['Artist', 'Number of Works']
@@ -340,6 +381,10 @@ artist_counts.columns = ['Artist', 'Number of Works']
 
 Here, we're assigning a list of two strings to rename the columns appropriately.
 :::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+<span style="color:red">WE ARE HERE </span>
+
 
 Now that we've created the `artist_counts` DataFrame, we can perform statistical operations 
 on it. While such statistical insights may not be significant for scholarly research in art history — 
@@ -374,7 +419,7 @@ with their work counts.
 
 Again, let's translate the pseudocode to Python code: 
 
-``` python
+``` Python
 artist_details = moma_df.groupby('Artist')[['Gender', 'Nationality']].first().reset_index()
 artist_counts = moma_df['Artist'].value_counts().reset_index()
 artist_counts.columns = ['Artist', 'Number of Works']
@@ -440,7 +485,7 @@ Write the Python code that shows how many works in MoMA's collection are attribu
 artists of different genders.
 
 :::: solution
-``` python
+``` Python
 gender_distribution = artist_info['Gender'].value_counts()
 gender_distribution
 ```
@@ -477,7 +522,7 @@ Write the pseudocode to find the artist and the artwork that correspond to the g
 
 Let's translate the pseudocode into Python code: 
 
-``` python
+``` Python
 gender= "() (male) (male) (male) () (male) (male) (female)"
 matching_artworks = moma_df[moma_df['Gender'] == gender]
 matching_artworks
@@ -506,7 +551,7 @@ some more pseudocode and Python code. The pseudocode for this step would look li
 
 which translates into one line of Python code: 
 
-```python
+```Python
 matching_artworks.iloc[0]['Artist']
 ```
 ![](fig/output_08.png)
@@ -532,11 +577,11 @@ the artwork with the specified gender description.
 
 ::::::::::::::::::::::::::::::::::::: challenge
 Let's take a look at which artist nationalities are most represented in `artist_info`. 
-Write a python code that outputs the top 10 artist nationalities from the dataset. 
+Write a Python code that outputs the top 10 artist nationalities from the dataset. 
 
 :::: solution
 
-``` python
+``` Python
 top_10_nationalities = artist_info['Nationality'].value_counts().head(10)
 top_10_nationalities
 ``` 
@@ -551,7 +596,7 @@ Now write a code that outputs the ten least represented artist nationalities in 
 
 :::: solution
 
-``` python
+``` Python
 bottom_10_nationalities = artist_info['Nationality'].value_counts().tail(10)
 bottom_10_nationalities
 ``` 
@@ -631,7 +676,7 @@ we want to analyze.
 
 Let's first import the libraries we need:
 
-``` python
+``` Python
 import plotly.express as px
 import pandas as pd
 ``` 
@@ -640,7 +685,7 @@ Now, let's visualize the distribution of artistic media over time in MoMA's coll
 To keep the graph clear and easy to read, we'll focus only on the top eight most common 
 artistic media found in `moma_df`.
 
-``` python
+``` Python
 top_media = moma_df['Medium'].value_counts().nlargest(8).index
 medium_df = moma_df[moma_df['Medium'].isin(top_media)]
 
@@ -727,7 +772,7 @@ Now, let's visualize a second graph using the MoMA database. This time, the proc
 be a bit more complex. It's up to you to understand the functionality of the code and what 
 information the resulting graph will represent.
 
-``` python
+``` Python
 df = moma_df.copy()
 df['Date'] = pd.to_numeric(df['Date'], errors='coerce')
 df = df.dropna(subset=['Date', 'Nationality'])
