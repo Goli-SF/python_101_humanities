@@ -132,6 +132,8 @@ pattern recognition, classification, or visual representation
 - Documenting the insights gained
 - Presenting the insights in the context of a scientific research
 
+:::::::::::::::: prereq
+
 ### Required Knowledge for Data Analysis in the Humanities
 
 To effectively analyze data in quantitative humanities research, it is important to have the following knowledge:
@@ -141,6 +143,9 @@ To effectively analyze data in quantitative humanities research, it is important
 one aims to extract
 - The ability to interact with computers to produce meaningful results — this requires proficiency in a 
 programming language or familiarity with relevant software tools.
+::::::::::::::::::
+
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
