@@ -15,8 +15,8 @@ exercises: 0
 
 - Learn how to initiate the analysis of tabular data
 - Understand which aspects of a tabular dataset can be analyzed quantitatively
-- Learn to break down the analysis into smaller tasks, think in terms of computer logic, 
-and translate these tasks into code
+- Learn to break down the analysis into smaller tasks, think in terms of computer logic 
+by writing pseudocode, and translate these tasks into code
 - Learn using the Python library Pandas for analyzing tabular data
 - Learn using the Python library Plotly for visualizing tabular data
 
@@ -331,7 +331,7 @@ How do you think we should proceed? Can you break down this task into single ste
 pseudocode for each step?
 
 :::: hint
-**HINT:** We need to create a new DataFrame based on `moma_df` regarding the task at hand. 
+We need to create a new DataFrame based on `moma_df` regarding the task at hand. 
 This new DataFrame should contain two columns: the artist names and number of times each name
 appears in `moma_df`.
 ::::
@@ -383,9 +383,6 @@ Here, we're assigning a list of two strings to rename the columns appropriately.
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-<span style="color:red">WE ARE HERE </span>
-
-
 Now that we've created the `artist_counts` DataFrame, we can perform statistical operations 
 on it. While such statistical insights may not be significant for scholarly research in art history — 
 since MoMA’s collection does not comprehensively represent global or regional art histories — 
@@ -401,7 +398,7 @@ that includes these details and name it `artist_info`.
 Can you break down this task into single steps and write the pseudocode for each step?
 
 :::: hint
-**HINT:** In the new DataFrame, we need more information than just "Artist" and "Number of Works". 
+In the new DataFrame, we need more information than just "Artist" and "Number of Works". 
 We also need "Gender" and "Nationality" for this task. 
 ::::
 
@@ -430,7 +427,7 @@ artist_info
 ![](fig/output_05.png)
 
 ::::::::::::::::::::::::::::::::::::::: discussion
-#### Let's analyze the code above
+#### Let's analyze the code line by line
 
 ``` 
 artist_details = moma_df.groupby('Artist')[['Gender', 'Nationality']].first().reset_index()
@@ -455,7 +452,7 @@ artist_counts.columns = ['Artist', 'Number of Works']
 
 - This code creates another DataFrame, `artist_counts`, containing the number of works 
 associated with each artist in `moma_df`.
-- The is the same step as we took in the previous task. We use the method `.value_counts()` 
+- This is the same step as we took in the previous task. We use the method `.value_counts()` 
 to count how many times each artist appears, and then use `.reset_index()` to turn the 
 artist names back into a column.
 - The columns are renamed to 'Artist' and 'Number of Works'.
@@ -473,6 +470,31 @@ matching rows from `artist_details` are added. If no match is found, the missing
 will be filled with `NaN`.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::: callout
+
+##### Note:
+
+When you're faced with complex, multi-line code and find it difficult to understand what 
+each line - or even each function or method within a line - is doing, try the following strategy:
+
+- Add a new cell to your Jupyter Notebook.
+- Identify the specific part of the code you want to understand better, and assign it to a 
+variable of your choice. For example, suppose you want to examine the DataFrame `artist_counts`
+before the `.reset_index()` method is applied. You can assign everything before 
+`.reset_index()` to a new variable — let's call it `test_index` — and then display its contents:
+
+
+``` python
+text_index = moma_df['Artist'].value_counts()
+text_index
+```
+
+- Now you can compare `test_index` with `artist_counts`. The differences between them will 
+show you exactly what the `.reset_index()` method does.
+
+::::::::::::::::::
+
 
 With the `artist_info` DataFrame ready, we can start exploring the composition of MoMA’s collection. 
 Let’s begin by examining how many works are attributed to artists of different genders. This will give 
@@ -531,7 +553,7 @@ matching_artworks
 ![](fig/output_07.png)
 
 ::::::::::::::::::::::::::::::::::::::: discussion
-#### Let's analyze the code above
+#### Let's analyze the code
 
 `matching_artworks = moma_df[moma_df['Gender'] == gender]` filters the `moma_df` DataFrame 
 to include only the rows where the Gender column exactly matches the gender string defined 
@@ -558,7 +580,7 @@ matching_artworks.iloc[0]['Artist']
 
 
 ::::::::::::::::::::::::::::::::::::::: discussion
-#### Let's analyze the code above
+#### Let's analyze the code
 
 Having filtered the data to include only the rows with the specified gender, we want to 
 work with the first one that meets the condition. `.iloc[0]` in `matching_artworks.iloc[0]` 
@@ -568,7 +590,7 @@ on their position (in this case, 0 refers to the first row).
 
 After accessing the first row using `.iloc[0]`, `matching_artworks.iloc[0]['Artist']` 
 selects the 'Artist' column from that row. This line extracts the artist's name from the 
-first row that matches the gender pattern, effectively identifying the artist who created 
+first row that matches the gender pattern, identifying the artist who created 
 the artwork with the specified gender description.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -576,7 +598,7 @@ the artwork with the specified gender description.
 
 
 ::::::::::::::::::::::::::::::::::::: challenge
-Let's take a look at which artist nationalities are most represented in `artist_info`. 
+Now Let's examine which artist nationalities are most represented in `artist_info`. 
 Write a Python code that outputs the top 10 artist nationalities from the dataset. 
 
 :::: solution
@@ -590,6 +612,7 @@ top_10_nationalities
 
 ::::
 :::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ::::::::::::::::::::::::::::::::::::: challenge
 Now write a code that outputs the ten least represented artist nationalities in `artist_info`. 
@@ -634,7 +657,7 @@ scientific value only when it's used to support a well-defined scientific argume
 ## Step 4 - Visualizing
 
 Visualizing data is a key part of conducting quantitative analysis. Different visualization 
-methods serve different analytical purposes, such as: 
+methods serve different analytic purposes, such as: 
 
 - Exploring relationships between features in the dataset
 - Comparing trends and measurements
@@ -645,9 +668,9 @@ methods serve different analytical purposes, such as:
 - Enhancing data storytelling
 
 among others. To dive deeper into data visualization for statistical inference and storytelling, 
-take a look at [this Carpentries lesson](https://carpentries-incubator.github.io/hermes_stat_inf_data_vis/).
+see [this Carpentries lesson](https://carpentries-incubator.github.io/hermes_stat_inf_data_vis/).
 
-Let's dive into two data visualization exercises using `moma_df`. But before we create the 
+Let's do two data visualization exercises using `moma_df`. But before we create the 
 visualizations, it's essential to define why we're making them, because the purpose of a 
 visualization guides how we build it. 
 
@@ -681,7 +704,27 @@ import plotly.express as px
 import pandas as pd
 ``` 
 
-Now, let's visualize the distribution of artistic media over time in MoMA's collection. 
+Now, let's visualize the distribution of artistic media over time in MoMA's collection. To do so, 
+we're going to create a *histogram*.
+
+:::::::::::::::::::::::::::::::::::::::::: spoiler
+#### What is a histogram? 
+
+A histogram is a type of chart that shows how often different ranges of values appear in a 
+dataset. It groups the data into "bins" (intervals), and for each bin, it shows how many 
+data points fall into that range using bars.
+
+For example, if you're analyzing ages in a list, a histogram can show how many people are 
+in their 20s, 30s, 40s, etc.
+
+Histograms are especially useful for:
+
+- Understanding the distribution of your data (e.g., is it spread out, concentrated in one 
+area, or skewed to one side?)
+- Detecting outliers (values that are very different from the rest)
+- Checking if your data is normal, uniform, or has some other pattern
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 To keep the graph clear and easy to read, we'll focus only on the top eight most common 
 artistic media found in `moma_df`.
 
@@ -709,8 +752,8 @@ You can read these documentations to understand other people's code or learn how
 new libraries in your own code. 
 
 :::: hint
-To understand how the `histogram` function from the `plotly.express` module functions, check 
-out the documentation of plotly.express.histogram 
+To understand how the `histogram` function from the `plotly.express` module works, check 
+out the documentation of `plotly.express.histogram` 
 [here](https://plotly.github.io/plotly.py-docs/generated/plotly.express.histogram.html). 
 ::::
 
@@ -720,20 +763,21 @@ Here's a line-by-line explanation of the above code:
 ```
 top_media = moma_df['Medium'].value_counts().nlargest(8).index
 ```
-`moma_df['Medium']` Selects the "Medium" column from the DataFrame `moma_df`, which contains 
+- `moma_df['Medium']` selects the "Medium" column from the DataFrame `moma_df`, which contains 
 the artistic media for each artwork. 
-`.value_counts()` counts the number of occurrences 
-of each unique value in the "Medium" column (i.e., how many artworks belong to each medium).
-`.nlargest(8)` selects the top 8 most frequent media types based on their counts.
-`.index` extracts the index (the actual medium types) from the result of `nlargest`, which 
+- `.value_counts()` counts the number of occurrences of each unique value in the "Medium" 
+column (i.e., how many artworks belong to each medium).
+- `.nlargest(8)` selects the top 8 most frequent media types based on their counts.
+- `.index` extracts the index (the actual medium types) from the result of `nlargest`, which 
 gives us the top 8 artistic media.
 
 ```
 medium_df = moma_df[moma_df['Medium'].isin(top_media)]
 ```
-`moma_df['Medium'].isin(top_media)` checks which rows in the "Medium" column of `moma_df` 
+
+- `moma_df['Medium'].isin(top_media)` checks which rows in the "Medium" column of `moma_df` 
 contain one of the top 8 media from the `top_media` list.
-The result is stored in a new DataFrame called `medium_df`, which contains only the artworks 
+- The result is stored in a new DataFrame called `medium_df`, which contains only the artworks 
 with the top 8 most frequent media.
 
 ```
@@ -751,13 +795,43 @@ This represents the year each artwork was created.
 distinguish between the different artistic media.
 - `nbins=50`: Specifies the number of bins for the histogram (i.e., how the years will be grouped).
 - `title='Trends in Medium Usage Over Time'`: The title of the plot.
-- `labels={'Date': 'Year', 'count': 'Number of Artworks'}`: Customizes the labels of the axes for better clarity.
+- `labels={'Date': 'Year', 'count': 'Number of Artworks'}`: Customizes the labels of the axes 
+in a *Python dictionary* for better clarity.
+
+:::::::::::::::::::::::::::::::::::::::::: spoiler
+##### What is a Python dictionary?
+
+A Python dictionary is a type of data structure that stores information in key-value pairs. 
+Each key is linked to a value, and you can use the key to quickly look up the value.
+
+Think of it like a list, but instead of using numbers to access items (like `my_list[0]`), 
+you use a key (like `my_dict['name']`).
+
+Here's a simple example::
+
+```Python
+person = {
+    'name': 'Alice',
+    'age': 30,
+    'city': 'New York'
+}
+```
+
+In this dictionary:
+
+- 'name' is a key, and 'Alice' is its value.
+- 'age' is a key, and 30 is its value.
+- 'city' is a key, and 'New York' is its value.
+
+Dictionaries are useful when you want to organize data that has labels or identifiers, 
+and you want to be able to look things up quickly using those labels.
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ```
 fig.show()
 ```
-This line displays the plot created by `plotly.express`. It renders the histogram in an 
+- This line displays the plot created by `plotly.express`. It renders the histogram in an 
 interactive format, allowing you to hover over the bars to view detailed information.
 
 ::::
@@ -770,7 +844,7 @@ Based on the graph, draw a conclusion about MoMA's collection.
 ::::::::::::::::::::::::::::::::::::: challenge
 Now, let's visualize a second graph using the MoMA database. This time, the process will 
 be a bit more complex. It's up to you to understand the functionality of the code and what 
-information the resulting graph will represent.
+information the resulting graph represents.
 
 ``` Python
 df = moma_df.copy()
@@ -796,6 +870,9 @@ df = moma_df.copy()
 
 - Creates a copy of the DataFrame `moma_df` and assigns it to `df`. This is often done to 
 preserve the original DataFrame in case you want to modify it without affecting the source.
+Here, because we are going to manipulate some values in `moma_df`, changing their data types and 
+removing rows that contain empty values, we create a copy of it to keep the original DataFrame 
+unchanged. 
 
 
 ```
@@ -805,7 +882,7 @@ df['Date'] = pd.to_numeric(df['Date'], errors='coerce')
 - If you remember, the dates in the 'Date' column were objects as `moma_df.info()` showed. 
 This line of code converts the values in the 'Date' column to numeric format.
 - Any values that can't be converted (like strings or invalid dates) are set to NaN 
-(missing values) because errors='coerce'.
+(missing values) by `errors='coerce'`.
 
 ```
 df = df.dropna(subset=['Date', 'Nationality'])
@@ -817,10 +894,12 @@ df = df.dropna(subset=['Date', 'Nationality'])
 ```
 grouped = df.groupby(['Date', 'Nationality']).size().reset_index(name='Count')
 ```
+
 - This line should already be familiar to you. It groups the cleaned DataFrame by 
 'Date' and 'Nationality'.
 - `.size()` counts how many entries fall into each group.
-- `.reset_index(name='Count')` turns the grouped result into a new DataFrame with columns: 'Date', 'Nationality', and 'Count'.
+- `.reset_index(name='Count')` turns the grouped result into a new DataFrame with 
+columns: 'Date', 'Nationality', and 'Count'.
 
 
 ```
@@ -834,7 +913,7 @@ top_nationalities = df['Nationality'].value_counts().nlargest(7).index
 grouped = grouped[grouped['Nationality'].isin(top_nationalities)]
 ```
 
-- Filters the grouped DataFrame to only include rows where the 'Nationality' is one of the top 7 
+- Filters the `grouped` DataFrame to only include rows where the 'Nationality' is one of the top 7 
 most frequent ones.
 - Helps focus the plot on the most represented nationalities.
 
@@ -855,15 +934,49 @@ fig.show()
 - `labels={'Date': 'Year'}`: renames the x-axis label.
 - `fig.show()`: displays the interactive plot.
 
+:::::::::::::::::::::::::::::::::::::::::: spoiler
+##### what is a Scatterplot?
+
+A scatter plot is a type of chart that shows the relationship between two numerical variables. 
+Each point on the plot represents one observation in the dataset, with its position 
+determined by two values — one on the x-axis and one on the y-axis.
+
+Scatter plots are useful for:
+
+- Checking if there’s a relationship or pattern between two variables
+- Seeing how closely the variables are related (positively, negatively, or not at all)
+- Detecting outliers or unusual data points
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ::::
 :::::::::::::::::::::::::::::::::::::::::::::::::
+
+#### The Data Visualization Workflow: 
+
+By now, you should have developed a basic understanding of the data visualization workflow. 
+You can infer this from the two visualization exercises we completed above. When visualizing 
+data, we generally follow these steps: 
+
+1. **Identify the features of the dataset** we want to analyze and the relationships between 
+them that are of interest to us. 
+2. **Choose the appropriate graph type** based on the goal of our analysis, and decide which 
+Python library we will use to create it (e.g., Matplotlib, Seaborn, Plotly). 
+3. **Extract the relevant data** - the specific values and features we plan to visualize - 
+from the original dataset, and store it in a separate variable for clarity and ease of use. 
+4. **Create the graph**. Graphs in Python offer many customizable elements, and we can map 
+different dataset features to these graphical properties. In the case of histograms and 
+scatter plots (which we’ve used here), common properties include: 
+
+    - The values along the X and Y axes
+    - The size of the bars (in histograms) or dots (in scatter plots)
+    - The color of the bars or dots
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 - Formulate appropriate research questions when working with tabular data.
 - Identify the quantitative analysis methods best suited to answering these questions.
-- Break down the analysis into smaller tasks, translate them into computer logic, and 
-implement them in code.
-- Use `pandas` for conting and searching values in tabular datasets. 
-- Use `plotly.express` for visualizing tabular data. 
+- Break down the analysis into smaller tasks, translate them into computer logic using pseudocode, 
+and implement them in Python code.
+- Use `pandas` for counting and searching values in tabular datasets. 
+- Use `plotly.express` for visualizing tabular data.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
