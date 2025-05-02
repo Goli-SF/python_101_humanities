@@ -1,7 +1,7 @@
 ---
 title: "Analyzing Tabular Data"
-teaching: 45
-exercises: 0
+teaching: 120
+exercises: 8
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
@@ -325,7 +325,6 @@ all the artist names in the DataFrame and determine how many works by each artis
 MoMA's collection.
 
 ::::::::::::::::::::::::::::::::::::: challenge
-#### Challenge
 
 How do you think we should proceed? Can you break down this task into single steps and write the 
 pseudocode for each step?
@@ -393,7 +392,6 @@ about the artists — such as their nationality and gender. Let's create a new D
 that includes these details and name it `artist_info`.
 
 ::::::::::::::::::::::::::::::::::::: challenge
-#### Challenge
 
 Can you break down this task into single steps and write the pseudocode for each step?
 
@@ -501,7 +499,6 @@ Let’s begin by examining how many works are attributed to artists of different
 us a basic understanding of gender representation in the museum’s holdings.
 
 ::::::::::::::::::::::::::::::::::::: challenge
-#### Challenge
 
 Write the Python code that shows how many works in MoMA's collection are attributed to 
 artists of different genders.
@@ -528,7 +525,6 @@ with the listed genders. To clarify this, let’s examine the `moma_df` dataset 
 artist and corresponding artwork associated with this particular gender entry.
 
 ::::::::::::::::::::::::::::::::::::: challenge
-#### Challenge
 
 Write the pseudocode to find the artist and the artwork that correspond to the gender
 "() (male) (male) (male) () (male) (male) (female)".
