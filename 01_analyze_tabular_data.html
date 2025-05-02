@@ -292,7 +292,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Analyzing Tabular Data</h1>
-        <p>Last updated on 2025-05-01 |
+        <p>Last updated on 2025-05-02 |
 
         <a href="https://github.com/Goli-SF/python_101_humanities/edit/main/episodes/01_analyze_tabular_data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -325,7 +325,8 @@ data?</li>
 <li>Understand which aspects of a tabular dataset can be analyzed
 quantitatively</li>
 <li>Learn to break down the analysis into smaller tasks, think in terms
-of computer logic, and translate these tasks into code</li>
+of computer logic by writing pseudocode, and translate these tasks into
+code</li>
 <li>Learn using the Python library Pandas for analyzing tabular
 data</li>
 <li>Learn using the Python library Plotly for visualizing tabular
@@ -703,10 +704,10 @@ single steps and write the pseudocode for each step?</p>
 </button>
 <div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
-<p><strong>HINT:</strong> We need to create a new DataFrame based on
-<code>moma_df</code> regarding the task at hand. This new DataFrame
-should contain two columns: the artist names and number of times each
-name appears in <code>moma_df</code>.</p>
+<p>We need to create a new DataFrame based on <code>moma_df</code>
+regarding the task at hand. This new DataFrame should contain two
+columns: the artist names and number of times each name appears in
+<code>moma_df</code>.</p>
 </div>
 </div>
 </div>
@@ -759,7 +760,6 @@ appropriately.</p>
 </div>
 </div>
 </div>
-<p><span style="color:red">WE ARE HERE </span></p>
 <p>Now that we’ve created the <code>artist_counts</code> DataFrame, we
 can perform statistical operations on it. While such statistical
 insights may not be significant for scholarly research in art history —
@@ -789,9 +789,9 @@ pseudocode for each step?</p>
 </button>
 <div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
-<p><strong>HINT:</strong> In the new DataFrame, we need more information
-than just “Artist” and “Number of Works”. We also need “Gender” and
-“Nationality” for this task.</p>
+<p>In the new DataFrame, we need more information than just “Artist” and
+“Number of Works”. We also need “Gender” and “Nationality” for this
+task.</p>
 </div>
 </div>
 </div>
@@ -825,12 +825,12 @@ artist information with their work counts.</li>
 <span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>artist_info <span class="op">=</span> artist_counts.merge(artist_details, on<span class="op">=</span><span class="st">'Artist'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
 <span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>artist_info</span></code></pre>
 </div>
-<figure><img src="fig/output_05.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-above" class="callout discussion">
+<figure><img src="fig/output_05.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-line-by-line-1" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<div id="lets-analyze-the-code-above" class="callout-inner">
-<h3 class="callout-title">Let’s analyze the code above</h3>
+<div id="lets-analyze-the-code-line-by-line-1" class="callout-inner">
+<h3 class="callout-title">Let’s analyze the code line by line</h3>
 <div class="callout-content">
 <pre><code>artist_details = moma_df.groupby('Artist')[['Gender', 'Nationality']].first().reset_index()</code></pre>
 <ul><li>
@@ -858,7 +858,7 @@ artist_counts.columns = ['Artist', 'Number of Works']</code></pre>
 <ul><li>This code creates another DataFrame, <code>artist_counts</code>,
 containing the number of works associated with each artist in
 <code>moma_df</code>.</li>
-<li>The is the same step as we took in the previous task. We use the
+<li>This is the same step as we took in the previous task. We use the
 method <code>.value_counts()</code> to count how many times each artist
 appears, and then use <code>.reset_index()</code> to turn the artist
 names back into a column.</li>
@@ -874,6 +874,35 @@ merge the data based on matching values in the ‘Artist’ column.</li>
 <code>artist_counts</code> are kept, and any matching rows from
 <code>artist_details</code> are added. If no match is found, the missing
 fields will be filled with <code>NaN</code>.</li>
+</ul></div>
+</div>
+</div>
+<div id="note" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="note" class="callout-inner">
+<h3 class="callout-title">Note:</h3>
+<div class="callout-content">
+<p>When you’re faced with complex, multi-line code and find it difficult
+to understand what each line - or even each function or method within a
+line - is doing, try the following strategy:</p>
+<ul><li>Add a new cell to your Jupyter Notebook.</li>
+<li>Identify the specific part of the code you want to understand
+better, and assign it to a variable of your choice. For example, suppose
+you want to examine the DataFrame <code>artist_counts</code> before the
+<code>.reset_index()</code> method is applied. You can assign everything
+before <code>.reset_index()</code> to a new variable — let’s call it
+<code>test_index</code> — and then display its contents:</li>
+</ul><div class="codewrapper sourceCode" id="cb19">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>text_index <span class="op">=</span> moma_df[<span class="st">'Artist'</span>].value_counts()</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>text_index</span></code></pre>
+</div>
+<ul><li>Now you can compare <code>test_index</code> with
+<code>artist_counts</code>. The differences between them will show you
+exactly what the <code>.reset_index()</code> method does.</li>
 </ul></div>
 </div>
 </div>
@@ -901,11 +930,11 @@ are attributed to artists of different genders.</p>
 </button>
 <div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>gender_distribution <span class="op">=</span> artist_info[<span class="st">'Gender'</span>].value_counts()</span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>gender_distribution</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>gender_distribution <span class="op">=</span> artist_info[<span class="st">'Gender'</span>].value_counts()</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>gender_distribution</span></code></pre>
 </div>
 <figure><img src="fig/output_06.png" class="figure mx-auto d-block"></figure></div>
 </div>
@@ -952,19 +981,19 @@ exactly matches this pattern.</li>
 </div>
 </div>
 <p>Let’s translate the pseudocode into Python code:</p>
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>gender<span class="op">=</span> <span class="st">"() (male) (male) (male) () (male) (male) (female)"</span></span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>matching_artworks <span class="op">=</span> moma_df[moma_df[<span class="st">'Gender'</span>] <span class="op">==</span> gender]</span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>matching_artworks</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>gender<span class="op">=</span> <span class="st">"() (male) (male) (male) () (male) (male) (female)"</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>matching_artworks <span class="op">=</span> moma_df[moma_df[<span class="st">'Gender'</span>] <span class="op">==</span> gender]</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>matching_artworks</span></code></pre>
 </div>
-<figure><img src="fig/output_07.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-above-1" class="callout discussion">
+<figure><img src="fig/output_07.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<div id="lets-analyze-the-code-above-1" class="callout-inner">
-<h3 class="callout-title">Let’s analyze the code above</h3>
+<div id="lets-analyze-the-code" class="callout-inner">
+<h3 class="callout-title">Let’s analyze the code</h3>
 <div class="callout-content">
 <p><code>matching_artworks = moma_df[moma_df['Gender'] == gender]</code>
 filters the <code>moma_df</code> DataFrame to include only the rows
@@ -982,17 +1011,17 @@ for this step would look like this:</p>
 <pre><code>- Access the first row of the matching results.
 - Retrieve the artist’s name from this row.</code></pre>
 <p>which translates into one line of Python code:</p>
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>matching_artworks.iloc[<span class="dv">0</span>][<span class="st">'Artist'</span>]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>matching_artworks.iloc[<span class="dv">0</span>][<span class="st">'Artist'</span>]</span></code></pre>
 </div>
-<figure><img src="fig/output_08.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-above-2" class="callout discussion">
+<figure><img src="fig/output_08.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-1" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<div id="lets-analyze-the-code-above-2" class="callout-inner">
-<h3 class="callout-title">Let’s analyze the code above</h3>
+<div id="lets-analyze-the-code-1" class="callout-inner">
+<h3 class="callout-title">Let’s analyze the code</h3>
 <div class="callout-content">
 <p>Having filtered the data to include only the rows with the specified
 gender, we want to work with the first one that meets the condition.
@@ -1004,9 +1033,8 @@ on their position (in this case, 0 refers to the first row).</p>
 <p>After accessing the first row using <code>.iloc[0]</code>,
 <code>matching_artworks.iloc[0]['Artist']</code> selects the ‘Artist’
 column from that row. This line extracts the artist’s name from the
-first row that matches the gender pattern, effectively identifying the
-artist who created the artwork with the specified gender
-description.</p>
+first row that matches the gender pattern, identifying the artist who
+created the artwork with the specified gender description.</p>
 </div>
 </div>
 </div>
@@ -1017,8 +1045,8 @@ description.</p>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<p>Let’s take a look at which artist nationalities are most represented
-in <code>artist_info</code>. Write a Python code that outputs the top 10
+<p>Now Let’s examine which artist nationalities are most represented in
+<code>artist_info</code>. Write a Python code that outputs the top 10
 artist nationalities from the dataset.</p>
 </div>
 </div>
@@ -1030,11 +1058,11 @@ artist nationalities from the dataset.</p>
 </button>
 <div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>top_10_nationalities <span class="op">=</span> artist_info[<span class="st">'Nationality'</span>].value_counts().head(<span class="dv">10</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>top_10_nationalities</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>top_10_nationalities <span class="op">=</span> artist_info[<span class="st">'Nationality'</span>].value_counts().head(<span class="dv">10</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>top_10_nationalities</span></code></pre>
 </div>
 <figure><img src="fig/output_09.png" class="figure mx-auto d-block"></figure></div>
 </div>
@@ -1059,11 +1087,11 @@ nationalities in <code>artist_info</code>.</p>
 </button>
 <div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb24">
+<div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>bottom_10_nationalities <span class="op">=</span> artist_info[<span class="st">'Nationality'</span>].value_counts().tail(<span class="dv">10</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>bottom_10_nationalities</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>bottom_10_nationalities <span class="op">=</span> artist_info[<span class="st">'Nationality'</span>].value_counts().tail(<span class="dv">10</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>bottom_10_nationalities</span></code></pre>
 </div>
 <figure><img src="fig/output_10.png" class="figure mx-auto d-block"></figure></div>
 </div>
@@ -1110,8 +1138,8 @@ used to support a well-defined scientific argument.</p>
 </div>
 </section><section><h2 class="section-heading" id="step-4---visualizing">Step 4 - Visualizing<a class="anchor" aria-label="anchor" href="#step-4---visualizing"></a></h2>
 <hr class="half-width"><p>Visualizing data is a key part of conducting quantitative analysis.
-Different visualization methods serve different analytical purposes,
-such as:</p>
+Different visualization methods serve different analytic purposes, such
+as:</p>
 <ul><li>Exploring relationships between features in the dataset</li>
 <li>Comparing trends and measurements</li>
 <li>Examining distributions</li>
@@ -1120,12 +1148,12 @@ such as:</p>
 <li>Understanding statistical inference</li>
 <li>Enhancing data storytelling</li>
 </ul><p>among others. To dive deeper into data visualization for statistical
-inference and storytelling, take a look at <a href="https://carpentries-incubator.github.io/hermes_stat_inf_data_vis/" class="external-link">this
+inference and storytelling, see <a href="https://carpentries-incubator.github.io/hermes_stat_inf_data_vis/" class="external-link">this
 Carpentries lesson</a>.</p>
-<p>Let’s dive into two data visualization exercises using
-<code>moma_df</code>. But before we create the visualizations, it’s
-essential to define why we’re making them, because the purpose of a
-visualization guides how we build it.</p>
+<p>Let’s do two data visualization exercises using <code>moma_df</code>.
+But before we create the visualizations, it’s essential to define why
+we’re making them, because the purpose of a visualization guides how we
+build it.</p>
 <p>We’re going to focus on two specific goals:</p>
 <ul><li>Visualize the distribution of artistic media over time in MoMA’s
 collection</li>
@@ -1148,27 +1176,52 @@ analyze and/or visualize.
 we want to analyze.
 - visualize the graph using the created DataFrame.</code></pre>
 <p>Let’s first import the libraries we need:</p>
-<div class="codewrapper sourceCode" id="cb26">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
-<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre>
-</div>
-<p>Now, let’s visualize the distribution of artistic media over time in
-MoMA’s collection. To keep the graph clear and easy to read, we’ll focus
-only on the top eight most common artistic media found in
-<code>moma_df</code>.</p>
 <div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>top_media <span class="op">=</span> moma_df[<span class="st">'Medium'</span>].value_counts().nlargest(<span class="dv">8</span>).index</span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>medium_df <span class="op">=</span> moma_df[moma_df[<span class="st">'Medium'</span>].isin(top_media)]</span>
-<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a>fig <span class="op">=</span> px.histogram(medium_df, x<span class="op">=</span><span class="st">'Date'</span>, color<span class="op">=</span><span class="st">'Medium'</span>,</span>
-<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>                   nbins<span class="op">=</span><span class="dv">50</span>,</span>
-<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a>                   title<span class="op">=</span><span class="st">'Trends in Medium Usage Over Time'</span>,</span>
-<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a>                   labels<span class="op">=</span>{<span class="st">'Date'</span>: <span class="st">'Year'</span>, <span class="st">'count'</span>: <span class="st">'Number of Artworks'</span>})</span>
-<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a>fig.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre>
+</div>
+<p>Now, let’s visualize the distribution of artistic media over time in
+MoMA’s collection. To do so, we’re going to create a
+<em>histogram</em>.</p>
+<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
+  <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a histogram? </h3>
+</button>
+<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
+<div class="accordion-body">
+<p>A histogram is a type of chart that shows how often different ranges
+of values appear in a dataset. It groups the data into “bins”
+(intervals), and for each bin, it shows how many data points fall into
+that range using bars.</p>
+<p>For example, if you’re analyzing ages in a list, a histogram can show
+how many people are in their 20s, 30s, 40s, etc.</p>
+<p>Histograms are especially useful for:</p>
+<ul><li>Understanding the distribution of your data (e.g., is it spread out,
+concentrated in one area, or skewed to one side?)</li>
+<li>Detecting outliers (values that are very different from the
+rest)</li>
+<li>Checking if your data is normal, uniform, or has some other
+pattern</li>
+</ul></div>
+</div>
+</div>
+</div>
+<p>To keep the graph clear and easy to read, we’ll focus only on the top
+eight most common artistic media found in <code>moma_df</code>.</p>
+<div class="codewrapper sourceCode" id="cb28">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>top_media <span class="op">=</span> moma_df[<span class="st">'Medium'</span>].value_counts().nlargest(<span class="dv">8</span>).index</span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>medium_df <span class="op">=</span> moma_df[moma_df[<span class="st">'Medium'</span>].isin(top_media)]</span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a>fig <span class="op">=</span> px.histogram(medium_df, x<span class="op">=</span><span class="st">'Date'</span>, color<span class="op">=</span><span class="st">'Medium'</span>,</span>
+<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a>                   nbins<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a>                   title<span class="op">=</span><span class="st">'Trends in Medium Usage Over Time'</span>,</span>
+<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a>                   labels<span class="op">=</span>{<span class="st">'Date'</span>: <span class="st">'Year'</span>, <span class="st">'count'</span>: <span class="st">'Number of Artworks'</span>})</span>
+<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a>fig.show()</span></code></pre>
 </div>
 <figure><img src="fig/output_11.png" class="figure mx-auto d-block"></figure><div id="challenge7" class="callout challenge">
 <div class="callout-square">
@@ -1196,8 +1249,8 @@ in your own code.</p>
 <div id="collapseHint3" class="accordion-collapse collapse" data-bs-parent="#accordionHint3" aria-labelledby="headingHint3">
 <div class="accordion-body">
 <p>To understand how the <code>histogram</code> function from the
-<code>plotly.express</code> module functions, check out the
-documentation of plotly.express.histogram <a href="https://plotly.github.io/plotly.py-docs/generated/plotly.express.histogram.html" class="external-link">here</a>.</p>
+<code>plotly.express</code> module works, check out the documentation of
+<code>plotly.express.histogram</code> <a href="https://plotly.github.io/plotly.py-docs/generated/plotly.express.histogram.html" class="external-link">here</a>.</p>
 </div>
 </div>
 </div>
@@ -1211,22 +1264,30 @@ documentation of plotly.express.histogram <a href="https://plotly.github.io/plot
 <div class="accordion-body">
 <p>Here’s a line-by-line explanation of the above code:</p>
 <pre><code>top_media = moma_df['Medium'].value_counts().nlargest(8).index</code></pre>
-<p><code>moma_df['Medium']</code> Selects the “Medium” column from the
+<ul><li>
+<code>moma_df['Medium']</code> selects the “Medium” column from the
 DataFrame <code>moma_df</code>, which contains the artistic media for
-each artwork. <code>.value_counts()</code> counts the number of
-occurrences of each unique value in the “Medium” column (i.e., how many
-artworks belong to each medium). <code>.nlargest(8)</code> selects the
-top 8 most frequent media types based on their counts.
-<code>.index</code> extracts the index (the actual medium types) from
-the result of <code>nlargest</code>, which gives us the top 8 artistic
-media.</p>
-<pre><code>medium_df = moma_df[moma_df['Medium'].isin(top_media)]</code></pre>
-<p><code>moma_df['Medium'].isin(top_media)</code> checks which rows in
+each artwork.</li>
+<li>
+<code>.value_counts()</code> counts the number of occurrences of
+each unique value in the “Medium” column (i.e., how many artworks belong
+to each medium).</li>
+<li>
+<code>.nlargest(8)</code> selects the top 8 most frequent media
+types based on their counts.</li>
+<li>
+<code>.index</code> extracts the index (the actual medium types)
+from the result of <code>nlargest</code>, which gives us the top 8
+artistic media.</li>
+</ul><pre><code>medium_df = moma_df[moma_df['Medium'].isin(top_media)]</code></pre>
+<ul><li>
+<code>moma_df['Medium'].isin(top_media)</code> checks which rows in
 the “Medium” column of <code>moma_df</code> contain one of the top 8
-media from the <code>top_media</code> list. The result is stored in a
-new DataFrame called <code>medium_df</code>, which contains only the
-artworks with the top 8 most frequent media.</p>
-<pre><code>fig = px.histogram(medium_df, x='Date', color='Medium', nbins=50, title='Trends in Medium
+media from the <code>top_media</code> list.</li>
+<li>The result is stored in a new DataFrame called
+<code>medium_df</code>, which contains only the artworks with the top 8
+most frequent media.</li>
+</ul><pre><code>fig = px.histogram(medium_df, x='Date', color='Medium', nbins=50, title='Trends in Medium
 Usage Over Time', labels={'Date': 'Year', 'count': 'Number of Artworks'})</code></pre>
 <p>The <code>px.histogram()</code> function from
 <code>plotly.express</code> creates a histogram. It takes the following
@@ -1250,12 +1311,47 @@ histogram (i.e., how the years will be grouped).</li>
 the plot.</li>
 <li>
 <code>labels={'Date': 'Year', 'count': 'Number of Artworks'}</code>:
-Customizes the labels of the axes for better clarity.</li>
-</ul><pre><code><span><span class="fu">fig.show</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-<p>This line displays the plot created by <code>plotly.express</code>.
-It renders the histogram in an interactive format, allowing you to hover
-over the bars to view detailed information.</p>
+Customizes the labels of the axes in a <em>Python dictionary</em> for
+better clarity.</li>
+</ul><div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a Python dictionary? </h3>
+</button>
+<div id="collapseSpoiler3" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler3" aria-labelledby="headingSpoiler3">
+<div class="accordion-body">
+<p>A Python dictionary is a type of data structure that stores
+information in key-value pairs. Each key is linked to a value, and you
+can use the key to quickly look up the value.</p>
+<p>Think of it like a list, but instead of using numbers to access items
+(like <code>my_list[0]</code>), you use a key (like
+<code>my_dict['name']</code>).</p>
+<p>Here’s a simple example::</p>
+<div class="codewrapper sourceCode" id="cb32">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>person <span class="op">=</span> {</span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>    <span class="st">'name'</span>: <span class="st">'Alice'</span>,</span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a>    <span class="st">'age'</span>: <span class="dv">30</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a>    <span class="st">'city'</span>: <span class="st">'New York'</span></span>
+<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a>}</span></code></pre>
 </div>
+<p>In this dictionary:</p>
+<ul><li>‘name’ is a key, and ‘Alice’ is its value.</li>
+<li>‘age’ is a key, and 30 is its value.</li>
+<li>‘city’ is a key, and ‘New York’ is its value.</li>
+</ul><p>Dictionaries are useful when you want to organize data that has
+labels or identifiers, and you want to be able to look things up quickly
+using those labels.</p>
+</div>
+</div>
+</div>
+</div>
+<pre><code><span><span class="fu">fig.show</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+<ul><li>This line displays the plot created by <code>plotly.express</code>.
+It renders the histogram in an interactive format, allowing you to hover
+over the bars to view detailed information.</li>
+</ul></div>
 </div>
 </div>
 </div>
@@ -1272,22 +1368,22 @@ MoMA’s collection.</p>
 <p>Now, let’s visualize a second graph using the MoMA database. This
 time, the process will be a bit more complex. It’s up to you to
 understand the functionality of the code and what information the
-resulting graph will represent.</p>
-<div class="codewrapper sourceCode" id="cb32">
+resulting graph represents.</p>
+<div class="codewrapper sourceCode" id="cb34">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>df <span class="op">=</span> moma_df.copy()</span>
-<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>df[<span class="st">'Date'</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">'Date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
-<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a>df <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">'Date'</span>, <span class="st">'Nationality'</span>])</span>
-<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a></span>
-<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a>grouped <span class="op">=</span> df.groupby([<span class="st">'Date'</span>, <span class="st">'Nationality'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'Count'</span>)</span>
-<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a>top_nationalities <span class="op">=</span> df[<span class="st">'Nationality'</span>].value_counts().nlargest(<span class="dv">7</span>).index</span>
-<span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a>grouped <span class="op">=</span> grouped[grouped[<span class="st">'Nationality'</span>].isin(top_nationalities)]</span>
-<span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a></span>
-<span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(grouped, x<span class="op">=</span><span class="st">'Date'</span>, y<span class="op">=</span><span class="st">'Nationality'</span>, size<span class="op">=</span><span class="st">'Count'</span>, color<span class="op">=</span><span class="st">'Nationality'</span>,</span>
-<span id="cb32-10"><a href="#cb32-10" tabindex="-1"></a>                 title<span class="op">=</span><span class="st">'Frequency of Artworks by Nationality Over Time'</span>,</span>
-<span id="cb32-11"><a href="#cb32-11" tabindex="-1"></a>                 labels<span class="op">=</span>{<span class="st">'Date'</span>: <span class="st">'Year'</span>})</span>
-<span id="cb32-12"><a href="#cb32-12" tabindex="-1"></a>fig.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a>df <span class="op">=</span> moma_df.copy()</span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a>df[<span class="st">'Date'</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">'Date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a>df <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">'Date'</span>, <span class="st">'Nationality'</span>])</span>
+<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" tabindex="-1"></a>grouped <span class="op">=</span> df.groupby([<span class="st">'Date'</span>, <span class="st">'Nationality'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'Count'</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" tabindex="-1"></a>top_nationalities <span class="op">=</span> df[<span class="st">'Nationality'</span>].value_counts().nlargest(<span class="dv">7</span>).index</span>
+<span id="cb34-7"><a href="#cb34-7" tabindex="-1"></a>grouped <span class="op">=</span> grouped[grouped[<span class="st">'Nationality'</span>].isin(top_nationalities)]</span>
+<span id="cb34-8"><a href="#cb34-8" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(grouped, x<span class="op">=</span><span class="st">'Date'</span>, y<span class="op">=</span><span class="st">'Nationality'</span>, size<span class="op">=</span><span class="st">'Count'</span>, color<span class="op">=</span><span class="st">'Nationality'</span>,</span>
+<span id="cb34-10"><a href="#cb34-10" tabindex="-1"></a>                 title<span class="op">=</span><span class="st">'Frequency of Artworks by Nationality Over Time'</span>,</span>
+<span id="cb34-11"><a href="#cb34-11" tabindex="-1"></a>                 labels<span class="op">=</span>{<span class="st">'Date'</span>: <span class="st">'Year'</span>})</span>
+<span id="cb34-12"><a href="#cb34-12" tabindex="-1"></a>fig.show()</span></code></pre>
 </div>
 <figure><img src="fig/output_12.png" class="figure mx-auto d-block"></figure></div>
 </div>
@@ -1302,14 +1398,17 @@ resulting graph will represent.</p>
 <pre><code><span><span class="va">df</span> <span class="op">=</span> <span class="fu">moma_df.copy</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 <ul><li>Creates a copy of the DataFrame <code>moma_df</code> and assigns it
 to <code>df</code>. This is often done to preserve the original
-DataFrame in case you want to modify it without affecting the
-source.</li>
+DataFrame in case you want to modify it without affecting the source.
+Here, because we are going to manipulate some values in
+<code>moma_df</code>, changing their data types and removing rows that
+contain empty values, we create a copy of it to keep the original
+DataFrame unchanged.</li>
 </ul><pre><code><span><span class="va">df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span> <span class="op">=</span> <span class="fu">pd.to_numeric</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span>, errors<span class="op">=</span><span class="st">'coerce'</span><span class="op">)</span></span></code></pre>
 <ul><li>If you remember, the dates in the ‘Date’ column were objects as
 <code>moma_df.info()</code> showed. This line of code converts the
 values in the ‘Date’ column to numeric format.</li>
 <li>Any values that can’t be converted (like strings or invalid dates)
-are set to NaN (missing values) because errors=‘coerce’.</li>
+are set to NaN (missing values) by <code>errors='coerce'</code>.</li>
 </ul><pre><code>df = df.dropna(subset=['Date', 'Nationality'])</code></pre>
 <ul><li>Removes rows from <code>df</code> where either ‘Date’ or
 ‘Nationality’ is missing (NaN).</li>
@@ -1330,8 +1429,8 @@ into a new DataFrame with columns: ‘Date’, ‘Nationality’, and
 occurrences in the ‘Nationality’ column.</li>
 <li>Returns the index (i.e. the nationality names) of the top 7.</li>
 </ul><pre><code>grouped = grouped[grouped['Nationality'].isin(top_nationalities)]</code></pre>
-<ul><li>Filters the grouped DataFrame to only include rows where the
-‘Nationality’ is one of the top 7 most frequent ones.</li>
+<ul><li>Filters the <code>grouped</code> DataFrame to only include rows
+where the ‘Nationality’ is one of the top 7 most frequent ones.</li>
 <li>Helps focus the plot on the most represented nationalities.</li>
 </ul><pre><code><span><span class="va">fig</span> <span class="op">=</span> <span class="fu">px.scatter</span><span class="op">(</span><span class="va">grouped</span>, x<span class="op">=</span><span class="st">'Date'</span>, y<span class="op">=</span><span class="st">'Nationality'</span>, size<span class="op">=</span><span class="st">'Count'</span>, color<span class="op">=</span><span class="st">'Nationality'</span>,</span>
 <span>                 title<span class="op">=</span><span class="st">'Frequency of Artworks by Nationality Over Time'</span>,</span>
@@ -1356,11 +1455,56 @@ different nationalities.</li>
 <code>labels={'Date': 'Year'}</code>: renames the x-axis label.</li>
 <li>
 <code>fig.show()</code>: displays the interactive plot.</li>
+</ul><div id="accordionSpoiler4" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler4" aria-expanded="false" aria-controls="collapseSpoiler4">
+  <h3 class="accordion-header" id="headingSpoiler4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> what is a Scatterplot? </h3>
+</button>
+<div id="collapseSpoiler4" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler4" aria-labelledby="headingSpoiler4">
+<div class="accordion-body">
+<p>A scatter plot is a type of chart that shows the relationship between
+two numerical variables. Each point on the plot represents one
+observation in the dataset, with its position determined by two values —
+one on the x-axis and one on the y-axis.</p>
+<p>Scatter plots are useful for:</p>
+<ul><li>Checking if there’s a relationship or pattern between two
+variables</li>
+<li>Seeing how closely the variables are related (positively,
+negatively, or not at all)</li>
+<li>Detecting outliers or unusual data points</li>
 </ul></div>
 </div>
 </div>
 </div>
-<div id="keypoints1" class="callout keypoints">
+</div>
+</div>
+</div>
+</div>
+<div class="section level4">
+<h4 id="the-data-visualization-workflow">The Data Visualization Workflow:<a class="anchor" aria-label="anchor" href="#the-data-visualization-workflow"></a></h4>
+<p>By now, you should have developed a basic understanding of the data
+visualization workflow. You can infer this from the two visualization
+exercises we completed above. When visualizing data, we generally follow
+these steps:</p>
+<ol style="list-style-type: decimal"><li><p><strong>Identify the features of the dataset</strong> we want to
+analyze and the relationships between them that are of interest to
+us.</p></li>
+<li><p><strong>Choose the appropriate graph type</strong> based on the
+goal of our analysis, and decide which Python library we will use to
+create it (e.g., Matplotlib, Seaborn, Plotly).</p></li>
+<li><p><strong>Extract the relevant data</strong> - the specific values
+and features we plan to visualize - from the original dataset, and store
+it in a separate variable for clarity and ease of use.</p></li>
+<li>
+<p><strong>Create the graph</strong>. Graphs in Python offer many
+customizable elements, and we can map different dataset features to
+these graphical properties. In the case of histograms and scatter plots
+(which we’ve used here), common properties include:</p>
+<ul><li>The values along the X and Y axes</li>
+<li>The size of the bars (in histograms) or dots (in scatter plots)</li>
+<li>The color of the bars or dots</li>
+</ul></li>
+</ol><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -1372,8 +1516,8 @@ data.</li>
 <li>Identify the quantitative analysis methods best suited to answering
 these questions.</li>
 <li>Break down the analysis into smaller tasks, translate them into
-computer logic, and implement them in code.</li>
-<li>Use <code>pandas</code> for conting and searching values in tabular
+computer logic using pseudocode, and implement them in Python code.</li>
+<li>Use <code>pandas</code> for counting and searching values in tabular
 datasets.</li>
 <li>Use <code>plotly.express</code> for visualizing tabular data.</li>
 </ul></div>
@@ -1383,6 +1527,7 @@ datasets.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="00_introduction.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
@@ -1441,8 +1586,8 @@ any links that you are not going to use.
   "url": "https://Goli-SF.github.io/python_101_humanities/01_analyze_tabular_data.html",
   "identifier": "https://Goli-SF.github.io/python_101_humanities/01_analyze_tabular_data.html",
   "dateCreated": "2025-05-08",
-  "dateModified": "2025-05-01",
-  "datePublished": "2025-05-01"
+  "dateModified": "2025-05-02",
+  "datePublished": "2025-05-02"
 }
 
   </script><script>
