@@ -725,6 +725,7 @@ To keep the graph clear and easy to read, we'll focus only on the top eight most
 artistic media found in `moma_df`.
 
 ``` Python
+moma_df['Date'] = pd.to_numeric(moma_df['Date'], errors='coerce')
 top_media = moma_df['Medium'].value_counts().nlargest(8).index
 medium_df = moma_df[moma_df['Medium'].isin(top_media)]
 
@@ -755,6 +756,15 @@ out the documentation of `plotly.express.histogram`
 
 :::: solution
 Here's a line-by-line explanation of the above code: 
+
+```
+moma_df['Date'] = pd.to_numeric(moma_df['Date'], errors='coerce')
+```
+- If you remember, the dates in the 'Date' column were objects as `moma_df.info()` showed. 
+This line of code converts the values in the 'Date' column to numeric format.
+- Any values that can't be converted (like strings or invalid dates) are set to NaN 
+(missing values) by `errors='coerce'`.
+
 
 ```
 top_media = moma_df['Medium'].value_counts().nlargest(8).index
@@ -875,8 +885,8 @@ unchanged.
 df['Date'] = pd.to_numeric(df['Date'], errors='coerce')
 ```
 
-- If you remember, the dates in the 'Date' column were objects as `moma_df.info()` showed. 
-This line of code converts the values in the 'Date' column to numeric format.
+- The dates in the 'Date' column are objects. This line of code converts the values in the 
+'Date' column to numeric format. 
 - Any values that can't be converted (like strings or invalid dates) are set to NaN 
 (missing values) by `errors='coerce'`.
 
