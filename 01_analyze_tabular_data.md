@@ -643,6 +643,12 @@ Don't stop here. To practice further, explore other features from `moma_df`. Ask
 questions about these features and apply the Python functions and methods you've learned so 
 far to investigate them and observe the results.
 
+If you're interested in boosting your skills in `pandas`, there are lots of free tutorials on the 
+internet that you can use. For example, you can watch 
+[this video tutorial](https://www.youtube.com/watch?v=2uvysYbKdjM) 
+on YouTube and code along with it to learn more about useful `pandas` functions, methods 
+and attributes. 
+
 ::::::::::::::::::::::::::::::::::: caution
 Up to this point, we've only been conducting exploratory data analysis (EDA). 
 This type of analysis is meant to help you become more familiar with the dataset. EDA gains 
