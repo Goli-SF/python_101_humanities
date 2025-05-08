@@ -738,7 +738,7 @@ medium_df = moma_df[moma_df['Medium'].isin(top_media)]
 fig = px.histogram(medium_df, x='Date', color='Medium',
                    nbins=50,
                    title='Trends in Medium Usage Over Time',
-                   labels={'Date': 'Year', 'count': 'Number of Artworks'})
+                   labels={'Date': 'Year'})
 fig.show()
 ``` 
 
@@ -807,7 +807,7 @@ This represents the year each artwork was created.
 distinguish between the different artistic media.
 - `nbins=50`: Specifies the number of bins for the histogram (i.e., how the years will be grouped).
 - `title='Trends in Medium Usage Over Time'`: The title of the plot.
-- `labels={'Date': 'Year', 'count': 'Number of Artworks'}`: Customizes the labels of the axes 
+- `labels={'Date': 'Year'}`: Customizes the label of the X-axis 
 in a *Python dictionary* for better clarity.
 
 :::::::::::::::::::::::::::::::::::::::::: spoiler
