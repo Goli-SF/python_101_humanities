@@ -25,12 +25,22 @@ version previously downloaded on April 9, 2025. This version is stored in the Gi
 repository for this lesson, ensuring that the results you see during live coding match 
 exactly what is demonstrated in the lesson.
 
-To load the data from this lesson’s repository into your code, use the following URL:
+To load the data from this lesson’s repository into your code, use the following URLs:
 
 <span style="color:red">Link to be updated.</span>
 
+**Data for Episode 2 (Analyzing Tabular Data):**
+
 ```
 https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/moma_artworks.csv
+```
+
+**Data for Episode 3 (Analyzing Text Data):**
+
+```
+https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/shakespeare
+
+https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/marlowe
 ```
 
 ## Software Setup
