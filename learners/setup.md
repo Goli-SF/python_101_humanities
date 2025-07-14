@@ -15,7 +15,9 @@ title: Setup
 In this lesson, we will work with multiple datasets. Each dataset represents a specific 
 type of data that is suited to particular methods of quantitative analysis.
 
-### 1. Artworks from MoMA
+<span style="color:red">Links to be updated.</span>
+
+### Data for Episode 2 (Analyzing Tabular Data): Artworks from MoMA
 
 The metadata for artworks in the [Museum of Modern Art (MoMA)](https://www.moma.org/) collection 
 can be downloaded from the museum's [GitHub Repository](https://github.com/MuseumofModernArt/collection). 
@@ -27,15 +29,16 @@ exactly what is demonstrated in the lesson.
 
 To load the data from this lesson’s repository into your code, use the following URLs:
 
-<span style="color:red">Link to be updated.</span>
-
-**Data for Episode 2 (Analyzing Tabular Data):**
 
 ```
 https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/moma_artworks.csv
 ```
 
-**Data for Episode 3 (Analyzing Text Data):**
+
+### Data for Episode 3 (Analyzing Text Data): Plays by Shakespeare and Marlowe 
+
+<span style="color:red">WE ARE HERE </span>
+
 
 ```
 https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/shakespeare
