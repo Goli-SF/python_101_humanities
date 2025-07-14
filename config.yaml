@@ -22,7 +22,7 @@ computational humanities using Python.' #FIXME
 title: 'Introduction to data analysis basics with Python for the humanities' 
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: '2025-05-08' # FIXME
+created: '2025-07-30' # FIXME
 
 # Comma-separated list of keywords for the lesson
 keywords: 'python, humanities, quantitative data analysis, digital humanities'
@@ -69,6 +69,7 @@ contact: 'golnaz.sarkarfarshi@uni-marburg.de'
 episodes: 
 - 00_introduction.md
 - 01_analyze_tabular_data.md
+- 02_analyze_text_data.md
 
 # Information for Learners
 learners: 
