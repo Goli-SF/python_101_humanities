@@ -6,21 +6,25 @@ exercises: 8
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- What quantitative analysis operations can be performed on tabular data?
+- What quantitative analysis operations can be performed on data composed of literary texts?
 - How can these operations be translated into Python code?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Learn how to initiate the analysis of tabular data
-- Understand which aspects of a tabular dataset can be analyzed quantitatively
-- Learn to break down the analysis into smaller tasks, think in terms of computer logic 
-by writing pseudocode, and translate these tasks into code
-- Learn using the Python library Pandas for analyzing tabular data
-- Learn using the Python library Plotly for visualizing tabular data
-
+- Learn how to perform word frequency analysis on literary texts. 
+- Learn how to perform keyword in context analysis on literary texts.
+- Learn how to perform collocation analysis on literary texts. 
+- Learn how to measure lexical diversity in a literary canon.
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+
+
+
+
 
 
 <span style="color:red">WE ARE HERE </span>
@@ -34,11 +38,11 @@ by writing pseudocode, and translate these tasks into code
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
-- Formulate appropriate research questions when working with tabular data.
-- Identify the quantitative analysis methods best suited to answering these questions.
-- Break down the analysis into smaller tasks, translate them into computer logic using pseudocode, 
-and implement them in Python code.
-- Use `pandas` for counting and searching values in tabular datasets. 
-- Use `plotly.express` for visualizing tabular data.
+- Formulate appropriate quantitative research questions when working with 
+data composed of literary texts.
+- Get to know and use the Python library spaCy.
+- Perform word frequency analysis using spaCy. 
+- Perform collocation analysis using spaCy.
+- Measure lexical diversity in a body of text. 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
