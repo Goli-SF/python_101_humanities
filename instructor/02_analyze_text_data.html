@@ -223,12 +223,19 @@
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         3. Analyzing Text Data
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#word-frequency-analysis">1. Word Frequency Analysis</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -290,7 +297,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Analyzing Text Data</h1>
-        <p>Last updated on 2025-07-14 |
+        <p>Last updated on 2025-07-15 |
 
         <a href="https://github.com/Goli-SF/python_101_humanities/edit/main/episodes/02_analyze_text_data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -311,8 +318,8 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>What quantitative analysis operations can be performed on tabular
-data?</li>
+<ul><li>What quantitative analysis operations can be performed on data
+composed of literary texts?</li>
 <li>How can these operations be translated into Python code?</li>
 </ul></div>
 </div>
@@ -321,17 +328,137 @@ data?</li>
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>Learn how to initiate the analysis of tabular data</li>
-<li>Understand which aspects of a tabular dataset can be analyzed
-quantitatively</li>
-<li>Learn to break down the analysis into smaller tasks, think in terms
-of computer logic by writing pseudocode, and translate these tasks into
-code</li>
-<li>Learn using the Python library Pandas for analyzing tabular
-data</li>
-<li>Learn using the Python library Plotly for visualizing tabular
-data</li>
+<ul><li>Learn how to perform word frequency analysis on literary texts.</li>
+<li>Learn how to perform keyword in context analysis on literary
+texts.</li>
+<li>Learn how to perform collocation analysis on literary texts.</li>
+<li>Learn how to measure lexical diversity in a literary canon.</li>
 </ul></div>
+</div>
+</div>
+</div>
+</div>
+<p>In the previous episode, we worked with tabular data and performed
+three core operations often used in quantitative humanities research:
+<em>counting</em>, <em>searching</em>, and <em>visualizing</em>. In this
+episode, we’ll apply similar operations to text data. However, as you’ll
+see, because text fundamentally differs from tabular data, we’ll take a
+completely different approach, using distinct Python libraries and
+syntax to carry out these analytical tasks.</p>
+<p>To save the data locally on your computer, create a directory named
+<code>data</code> in your working directory. Inside the
+<code>data</code> directory, create two more directories named
+<code>marlowe</code> and <code>shakespeare</code>. Download the works by
+each playwright from the GitHub links provided in the <strong>Summary
+and Setup</strong> episode, and save them in the corresponding folders
+you’ve just created.</p>
+<p>In jupyter notebook, go ahead and save the path to each directory in
+a variable like this:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>shakespeare_path <span class="op">=</span> <span class="st">'./data/shakespeare'</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>marlowe_path <span class="op">=</span> <span class="st">'./data/marlowe'</span></span></code></pre>
+</div>
+<p>In this episode, we’ll learn how to perform the following types of
+text analysis using Python:</p>
+<ol style="list-style-type: decimal"><li>Word frequency analysis</li>
+<li>Keyword-in-context analysis</li>
+<li>Collocation analysis</li>
+<li>Measuring lexical diversity</li>
+</ol><section><h2 class="section-heading" id="word-frequency-analysis">1. Word Frequency Analysis<a class="anchor" aria-label="anchor" href="#word-frequency-analysis"></a></h2>
+<hr class="half-width"><p>Word frequency analysis is a foundational method in computational
+literary studies that involves counting how often individual words
+appear in a text or a collection of texts. By quantifying language in
+this way, scholars can identify patterns, emphases, and stylistic
+tendencies with empirical precision.</p>
+<p>This method can serve several purposes in literary research:</p>
+<ul><li>It can reveal recurring themes or motifs by highlighting which words
+are most frequently used, offering insight into a text’s dominant
+concerns or rhetorical strategies.</li>
+<li>It can also be used to compare the linguistic style of different
+authors, genres, or historical periods, helping to map changes in
+diction, tone, or subject matter over time.</li>
+</ul><p>In studies of individual works, frequency analysis can assist in
+tracking narrative focus or character development by examining how often
+certain names, places, or concepts appear across a text.</p>
+<p>Beyond individual texts, word frequency analysis can also support
+authorship attribution, genre classification, and the study of
+intertextuality.</p>
+<p>In this episode, we focus on two English playwrights from the 16th
+century: William Shakespeare (1564–1616) and Christopher Marlowe
+(1564–1593). We’ll explore which words were most frequently used in nine
+of Shakespeare’s plays and four of Marlowe’s, all included in our
+dataset. This analysis will help us gain insight into the themes and
+rhetoric of some of the most influential English plays written in
+16th-century England.</p>
+<div class="section level3">
+<h3 id="step-1-loading-the-dataset-into-the-script">Step 1: Loading the dataset into the script<a class="anchor" aria-label="anchor" href="#step-1-loading-the-dataset-into-the-script"></a></h3>
+<p>Unlike the previous episode, where the dataset was stored in a single
+<code>.csv</code> file, the dataset for this episode is stored in
+thirteen separate <code>.txt</code> files. To store all of these in a
+single Python variable, we can construct a <em>Python
+dictionary</em>.</p>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+  What is a Python dictionary?
+  </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div class="accordion-body">
+<p>A Python dictionary is a built-in data structure used to store pairs
+of related information. One part of the pair is called the <em>key</em>,
+and the other part is the <em>value</em>. Each key is linked to a
+specific value, and you can use the key to quickly access the value
+associated with it. A Python dictionary is structured exactly like a
+linguistic dictionary: just as you look up a word in a linguistic
+dictionary to find its definition, you can store values under keys in a
+Python dictionary to be able to use the keys to retrieve the values
+later.</p>
+<p>Here’s how you might define a Python dictionary:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>my_vacation_plan<span class="op">=</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>    <span class="st">'budget'</span>: <span class="dv">100</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>    <span class="st">'destination'</span>: <span class="st">'Johannesburg'</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>    <span class="st">'accomodation'</span>: <span class="st">'Sunset Hotel'</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>    <span class="st">'activities'</span>: [<span class="st">'hiking'</span>, <span class="st">'swimming'</span>, <span class="st">'biking'</span>],</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>    <span class="st">'travel by plane'</span>: TRUE</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>}</span></code></pre>
+</div>
+<p>In a Python dictionary, both keys and values can be a variety of data
+types, but with some important rules:</p>
+<div class="section level5">
+<h5 id="keys">Keys:<a class="anchor" aria-label="anchor" href="#keys"></a></h5>
+<p>There are two main things to know about keys:</p>
+<ol style="list-style-type: decimal"><li>They must be unique: You can’t have two identical keys in the same
+dictionary.</li>
+<li>They must be immutable: This means they have to be data types that
+cannot change.</li>
+</ol><p>Valid key types include:</p>
+<ul><li>Strings (e.g., ‘budget’)</li>
+<li>Numbers (e.g., 1, 3.14)</li>
+<li>Tuples (e.g., (1, 2)), as long as the tuple itself doesn’t contain
+mutable objects</li>
+</ul><p>You cannot use lists, dictionaries, or other mutable types as
+keys.</p>
+</div>
+<div class="section level5">
+<h5 id="values">Values:<a class="anchor" aria-label="anchor" href="#values"></a></h5>
+<p>Values can be any type of Python object, including:</p>
+<ul><li>Strings</li>
+<li>Numbers</li>
+<li>Lists</li>
+<li>Booleans</li>
+<li>Functions</li>
+<li>Even other dictionaries or complex objects</li>
+</ul><p>Python places no restriction on the types of values you can
+store.</p>
+</div>
 </div>
 </div>
 </div>
@@ -344,15 +471,12 @@ data</li>
 <div class="callout-inner">
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
-<ul><li>Formulate appropriate research questions when working with tabular
-data.</li>
-<li>Identify the quantitative analysis methods best suited to answering
-these questions.</li>
-<li>Break down the analysis into smaller tasks, translate them into
-computer logic using pseudocode, and implement them in Python code.</li>
-<li>Use <code>pandas</code> for counting and searching values in tabular
-datasets.</li>
-<li>Use <code>plotly.express</code> for visualizing tabular data.</li>
+<ul><li>Formulate appropriate quantitative research questions when working
+with data composed of literary texts.</li>
+<li>Get to know and use the Python library spaCy.</li>
+<li>Perform word frequency analysis using spaCy.</li>
+<li>Perform collocation analysis using spaCy.</li>
+<li>Measure lexical diversity in a body of text.</li>
 </ul></div>
 </div>
 </div>
@@ -360,10 +484,8 @@ datasets.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-
-
-
-      </div> <!-- / div.lesson-content -->
+</div>
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/01_analyze_tabular_data.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="../instructor/index.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
@@ -421,7 +543,7 @@ any links that you are not going to use.
   "url": "https://Goli-SF.github.io/python_101_humanities/instructor/02_analyze_text_data.html",
   "identifier": "https://Goli-SF.github.io/python_101_humanities/instructor/02_analyze_text_data.html",
   "dateCreated": "2025-07-30",
-  "dateModified": "2025-07-14",
+  "dateModified": "2025-07-15",
   "datePublished": "2025-07-15"
 }
 
