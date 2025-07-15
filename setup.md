@@ -29,16 +29,39 @@ exactly what is demonstrated in the lesson.
 
 To load the data from this lesson’s repository into your code, use the following URLs:
 
-
 ```
 https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/moma_artworks.csv
 ```
 
-
 ### Data for Episode 3 (Analyzing Text Data): Plays by Shakespeare and Marlowe 
 
-<span style="color:red">WE ARE HERE </span>
+This dataset consists of the full texts of four plays by Christopher Marlowe and nine 
+plays by William Shakespeare as follows. The Marlowe texts were downloaded from the 
+website of [Project Gutenberg](https://www.gutenberg.org/ebooks/author/410). 
+The Shakespeare texts stem from 
+[Folger Shakespeare Library](https://www.folger.edu/explore/shakespeares-works/download/).
 
+**Plays by Christopher Marlowe: **
+
+- Doctor Faustus
+- Edward II
+- The Jew of Malta
+- The Massacre at Paris
+
+
+**Plays by William Shakespeare: **
+
+- All's Well That Ends Well
+- The Comedy of Errors
+- Hamlet
+- Julius Caesar
+- King Lear
+- Macbeth
+- Othello
+- Romeo and Juliet
+- The Winter's Tale
+
+You can download each set of works from the folders below: 
 
 ```
 https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/shakespeare
