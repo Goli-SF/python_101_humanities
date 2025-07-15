@@ -40,6 +40,7 @@ plays by William Shakespeare as follows. The Marlowe texts were downloaded from 
 website of [Project Gutenberg](https://www.gutenberg.org/ebooks/author/410). 
 The Shakespeare texts stem from 
 [Folger Shakespeare Library](https://www.folger.edu/explore/shakespeares-works/download/).
+Each play has been saved to a `.txt` file.
 
 **Plays by Christopher Marlowe: **
 
@@ -61,7 +62,7 @@ The Shakespeare texts stem from
 - Romeo and Juliet
 - The Winter's Tale
 
-You can download each set of works from the folders below: 
+You can download each set of works from the folders provided below: 
 
 ```
 https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/shakespeare
