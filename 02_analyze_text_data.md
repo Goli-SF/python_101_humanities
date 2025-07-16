@@ -85,12 +85,13 @@ in 16th-century England.
 
 Unlike the previous episode, where the dataset was stored in a single `.csv`
 file, the dataset for this episode is stored in thirteen separate `.txt` files.
-To store all of these in a single Python variable, we can construct
+To store multiple texts in a single Python variable, we can construct
 a *Python dictionary*.
 
 :::::::::::::::::::::::::::::::::::::::::: spoiler
 #### What is a Python dictionary?
 
+Python dictionaries are enclosed in curly brackets: **{ }**.
 A Python dictionary is a built-in data structure used to store pairs of related information. 
 One part of the pair is called the *key*, and the other part is the *value*. 
 Each key is linked to a specific value, and you can use the key to quickly access the 
@@ -143,6 +144,98 @@ Values can be any type of Python object, including:
 Python places no restriction on the types of values you can store.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+We’re going to create two dictionaries: one for Marlowe’s plays, and one
+for Shakespeare’s. The keys in each dictionary will be the names of the
+`.txt` files — which correspond to the play titles — and the values will be the
+complete texts of the plays. First, let's build a list of keys for
+each dictionary:
+
+``` python
+import os
+
+shakespeare_files = [f for f in os.listdir(shakespeare_path)]
+marlowe_files = [f for f in os.listdir(marlowe_path)]
+
+print("File names corresponding to Shakespeare:")
+for file in shakespeare_files: 
+    print ("*", file)
+print()
+print("File names corresponding to Marlowe:")
+for file in marlowe_files: 
+    print ("*", file)
+```
+
+![](fig/output_13.png)
+
+::::::::::::::::::::::::::::::::::::::: discussion
+#### Let's analyze the code line by line
+
+In the above code, we're defining two lists: `shakespeare_files` and `marlowe_files`.
+
+:::::::::::::::::::::::::::::::::::::::::: spoiler
+#### What is a Python list?
+
+A list in Python is a type of data structure used to store multiple items in a 
+single variable. Lists can hold different types of data like numbers, strings, 
+or even other lists. Items in a list are ordered, changeable (mutable), 
+and allow duplicate values. Python lists are enclosed in square brackets: **[ ]**.
+
+A Python list could look like this: 
+
+```python
+my_list = ['apples', 'oranges', 12, [4, 5, 6], 'bananas']
+```
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+```
+import os
+```
+This line imports Python’s built-in `os` module, which provides functions for 
+interacting with the operating system. This includes functions to work with 
+files and directories.
+
+```
+shakespeare_files = [f for f in os.listdir(shakespeare_path)]
+```
+This is a list comprehension, which is a short way to create a new list using 
+a `for` loop.
+
+:::::::::::::::::::::::::::::::::::::::::: spoiler
+#### What is a for loop?
+
+A for loop is used in Python to repeat an action for every item in a group 
+(like a list). You can think of it as a way to go through a collection of 
+things one by one and do something with each item. Here’s a basic idea:
+
+```
+for item in group:
+    do something with item
+```
+
+The loop takes one item from the group, does something with it, then moves on 
+to the next, until there are no more items left.
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+- `os.listdir(shakespeare_path)` calls a function named `listdir()` from the 
+`os` module. It takes the path to a directory (given in `shakespeare_path`) 
+and returns a list of all the names of files and folders inside that directory.
+
+- `for f in os.listdir(shakespeare_path)` is a `for` loop. It goes through each 
+item in the list returned by `os.listdir(shakespeare_path)`. For each item 
+(each filename), it temporarily gives it the name `f`. So, `f` is a variable 
+that holds each filename one by one. 
+
+- The list comprehension `[f for f in os.listdir(shakespeare_path)]` basically 
+says: "“Take each `f` (each filename) from the directory, and put it into a new list."
+That new list is then assigned to the variable `shakespeare_files`.
+
+`marlowe_files` is another list that is created through the exact same process. 
+
+Having created these lists, we proceed to print their items one by one, again 
+using a `for` loop. Notice how the `for` loop is being implemented here as compared 
+to the list comprehension above. Can you see the logic behind its syntax?
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 
@@ -159,6 +252,7 @@ Python places no restriction on the types of values you can store.
 ::::::::::::::::::::::::::::::::::::: keypoints 
 - Formulate appropriate quantitative research questions when working with 
 data composed of literary texts.
+- Learn about dictionaries, lists and for loops in Python.
 - Get to know and use the Python library spaCy.
 - Perform word frequency analysis using spaCy. 
 - Perform collocation analysis using spaCy.
