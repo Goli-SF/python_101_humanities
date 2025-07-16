@@ -231,16 +231,182 @@ That new list is then assigned to the variable `shakespeare_files`.
 
 `marlowe_files` is another list that is created through the exact same process. 
 
+```
+print("File names corresponding to Shakespeare:")
+for file in shakespeare_files: 
+    print ("*", file)
+print()
+print("File names corresponding to Marlowe:")
+for file in marlowe_files: 
+    print ("*", file)
+```
+
 Having created these lists, we proceed to print their items one by one, again 
 using a `for` loop. Notice how the `for` loop is being implemented here as compared 
 to the list comprehension above. Can you see the logic behind its syntax?
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
+In order to use the file names as dictionary keys, we need to get rid of their 
+`.txt` extension. To do so, let's write a function that does exactly this for us. 
+The function takes a list of file names, removes their `.txt` extensions, and 
+returns a list of file names without extension:
 
+``` python
+def extention_remover (file_names):
+    filenames_without_extention = [file.removesuffix(".txt") for file in file_names]
+    return filenames_without_extention
+```
 
+Now let's apply the function to `shakespeare_files` and `marlowe_files` and store the 
+results in two new lists, `shakespeare_works` and `marlowe_works`. We'll print the 
+resulting lists to make sure that the file extensions have been successfully 
+removed from them: 
 
+``` python
+shakespeare_works= extention_remover(shakespeare_files)
+marlowe_works= extention_remover(marlowe_files)
 
+print (shakespeare_works)
+print (marlowe_works)
+```
+
+![](fig/output_14.png)
+
+So far, so good! Now we can create dictionaries containing all the works
+by each author. To do this, we'll define a function that handles it
+for us. We'll also incorporate the earlier steps - specifically, reading file names
+from a directory and applying the `extension_remover` function to strip their extensions.
+This way, the new function can take the path to a folder containing
+our literary works and return a dictionary where each file name (without the
+extension) becomes a key, and the corresponding literary text becomes the value.
+
+``` python
+def literary_work_loader (path):
+    
+    def extention_remover (file_names):
+        filenames_without_extention = [file.removesuffix(".txt") for file in file_names]
+        return filenames_without_extention
+        
+    file_names= [f for f in os.listdir(path)]
+    work_names= extention_remover (file_names)
+
+    full_text_dict= {}
+    
+    for file, work in zip(file_names, work_names): 
+        with open(f"{path}/{file}", "r", encoding="utf-8") as f:
+            full_text = f.read().replace("\n", "")
+            full_text_dict[work]= full_text
+    
+    return full_text_dict
+```
+
+::::::::::::::::::::::::::::::::::::::: discussion
+#### Let's analyze the code line by line
+
+The first few lines of the above code are already familiar to you. So let's only 
+focus on the part where we are creating a dictionary:
+
+``` 
+full_text_dict= {}
+```
+
+In this line, we are creating an empty dictionary and assigning it to a variable named 
+`full_text_dict`. 
+
+``` 
+for file, work in zip(file_names, work_names):
+```
+
+This line sets up a `for` loop. It lets us go through two lists — `file_names` 
+and `work_names` — **at the same time**. The `zip()` function pairs up each 
+file name (with the `.txt` extension) and its matching cleaned-up name 
+(with no `.txt` extension). So for each step in the loop:
+
+- `file` will be the full file name (like "hamlet.txt"), and
+- `work` will be the name without the `.txt` part (like "hamlet").
+
+```
+with open(f"{path}/{file}", "r", encoding="utf-8") as f:
+```
+
+This line opens a file so that we can read its contents.
+
+- `f"{path}/{file}"` is an f-string that builds the complete path to the file. 
+If path is "./data/shakespeare" and file is "hamlet.txt", this becomes 
+"./data/shakespeare/hamlet.txt". 
+
+:::::::::::::::::::::::::::::::::::::::::: spoiler
+#### What is an f-string?
+
+An f-string (short for formatted string) is a 
+way to create strings that include variables inside them. It makes it easier to 
+combine text and values without having to use complicated syntax.
+Here's the basic idea:
+
+``` 
+name = "Bani"
+greeting = f"Hello, {name}!"
+print(greeting)
+```
+
+Output: `Hello, Bani!`
+
+The `f` before the opening quotation mark tells Python: This is a formatted string.
+Inside the string, you can use curly braces { } to include variables (like name) 
+or even expressions (like 1 + 2).
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+- `"r"` means we are opening the file in read mode (we are not changing it).
+- `encoding="utf-8"` makes sure we can read special characters (like letters 
+with accents).
+- `as f` gives the file a nickname: `f`, so we can use it in the next line.
+- The `with` keyword automatically closes the file when we're done reading it, 
+which is a good habit.
+
+```
+full_text = f.read().replace("\n", "")
+```
+
+- `f.read()` reads the entire content of the file and stores it in a variable 
+called `full_text`.
+- `.replace("\n", "")` removes all the newline characters (\n) from the text. 
+Normally, text files have line breaks. This line of code puts everything together in 
+one big line of text.
+
+```
+full_text_dict[work] = full_text
+```
+
+This line adds a new entry to our dictionary.
+
+- `work` is used as the key — that’s the cleaned-up name like "hamlet".
+- `full_text` is used as the value — that’s the complete content of the file.
+
+```
+return full_text_dict
+```
+
+This line returns the dictionary we built. Whoever uses this function will get 
+back a dictionary with all the file names (without .txt) as keys and their full 
+texts as values.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Now that we have the function, we can use it to create two dictionaries 
+containing the works of Shakespeare and Marlowe: 
+
+``` python
+shakespeare_texts= literary_work_loader (shakespeare_path)
+marlowe_texts= literary_work_loader (marlowe_path)
+```
+
+Try printing the `marlowe_texts` dictionary, which is shorter, to get an overview 
+of its structure and content. 
+
+### Step 2: Performing Word Frequency Analysis using spaCy
+
+***
 
 <span style="color:red">WE ARE HERE </span>
 
@@ -252,7 +418,7 @@ to the list comprehension above. Can you see the logic behind its syntax?
 ::::::::::::::::::::::::::::::::::::: keypoints 
 - Formulate appropriate quantitative research questions when working with 
 data composed of literary texts.
-- Learn about dictionaries, lists and for loops in Python.
+- Learn about dictionaries, lists, for loops, and f-strings in Python.
 - Get to know and use the Python library spaCy.
 - Perform word frequency analysis using spaCy. 
 - Perform collocation analysis using spaCy.

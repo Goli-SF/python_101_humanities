@@ -988,6 +988,8 @@ scatter plots (which we’ve used here), common properties include:
 - Identify the quantitative analysis methods best suited to answering these questions.
 - Break down the analysis into smaller tasks, translate them into computer logic using pseudocode, 
 and implement them in Python code.
+- Learn about Python functions and methods. 
+- Learn about histograms.
 - Use `pandas` for counting and searching values in tabular datasets. 
 - Use `plotly.express` for visualizing tabular data.
 ::::::::::::::::::::::::::::::::::::::::::::::::
