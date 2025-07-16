@@ -297,7 +297,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Analyzing Text Data</h1>
-        <p>Last updated on 2025-07-15 |
+        <p>Last updated on 2025-07-16 |
 
         <a href="https://github.com/Goli-SF/python_101_humanities/edit/main/episodes/02_analyze_text_data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -396,7 +396,7 @@ rhetoric of some of the most influential English plays written in
 <h3 id="step-1-loading-the-dataset-into-the-script">Step 1: Loading the dataset into the script<a class="anchor" aria-label="anchor" href="#step-1-loading-the-dataset-into-the-script"></a></h3>
 <p>Unlike the previous episode, where the dataset was stored in a single
 <code>.csv</code> file, the dataset for this episode is stored in
-thirteen separate <code>.txt</code> files. To store all of these in a
+thirteen separate <code>.txt</code> files. To store multiple texts in a
 single Python variable, we can construct a <em>Python
 dictionary</em>.</p>
 <div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
@@ -407,14 +407,15 @@ dictionary</em>.</p>
   What is a Python dictionary?
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
-<p>A Python dictionary is a built-in data structure used to store pairs
-of related information. One part of the pair is called the <em>key</em>,
-and the other part is the <em>value</em>. Each key is linked to a
-specific value, and you can use the key to quickly access the value
-associated with it. A Python dictionary is structured exactly like a
-linguistic dictionary: just as you look up a word in a linguistic
+<p>Python dictionaries are enclosed in curly brackets: <strong>{
+}</strong>. A Python dictionary is a built-in data structure used to
+store pairs of related information. One part of the pair is called the
+<em>key</em>, and the other part is the <em>value</em>. Each key is
+linked to a specific value, and you can use the key to quickly access
+the value associated with it. A Python dictionary is structured exactly
+like a linguistic dictionary: just as you look up a word in a linguistic
 dictionary to find its definition, you can store values under keys in a
 Python dictionary to be able to use the keys to retrieve the values
 later.</p>
@@ -463,6 +464,115 @@ store.</p>
 </div>
 </div>
 </div>
+<p>We’re going to create two dictionaries: one for Marlowe’s plays, and
+one for Shakespeare’s. The keys in each dictionary will be the names of
+the <code>.txt</code> files — which correspond to the play titles — and
+the values will be the complete texts of the plays. First, let’s build a
+list of keys for each dictionary:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>shakespeare_files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(shakespeare_path)]</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>marlowe_files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(marlowe_path)]</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"File names corresponding to Shakespeare:"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> shakespeare_files: </span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>    <span class="bu">print</span> (<span class="st">"*"</span>, <span class="bu">file</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"File names corresponding to Marlowe:"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> marlowe_files: </span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>    <span class="bu">print</span> (<span class="st">"*"</span>, <span class="bu">file</span>)</span></code></pre>
+</div>
+<figure><img src="../fig/output_13.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-line-by-line" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="lets-analyze-the-code-line-by-line" class="callout-inner">
+<h3 class="callout-title">Let’s analyze the code line by line</h3>
+<div class="callout-content">
+<p>In the above code, we’re defining two lists:
+<code>shakespeare_files</code> and <code>marlowe_files</code>.</p>
+<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
+  <h3 class="accordion-header" id="headingSpoiler2">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+  What is a Python list?
+  </h3>
+</button>
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div class="accordion-body">
+<p>A list in Python is a type of data structure used to store multiple
+items in a single variable. Lists can hold different types of data like
+numbers, strings, or even other lists. Items in a list are ordered,
+changeable (mutable), and allow duplicate values. Python lists are
+enclosed in square brackets: <strong>[ ]</strong>.</p>
+<p>A Python list could look like this:</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>my_list <span class="op">=</span> [<span class="st">'apples'</span>, <span class="st">'oranges'</span>, <span class="dv">12</span>, [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], <span class="st">'bananas'</span>]</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<pre><code>import os</code></pre>
+<p>This line imports Python’s built-in <code>os</code> module, which
+provides functions for interacting with the operating system. This
+includes functions to work with files and directories.</p>
+<pre><code>shakespeare_files = [f for f in os.listdir(shakespeare_path)]</code></pre>
+<p>This is a list comprehension, which is a short way to create a new
+list using a <code>for</code> loop.</p>
+<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+  <h3 class="accordion-header" id="headingSpoiler3">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+  What is a for loop?
+  </h3>
+</button>
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
+<div class="accordion-body">
+<p>A for loop is used in Python to repeat an action for every item in a
+group (like a list). You can think of it as a way to go through a
+collection of things one by one and do something with each item. Here’s
+a basic idea:</p>
+<pre><code>for item in group:
+    do something with item</code></pre>
+<p>The loop takes one item from the group, does something with it, then
+moves on to the next, until there are no more items left.</p>
+</div>
+</div>
+</div>
+</div>
+<ul><li><p><code>os.listdir(shakespeare_path)</code> calls a function named
+<code>listdir()</code> from the <code>os</code> module. It takes the
+path to a directory (given in <code>shakespeare_path</code>) and returns
+a list of all the names of files and folders inside that
+directory.</p></li>
+<li><p><code>for f in os.listdir(shakespeare_path)</code> is a
+<code>for</code> loop. It goes through each item in the list returned by
+<code>os.listdir(shakespeare_path)</code>. For each item (each
+filename), it temporarily gives it the name <code>f</code>. So,
+<code>f</code> is a variable that holds each filename one by
+one.</p></li>
+<li><p>The list comprehension
+<code>[f for f in os.listdir(shakespeare_path)]</code> basically says:
+““Take each <code>f</code> (each filename) from the directory, and put
+it into a new list.” That new list is then assigned to the variable
+<code>shakespeare_files</code>.</p></li>
+</ul><p><code>marlowe_files</code> is another list that is created through
+the exact same process.</p>
+<p>Having created these lists, we proceed to print their items one by
+one, again using a <code>for</code> loop. Notice how the
+<code>for</code> loop is being implemented here as compared to the list
+comprehension above. Can you see the logic behind its syntax?</p>
+</div>
+</div>
+</div>
 <p><span style="color:red">WE ARE HERE </span></p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -473,6 +583,7 @@ store.</p>
 <div class="callout-content">
 <ul><li>Formulate appropriate quantitative research questions when working
 with data composed of literary texts.</li>
+<li>Learn about dictionaries, lists and for loops in Python.</li>
 <li>Get to know and use the Python library spaCy.</li>
 <li>Perform word frequency analysis using spaCy.</li>
 <li>Perform collocation analysis using spaCy.</li>
@@ -543,8 +654,8 @@ any links that you are not going to use.
   "url": "https://Goli-SF.github.io/python_101_humanities/instructor/02_analyze_text_data.html",
   "identifier": "https://Goli-SF.github.io/python_101_humanities/instructor/02_analyze_text_data.html",
   "dateCreated": "2025-07-30",
-  "dateModified": "2025-07-15",
-  "datePublished": "2025-07-15"
+  "dateModified": "2025-07-16",
+  "datePublished": "2025-07-16"
 }
 
   </script><script>
