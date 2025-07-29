@@ -66,13 +66,13 @@ When you define a function, you can set it up to accept input values. These inpu
 called **parameters**. When you actually call the function and give it real values, 
 those are called arguments. For example, in the following code, I am defining a function
 called `greet`. The function takes the name of a person and says hello to 
-that person. Here, `name` is a parameter, whereas `Alice` is an argument: 
+that person. Here, `name` is a parameter, whereas `Basma` is an argument: 
 
 ``` Python
 def greet(name):
     print("Hello, " + name)
 
-greet("Alice")
+greet("Basma")
 ```
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -811,32 +811,59 @@ distinguish between the different artistic media.
 in a *Python dictionary* for better clarity.
 
 :::::::::::::::::::::::::::::::::::::::::: spoiler
-##### What is a Python dictionary?
+#### What is a Python dictionary?
 
-A Python dictionary is a type of data structure that stores information in key-value pairs. 
-Each key is linked to a value, and you can use the key to quickly look up the value.
+Python dictionaries are enclosed in curly brackets: **{ }**.
+A Python dictionary is a built-in data structure used to store pairs of related information. 
+One part of the pair is called the *key*, and the other part is the *value*. 
+Each key is linked to a specific value, and you can use the key to quickly access the 
+value associated with it. A Python dictionary is structured exactly like a linguistic
+dictionary: just as you look up a word in a linguistic dictionary to find its definition, 
+you can store values under keys in a Python dictionary to be able to use the keys to 
+retrieve the values later. 
 
-Think of it like a list, but instead of using numbers to access items (like `my_list[0]`), 
-you use a key (like `my_dict['name']`).
+Here’s how you might define a Python dictionary:
 
-Here's a simple example::
-
-```Python
-person = {
-    'name': 'Alice',
-    'age': 30,
-    'city': 'New York'
+``` python
+my_vacation_plan= {
+    'budget': 100,
+    'destination': 'Johannesburg',
+    'accomodation': 'Sunset Hotel',
+    'activities': ['hiking', 'swimming', 'biking'],
+    'travel by plane': TRUE
 }
 ```
 
-In this dictionary:
+In a Python dictionary, both keys and values can be a variety of data types, 
+but with some important rules:
 
-- 'name' is a key, and 'Alice' is its value.
-- 'age' is a key, and 30 is its value.
-- 'city' is a key, and 'New York' is its value.
+##### Keys:
 
-Dictionaries are useful when you want to organize data that has labels or identifiers, 
-and you want to be able to look things up quickly using those labels.
+There are two main things to know about keys:
+
+1. They must be unique: You can’t have two identical keys in the same dictionary.
+2. They must be immutable: This means they have to be data types that cannot change.
+
+Valid key types include:
+
+- Strings (e.g., 'budget')
+- Numbers (e.g., 1, 3.14)
+- Tuples (e.g., (1, 2)), as long as the tuple itself doesn’t contain mutable objects
+
+You cannot use lists, dictionaries, or other mutable types as keys.
+
+##### Values:
+
+Values can be any type of Python object, including:
+
+- Strings
+- Numbers
+- Lists
+- Booleans
+- Functions
+- Even other dictionaries or complex objects
+
+Python places no restriction on the types of values you can store.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
