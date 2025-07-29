@@ -298,7 +298,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Analyzing Text Data</h1>
-        <p>Last updated on 2025-07-16 |
+        <p>Last updated on 2025-07-29 |
 
         <a href="https://github.com/Goli-SF/python_101_humanities/edit/main/episodes/02_analyze_text_data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -328,7 +328,7 @@ composed of literary texts?</li>
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul><li>Learn how to perform word frequency analysis on literary texts.</li>
-<li>Learn how to perform keyword in context analysis on literary
+<li>Learn how to perform keyword-in-context analysis on literary
 texts.</li>
 <li>Learn how to perform collocation analysis on literary texts.</li>
 <li>Learn how to measure lexical diversity in a literary canon.</li>
@@ -340,13 +340,22 @@ texts.</li>
 <p>In the previous episode, we worked with tabular data and performed
 three core operations often used in quantitative humanities research:
 <em>counting</em>, <em>searching</em>, and <em>visualizing</em>. In this
-episode, we’ll apply similar operations to text data. However, as you’ll
-see, because text fundamentally differs from tabular data, we’ll take a
-completely different approach, using distinct Python libraries and
-syntax to carry out these analytical tasks.</p>
+episode, we’ll apply similar operations to text data. We’ll focus on
+analyzing the full texts of plays written by two prominent English
+playwrights from the 16th century: William Shakespeare (1564–1616) and
+Christopher Marlowe (1564–1593). We’ll learn how to perform the
+following types of analysis on these texts using Python:</p>
+<ol style="list-style-type: decimal"><li>Word frequency analysis</li>
+<li>Keyword-in-context analysis</li>
+<li>Collocation analysis</li>
+<li>Measuring lexical diversity</li>
+</ol><p>Because text fundamentally differs from tabular data, we’ll take a
+completely different approach in this episode compared to the previous
+one, using distinct Python libraries and syntax to carry out analytical
+tasks.</p>
 <p>To save the data locally on your computer, create a directory named
 <code>data</code> in your working directory. Inside the
-<code>data</code> directory, create two more directories named
+<code>data</code> directory, create two further directories named
 <code>marlowe</code> and <code>shakespeare</code>. Download the works by
 each playwright from the GitHub links provided in the <strong>Summary
 and Setup</strong> episode, and save them in the corresponding folders
@@ -359,38 +368,31 @@ a variable like this:</p>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>shakespeare_path <span class="op">=</span> <span class="st">'./data/shakespeare'</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>marlowe_path <span class="op">=</span> <span class="st">'./data/marlowe'</span></span></code></pre>
 </div>
-<p>In this episode, we’ll learn how to perform the following types of
-text analysis using Python:</p>
-<ol style="list-style-type: decimal"><li>Word frequency analysis</li>
-<li>Keyword-in-context analysis</li>
-<li>Collocation analysis</li>
-<li>Measuring lexical diversity</li>
-</ol><section><h2 class="section-heading" id="word-frequency-analysis">1. Word Frequency Analysis<a class="anchor" aria-label="anchor" href="#word-frequency-analysis"></a></h2>
+<section><h2 class="section-heading" id="word-frequency-analysis">1. Word Frequency Analysis<a class="anchor" aria-label="anchor" href="#word-frequency-analysis"></a></h2>
 <hr class="half-width"><p>Word frequency analysis is a foundational method in computational
 literary studies that involves counting how often individual words
 appear in a text or a collection of texts. By quantifying language in
 this way, scholars can identify patterns, emphases, and stylistic
-tendencies with empirical precision.</p>
-<p>This method can serve several purposes in literary research:</p>
+tendencies within texts.</p>
+<p>Word frequency analysis can serve several purposes in literary
+research:</p>
 <ul><li>It can reveal recurring themes or motifs by highlighting which words
 are most frequently used, offering insight into a text’s dominant
 concerns or rhetorical strategies.</li>
 <li>It can also be used to compare the linguistic style of different
 authors, genres, or historical periods, helping to map changes in
 diction, tone, or subject matter over time.</li>
-</ul><p>In studies of individual works, frequency analysis can assist in
+<li>In studies of individual works, frequency analysis can assist in
 tracking narrative focus or character development by examining how often
-certain names, places, or concepts appear across a text.</p>
-<p>Beyond individual texts, word frequency analysis can also support
+certain names, places, or concepts appear across a text.</li>
+<li>Beyond individual texts, word frequency analysis can also support
 authorship attribution, genre classification, and the study of
-intertextuality.</p>
-<p>In this episode, we focus on two English playwrights from the 16th
-century: William Shakespeare (1564–1616) and Christopher Marlowe
-(1564–1593). We’ll explore which words were most frequently used in nine
-of Shakespeare’s plays and four of Marlowe’s, all included in our
-dataset. This analysis will help us gain insight into the themes and
-rhetoric of some of the most influential English plays written in
-16th-century England.</p>
+intertextuality.</li>
+</ul><p>We’ll explore which words were most frequently used in nine of
+Shakespeare’s plays and four of Marlowe’s, all included in our dataset.
+This analysis will help us gain insight into the themes and rhetoric of
+some of the most influential English plays written in 16th-century
+England.</p>
 <div class="section level3">
 <h3 id="step-1-loading-the-dataset-into-the-script">Step 1: Loading the dataset into the script<a class="anchor" aria-label="anchor" href="#step-1-loading-the-dataset-into-the-script"></a></h3>
 <p>Unlike the previous episode, where the dataset was stored in a single
@@ -398,91 +400,26 @@ rhetoric of some of the most influential English plays written in
 thirteen separate <code>.txt</code> files. To store multiple texts in a
 single Python variable, we can construct a <em>Python
 dictionary</em>.</p>
-<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
-  <h3 class="accordion-header" id="headingSpoiler1">
-  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
-  What is a Python dictionary?
-  </h3>
-</button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
-<div class="accordion-body">
-<p>Python dictionaries are enclosed in curly brackets: <strong>{
-}</strong>. A Python dictionary is a built-in data structure used to
-store pairs of related information. One part of the pair is called the
-<em>key</em>, and the other part is the <em>value</em>. Each key is
-linked to a specific value, and you can use the key to quickly access
-the value associated with it. A Python dictionary is structured exactly
-like a linguistic dictionary: just as you look up a word in a linguistic
-dictionary to find its definition, you can store values under keys in a
-Python dictionary to be able to use the keys to retrieve the values
-later.</p>
-<p>Here’s how you might define a Python dictionary:</p>
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>my_vacation_plan<span class="op">=</span> {</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>    <span class="st">'budget'</span>: <span class="dv">100</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>    <span class="st">'destination'</span>: <span class="st">'Johannesburg'</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>    <span class="st">'accomodation'</span>: <span class="st">'Sunset Hotel'</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>    <span class="st">'activities'</span>: [<span class="st">'hiking'</span>, <span class="st">'swimming'</span>, <span class="st">'biking'</span>],</span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>    <span class="st">'travel by plane'</span>: TRUE</span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>}</span></code></pre>
-</div>
-<p>In a Python dictionary, both keys and values can be a variety of data
-types, but with some important rules:</p>
-<div class="section level5">
-<h5 id="keys">Keys:<a class="anchor" aria-label="anchor" href="#keys"></a></h5>
-<p>There are two main things to know about keys:</p>
-<ol style="list-style-type: decimal"><li>They must be unique: You can’t have two identical keys in the same
-dictionary.</li>
-<li>They must be immutable: This means they have to be data types that
-cannot change.</li>
-</ol><p>Valid key types include:</p>
-<ul><li>Strings (e.g., ‘budget’)</li>
-<li>Numbers (e.g., 1, 3.14)</li>
-<li>Tuples (e.g., (1, 2)), as long as the tuple itself doesn’t contain
-mutable objects</li>
-</ul><p>You cannot use lists, dictionaries, or other mutable types as
-keys.</p>
-</div>
-<div class="section level5">
-<h5 id="values">Values:<a class="anchor" aria-label="anchor" href="#values"></a></h5>
-<p>Values can be any type of Python object, including:</p>
-<ul><li>Strings</li>
-<li>Numbers</li>
-<li>Lists</li>
-<li>Booleans</li>
-<li>Functions</li>
-<li>Even other dictionaries or complex objects</li>
-</ul><p>Python places no restriction on the types of values you can
-store.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
 <p>We’re going to create two dictionaries: one for Marlowe’s plays, and
 one for Shakespeare’s. The keys in each dictionary will be the names of
 the <code>.txt</code> files — which correspond to the play titles — and
-the values will be the complete texts of the plays. First, let’s build a
+the values will be the full texts of the plays. First, let’s build a
 list of keys for each dictionary:</p>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>shakespeare_files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(shakespeare_path)]</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>marlowe_files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(marlowe_path)]</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"File names corresponding to Shakespeare:"</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> shakespeare_files: </span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>    <span class="bu">print</span> (<span class="st">"*"</span>, <span class="bu">file</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="bu">print</span>()</span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"File names corresponding to Marlowe:"</span>)</span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> marlowe_files: </span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>    <span class="bu">print</span> (<span class="st">"*"</span>, <span class="bu">file</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>shakespeare_files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(shakespeare_path)]</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>marlowe_files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(marlowe_path)]</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"File names corresponding to Shakespeare:"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> shakespeare_files: </span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    <span class="bu">print</span> (<span class="st">"*"</span>, <span class="bu">file</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"File names corresponding to Marlowe:"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> marlowe_files: </span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>    <span class="bu">print</span> (<span class="st">"*"</span>, <span class="bu">file</span>)</span></code></pre>
 </div>
 <figure><img src="fig/output_13.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-line-by-line" class="callout discussion">
 <div class="callout-square">
@@ -493,26 +430,27 @@ list of keys for each dictionary:</p>
 <div class="callout-content">
 <p>In the above code, we’re defining two lists:
 <code>shakespeare_files</code> and <code>marlowe_files</code>.</p>
-<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
-  <h3 class="accordion-header" id="headingSpoiler2">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">
   <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
   What is a Python list?
   </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>A list in Python is a type of data structure used to store multiple
 items in a single variable. Lists can hold different types of data like
 numbers, strings, or even other lists. Items in a list are ordered,
-changeable (mutable), and allow duplicate values. Python lists are
-enclosed in square brackets: <strong>[ ]</strong>.</p>
-<p>A Python list could look like this:</p>
-<div class="codewrapper sourceCode" id="cb4">
+changeable (mutable), and allow duplicate values- meaning that the same
+value can appear multiple times in the list without any issue.</p>
+<p>Python lists are enclosed in square brackets: <strong>[ ]</strong>. A
+Python list could look like this:</p>
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>my_list <span class="op">=</span> [<span class="st">'apples'</span>, <span class="st">'oranges'</span>, <span class="dv">12</span>, [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], <span class="st">'bananas'</span>]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>my_list <span class="op">=</span> [<span class="st">'apples'</span>, <span class="st">'oranges'</span>, <span class="dv">12</span>, [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], <span class="st">'bananas'</span>]</span></code></pre>
 </div>
 </div>
 </div>
@@ -522,18 +460,19 @@ enclosed in square brackets: <strong>[ ]</strong>.</p>
 <p>This line imports Python’s built-in <code>os</code> module, which
 provides functions for interacting with the operating system. This
 includes functions to work with files and directories.</p>
-<pre><code>shakespeare_files = [f for f in os.listdir(shakespeare_path)]</code></pre>
+<pre><code>shakespeare_files = [f for f in os.listdir(shakespeare_path)]
+marlowe_files = [f for f in os.listdir(marlowe_path)]</code></pre>
 <p>This is a list comprehension, which is a short way to create a new
 list using a <code>for</code> loop.</p>
-<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
-  <h3 class="accordion-header" id="headingSpoiler3">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
+  <h3 class="accordion-header" id="headingSpoiler2">
   <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
   What is a for loop?
   </h3>
 </button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
 <div class="accordion-body">
 <p>A for loop is used in Python to repeat an action for every item in a
 group (like a list). You can think of it as a way to go through a
@@ -560,8 +499,8 @@ filename), it temporarily gives it the name <code>f</code>. So,
 one.</p></li>
 <li><p>The list comprehension
 <code>[f for f in os.listdir(shakespeare_path)]</code> basically says:
-““Take each <code>f</code> (each filename) from the directory, and put
-it into a new list.” That new list is then assigned to the variable
+“Take each <code>f</code> (each filename) from the directory, and put it
+into a new list.” That new list is then assigned to the variable
 <code>shakespeare_files</code>.</p></li>
 </ul><p><code>marlowe_files</code> is another list that is created through
 the exact same process.</p>
@@ -584,26 +523,26 @@ of their <code>.txt</code> extension. To do so, let’s write a function
 that does exactly this for us. The function takes a list of file names,
 removes their <code>.txt</code> extensions, and returns a list of file
 names without extension:</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="kw">def</span> extention_remover (file_names):</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>    filenames_without_extention <span class="op">=</span> [<span class="bu">file</span>.removesuffix(<span class="st">".txt"</span>) <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> file_names]</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>    <span class="cf">return</span> filenames_without_extention</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="kw">def</span> extention_remover (file_names):</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>    filenames_without_extention <span class="op">=</span> [<span class="bu">file</span>.removesuffix(<span class="st">".txt"</span>) <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> file_names]</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>    <span class="cf">return</span> filenames_without_extention</span></code></pre>
 </div>
 <p>Now let’s apply the function to <code>shakespeare_files</code> and
 <code>marlowe_files</code> and store the results in two new lists,
 <code>shakespeare_works</code> and <code>marlowe_works</code>. We’ll
 print the resulting lists to make sure that the file extensions have
 been successfully removed from them:</p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>shakespeare_works<span class="op">=</span> extention_remover(shakespeare_files)</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>marlowe_works<span class="op">=</span> extention_remover(marlowe_files)</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="bu">print</span> (shakespeare_works)</span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="bu">print</span> (marlowe_works)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>shakespeare_works<span class="op">=</span> extention_remover(shakespeare_files)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>marlowe_works<span class="op">=</span> extention_remover(marlowe_files)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="bu">print</span> (shakespeare_works)</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="bu">print</span> (marlowe_works)</span></code></pre>
 </div>
 <figure><img src="fig/output_14.png" class="figure mx-auto d-block"></figure><p>So far, so good! Now we can create dictionaries containing all the
 works by each author. To do this, we’ll define a function that handles
@@ -613,27 +552,27 @@ reading file names from a directory and applying the
 way, the new function can take the path to a folder containing our
 literary works and return a dictionary where each file name (without the
 extension) becomes a key, and the corresponding literary text becomes
-the value.</p>
-<div class="codewrapper sourceCode" id="cb11">
+the value:</p>
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="kw">def</span> literary_work_loader (path):</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>    </span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>    <span class="kw">def</span> extention_remover (file_names):</span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>        filenames_without_extention <span class="op">=</span> [<span class="bu">file</span>.removesuffix(<span class="st">".txt"</span>) <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> file_names]</span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>        <span class="cf">return</span> filenames_without_extention</span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>        </span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>    file_names<span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(path)]</span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>    work_names<span class="op">=</span> extention_remover (file_names)</span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>    full_text_dict<span class="op">=</span> {}</span>
-<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>    </span>
-<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>    <span class="cf">for</span> <span class="bu">file</span>, work <span class="kw">in</span> <span class="bu">zip</span>(file_names, work_names): </span>
-<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(<span class="ss">f"</span><span class="sc">{</span>path<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="bu">file</span><span class="sc">}</span><span class="ss">"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
-<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>            full_text <span class="op">=</span> f.read().replace(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">""</span>)</span>
-<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>            full_text_dict[work]<span class="op">=</span> full_text</span>
-<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a>    </span>
-<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>    <span class="cf">return</span> full_text_dict</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="kw">def</span> literary_work_loader (path):</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>    </span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>    <span class="kw">def</span> extention_remover (file_names):</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>        filenames_without_extention <span class="op">=</span> [<span class="bu">file</span>.removesuffix(<span class="st">".txt"</span>) <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> file_names]</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>        <span class="cf">return</span> filenames_without_extention</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>        </span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>    file_names<span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(path)]</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>    work_names<span class="op">=</span> extention_remover (file_names)</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>    full_text_dict<span class="op">=</span> {}</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>    </span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>    <span class="cf">for</span> <span class="bu">file</span>, work <span class="kw">in</span> <span class="bu">zip</span>(file_names, work_names): </span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(<span class="ss">f"</span><span class="sc">{</span>path<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="bu">file</span><span class="sc">}</span><span class="ss">"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>            full_text <span class="op">=</span> f.read().replace(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">""</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>            full_text_dict[work]<span class="op">=</span> full_text</span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>    </span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>    <span class="cf">return</span> full_text_dict</span></code></pre>
 </div>
 <div id="lets-analyze-the-code-line-by-line-1" class="callout discussion">
 <div class="callout-square">
@@ -664,37 +603,41 @@ part (like “hamlet”).</li>
 <p>This line opens a file so that we can read its contents.</p>
 <ul><li>
 <code>f"{path}/{file}"</code> is an f-string that builds the
-complete path to the file. If path is “./data/shakespeare” and file is
-“hamlet.txt”, this becomes “./data/shakespeare/hamlet.txt”.</li>
-</ul><div id="accordionSpoiler4" class="accordion spoiler-accordion accordion-flush">
+complete path to the file.</li>
+</ul><div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler4" aria-expanded="false" aria-controls="collapseSpoiler4">
-  <h3 class="accordion-header" id="headingSpoiler4">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+  <h3 class="accordion-header" id="headingSpoiler3">
   <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
   What is an f-string?
   </h3>
 </button>
-<div id="collapseSpoiler4" class="accordion-collapse collapse" aria-labelledby="headingSpoiler4" data-bs-parent="#accordionSpoiler4">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
 <div class="accordion-body">
-<p>An f-string (short for formatted string) is a way to create strings
-that include variables inside them. It makes it easier to combine text
-and values without having to use complicated syntax. Here’s the basic
-idea:</p>
+<p>An <em>f-string</em> (short for <em>formatted string</em>) is a way
+to create strings that include variables inside them. It makes it easier
+to combine text and values without having to use complicated syntax.
+Here’s the basic idea:</p>
 <pre><code>name = "Bani"
 greeting = f"Hello, {name}!"
 print(greeting)</code></pre>
 <p>Output: <code>Hello, Bani!</code></p>
 <p>The <code>f</code> before the opening quotation mark tells Python:
 This is a formatted string. Inside the string, you can use curly braces
-{ } to include variables (like name) or even expressions (like 1 +
-2).</p>
+{ } to include variables (like <code>name</code>) or even expressions
+(like <code>1 + 2</code>).</p>
 </div>
 </div>
 </div>
+</div>
+<div style="margin-left: 30px;">
+<p>If <code>path</code> equals “./data/shakespeare” and
+<code>file</code> equals “hamlet.txt”, this becomes
+“./data/shakespeare/hamlet.txt”.</p>
 </div>
 <ul><li>
-<code>"r"</code> means we are opening the file in read mode (we are
-not changing it).</li>
+<code>"r"</code> means we are opening the file in <em>read</em> mode
+(we are not changing it).</li>
 <li>
 <code>encoding="utf-8"</code> makes sure we can read special
 characters (like letters with accents).</li>
@@ -709,37 +652,112 @@ we’re done reading it, which is a good habit.</li>
 stores it in a variable called <code>full_text</code>.</li>
 <li>
 <code>.replace("\n", "")</code> removes all the newline characters
-() from the text. Normally, text files have line breaks. This line of
-code puts everything together in one big line of text.</li>
+(<code>\n</code>) from the text by replacing them with a string with
+zero length, containing no characters (““). Normally, text files have
+line breaks. This line of code removes the line breaks and puts
+everything together in one big line of text.</li>
 </ul><pre><code><span><span class="va">full_text_dict</span><span class="op">[</span><span class="va">work</span><span class="op">]</span> <span class="op">=</span> <span class="va">full_text</span></span></code></pre>
-<p>This line adds a new entry to our dictionary.</p>
+<p>This line adds a new entry to the <code>full_text_dict</code>
+dictionary.</p>
 <ul><li>
 <code>work</code> is used as the key — that’s the cleaned-up name
 like “hamlet”.</li>
 <li>
 <code>full_text</code> is used as the value — that’s the complete
-content of the file.</li>
+content of the file <code>hamlet.txt</code>.</li>
 </ul><pre><code>return full_text_dict</code></pre>
 <p>This line returns the dictionary we built. Whoever uses this function
-will get back a dictionary with all the file names (without .txt) as
-keys and their full texts as values.</p>
+will get back a dictionary with all the file names (without
+<code>.txt</code>) as keys and their full texts as values.</p>
 </div>
 </div>
 </div>
 <p>Now that we have the function, we can use it to create two
 dictionaries containing the works of Shakespeare and Marlowe:</p>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>shakespeare_texts<span class="op">=</span> literary_work_loader (shakespeare_path)</span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>marlowe_texts<span class="op">=</span> literary_work_loader (marlowe_path)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>shakespeare_texts<span class="op">=</span> literary_work_loader (shakespeare_path)</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>marlowe_texts<span class="op">=</span> literary_work_loader (marlowe_path)</span></code></pre>
 </div>
 <p>Try printing the <code>marlowe_texts</code> dictionary, which is
 shorter, to get an overview of its structure and content.</p>
+<p><span style="color:red">WE WERE HERE </span></p>
 </div>
 <div class="section level3">
 <h3 id="step-2-performing-word-frequency-analysis-using-spacy">Step 2: Performing Word Frequency Analysis using spaCy<a class="anchor" aria-label="anchor" href="#step-2-performing-word-frequency-analysis-using-spacy"></a></h3>
-<hr><p><span style="color:red">WE ARE HERE </span></p>
+<p>Performing word frequency analysis is faster and easier than you
+think. This has become possible thanks to <em>pretrained machine
+learning models</em> that the Python library <code>spaCy</code>
+offers.</p>
+<div id="accordionSpoiler4" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler4" aria-expanded="false" aria-controls="collapseSpoiler4">
+  <h3 class="accordion-header" id="headingSpoiler4">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+  What is a pretrained machine learning model?
+  </h3>
+</button>
+<div id="collapseSpoiler4" class="accordion-collapse collapse" aria-labelledby="headingSpoiler4" data-bs-parent="#accordionSpoiler4">
+<div class="accordion-body">
+<p>A pretrained machine learning model is a model that has already been
+trained on a large dataset by other developers or researchers. Instead
+of starting from scratch, you can use this model to perform tasks like
+image recognition, language processing, or object detection. It has
+already learned patterns and features from the data, so you don’t need
+to teach it everything again. This saves time, computing resources, and
+often improves accuracy, especially when you don’t have a lot of your
+own data to train a model from the beginning. You can also fine-tune it
+to work better on your specific task by giving it a smaller set of
+relevant data.</p>
+</div>
+</div>
+</div>
+</div>
+<p>We are going to use <code>spaCy</code>’s <code>en_core_web_md</code>
+model for this exercise. You can directly download the model from your
+jupyter notebook by running the following code:</p>
+<div class="codewrapper sourceCode" id="cb19">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="op">!</span> python <span class="op">-</span>m spacy download en_core_web_md</span></code></pre>
+</div>
+<p>Once you have downloaded the <code>en_core_web_md</code> model, it
+stays on your computer so that you don’t have to download it the next
+time you run the following lines of code in jupyter notebook.</p>
+<p>Now we are going to write a function that takes the full text of each
+play, tokenizes it, and then counts the number of times each word
+appears in that text.</p>
+<div id="accordionSpoiler5" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler5" aria-expanded="false" aria-controls="collapseSpoiler5">
+  <h3 class="accordion-header" id="headingSpoiler5">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+  What does tokenizing mean?
+  </h3>
+</button>
+<div id="collapseSpoiler5" class="accordion-collapse collapse" aria-labelledby="headingSpoiler5" data-bs-parent="#accordionSpoiler5">
+<div class="accordion-body">
+<p>Tokenizing a text means breaking a piece of text into smaller parts -
+usually words, subwords, or sentences - so that a computer can work with
+it more easily.</p>
+<p>In natural language processing (NLP), tokenization is often the first
+step when preparing text for most analysis tasks like word frequency
+analysis, language modeling, translation, or sentiment analysis.</p>
+<p>The following example demonstrates how a sentence can be
+tokenized:</p>
+<pre><code>text = "I love Python programming."
+tokens = ['I', 'love', 'Python', 'programming']</code></pre>
+<p>In this case, each word is a token. However, more advanced tokenizers
+(like those in NLTK, spaCy, or transformers) can handle punctuation,
+subwords, and special characters more intelligently.</p>
+<p>Tokenization is important in NLP because computers don’t understand
+raw text.</p>
+</div>
+</div>
+</div>
+</div>
+<p><span style="color:red">WE ARE HERE </span></p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -821,7 +839,7 @@ any links that you are not going to use.
   "url": "https://Goli-SF.github.io/python_101_humanities/02_analyze_text_data.html",
   "identifier": "https://Goli-SF.github.io/python_101_humanities/02_analyze_text_data.html",
   "dateCreated": "2025-07-30",
-  "dateModified": "2025-07-16",
+  "dateModified": "2025-07-29",
   "datePublished": "2025-07-29"
 }
 
