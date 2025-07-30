@@ -435,7 +435,7 @@ list of keys for each dictionary:</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a Python list? </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>A list in Python is a type of data structure used to store multiple
 items in a single variable. Lists can hold different types of data like
@@ -466,7 +466,7 @@ list using a <code>for</code> loop.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
   <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a for loop? </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
 <div class="accordion-body">
 <p>A for loop is used in Python to repeat an action for every item in a
 group (like a list). You can think of it as a way to go through a
@@ -603,7 +603,7 @@ complete path to the file.</li>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
   <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is an f-string? </h3>
 </button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler3" aria-labelledby="headingSpoiler3">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
 <div class="accordion-body">
 <p>An <em>f-string</em> (short for <em>formatted string</em>) is a way
 to create strings that include variables inside them. It makes it easier
@@ -686,7 +686,7 @@ offers.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler4" aria-expanded="false" aria-controls="collapseSpoiler4">
   <h3 class="accordion-header" id="headingSpoiler4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a pretrained machine learning model? </h3>
 </button>
-<div id="collapseSpoiler4" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler4" aria-labelledby="headingSpoiler4">
+<div id="collapseSpoiler4" class="accordion-collapse collapse" aria-labelledby="headingSpoiler4" data-bs-parent="#accordionSpoiler4">
 <div class="accordion-body">
 <p>A pretrained machine learning model is a model that has already been
 trained on a large dataset by other developers or researchers. Instead
@@ -721,7 +721,7 @@ appears in that text.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler5" aria-expanded="false" aria-controls="collapseSpoiler5">
   <h3 class="accordion-header" id="headingSpoiler5">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What does tokenizing mean? </h3>
 </button>
-<div id="collapseSpoiler5" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler5" aria-labelledby="headingSpoiler5">
+<div id="collapseSpoiler5" class="accordion-collapse collapse" aria-labelledby="headingSpoiler5" data-bs-parent="#accordionSpoiler5">
 <div class="accordion-body">
 <p>Tokenizing a text means breaking a piece of text into smaller parts -
 usually words, subwords, or sentences - so that a computer can work with
@@ -785,7 +785,7 @@ possibly have?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Let’s analyze the code line by line and answer the above
 questions:</p>
@@ -943,7 +943,7 @@ the frequency of words used in these texts:</p>
 <span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a>marlowe_frequency</span></code></pre>
 </div>
 <figure><img src="fig/output_15.png" class="figure mx-auto d-block"></figure><p>The above output shows some of the most frequent words used by
-Chrisopher Marlowe in the four plays by him that we are analyzing. You
+Christopher Marlowe in the four plays by him that we are analyzing. You
 can also display the frequency of words used by Shakespeare and compare
 both results.</p>
 <div id="interpreting-and-comparing-the-results" class="callout">
@@ -965,7 +965,36 @@ styles and literary themes.</p>
 </div>
 <div class="section level3">
 <h3 id="step-3-visualizing-word-frequencies">Step 3: Visualizing word frequencies<a class="anchor" aria-label="anchor" href="#step-3-visualizing-word-frequencies"></a></h3>
-<hr><p><span style="color:red">WE ARE HERE </span></p>
+<p>We have already worked with the <code>plotly.express</code> module in
+the previous episode, where we visualized DataFrames. We are going to
+implement the same library in this episode as well. Let’s write a
+function that takes the <code>Counter</code> object containing a
+dictionary of word frequencies (<code>freq_dict</code>), the number of
+the most frequent words that should appear in the graph
+(<code>top_n</code>), and the title of the graph (<code>title</code>) as
+attributes, and creates a bar chart of the frequency of the selected
+words within the Counter object:</p>
+<div class="codewrapper sourceCode" id="cb29">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a><span class="kw">def</span> plot_frequencies_plotly(freq_dict, top_n, title):</span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>    </span>
+<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>    most_common <span class="op">=</span> freq_dict.most_common(top_n)</span>
+<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame(most_common, columns<span class="op">=</span>[<span class="st">'word'</span>, <span class="st">'frequency'</span>])</span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>    fig <span class="op">=</span> px.bar(df, x<span class="op">=</span><span class="st">'word'</span>, y<span class="op">=</span><span class="st">'frequency'</span>, title<span class="op">=</span>title, text<span class="op">=</span><span class="st">'frequency'</span>)</span>
+<span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a>    </span>
+<span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a>    fig.show()</span></code></pre>
+</div>
+<hr><div class="codewrapper sourceCode" id="cb30">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>plot_frequencies_plotly(shakespeare_frequency, <span class="dv">20</span>, <span class="st">"Top 20 Words in Shakespeare's Works"</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>plot_frequencies_plotly(marlowe_frequency, <span class="dv">20</span>, <span class="st">"Top 20 Words in Marlowe's Worksthat"</span>)</span></code></pre>
+</div>
+<figure><img src="fig/output_16.png" class="figure mx-auto d-block"></figure><p><span style="color:red">WE ARE HERE </span></p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -975,8 +1004,7 @@ styles and literary themes.</p>
 <div class="callout-content">
 <ul><li>Formulate appropriate quantitative research questions when working
 with data composed of literary texts.</li>
-<li>Learn about dictionaries, lists, for loops, and f-strings in
-Python.</li>
+<li>Learn about lists, for loops, and f-strings in Python.</li>
 <li>Get to know and use the Python library spaCy.</li>
 <li>Perform word frequency analysis using spaCy.</li>
 <li>Perform collocation analysis using spaCy.</li>
