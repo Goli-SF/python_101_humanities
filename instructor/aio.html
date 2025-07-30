@@ -2653,14 +2653,14 @@ styles and literary themes.</p>
 <h3 id="step-3-visualizing-word-frequencies">Step 3: Visualizing word frequencies<a class="anchor" aria-label="anchor" href="#step-3-visualizing-word-frequencies"></a>
 </h3>
 <p>We have already worked with the <code>plotly.express</code> module in
-the previous episode, where we visualized DataFrames. We are going to
-implement the same library in this episode as well. Let’s write a
-function that takes the <code>Counter</code> object containing a
+the previous episode, where we visualized dataframes. We are going to
+implement the same module in this episode as well. Let’s write a
+function that takes a <code>Counter</code> object containing a
 dictionary of word frequencies (<code>freq_dict</code>), the number of
 the most frequent words that should appear in the graph
 (<code>top_n</code>), and the title of the graph (<code>title</code>) as
 attributes, and creates a bar chart of the frequency of the selected
-words within the Counter object:</p>
+words within the <code>Counter</code> object:</p>
 <div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2675,14 +2675,85 @@ words within the Counter object:</p>
 <span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a>    </span>
 <span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a>    fig.show()</span></code></pre>
 </div>
-<hr>
-<div class="codewrapper sourceCode" id="cb30">
+<div id="lets-analyze-the-codes-last-lines-1" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="lets-analyze-the-codes-last-lines-1" class="callout-inner">
+<h3 class="callout-title">Let’s analyze the code’s last lines</h3>
+<div class="callout-content">
+<pre><code><span><span class="va">most_common</span> <span class="op">=</span> <span class="fu">freq_dict.most_common</span><span class="op">(</span><span class="va">top_n</span><span class="op">)</span></span></code></pre>
+<p>This line gets the top n most frequent words from
+<code>freq_dict</code> and stores them in a list we have called
+<code>most_common</code>. This list contains tuples that look like this:
+<strong>(word, frequency)</strong>. So, for example, the value stored in
+<code>most_common</code> for the top three words that appear in
+Shakespeare plays would be:</p>
+<p><code>[('thou', 1136), ('shall', 759), ('thy', 725)]</code></p>
+<pre><code>df = pd.DataFrame(most_common, columns=['word', 'frequency'])</code></pre>
+<p>This turns the <code>most_common</code> list into a dataframe using
+pandas and stores the dataframe in a variable named <code>df</code>. It
+gives the columns the names ‘word’ and ‘frequency’. The dataframe format
+is what plotly expects when making a chart.</p>
+<pre><code><span><span class="va">fig</span> <span class="op">=</span> <span class="fu">px.bar</span><span class="op">(</span><span class="va">df</span>, x<span class="op">=</span><span class="st">'word'</span>, y<span class="op">=</span><span class="st">'frequency'</span>, title<span class="op">=</span><span class="va">title</span>, text<span class="op">=</span><span class="st">'frequency'</span><span class="op">)</span></span>
+<span><span class="fu">fig.show</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+<p>The first line creates a bar chart using the express module from the
+plotly library. It uses:</p>
+<ul>
+<li>
+<code>df</code>: the dataframe created in the previous line</li>
+<li>
+<code>x='word'</code>: words go on the x-axis</li>
+<li>
+<code>y='frequency'</code>: their counts go on the y-axis</li>
+<li>
+<code>title=title</code>: the chart gets the title that is passed to
+the function as an attribute.</li>
+<li>
+<code>text='frequency'</code>: shows word frequencies above bars for
+clarity</li>
+</ul>
+<p>Finally, <code>fig.show()</code> displays the chart in jupyter
+notebook.</p>
+</div>
+</div>
+</div>
+<p>Now that we have the function, let’s pass the necessary arguments to
+it and visualize two bar charts displaying the 20 most frequent words
+that appear in the Marlowe and Shakespeare plays:</p>
+<div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>plot_frequencies_plotly(shakespeare_frequency, <span class="dv">20</span>, <span class="st">"Top 20 Words in Shakespeare's Works"</span>)</span>
-<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>plot_frequencies_plotly(marlowe_frequency, <span class="dv">20</span>, <span class="st">"Top 20 Words in Marlowe's Worksthat"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>plot_frequencies_plotly(shakespeare_frequency, <span class="dv">20</span>, <span class="st">"Top 20 Words in Shakespeare's Works"</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>plot_frequencies_plotly(marlowe_frequency, <span class="dv">20</span>, <span class="st">"Top 20 Words in Marlowe's Worksthat"</span>)</span></code></pre>
 </div>
-<figure><img src="../fig/output_16.png" class="figure mx-auto d-block"></figure><p><span style="color:red">WE ARE HERE </span></p>
+<figure><img src="../fig/output_16.png" class="figure mx-auto d-block"></figure><div id="discussion5" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Discussion</h3>
+<div class="callout-content">
+<p>In a group, discuss the meaning of the bar charts you have just
+visualized:</p>
+<ul>
+<li>What information do these word frequencies reveal about the content
+and style of the plays written by the two selected playwrights?</li>
+<li>Are there any common words among the 20 most frequent words from the
+works of each playwright? What do these commonalities tell about the
+style of English playwrights from the 16th century?</li>
+<li>Do you think this observation can be generalized to all 16th-century
+authors from England? Why (not)?</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="keyword-in-context-analysis">2. Keyword-in-context analysis<a class="anchor" aria-label="anchor" href="#keyword-in-context-analysis"></a>
+</h2>
+<hr class="half-width">
+<hr>
+<p><span style="color:red">WE ARE HERE </span></p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -2706,7 +2777,6 @@ with data composed of literary texts.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</div>
 </section></section>
 </div>
     </main>
