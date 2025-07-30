@@ -719,9 +719,59 @@ from the 16th century?
 
 ## 2. Keyword-in-context analysis
 
-***
+In the previous section on word frequency analysis, we saw that counting the frequency
+of words in a body of work can provide some information on the style and themes of 
+literary works written by certain authors or in a certain epoch. 
+
+These words and their contribution to style and meaning can be analyzed even more 
+effectively if you look at the context they appear in. Keyword-in-context (kwic) analysis 
+allows you to automate the search for the context in which each word appears. 
+
+In this section, I'm going to present you with a simple code that does exactly this
+for you. If you have studied this Python lesson from the very beginning and mastered
+the concepts and methods from Episode 1 up to here, you must be able to understand 
+what the code does. Play with the arguments that you are passing to the 
+`kwic_analyze` function and look at the output. What does each argument do in the function?
+
+``` python
+import nltk
+from nltk.text import Text
+from nltk.tokenize import word_tokenize
+nltk.download('punkt')      #run this line only once and then comment it out. 
+
+def kwic_analyze (text, keyword, width=140, lines=20):
+    tokens = word_tokenize(text)
+    nltk_text = Text(tokens)
+    nltk_text.concordance(keyword, width=width, lines=lines)
+    
+kwic_analyze (marlowe_texts['jew_of_malta'], "lord", width=120, lines= 20)
+```
+
+![](fig/output_17.png)
+
+::::::::::::::::::::::::::::::::::::: challenge
+#### Can you tell how the above code works?
+
+:::: solution
+*** provide solution
+::::
+:::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 <span style="color:red">WE ARE HERE </span>
+
+
+:::::::::::::::: callout
+#### Challenge
+
+Can you write a function that takes the dictionary containing all works by an author — 
+instead of taking only one text — as well as the keyword, width of the context, 
+and number of lines, and returns that keyword in the context of each one of the 
+texts within the dictionary? You can integrate the `kwic_analyze` function 
+from above into the function that you are writing. 
+::::::::::::::::::
+
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 - Formulate appropriate quantitative research questions when working with 
