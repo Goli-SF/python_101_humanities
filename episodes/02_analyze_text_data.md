@@ -617,7 +617,7 @@ marlowe_frequency
 
 ![](fig/output_15.png)
 
-The above output shows some of the most frequent words used by Chrisopher Marlowe
+The above output shows some of the most frequent words used by Christopher Marlowe
 in the four plays by him that we are analyzing. You can also display the frequency 
 of words used by Shakespeare and compare both results. 
 
@@ -633,14 +633,45 @@ compare their linguistic styles and literary themes.
 
 ### Step 3: Visualizing word frequencies
 
+We have already worked with the `plotly.express` module in the previous episode, where we 
+visualized DataFrames. We are going to implement the same library in this episode
+as well. Let's write a function that takes the `Counter` object containing a 
+dictionary of word frequencies (`freq_dict`), the number of the most frequent words that should
+appear in the graph (`top_n`), and the title of the graph (`title`) as attributes, and 
+creates a bar chart of the frequency of the selected words within the Counter
+object:
+
+``` python
+import plotly.express as px
+import pandas as pd
+
+def plot_frequencies_plotly(freq_dict, top_n, title):
+    
+    most_common = freq_dict.most_common(top_n)
+    df = pd.DataFrame(most_common, columns=['word', 'frequency'])
+    fig = px.bar(df, x='word', y='frequency', title=title, text='frequency')
+    
+    fig.show()
+```
+
 ***
+
+
+``` python
+plot_frequencies_plotly(shakespeare_frequency, 20, "Top 20 Words in Shakespeare's Works")
+plot_frequencies_plotly(marlowe_frequency, 20, "Top 20 Words in Marlowe's Worksthat")
+```
+
+![](fig/output_16.png)
+
+
 
 <span style="color:red">WE ARE HERE </span>
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 - Formulate appropriate quantitative research questions when working with 
 data composed of literary texts.
-- Learn about dictionaries, lists, for loops, and f-strings in Python.
+- Learn about lists, for loops, and f-strings in Python.
 - Get to know and use the Python library spaCy.
 - Perform word frequency analysis using spaCy. 
 - Perform collocation analysis using spaCy.
