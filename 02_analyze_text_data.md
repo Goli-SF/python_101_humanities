@@ -414,13 +414,228 @@ and special characters more intelligently.
 Tokenization is important in NLP because computers don’t understand raw text.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+``` python
+import spacy
+from collections import Counter
+
+def token_count(text):
+    nlp = spacy.load("en_core_web_md")
+    doc = nlp(text)
+    
+    words = [
+        token.lemma_.lower()
+        for token in doc
+        if token.is_alpha               # Keep alphabetic tokens only
+        and not token.is_stop           # Exclude stop words
+        and token.pos_ != "VERB"        # Exclude verbs
+    ]
+    
+    return Counter(words)
+```
+
+::::::::::::::::::::::::::::::::::::: challenge
+Work with a partner and try to interpret the code above. Answer the following 
+questions:
+
+1. What do the imported libraries do? 
+2. What does the function do?
+3. Can you recognize the list comprehension in the function? How is is structured?
+4. What Python object does the function return? What shape could it possibly have?
+
+:::: solution
+Let's analyze the code line by line and answer the above questions: 
+
+1. `spacy` is a library that helps Python understand and work with natural language 
+or human language (text). It can tokenize text, recognize parts of speech 
+(like nouns or verbs), and more. `Counter` is a class from the `collections` module. 
+It creates special dictionary-like objects that automatically count how often 
+each item appears in a list.
+
+2. The function `token_count` processes a string of text and returns a count of 
+specific words, excluding common words and verbs. Let’s break down what happens, 
+step by step:
+
+<div style="margin-left: 30px;">
+
+``` 
+nlp = spacy.load("en_core_web_md")
+```
+
+- This line loads `en_core_web_md` — the pre-trained machine learning model from 
+spaCy that we have already downloaded. This model has been trained on a large 
+collection of English text and it can recognize words, their grammatical roles 
+(like nouns or verbs), their base forms (lemmas), and more.
+- We *instantiate* the `en_core_web_md` model, meaning that we load it using `spacy` 
+and create an instance of it by assigning it to a variable named `nlp`. 
+From now on, `nlp` represents this model in our code and it can be used to perform 
+natural language processing on texts. 
+
+``` 
+doc = nlp(text)
+```
+
+Here, we use `nlp` to tokenize the text that is given to the `token_count` function 
+as an argument. The result is a `Doc` object, stored in the variable `doc`. 
+The `Doc` object represents the entire text and contains a sequence of Token 
+objects. Each token is a word, punctuation mark, or other meaningful unit that 
+the model has identified.
+
+From there, the function filters and counts certain words from `doc`. 
+We define which words these should be in the following list comprehension. 
+
+</div>
+
+3. 
+
+<div style="margin-left: 30px;">
+
+``` 
+words = [
+        token.lemma_.lower()
+        for token in doc
+        if token.is_alpha 
+        and not token.is_stop 
+        and token.pos_ != "VERB"
+    ]
+```
+
+This list comprehension has the following structure: 
+
+``` 
+[token.lemma_.lower() for token in doc if ...]
+```
+
+It means:
+
+- Go through each word (`token`) in the text (`doc`),
+- Convert it to its lemma (basic form, like “run” instead of “running”),
+- Make it lowercase,
+- But only include it if it’s a word (no punctuation), not a stop word, 
+and not a verb.
+
+Stop words are very common words in a language — like "the", "and", "is", "in", 
+or "of". These words are important for grammar, but they usually don’t carry much 
+meaning on their own. In natural language processing, we often remove stop words 
+because:
+
+- They appear very frequently, so they dominate word counts.
+- They don’t help us understand what the text is about.
+- They’re similar across texts, so they’re not useful for comparing different documents.
+
+We are also excluding verbs because, in performing this concrete word frequency 
+analysis on the text of Marlowe and Shakespeare, we are more interested in nouns 
+and adjectives, not in verbs. 
+
+</div>
+
+4. 
+
+<div style="margin-left: 30px;">
+
+The function returns a `Counter` object. This is like a dictionary where:
+
+- Each key is a word,
+- Each value is the number of times that word appeared.
+
+So the shape is something like:
+
+``` 
+{'word1': 3, 'word2': 1, 'word3': 2}
+```
+
+</div>
+::::
+:::::::::::::::::::::::::::::::::::::::::::::::::
+
+We are now only one step away from reaching the word frequencies in the entire text 
+collections by Marlowe and Shakespeare. Whereas the `token_count` function only counts
+words in a single text file, we have dictionaries that contain multiple
+text files: four texts by Marlowe and nine by Shakespeare. So we need a further 
+function that takes a dictionary — and not a single text file — and counts the 
+words in all of the texts that exist as the values of keys in that dictionary. 
+This way, we can count words not in a single text, but in a collection of texts
+written by a single author. 
+
+Writing this new function is going to be relatively easy, because we are going
+to integrate the `token_count` function within it, which does most of the job 
+for us: 
+
+``` python
+def token_frequency_count (text_dict):
+    
+    def token_count(text):
+        nlp = spacy.load("en_core_web_md")
+        doc = nlp(text)
+        words = [
+            token.lemma_.lower()
+            for token in doc
+            if token.is_alpha 
+            and not token.is_stop  
+            and token.pos_ != "VERB"
+        ]
+        return Counter(words)
+
+    total_counts = Counter()
+    for key, value in text_dict.items(): 
+        total_counts += token_count (value)
+
+    return total_counts
+```
+
+::::::::::::::::::::::::::::::::::::::: discussion
+#### Let's analyze the code's last lines
+
+The `token_frequency_count` function contains the `token_count` function that 
+we have written previously. After defining the `token_count` function, we are creating  
+an empty `Counter` object (which has the structure of a Python dictionary) and 
+assigning it to the variable `total_counts`. 
+
+Then, we are iterating through the keys and values of the input dictionary, namely 
+`text_dict`, using a for loop. The for loop does the following: 
+
+- It treats each key-value pair as an `item`. 
+- It goes to the first item using its key, and reads the value of that key, which 
+is the full text of a play. 
+- It uses the `token_count` function to create a `Counter` object containing all the 
+desired words (`tokens`) from that text and adds that `Counter` object to `total_counts`. 
+- Then it goes to the next item (key-value pair) in `text_dict` and performs the 
+above operations again. It keeps counting words from every text in `text_dict` and adding
+them to `total_counts` until it reaches the last item in text_dict. 
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Let's apply the token_frequency_count function to the dictionaries we have created 
+from the Marlowe and Shakespeare texts and take a look at the frequency of words used in 
+these texts: 
+
+``` python
+shakespeare_frequency = token_frequency_count (shakespeare_texts)
+marlowe_frequency = token_frequency_count (marlowe_texts)
+
+marlowe_frequency
+```
+
+![](fig/output_15.png)
+
+The above output shows some of the most frequent words used by Chrisopher Marlowe
+in the four plays by him that we are analyzing. You can also display the frequency 
+of words used by Shakespeare and compare both results. 
+
+:::::::::::::::: callout
+#### Interpreting and comparing the results
+
+As you can see, comparing the two results can be time-consuming and un-intuitive, since
+they are not displayed next to each other in jupyter notebook. Therefore, in 
+the next step, we are going to visualize these word frequencies to get a better
+overview of the contents of the texts written by each playwright, as well as to 
+compare their linguistic styles and literary themes. 
+::::::::::::::::::
+
+### Step 3: Visualizing word frequencies
+
+***
 
 <span style="color:red">WE ARE HERE </span>
-
-
-
-
-
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 - Formulate appropriate quantitative research questions when working with 
