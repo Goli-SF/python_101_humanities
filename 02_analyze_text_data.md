@@ -634,11 +634,11 @@ compare their linguistic styles and literary themes.
 ### Step 3: Visualizing word frequencies
 
 We have already worked with the `plotly.express` module in the previous episode, where we 
-visualized DataFrames. We are going to implement the same library in this episode
-as well. Let's write a function that takes the `Counter` object containing a 
+visualized dataframes. We are going to implement the same module in this episode
+as well. Let's write a function that takes a `Counter` object containing a 
 dictionary of word frequencies (`freq_dict`), the number of the most frequent words that should
 appear in the graph (`top_n`), and the title of the graph (`title`) as attributes, and 
-creates a bar chart of the frequency of the selected words within the Counter
+creates a bar chart of the frequency of the selected words within the `Counter`
 object:
 
 ``` python
@@ -654,8 +654,48 @@ def plot_frequencies_plotly(freq_dict, top_n, title):
     fig.show()
 ```
 
-***
+::::::::::::::::::::::::::::::::::::::: discussion
+#### Let's analyze the code's last lines
 
+``` 
+most_common = freq_dict.most_common(top_n)
+``` 
+
+This line gets the top n most frequent words from `freq_dict` and stores them in 
+a list we have called `most_common`. This list contains tuples that look like 
+this: **(word, frequency)**. So, for example, the value stored in `most_common`
+for the top three words that appear in Shakespeare plays would be:
+
+`[('thou', 1136), ('shall', 759), ('thy', 725)]`
+
+``` 
+df = pd.DataFrame(most_common, columns=['word', 'frequency'])
+``` 
+
+This turns the `most_common` list into a dataframe using pandas and stores the dataframe 
+in a variable named `df`. It gives the columns the names 'word' and 'frequency'. 
+The dataframe format is what plotly expects when making a chart.
+
+``` 
+fig = px.bar(df, x='word', y='frequency', title=title, text='frequency')
+fig.show()
+``` 
+
+The first line creates a bar chart using the express module from the plotly library. 
+It uses:
+
+- `df`: the dataframe created in the previous line
+- `x='word'`: words go on the x-axis
+- `y='frequency'`: their counts go on the y-axis
+- `title=title`: the chart gets the title that is passed to the function as an attribute.
+- `text='frequency'`: shows word frequencies above bars for clarity
+
+Finally, `fig.show()` displays the chart in jupyter notebook. 
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Now that we have the function, let's pass the necessary arguments to it and visualize
+two bar charts displaying the 20 most frequent words that appear in the Marlowe and 
+Shakespeare plays: 
 
 ``` python
 plot_frequencies_plotly(shakespeare_frequency, 20, "Top 20 Words in Shakespeare's Works")
@@ -664,7 +704,22 @@ plot_frequencies_plotly(marlowe_frequency, 20, "Top 20 Words in Marlowe's Workst
 
 ![](fig/output_16.png)
 
+::::::::::::::::::::::::::::::::::::::: discussion
+In a group, discuss the meaning of the bar charts you have just visualized: 
 
+- What information do these word frequencies reveal about the content and style of the 
+plays written by the two selected playwrights? 
+- Are there any common words among the 20 most frequent words from the works of each
+playwright? What do these commonalities tell about the style of English playwrights
+from the 16th century? 
+- Do you think this observation can be generalized to all 
+16th-century authors from England? Why (not)?
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+## 2. Keyword-in-context analysis
+
+***
 
 <span style="color:red">WE ARE HERE </span>
 
