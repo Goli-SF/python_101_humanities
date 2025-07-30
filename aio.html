@@ -2749,8 +2749,76 @@ authors from England? Why (not)?</li>
 </section><section><h2 class="section-heading" id="keyword-in-context-analysis">2. Keyword-in-context analysis<a class="anchor" aria-label="anchor" href="#keyword-in-context-analysis"></a>
 </h2>
 <hr class="half-width">
-<hr>
+<p>In the previous section on word frequency analysis, we saw that
+counting the frequency of words in a body of work can provide some
+information on the style and themes of literary works written by certain
+authors or in a certain epoch.</p>
+<p>These words and their contribution to style and meaning can be
+analyzed even more effectively if you look at the context they appear
+in. Keyword-in-context (kwic) analysis allows you to automate the search
+for the context in which each word appears.</p>
+<p>In this section, I’m going to present you with a simple code that
+does exactly this for you. If you have studied this Python lesson from
+the very beginning and mastered the concepts and methods from Episode 1
+up to here, you must be able to understand what the code does. Play with
+the arguments that you are passing to the <code>kwic_analyze</code>
+function and look at the output. What does each argument do in the
+function?</p>
+<div class="codewrapper sourceCode" id="cb34">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a><span class="im">from</span> nltk.text <span class="im">import</span> Text</span>
+<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a><span class="im">from</span> nltk.tokenize <span class="im">import</span> word_tokenize</span>
+<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a>nltk.download(<span class="st">'punkt'</span>)      <span class="co">#run this line only once and then comment it out. </span></span>
+<span id="cb34-5"><a href="#cb34-5" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" tabindex="-1"></a><span class="kw">def</span> kwic_analyze (text, keyword, width<span class="op">=</span><span class="dv">140</span>, lines<span class="op">=</span><span class="dv">20</span>):</span>
+<span id="cb34-7"><a href="#cb34-7" tabindex="-1"></a>    tokens <span class="op">=</span> word_tokenize(text)</span>
+<span id="cb34-8"><a href="#cb34-8" tabindex="-1"></a>    nltk_text <span class="op">=</span> Text(tokens)</span>
+<span id="cb34-9"><a href="#cb34-9" tabindex="-1"></a>    nltk_text.concordance(keyword, width<span class="op">=</span>width, lines<span class="op">=</span>lines)</span>
+<span id="cb34-10"><a href="#cb34-10" tabindex="-1"></a>    </span>
+<span id="cb34-11"><a href="#cb34-11" tabindex="-1"></a>kwic_analyze (marlowe_texts[<span class="st">'jew_of_malta'</span>], <span class="st">"lord"</span>, width<span class="op">=</span><span class="dv">120</span>, lines<span class="op">=</span> <span class="dv">20</span>)</span></code></pre>
+</div>
+<figure><img src="fig/output_17.png" class="figure mx-auto d-block"></figure><div id="can-you-tell-how-the-above-code-works" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="can-you-tell-how-the-above-code-works" class="callout-inner">
+<h3 class="callout-title">Can you tell how the above code works?</h3>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<p>*** provide solution</p>
+</div>
+</div>
+</div>
+</div>
 <p><span style="color:red">WE ARE HERE </span></p>
+<div id="challenge" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="challenge" class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Can you write a function that takes the dictionary containing all
+works by an author — instead of taking only one text — as well as the
+keyword, width of the context, and number of lines, and returns that
+keyword in the context of each one of the texts within the dictionary?
+You can integrate the <code>kwic_analyze</code> function from above into
+the function that you are writing.</p>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
