@@ -14,9 +14,9 @@ texts?
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Learn how to perform word frequency analysis on literary texts. 
+- Learn how to perform word frequency analysis on literary texts.
+- Learn how to visualize a word cloud for a text. 
 - Learn how to perform keyword-in-context analysis on literary texts.
-- Learn how to perform collocation analysis on literary texts. 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 In the previous episode, we worked with tabular data and performed three
@@ -737,7 +737,59 @@ plt.show()
 ```
 ![](fig/output_18.png)
 
+:::::::::::::::: discussion
+#### Let's analyze the code line by line
 
+In this analysis, only lines of code are included that might be new to you.
+
+``` 
+from wordcloud import WordCloud
+```
+Here, we are importing the `WordCloud` class from the `wordcloud` library. This library 
+is specifically designed to create word clouds, which are visual representations of 
+text data where the size of each word indicates its frequency or importance.
+
+``` 
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
+```
+
+In this line, we create an instance of the `WordCloud` class with specific parameters:
+
+- `width=800`: Sets the width of the word cloud image to 800 pixels.
+- `height=400`: Sets the height of the word cloud image to 400 pixels.
+- `background_color='white'`: Sets the background color of the word cloud to white.
+
+The `.generate(text)` method takes the `text` variable (which contains the Shakespearean text) 
+and generates the word cloud based on the frequency of words in that text. 
+The result is stored in the variable `wordcloud`.
+
+``` 
+plt.figure(figsize=(10, 5))
+```
+
+This line creates a new figure for plotting with a specified size. The `figsize` parameter 
+sets the dimensions of the figure to 10 inches wide and 5 inches tall. This helps in 
+controlling how the word cloud will be displayed.
+
+``` 
+plt.imshow(wordcloud, interpolation='bilinear')
+```
+
+Here, we use the `imshow` function to display the generated word cloud image. The 
+`interpolation='bilinear'` argument is used to improve the appearance of the image 
+by smoothing it, which can make it look better when resized.
+
+``` 
+plt.axis('off')
+```
+
+This line turns off the axes of the plot. By default, plots have axes that show the 
+scale, but for a word cloud, we typically want to hide these axes to focus on the 
+visual representation of the words.
+::::::::::::::::::
+
+Look again at the word cloud that we have created. Can you tell the names of the play's
+main characters? 
 
 ## 3. Keyword-in-context analysis
 
@@ -853,16 +905,13 @@ text to get an even better understanding of the contexts of the keywords on whic
 research is focused. 
 
 
-<span style="color:red">WE ARE HERE </span>
-
-
 ::::::::::::::::::::::::::::::::::::: keypoints 
 - Formulate appropriate quantitative research questions when working with 
 data composed of literary texts.
 - Learn about lists, for loops, and f-strings in Python.
 - Get to know and use the Python libraries spaCy and NLTK.
 - Perform word frequency analysis using spaCy. 
+- Generate word clouds using worldcloud.
 - Perform KWIC analysis using nltk. 
-- Perform collocation analysis using spaCy.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
