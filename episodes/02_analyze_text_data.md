@@ -17,7 +17,6 @@ texts?
 - Learn how to perform word frequency analysis on literary texts. 
 - Learn how to perform keyword-in-context analysis on literary texts.
 - Learn how to perform collocation analysis on literary texts. 
-- Learn how to measure lexical diversity in a literary canon.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 In the previous episode, we worked with tabular data and performed three
@@ -31,7 +30,6 @@ analysis on these texts using Python:
 1. Word frequency analysis
 2. Keyword-in-context analysis
 3. Collocation analysis
-4. Measuring lexical diversity
 
 
 Because text fundamentally differs from tabular data, we’ll take a completely 
@@ -637,7 +635,7 @@ We have already worked with the `plotly.express` module in the previous episode,
 visualized dataframes. We are going to implement the same module in this episode
 as well. Let's write a function that takes a `Counter` object containing a 
 dictionary of word frequencies (`freq_dict`), the number of the most frequent words that should
-appear in the graph (`top_n`), and the title of the graph (`title`) as attributes, and 
+appear in the graph (`top_n`), and the title of the graph (`title`) as parameters, and 
 creates a bar chart of the frequency of the selected words within the `Counter`
 object:
 
@@ -687,7 +685,7 @@ It uses:
 - `df`: the dataframe created in the previous line
 - `x='word'`: words go on the x-axis
 - `y='frequency'`: their counts go on the y-axis
-- `title=title`: the chart gets the title that is passed to the function as an attribute.
+- `title=title`: the chart gets the title that is passed to the function as a parameter.
 - `text='frequency'`: shows word frequencies above bars for clarity
 
 Finally, `fig.show()` displays the chart in jupyter notebook. 
@@ -716,8 +714,32 @@ from the 16th century?
 16th-century authors from England? Why (not)?
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
+## 2. Creating a word cloud
 
-## 2. Keyword-in-context analysis
+Another way to visualize the most frequent words in a text is to create a word cloud. There
+is a specific Python library named WordCloud that does exactly this for you. To visualize
+a word cloud, we are going to use single texts and not the entire text collection by each 
+author. Let's write a code that visualizes a word cloud for Shakespeare's early play, 
+"Comedy of Errors":
+
+``` python
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud
+
+text = shakespeare_texts['comedy_of_errors']
+
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
+
+plt.figure(figsize=(10, 5))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis('off') 
+plt.show()
+```
+![](fig/output_18.png)
+
+
+
+## 3. Keyword-in-context analysis
 
 In the previous section on word frequency analysis, we saw that counting the frequency
 of words in a body of work can provide some information on the style and themes of 
@@ -830,11 +852,6 @@ contexts seem relevant to you as a researcher, then you can consider reading the
 text to get an even better understanding of the contexts of the keywords on which your
 research is focused. 
 
-## 3. Collocation analysis
-
-Whereas KWIC analysis gives you the broader textual context in which a certain keyword
-emerges, collocation analysis is helpful for identifying pairs (bigrams) and triplets 
-(trigrams) of words that frequently occur together in a text. 
 
 <span style="color:red">WE ARE HERE </span>
 
@@ -843,9 +860,9 @@ emerges, collocation analysis is helpful for identifying pairs (bigrams) and tri
 - Formulate appropriate quantitative research questions when working with 
 data composed of literary texts.
 - Learn about lists, for loops, and f-strings in Python.
-- Get to know and use the Python library spaCy.
+- Get to know and use the Python libraries spaCy and NLTK.
 - Perform word frequency analysis using spaCy. 
+- Perform KWIC analysis using nltk. 
 - Perform collocation analysis using spaCy.
-- Measure lexical diversity in a body of text. 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
