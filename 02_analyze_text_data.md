@@ -728,10 +728,7 @@ effectively if you look at the context they appear in. Keyword-in-context (kwic)
 allows you to automate the search for the context in which each word appears. 
 
 In this section, I'm going to present you with a simple code that does exactly this
-for you. If you have studied this Python lesson from the very beginning and mastered
-the concepts and methods from Episode 1 up to here, you must be able to understand 
-what the code does. Play with the arguments that you are passing to the 
-`kwic_analyze` function and look at the output. What does each argument do in the function?
+for you:
 
 ``` python
 import nltk
@@ -752,14 +749,69 @@ kwic_analyze (marlowe_texts['jew_of_malta'], "lord", width=120, lines= 20)
 ::::::::::::::::::::::::::::::::::::: challenge
 #### Can you tell how the above code works?
 
+If you have studied this Python lesson from the very beginning and mastered
+the concepts and methods from Episode 1 up to here, you must be able to understand 
+what the above code does. Play with the arguments that you are passing to the 
+`kwic_analyze` function and look at the output. What does each argument do in 
+the function?
+
 :::: solution
-*** provide solution
+```
+import nltk
+```
+This imports the Natural Language Toolkit (`NLTK`) library. NLTK is a popular Python 
+package for processing and analyzing natural language (text).
+
+```
+from nltk.text import Text
+```
+This imports the `Text` class from `nltk.text`. The Text class provides useful tools 
+for analyzing text, including functions like `concordance()` for keyword-in-context 
+(KWIC) searches.
+
+```
+from nltk.tokenize import word_tokenize
+```
+This imports the `word_tokenize` function from `NLTK`. It tokenizes a string of text 
+by breaking it into individual words and punctuation marks.
+
+```
+nltk.download('punkt')
+```
+This downloads the `punkt` tokenizer model, which `word_tokenize` depends on to split 
+text into words. 
+
+```
+def kwic_analyze (text, keyword, width=140, lines=20):
+```
+This defines a function named `kwic_analyze` that takes four parameters:
+
+- `text`: the full text you want to search
+- `keyword`: the word you want to find in context
+- `width`: how many characters of context to show around the keyword (default is 140)
+- `lines`: how many keyword matches to display (default is 20)
+
+```
+tokens = word_tokenize(text)
+```
+This breaks the input text into a list of tokens (words and punctuation), using the 
+`word_tokenize` function.
+
+```
+nltk_text = Text(tokens)
+```
+This creates an `nltk.Text` object from the list of tokens. This object lets you use 
+text analysis methods, such as `concordance()`.
+
+```
+nltk_text.concordance(keyword, width=width, lines=lines)
+```
+This searches the text for the given keyword and displays each occurrence in context.
+
+- `width` controls how much surrounding text is shown.
+- `lines` limits how many matches to show.
 ::::
 :::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-<span style="color:red">WE ARE HERE </span>
-
 
 :::::::::::::::: callout
 #### Challenge
@@ -771,6 +823,20 @@ texts within the dictionary? You can integrate the `kwic_analyze` function
 from above into the function that you are writing. 
 ::::::::::::::::::
 
+KWIC analysis allows you to actually see in which context each keyword appears. It is helpful
+when you want to quickly examine the texts that you are analyzing and the context in which 
+individual keywords appear without having to perform close reading on the text. If these
+contexts seem relevant to you as a researcher, then you can consider reading the entire 
+text to get an even better understanding of the contexts of the keywords on which your
+research is focused. 
+
+## 3. Collocation analysis
+
+Whereas KWIC analysis gives you the broader textual context in which a certain keyword
+emerges, collocation analysis is helpful for identifying pairs (bigrams) and triplets 
+(trigrams) of words that frequently occur together in a text. 
+
+<span style="color:red">WE ARE HERE </span>
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
