@@ -1,7 +1,7 @@
 ---
 title: "Analyzing Text Data"
-teaching: 120
-exercises: 8
+teaching: 180
+exercises: 12
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
@@ -15,7 +15,7 @@ texts?
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Learn how to perform word frequency analysis on literary texts.
-- Learn how to visualize a word cloud for a text. 
+- Learn how to visualize a word cloud from a text. 
 - Learn how to perform keyword-in-context analysis on literary texts.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -43,7 +43,7 @@ each playwright from the GitHub links provided in the **Summary and
 Setup** episode, and save them in the corresponding folders you’ve
 just created.
 
-In jupyter notebook, go ahead and save the path to each directory in a variable 
+In Jupyter Notebook, go ahead and save the path to each directory in a variable 
 like this: 
 
 
@@ -78,7 +78,7 @@ all included in our dataset. This analysis will help us gain insight into
 the themes and rhetoric of some of the most influential English plays written
 in 16th-century England.
 
-### Step 1: Loading the dataset into the script
+### Step 1: Loading the Dataset into the Script
 
 Unlike the previous episode, where the dataset was stored in a single `.csv`
 file, the dataset for this episode is stored in thirteen separate `.txt` files.
@@ -351,8 +351,6 @@ marlowe_texts= literary_work_loader (marlowe_path)
 Try printing the `marlowe_texts` dictionary, which is shorter, to get an overview 
 of its structure and content. 
 
-<span style="color:red">WE WERE HERE </span>
-
 ### Step 2: Performing Word Frequency Analysis using spaCy
 
 Performing word frequency analysis is faster and easier than you think. This has
@@ -363,7 +361,7 @@ library `spaCy` offers.
 #### What is a pretrained machine learning model?
 
 A pretrained machine learning model is a model that has already been trained on
-a large dataset by other developers or researchers. Instead of starting from scratch,
+a large dataset by other developers. Instead of starting from scratch,
 you can use this model to perform tasks like image recognition, language processing,
 or object detection. It has already learned patterns and features from the data,
 so you don’t need to teach it everything again. This saves time, computing resources,
@@ -374,25 +372,25 @@ set of relevant data.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 We are going to use `spaCy`'s `en_core_web_md` model for this exercise. You can 
-directly download the model from your jupyter notebook by running the following
+directly download the model from your Jupyter Notebook by running the following
 code: 
 
 ``` python
 ! python -m spacy download en_core_web_md
 ```
 
-Once you have downloaded the `en_core_web_md` model, it stays on your computer so 
-that you don't have to download it the next time you run the following lines of code
-in jupyter notebook. 
+Once you have downloaded the en_core_web_md model, it remains on your
+computer, ensuring you don't need to download it again the next time you run
+the following lines of code in Jupyter Notebook. 
 
-Now we are going to write a function that takes the full text of each play, tokenizes
-it, and then counts the number of times each word appears in that text. 
+Now, we will write a function that takes the full text of each play, tokenizes
+it, and counts the number of times each word appears in that text.
 
 :::::::::::::::::::::::::::::::::::::::::: spoiler
 #### What does tokenizing mean?
 
-Tokenizing a text means breaking a piece of text into smaller parts - usually words, 
-subwords, or sentences - so that a computer can work with it more easily.
+Tokenizing a text means breaking a piece of text into smaller parts — usually words, 
+subwords, or sentences — so that a computer can work with it more easily.
 
 In natural language processing (NLP), tokenization is often the first 
 step when preparing text for most analysis tasks like word frequency analysis, 
@@ -447,11 +445,11 @@ Let's analyze the code line by line and answer the above questions:
 or human language (text). It can tokenize text, recognize parts of speech 
 (like nouns or verbs), and more. `Counter` is a class from the `collections` module. 
 It creates special dictionary-like objects that automatically count how often 
-each item appears in a list.
+each item appears in an iterable, such as a list.
 
 2. The function `token_count` processes a string of text and returns a count of 
-specific words, excluding common words and verbs. Let’s break down what happens, 
-step by step:
+specific words, excluding common words and verbs. Let’s break down what happens 
+in the function step by step:
 
 <div style="margin-left: 30px;">
 
@@ -459,14 +457,11 @@ step by step:
 nlp = spacy.load("en_core_web_md")
 ```
 
-- This line loads `en_core_web_md` — the pre-trained machine learning model from 
-spaCy that we have already downloaded. This model has been trained on a large 
-collection of English text and it can recognize words, their grammatical roles 
-(like nouns or verbs), their base forms (lemmas), and more.
-- We *instantiate* the `en_core_web_md` model, meaning that we load it using `spacy` 
-and create an instance of it by assigning it to a variable named `nlp`. 
-From now on, `nlp` represents this model in our code and it can be used to perform 
-natural language processing on texts. 
+This line loads `en_core_web_md`, the pre-trained machine learning model from 
+`spaCy` that we have already downloaded, and assigns it to the variable `nlp`. 
+This model has been trained on a large collection of English text and it can recognize words, 
+their part of speech (like nouns or verbs), their base forms (lemmas), and more. 
+We are assigning the loaded model 
 
 ``` 
 doc = nlp(text)
@@ -545,18 +540,18 @@ So the shape is something like:
 ::::
 :::::::::::::::::::::::::::::::::::::::::::::::::
 
-We are now only one step away from reaching the word frequencies in the entire text 
-collections by Marlowe and Shakespeare. Whereas the `token_count` function only counts
-words in a single text file, we have dictionaries that contain multiple
-text files: four texts by Marlowe and nine by Shakespeare. So we need a further 
-function that takes a dictionary — and not a single text file — and counts the 
-words in all of the texts that exist as the values of keys in that dictionary. 
-This way, we can count words not in a single text, but in a collection of texts
-written by a single author. 
+We are now just one step away from obtaining the word frequencies in the entire
+text collections by Marlowe and Shakespeare. While the `token_count` function
+only counts words in a single text file, we have dictionaries that contain multiple
+text files: four texts by Marlowe and nine by Shakespeare.
 
-Writing this new function is going to be relatively easy, because we are going
-to integrate the `token_count` function within it, which does most of the job 
-for us: 
+Therefore, we need an additional function that takes a dictionary — not just a
+single text file — and counts the words in all the texts that exist as the values
+of keys in that dictionary. This approach allows us to count words not in a
+single text, but across a collection of texts written by a single author.
+
+Writing this new function will be relatively easy, as we will integrate the
+`token_count` function within it, which handles most of the work for us. 
 
 ``` python
 def token_frequency_count (text_dict):
@@ -596,15 +591,15 @@ Then, we are iterating through the keys and values of the input dictionary, name
 is the full text of a play. 
 - It uses the `token_count` function to create a `Counter` object containing all the 
 desired words (`tokens`) from that text and adds that `Counter` object to `total_counts`. 
-- Then it goes to the next item (key-value pair) in `text_dict` and performs the 
+- Then it goes to the next `item` (key-value pair) in `text_dict` and performs the 
 above operations again. It keeps counting words from every text in `text_dict` and adding
-them to `total_counts` until it reaches the last item in text_dict. 
+them to `total_counts` until it reaches the last `item` in `text_dict`. 
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Let's apply the token_frequency_count function to the dictionaries we have created 
+Let's apply the `token_frequency_count` function to the dictionaries we have created 
 from the Marlowe and Shakespeare texts and take a look at the frequency of words used in 
-these texts: 
+the texts written by Marlowe as an example: 
 
 ``` python
 shakespeare_frequency = token_frequency_count (shakespeare_texts)
@@ -615,35 +610,36 @@ marlowe_frequency
 
 ![](fig/output_15.png)
 
-The above output shows some of the most frequent words used by Christopher Marlowe
-in the four plays by him that we are analyzing. You can also display the frequency 
-of words used by Shakespeare and compare both results. 
+The output above displays some of the most frequent words used by Christopher
+Marlowe in the four plays we are analyzing.
 
-:::::::::::::::: callout
-#### Interpreting and comparing the results
+In your Jupyter Notebook, also display the frequency of words used by Shakespeare
+and compare both results.
 
-As you can see, comparing the two results can be time-consuming and un-intuitive, since
-they are not displayed next to each other in jupyter notebook. Therefore, in 
-the next step, we are going to visualize these word frequencies to get a better
-overview of the contents of the texts written by each playwright, as well as to 
-compare their linguistic styles and literary themes. 
-::::::::::::::::::
+As you can see, comparing the two results can be time-consuming and
+unintuitive, as they are not displayed next to each other in Jupyter Notebook.
 
-### Step 3: Visualizing word frequencies
+Therefore, in the next step, we will visualize these word frequencies to gain
+a better overview of the contents of the texts written by each playwright.
+This will also allow us to compare their linguistic styles and literary themes.
 
-We have already worked with the `plotly.express` module in the previous episode, where we 
-visualized dataframes. We are going to implement the same module in this episode
-as well. Let's write a function that takes a `Counter` object containing a 
-dictionary of word frequencies (`freq_dict`), the number of the most frequent words that should
-appear in the graph (`top_n`), and the title of the graph (`title`) as parameters, and 
-creates a bar chart of the frequency of the selected words within the `Counter`
-object:
+### Step 3: Visualizing Word Frequencies
+
+We have already worked with the `plotly.express` module in the previous
+episode, where we visualized dataframes. We will implement the same module
+in this episode as well.
+
+Let's write a function that takes a `Counter` object containing a dictionary
+of word frequencies (`freq_dict`), the number of the most frequent words
+to display in the graph (`top_n`), and the title of the graph (`title`)
+as parameters. This function will create a bar chart of the frequency of the
+selected words within the `Counter` object:
 
 ``` python
 import plotly.express as px
 import pandas as pd
 
-def plot_frequencies_plotly(freq_dict, top_n, title):
+def plot_frequencies (freq_dict, top_n, title):
     
     most_common = freq_dict.most_common(top_n)
     df = pd.DataFrame(most_common, columns=['word', 'frequency'])
@@ -660,35 +656,46 @@ most_common = freq_dict.most_common(top_n)
 ``` 
 
 This line gets the top n most frequent words from `freq_dict` and stores them in 
-a list we have called `most_common`. This list contains tuples that look like 
+a list we have called `most_common`. This list contains *tuples* that look like 
 this: **(word, frequency)**. So, for example, the value stored in `most_common`
 for the top three words that appear in Shakespeare plays would be:
 
 `[('thou', 1136), ('shall', 759), ('thy', 725)]`
 
+:::::::::::::::::::::::::::::::::::::::::: spoiler
+#### What is a tuple?
+
+A tuple in Python is a collection data type used to store multiple items in a single 
+variable, characterized by its immutability, meaning that once created, its contents 
+cannot be changed; it maintains the order of elements, ensuring they appear in the 
+same sequence as defined; and it can contain heterogeneous data types, allowing for 
+integers, strings, and even other tuples within a single tuple. Tuples are defined 
+using parentheses and commas, such as in the example: `(1, "apple", 3.14, True)`.
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ``` 
 df = pd.DataFrame(most_common, columns=['word', 'frequency'])
 ``` 
 
-This turns the `most_common` list into a dataframe using pandas and stores the dataframe 
+This turns the `most_common` list into a dataframe using `pandas` and stores the dataframe 
 in a variable named `df`. It gives the columns the names 'word' and 'frequency'. 
-The dataframe format is what plotly expects when making a chart.
+The dataframe format is what `plotly` expects when making a chart.
 
 ``` 
 fig = px.bar(df, x='word', y='frequency', title=title, text='frequency')
 fig.show()
 ``` 
 
-The first line creates a bar chart using the express module from the plotly library. 
-It uses:
+The first line creates a bar chart using the `express` module from the `plotly` library. 
+It takes the following arguments:
 
 - `df`: the dataframe created in the previous line
 - `x='word'`: words go on the x-axis
 - `y='frequency'`: their counts go on the y-axis
-- `title=title`: the chart gets the title that is passed to the function as a parameter.
-- `text='frequency'`: shows word frequencies above bars for clarity
+- `title=title`: the chart gets the title that is passed to the function.
+- `text='frequency'`: shows word frequencies above the bars for clarity
 
-Finally, `fig.show()` displays the chart in jupyter notebook. 
+Finally, `fig.show()` displays the chart in Jupyter Notebook. 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Now that we have the function, let's pass the necessary arguments to it and visualize
@@ -696,31 +703,36 @@ two bar charts displaying the 20 most frequent words that appear in the Marlowe 
 Shakespeare plays: 
 
 ``` python
-plot_frequencies_plotly(shakespeare_frequency, 20, "Top 20 Words in Shakespeare's Works")
-plot_frequencies_plotly(marlowe_frequency, 20, "Top 20 Words in Marlowe's Worksthat")
+plot_frequencies(shakespeare_frequency, 20, "Top 20 Words in Shakespeare's Works")
+plot_frequencies(marlowe_frequency, 20, "Top 20 Words in Marlowe's Works")
 ```
 
 ![](fig/output_16.png)
 
 ::::::::::::::::::::::::::::::::::::::: discussion
-In a group, discuss the meaning of the bar charts you have just visualized: 
+In a group, interpret the bar charts you have just visualized:
 
-- What information do these word frequencies reveal about the content and style of the 
-plays written by the two selected playwrights? 
-- Are there any common words among the 20 most frequent words from the works of each
-playwright? What do these commonalities tell about the style of English playwrights
-from the 16th century? 
-- Do you think this observation can be generalized to all 
-16th-century authors from England? Why (not)?
+- What information do these word frequencies reveal about the content and
+style of the plays written by the two selected playwrights?
+
+- Are there any common words among the 20 most frequent words from the
+works of each playwright? What do these commonalities indicate about the
+style of English playwrights from the 16th century?
+
+- Do you think this observation can be generalized to all 16th-century
+authors from England? Why or why not?
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## 2. Creating a word cloud
+## 2. Creating a Word Cloud
 
-Another way to visualize the most frequent words in a text is to create a word cloud. There
-is a specific Python library named WordCloud that does exactly this for you. To visualize
-a word cloud, we are going to use single texts and not the entire text collection by each 
-author. Let's write a code that visualizes a word cloud for Shakespeare's early play, 
-"Comedy of Errors":
+Another way to visualize the most frequent words in a text is by creating a
+word cloud. Word clouds are visual representations of 
+text data where the size of each word indicates its frequency.
+
+There is a specific Python library named `WordCloud` that does
+exactly this for you. To visualize a word cloud, we will use single texts rather than the entire
+text collection by each author. Let's write code that visualizes a word cloud
+for Shakespeare's early play, "Comedy of Errors":
 
 ``` python
 import matplotlib.pyplot as plt
@@ -740,14 +752,13 @@ plt.show()
 :::::::::::::::: discussion
 #### Let's analyze the code line by line
 
-In this analysis, only lines of code are included that might be new to you.
+In this analysis, only lines of code are included that may be new to you.
 
 ``` 
 from wordcloud import WordCloud
 ```
 Here, we are importing the `WordCloud` class from the `wordcloud` library. This library 
-is specifically designed to create word clouds, which are visual representations of 
-text data where the size of each word indicates its frequency or importance.
+is specifically designed to create word clouds.
 
 ``` 
 wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
@@ -759,7 +770,7 @@ In this line, we create an instance of the `WordCloud` class with specific param
 - `height=400`: Sets the height of the word cloud image to 400 pixels.
 - `background_color='white'`: Sets the background color of the word cloud to white.
 
-The `.generate(text)` method takes the `text` variable (which contains the Shakespearean text) 
+The `.generate(text)` method takes the `text` variable (which contains the Shakespeare play) 
 and generates the word cloud based on the frequency of words in that text. 
 The result is stored in the variable `wordcloud`.
 
@@ -768,8 +779,7 @@ plt.figure(figsize=(10, 5))
 ```
 
 This line creates a new figure for plotting with a specified size. The `figsize` parameter 
-sets the dimensions of the figure to 10 inches wide and 5 inches tall. This helps in 
-controlling how the word cloud will be displayed.
+sets the dimensions of the figure to 10 inches wide and 5 inches tall.
 
 ``` 
 plt.imshow(wordcloud, interpolation='bilinear')
@@ -788,10 +798,12 @@ scale, but for a word cloud, we typically want to hide these axes to focus on th
 visual representation of the words.
 ::::::::::::::::::
 
-Look again at the word cloud that we have created. Can you tell the names of the play's
-main characters? 
+:::::::::::::::: callout
+Look again at the word cloud we have created. Can you identify the names of
+the play's main characters?
+::::::::::::::::::
 
-## 3. Keyword-in-context analysis
+## 3. Keyword-in-Context (KWIC) Analysis
 
 In the previous section on word frequency analysis, we saw that counting the frequency
 of words in a body of work can provide some information on the style and themes of 
@@ -824,24 +836,25 @@ kwic_analyze (marlowe_texts['jew_of_malta'], "lord", width=120, lines= 20)
 #### Can you tell how the above code works?
 
 If you have studied this Python lesson from the very beginning and mastered
-the concepts and methods from Episode 1 up to here, you must be able to understand 
-what the above code does. Play with the arguments that you are passing to the 
-`kwic_analyze` function and look at the output. What does each argument do in 
-the function?
+the concepts and methods from Episode 1 up to this point, you should be able
+to understand what the above code does.
+
+Experiment with the arguments you are passing to the `kwic_analyze` function
+and observe the output. What does each argument do within the function?
 
 :::: solution
 ```
 import nltk
 ```
-This imports the Natural Language Toolkit (`NLTK`) library. NLTK is a popular Python 
-package for processing and analyzing natural language (text).
+This imports the Natural Language Toolkit (`NLTK`) library. `NLTK` is a popular Python 
+library for processing and analyzing natural language (text).
 
 ```
 from nltk.text import Text
 ```
-This imports the `Text` class from `nltk.text`. The Text class provides useful tools 
+This imports the `Text` class from the `nltk.text` module. The `Text` class provides useful tools 
 for analyzing text, including functions like `concordance()` for keyword-in-context 
-(KWIC) searches.
+(KWIC) analysis.
 
 ```
 from nltk.tokenize import word_tokenize
@@ -853,7 +866,8 @@ by breaking it into individual words and punctuation marks.
 nltk.download('punkt')
 ```
 This downloads the `punkt` tokenizer model, which `word_tokenize` depends on to split 
-text into words. 
+text into words. Once you have downloaded this model, you can comment out this line of 
+code because you don't need it any more. 
 
 ```
 def kwic_analyze (text, keyword, width=140, lines=20):
@@ -868,8 +882,7 @@ This defines a function named `kwic_analyze` that takes four parameters:
 ```
 tokens = word_tokenize(text)
 ```
-This breaks the input text into a list of tokens (words and punctuation), using the 
-`word_tokenize` function.
+This breaks the input text into a list of tokens,  using the `word_tokenize` function.
 
 ```
 nltk_text = Text(tokens)
@@ -887,7 +900,8 @@ This searches the text for the given keyword and displays each occurrence in con
 ::::
 :::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::: callout
+
+::::::::::::::::::::::::::::::::::::: challenge
 #### Challenge
 
 Can you write a function that takes the dictionary containing all works by an author — 
@@ -895,23 +909,55 @@ instead of taking only one text — as well as the keyword, width of the context
 and number of lines, and returns that keyword in the context of each one of the 
 texts within the dictionary? You can integrate the `kwic_analyze` function 
 from above into the function that you are writing. 
+
+:::: solution
+``` python
+import nltk
+from nltk.text import Text
+from nltk.tokenize import word_tokenize
+
+def kwic_analyze_all(texts_dict, keyword, width=140, lines=20):
+    def kwic_analyze(text, keyword, width=width, lines=lines):
+        tokens = word_tokenize(text)
+        nltk_text = Text(tokens)
+        nltk_text.concordance(keyword, width=width, lines=lines)
+    
+    for title, text in texts_dict.items():
+        print(f"\nContext for '{keyword}' in '{title}':")
+        print()
+        kwic_analyze(text, keyword, width, lines)
+```
+::::        
+        
+:::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::: callout
+#### Reflect
+
+Examine other plays by both authors and display the keyword "lord" in its
+context within these texts. Does the word, in each context, refer to "God,"
+or is it used to address a person of higher social rank?
+
+Is there a relationship between these use cases and the genre and topic of the
+plays?
 ::::::::::::::::::
 
-KWIC analysis allows you to actually see in which context each keyword appears. It is helpful
-when you want to quickly examine the texts that you are analyzing and the context in which 
-individual keywords appear without having to perform close reading on the text. If these
-contexts seem relevant to you as a researcher, then you can consider reading the entire 
-text to get an even better understanding of the contexts of the keywords on which your
-research is focused. 
+KWIC analysis allows you to see the context in which each keyword appears.
+It is helpful when you want to quickly examine the texts you are analyzing and
+the context of individual keywords without performing a close reading of the text.
+
+If these contexts seem relevant to you as a researcher, you can consider reading
+the entire text to gain an even better understanding of the contexts of the
+keywords on which your research is focused.
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 - Formulate appropriate quantitative research questions when working with 
 data composed of literary texts.
-- Learn about lists, for loops, and f-strings in Python.
-- Get to know and use the Python libraries spaCy and NLTK.
+- Learn about lists, for loops, f-strings, and tuples in Python.
+- Get to know and use the Python libraries spaCy, wordcloud, and NLTK.
 - Perform word frequency analysis using spaCy. 
 - Generate word clouds using worldcloud.
-- Perform KWIC analysis using nltk. 
+- Perform keywprd-in-context analysis using NLTK. 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
