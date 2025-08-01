@@ -1949,10 +1949,10 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-02_analyze_text_data"><p>Content from <a href="02_analyze_text_data.html">Analyzing Text Data</a></p>
 <hr>
-<p>Last updated on 2025-07-31 |
+<p>Last updated on 2025-08-01 |
 
         <a href="https://github.com/Goli-SF/python_101_humanities/edit/main/episodes/02_analyze_text_data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-<p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 128 minutes</p>
+<p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 192 minutes</p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -1977,7 +1977,7 @@ composed of literary texts?</li>
 <h3 class="card-title">Objectives</h3>
 <ul>
 <li>Learn how to perform word frequency analysis on literary texts.</li>
-<li>Learn how to visualize a word cloud for a text.</li>
+<li>Learn how to visualize a word cloud from a text.</li>
 <li>Learn how to perform keyword-in-context analysis on literary
 texts.</li>
 </ul>
@@ -2010,7 +2010,7 @@ tasks.</p>
 each playwright from the GitHub links provided in the <strong>Summary
 and Setup</strong> episode, and save them in the corresponding folders
 you’ve just created.</p>
-<p>In jupyter notebook, go ahead and save the path to each directory in
+<p>In Jupyter Notebook, go ahead and save the path to each directory in
 a variable like this:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2048,7 +2048,7 @@ This analysis will help us gain insight into the themes and rhetoric of
 some of the most influential English plays written in 16th-century
 England.</p>
 <div class="section level3">
-<h3 id="step-1-loading-the-dataset-into-the-script">Step 1: Loading the dataset into the script<a class="anchor" aria-label="anchor" href="#step-1-loading-the-dataset-into-the-script"></a>
+<h3 id="step-1-loading-the-dataset-into-the-script">Step 1: Loading the Dataset into the Script<a class="anchor" aria-label="anchor" href="#step-1-loading-the-dataset-into-the-script"></a>
 </h3>
 <p>Unlike the previous episode, where the dataset was stored in a single
 <code>.csv</code> file, the dataset for this episode is stored in
@@ -2340,7 +2340,6 @@ dictionaries containing the works of Shakespeare and Marlowe:</p>
 </div>
 <p>Try printing the <code>marlowe_texts</code> dictionary, which is
 shorter, to get an overview of its structure and content.</p>
-<p><span style="color:red">WE WERE HERE </span></p>
 </div>
 <div class="section level3">
 <h3 id="step-2-performing-word-frequency-analysis-using-spacy">Step 2: Performing Word Frequency Analysis using spaCy<a class="anchor" aria-label="anchor" href="#step-2-performing-word-frequency-analysis-using-spacy"></a>
@@ -2357,33 +2356,33 @@ offers.</p>
 <div id="collapseSpoiler4" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler4" aria-labelledby="headingSpoiler4">
 <div class="accordion-body">
 <p>A pretrained machine learning model is a model that has already been
-trained on a large dataset by other developers or researchers. Instead
-of starting from scratch, you can use this model to perform tasks like
-image recognition, language processing, or object detection. It has
-already learned patterns and features from the data, so you don’t need
-to teach it everything again. This saves time, computing resources, and
-often improves accuracy, especially when you don’t have a lot of your
-own data to train a model from the beginning. You can also fine-tune it
-to work better on your specific task by giving it a smaller set of
-relevant data.</p>
+trained on a large dataset by other developers. Instead of starting from
+scratch, you can use this model to perform tasks like image recognition,
+language processing, or object detection. It has already learned
+patterns and features from the data, so you don’t need to teach it
+everything again. This saves time, computing resources, and often
+improves accuracy, especially when you don’t have a lot of your own data
+to train a model from the beginning. You can also fine-tune it to work
+better on your specific task by giving it a smaller set of relevant
+data.</p>
 </div>
 </div>
 </div>
 </div>
 <p>We are going to use <code>spaCy</code>’s <code>en_core_web_md</code>
 model for this exercise. You can directly download the model from your
-jupyter notebook by running the following code:</p>
+Jupyter Notebook by running the following code:</p>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="op">!</span> python <span class="op">-</span>m spacy download en_core_web_md</span></code></pre>
 </div>
-<p>Once you have downloaded the <code>en_core_web_md</code> model, it
-stays on your computer so that you don’t have to download it the next
-time you run the following lines of code in jupyter notebook.</p>
-<p>Now we are going to write a function that takes the full text of each
-play, tokenizes it, and then counts the number of times each word
-appears in that text.</p>
+<p>Once you have downloaded the en_core_web_md model, it remains on your
+computer, ensuring you don’t need to download it again the next time you
+run the following lines of code in Jupyter Notebook.</p>
+<p>Now, we will write a function that takes the full text of each play,
+tokenizes it, and counts the number of times each word appears in that
+text.</p>
 <div id="accordionSpoiler5" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler5" aria-expanded="false" aria-controls="collapseSpoiler5">
@@ -2391,8 +2390,8 @@ appears in that text.</p>
 </button>
 <div id="collapseSpoiler5" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler5" aria-labelledby="headingSpoiler5">
 <div class="accordion-body">
-<p>Tokenizing a text means breaking a piece of text into smaller parts -
-usually words, subwords, or sentences - so that a computer can work with
+<p>Tokenizing a text means breaking a piece of text into smaller parts —
+usually words, subwords, or sentences — so that a computer can work with
 it more easily.</p>
 <p>In natural language processing (NLP), tokenization is often the first
 step when preparing text for most analysis tasks like word frequency
@@ -2465,25 +2464,20 @@ work with natural language or human language (text). It can tokenize
 text, recognize parts of speech (like nouns or verbs), and more.
 <code>Counter</code> is a class from the <code>collections</code>
 module. It creates special dictionary-like objects that automatically
-count how often each item appears in a list.</p></li>
+count how often each item appears in an iterable, such as a
+list.</p></li>
 <li><p>The function <code>token_count</code> processes a string of text
 and returns a count of specific words, excluding common words and verbs.
-Let’s break down what happens, step by step:</p></li>
+Let’s break down what happens in the function step by step:</p></li>
 </ol>
 <div style="margin-left: 30px;">
 <pre><code><span><span class="va">nlp</span> <span class="op">=</span> <span class="fu">spacy.load</span><span class="op">(</span><span class="st">"en_core_web_md"</span><span class="op">)</span></span></code></pre>
-<ul>
-<li>This line loads <code>en_core_web_md</code> — the pre-trained
-machine learning model from spaCy that we have already downloaded. This
-model has been trained on a large collection of English text and it can
-recognize words, their grammatical roles (like nouns or verbs), their
-base forms (lemmas), and more.</li>
-<li>We <em>instantiate</em> the <code>en_core_web_md</code> model,
-meaning that we load it using <code>spacy</code> and create an instance
-of it by assigning it to a variable named <code>nlp</code>. From now on,
-<code>nlp</code> represents this model in our code and it can be used to
-perform natural language processing on texts.</li>
-</ul>
+<p>This line loads <code>en_core_web_md</code>, the pre-trained machine
+learning model from <code>spaCy</code> that we have already downloaded,
+and assigns it to the variable <code>nlp</code>. This model has been
+trained on a large collection of English text and it can recognize
+words, their part of speech (like nouns or verbs), their base forms
+(lemmas), and more. We are assigning the loaded model</p>
 <pre><code><span><span class="va">doc</span> <span class="op">=</span> <span class="fu">nlp</span><span class="op">(</span><span class="va">text</span><span class="op">)</span></span></code></pre>
 <p>Here, we use <code>nlp</code> to tokenize the text that is given to
 the <code>token_count</code> function as an argument. The result is a
@@ -2547,18 +2541,19 @@ dictionary where:</p>
 </div>
 </div>
 </div>
-<p>We are now only one step away from reaching the word frequencies in
-the entire text collections by Marlowe and Shakespeare. Whereas the
+<p>We are now just one step away from obtaining the word frequencies in
+the entire text collections by Marlowe and Shakespeare. While the
 <code>token_count</code> function only counts words in a single text
 file, we have dictionaries that contain multiple text files: four texts
-by Marlowe and nine by Shakespeare. So we need a further function that
-takes a dictionary — and not a single text file — and counts the words
-in all of the texts that exist as the values of keys in that dictionary.
-This way, we can count words not in a single text, but in a collection
-of texts written by a single author.</p>
-<p>Writing this new function is going to be relatively easy, because we
-are going to integrate the <code>token_count</code> function within it,
-which does most of the job for us:</p>
+by Marlowe and nine by Shakespeare.</p>
+<p>Therefore, we need an additional function that takes a dictionary —
+not just a single text file — and counts the words in all the texts that
+exist as the values of keys in that dictionary. This approach allows us
+to count words not in a single text, but across a collection of texts
+written by a single author.</p>
+<p>Writing this new function will be relatively easy, as we will
+integrate the <code>token_count</code> function within it, which handles
+most of the work for us.</p>
 <div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2606,18 +2601,19 @@ key, which is the full text of a play.</li>
 <code>Counter</code> object containing all the desired words
 (<code>tokens</code>) from that text and adds that <code>Counter</code>
 object to <code>total_counts</code>.</li>
-<li>Then it goes to the next item (key-value pair) in
+<li>Then it goes to the next <code>item</code> (key-value pair) in
 <code>text_dict</code> and performs the above operations again. It keeps
 counting words from every text in <code>text_dict</code> and adding them
-to <code>total_counts</code> until it reaches the last item in
-text_dict.</li>
+to <code>total_counts</code> until it reaches the last <code>item</code>
+in <code>text_dict</code>.</li>
 </ul>
 </div>
 </div>
 </div>
-<p>Let’s apply the token_frequency_count function to the dictionaries we
-have created from the Marlowe and Shakespeare texts and take a look at
-the frequency of words used in these texts:</p>
+<p>Let’s apply the <code>token_frequency_count</code> function to the
+dictionaries we have created from the Marlowe and Shakespeare texts and
+take a look at the frequency of words used in the texts written by
+Marlowe as an example:</p>
 <div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2626,46 +2622,37 @@ the frequency of words used in these texts:</p>
 <span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a></span>
 <span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a>marlowe_frequency</span></code></pre>
 </div>
-<figure><img src="../fig/output_15.png" class="figure mx-auto d-block"></figure><p>The above output shows some of the most frequent words used by
-Christopher Marlowe in the four plays by him that we are analyzing. You
-can also display the frequency of words used by Shakespeare and compare
-both results.</p>
-<div id="interpreting-and-comparing-the-results" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div id="interpreting-and-comparing-the-results" class="callout-inner">
-<h3 class="callout-title">Interpreting and comparing the results</h3>
-<div class="callout-content">
+<figure><img src="../fig/output_15.png" class="figure mx-auto d-block"></figure><p>The output above displays some of the most frequent words used by
+Christopher Marlowe in the four plays we are analyzing.</p>
+<p>In your Jupyter Notebook, also display the frequency of words used by
+Shakespeare and compare both results.</p>
 <p>As you can see, comparing the two results can be time-consuming and
-un-intuitive, since they are not displayed next to each other in jupyter
-notebook. Therefore, in the next step, we are going to visualize these
-word frequencies to get a better overview of the contents of the texts
-written by each playwright, as well as to compare their linguistic
-styles and literary themes.</p>
-</div>
-</div>
-</div>
+unintuitive, as they are not displayed next to each other in Jupyter
+Notebook.</p>
+<p>Therefore, in the next step, we will visualize these word frequencies
+to gain a better overview of the contents of the texts written by each
+playwright. This will also allow us to compare their linguistic styles
+and literary themes.</p>
 </div>
 <div class="section level3">
-<h3 id="step-3-visualizing-word-frequencies">Step 3: Visualizing word frequencies<a class="anchor" aria-label="anchor" href="#step-3-visualizing-word-frequencies"></a>
+<h3 id="step-3-visualizing-word-frequencies">Step 3: Visualizing Word Frequencies<a class="anchor" aria-label="anchor" href="#step-3-visualizing-word-frequencies"></a>
 </h3>
 <p>We have already worked with the <code>plotly.express</code> module in
-the previous episode, where we visualized dataframes. We are going to
-implement the same module in this episode as well. Let’s write a
-function that takes a <code>Counter</code> object containing a
-dictionary of word frequencies (<code>freq_dict</code>), the number of
-the most frequent words that should appear in the graph
+the previous episode, where we visualized dataframes. We will implement
+the same module in this episode as well.</p>
+<p>Let’s write a function that takes a <code>Counter</code> object
+containing a dictionary of word frequencies (<code>freq_dict</code>),
+the number of the most frequent words to display in the graph
 (<code>top_n</code>), and the title of the graph (<code>title</code>) as
-parameters, and creates a bar chart of the frequency of the selected
-words within the <code>Counter</code> object:</p>
+parameters. This function will create a bar chart of the frequency of
+the selected words within the <code>Counter</code> object:</p>
 <div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
 <span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a><span class="kw">def</span> plot_frequencies_plotly(freq_dict, top_n, title):</span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a><span class="kw">def</span> plot_frequencies (freq_dict, top_n, title):</span>
 <span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>    </span>
 <span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>    most_common <span class="op">=</span> freq_dict.most_common(top_n)</span>
 <span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame(most_common, columns<span class="op">=</span>[<span class="st">'word'</span>, <span class="st">'frequency'</span>])</span>
@@ -2683,20 +2670,41 @@ words within the <code>Counter</code> object:</p>
 <pre><code><span><span class="va">most_common</span> <span class="op">=</span> <span class="fu">freq_dict.most_common</span><span class="op">(</span><span class="va">top_n</span><span class="op">)</span></span></code></pre>
 <p>This line gets the top n most frequent words from
 <code>freq_dict</code> and stores them in a list we have called
-<code>most_common</code>. This list contains tuples that look like this:
-<strong>(word, frequency)</strong>. So, for example, the value stored in
-<code>most_common</code> for the top three words that appear in
-Shakespeare plays would be:</p>
+<code>most_common</code>. This list contains <em>tuples</em> that look
+like this: <strong>(word, frequency)</strong>. So, for example, the
+value stored in <code>most_common</code> for the top three words that
+appear in Shakespeare plays would be:</p>
 <p><code>[('thou', 1136), ('shall', 759), ('thy', 725)]</code></p>
+<div id="accordionSpoiler6" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler6" aria-expanded="false" aria-controls="collapseSpoiler6">
+  <h3 class="accordion-header" id="headingSpoiler6">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a tuple? </h3>
+</button>
+<div id="collapseSpoiler6" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler6" aria-labelledby="headingSpoiler6">
+<div class="accordion-body">
+<p>A tuple in Python is a collection data type used to store multiple
+items in a single variable, characterized by its immutability, meaning
+that once created, its contents cannot be changed; it maintains the
+order of elements, ensuring they appear in the same sequence as defined;
+and it can contain heterogeneous data types, allowing for integers,
+strings, and even other tuples within a single tuple. Tuples are defined
+using parentheses and commas, such as in the example:
+<code>(1, "apple", 3.14, True)</code>.</p>
+</div>
+</div>
+</div>
+</div>
 <pre><code>df = pd.DataFrame(most_common, columns=['word', 'frequency'])</code></pre>
 <p>This turns the <code>most_common</code> list into a dataframe using
-pandas and stores the dataframe in a variable named <code>df</code>. It
-gives the columns the names ‘word’ and ‘frequency’. The dataframe format
-is what plotly expects when making a chart.</p>
+<code>pandas</code> and stores the dataframe in a variable named
+<code>df</code>. It gives the columns the names ‘word’ and ‘frequency’.
+The dataframe format is what <code>plotly</code> expects when making a
+chart.</p>
 <pre><code><span><span class="va">fig</span> <span class="op">=</span> <span class="fu">px.bar</span><span class="op">(</span><span class="va">df</span>, x<span class="op">=</span><span class="st">'word'</span>, y<span class="op">=</span><span class="st">'frequency'</span>, title<span class="op">=</span><span class="va">title</span>, text<span class="op">=</span><span class="st">'frequency'</span><span class="op">)</span></span>
 <span><span class="fu">fig.show</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-<p>The first line creates a bar chart using the express module from the
-plotly library. It uses:</p>
+<p>The first line creates a bar chart using the <code>express</code>
+module from the <code>plotly</code> library. It takes the following
+arguments:</p>
 <ul>
 <li>
 <code>df</code>: the dataframe created in the previous line</li>
@@ -2706,13 +2714,13 @@ plotly library. It uses:</p>
 <code>y='frequency'</code>: their counts go on the y-axis</li>
 <li>
 <code>title=title</code>: the chart gets the title that is passed to
-the function as a parameter.</li>
+the function.</li>
 <li>
-<code>text='frequency'</code>: shows word frequencies above bars for
-clarity</li>
+<code>text='frequency'</code>: shows word frequencies above the bars
+for clarity</li>
 </ul>
-<p>Finally, <code>fig.show()</code> displays the chart in jupyter
-notebook.</p>
+<p>Finally, <code>fig.show()</code> displays the chart in Jupyter
+Notebook.</p>
 </div>
 </div>
 </div>
@@ -2722,8 +2730,8 @@ that appear in the Marlowe and Shakespeare plays:</p>
 <div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>plot_frequencies_plotly(shakespeare_frequency, <span class="dv">20</span>, <span class="st">"Top 20 Words in Shakespeare's Works"</span>)</span>
-<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>plot_frequencies_plotly(marlowe_frequency, <span class="dv">20</span>, <span class="st">"Top 20 Words in Marlowe's Worksthat"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>plot_frequencies(shakespeare_frequency, <span class="dv">20</span>, <span class="st">"Top 20 Words in Shakespeare's Works"</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>plot_frequencies(marlowe_frequency, <span class="dv">20</span>, <span class="st">"Top 20 Words in Marlowe's Works"</span>)</span></code></pre>
 </div>
 <figure><img src="../fig/output_16.png" class="figure mx-auto d-block"></figure><div id="discussion5" class="callout discussion">
 <div class="callout-square">
@@ -2732,30 +2740,32 @@ that appear in the Marlowe and Shakespeare plays:</p>
 <div class="callout-inner">
 <h3 class="callout-title">Discussion</h3>
 <div class="callout-content">
-<p>In a group, discuss the meaning of the bar charts you have just
-visualized:</p>
+<p>In a group, interpret the bar charts you have just visualized:</p>
 <ul>
-<li>What information do these word frequencies reveal about the content
-and style of the plays written by the two selected playwrights?</li>
-<li>Are there any common words among the 20 most frequent words from the
-works of each playwright? What do these commonalities tell about the
-style of English playwrights from the 16th century?</li>
-<li>Do you think this observation can be generalized to all 16th-century
-authors from England? Why (not)?</li>
+<li><p>What information do these word frequencies reveal about the
+content and style of the plays written by the two selected
+playwrights?</p></li>
+<li><p>Are there any common words among the 20 most frequent words from
+the works of each playwright? What do these commonalities indicate about
+the style of English playwrights from the 16th century?</p></li>
+<li><p>Do you think this observation can be generalized to all
+16th-century authors from England? Why or why not?</p></li>
 </ul>
 </div>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="creating-a-word-cloud">2. Creating a word cloud<a class="anchor" aria-label="anchor" href="#creating-a-word-cloud"></a>
+</section><section><h2 class="section-heading" id="creating-a-word-cloud">2. Creating a Word Cloud<a class="anchor" aria-label="anchor" href="#creating-a-word-cloud"></a>
 </h2>
 <hr class="half-width">
-<p>Another way to visualize the most frequent words in a text is to
-create a word cloud. There is a specific Python library named WordCloud
-that does exactly this for you. To visualize a word cloud, we are going
-to use single texts and not the entire text collection by each author.
-Let’s write a code that visualizes a word cloud for Shakespeare’s early
-play, “Comedy of Errors”:</p>
+<p>Another way to visualize the most frequent words in a text is by
+creating a word cloud. Word clouds are visual representations of text
+data where the size of each word indicates its frequency.</p>
+<p>There is a specific Python library named <code>WordCloud</code> that
+does exactly this for you. To visualize a word cloud, we will use single
+texts rather than the entire text collection by each author. Let’s write
+code that visualizes a word cloud for Shakespeare’s early play, “Comedy
+of Errors”:</p>
 <div class="codewrapper sourceCode" id="cb34">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2778,13 +2788,12 @@ play, “Comedy of Errors”:</p>
 <div id="lets-analyze-the-code-line-by-line-2" class="callout-inner">
 <h3 class="callout-title">Let’s analyze the code line by line</h3>
 <div class="callout-content">
-<p>In this analysis, only lines of code are included that might be new
-to you.</p>
+<p>In this analysis, only lines of code are included that may be new to
+you.</p>
 <pre><code>from wordcloud import WordCloud</code></pre>
 <p>Here, we are importing the <code>WordCloud</code> class from the
 <code>wordcloud</code> library. This library is specifically designed to
-create word clouds, which are visual representations of text data where
-the size of each word indicates its frequency or importance.</p>
+create word clouds.</p>
 <pre><code>wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)</code></pre>
 <p>In this line, we create an instance of the <code>WordCloud</code>
 class with specific parameters:</p>
@@ -2800,14 +2809,13 @@ class with specific parameters:</p>
 the word cloud to white.</li>
 </ul>
 <p>The <code>.generate(text)</code> method takes the <code>text</code>
-variable (which contains the Shakespearean text) and generates the word
+variable (which contains the Shakespeare play) and generates the word
 cloud based on the frequency of words in that text. The result is stored
 in the variable <code>wordcloud</code>.</p>
 <pre><code>plt.figure(figsize=(10, 5))</code></pre>
 <p>This line creates a new figure for plotting with a specified size.
 The <code>figsize</code> parameter sets the dimensions of the figure to
-10 inches wide and 5 inches tall. This helps in controlling how the word
-cloud will be displayed.</p>
+10 inches wide and 5 inches tall.</p>
 <pre><code><span><span class="fu">plt.imshow</span><span class="op">(</span><span class="va">wordcloud</span>, interpolation<span class="op">=</span><span class="st">'bilinear'</span><span class="op">)</span></span></code></pre>
 <p>Here, we use the <code>imshow</code> function to display the
 generated word cloud image. The <code>interpolation='bilinear'</code>
@@ -2820,9 +2828,19 @@ these axes to focus on the visual representation of the words.</p>
 </div>
 </div>
 </div>
-<p>Look again at the word cloud that we have created. Can you tell the
+<div id="callout1" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Callout</h3>
+<div class="callout-content">
+<p>Look again at the word cloud we have created. Can you identify the
 names of the play’s main characters?</p>
-</section><section><h2 class="section-heading" id="keyword-in-context-analysis">3. Keyword-in-context analysis<a class="anchor" aria-label="anchor" href="#keyword-in-context-analysis"></a>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="keyword-in-context-kwic-analysis">3. Keyword-in-Context (KWIC) Analysis<a class="anchor" aria-label="anchor" href="#keyword-in-context-kwic-analysis"></a>
 </h2>
 <hr class="half-width">
 <p>In the previous section on word frequency analysis, we saw that
@@ -2858,10 +2876,11 @@ does exactly this for you:</p>
 <h3 class="callout-title">Can you tell how the above code works?</h3>
 <div class="callout-content">
 <p>If you have studied this Python lesson from the very beginning and
-mastered the concepts and methods from Episode 1 up to here, you must be
-able to understand what the above code does. Play with the arguments
-that you are passing to the <code>kwic_analyze</code> function and look
-at the output. What does each argument do in the function?</p>
+mastered the concepts and methods from Episode 1 up to this point, you
+should be able to understand what the above code does.</p>
+<p>Experiment with the arguments you are passing to the
+<code>kwic_analyze</code> function and observe the output. What does
+each argument do within the function?</p>
 </div>
 </div>
 </div>
@@ -2874,20 +2893,22 @@ at the output. What does each argument do in the function?</p>
 <div class="accordion-body">
 <pre><code>import nltk</code></pre>
 <p>This imports the Natural Language Toolkit (<code>NLTK</code>)
-library. NLTK is a popular Python package for processing and analyzing
-natural language (text).</p>
+library. <code>NLTK</code> is a popular Python library for processing
+and analyzing natural language (text).</p>
 <pre><code>from nltk.text import Text</code></pre>
-<p>This imports the <code>Text</code> class from <code>nltk.text</code>.
-The Text class provides useful tools for analyzing text, including
-functions like <code>concordance()</code> for keyword-in-context (KWIC)
-searches.</p>
+<p>This imports the <code>Text</code> class from the
+<code>nltk.text</code> module. The <code>Text</code> class provides
+useful tools for analyzing text, including functions like
+<code>concordance()</code> for keyword-in-context (KWIC) analysis.</p>
 <pre><code>from nltk.tokenize import word_tokenize</code></pre>
 <p>This imports the <code>word_tokenize</code> function from
 <code>NLTK</code>. It tokenizes a string of text by breaking it into
 individual words and punctuation marks.</p>
 <pre><code><span><span class="fu">nltk.download</span><span class="op">(</span><span class="st">'punkt'</span><span class="op">)</span></span></code></pre>
 <p>This downloads the <code>punkt</code> tokenizer model, which
-<code>word_tokenize</code> depends on to split text into words.</p>
+<code>word_tokenize</code> depends on to split text into words. Once you
+have downloaded this model, you can comment out this line of code
+because you don’t need it any more.</p>
 <pre><code>def kwic_analyze (text, keyword, width=140, lines=20):</code></pre>
 <p>This defines a function named <code>kwic_analyze</code> that takes
 four parameters:</p>
@@ -2904,8 +2925,8 @@ the keyword (default is 140)</li>
 20)</li>
 </ul>
 <pre><code><span><span class="va">tokens</span> <span class="op">=</span> <span class="fu">word_tokenize</span><span class="op">(</span><span class="va">text</span><span class="op">)</span></span></code></pre>
-<p>This breaks the input text into a list of tokens (words and
-punctuation), using the <code>word_tokenize</code> function.</p>
+<p>This breaks the input text into a list of tokens, using the
+<code>word_tokenize</code> function.</p>
 <pre><code><span><span class="va">nltk_text</span> <span class="op">=</span> <span class="fu">Text</span><span class="op">(</span><span class="va">tokens</span><span class="op">)</span></span></code></pre>
 <p>This creates an <code>nltk.Text</code> object from the list of
 tokens. This object lets you use text analysis methods, such as
@@ -2923,9 +2944,9 @@ occurrence in context.</p>
 </div>
 </div>
 </div>
-<div id="challenge" class="callout">
+<div id="challenge" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="challenge" class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
@@ -2939,12 +2960,56 @@ the function that you are writing.</p>
 </div>
 </div>
 </div>
-<p>KWIC analysis allows you to actually see in which context each
-keyword appears. It is helpful when you want to quickly examine the
-texts that you are analyzing and the context in which individual
-keywords appear without having to perform close reading on the text. If
-these contexts seem relevant to you as a researcher, then you can
-consider reading the entire text to get an even better understanding of
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb49">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a><span class="im">from</span> nltk.text <span class="im">import</span> Text</span>
+<span id="cb49-3"><a href="#cb49-3" tabindex="-1"></a><span class="im">from</span> nltk.tokenize <span class="im">import</span> word_tokenize</span>
+<span id="cb49-4"><a href="#cb49-4" tabindex="-1"></a></span>
+<span id="cb49-5"><a href="#cb49-5" tabindex="-1"></a><span class="kw">def</span> kwic_analyze_all(texts_dict, keyword, width<span class="op">=</span><span class="dv">140</span>, lines<span class="op">=</span><span class="dv">20</span>):</span>
+<span id="cb49-6"><a href="#cb49-6" tabindex="-1"></a>    <span class="kw">def</span> kwic_analyze(text, keyword, width<span class="op">=</span>width, lines<span class="op">=</span>lines):</span>
+<span id="cb49-7"><a href="#cb49-7" tabindex="-1"></a>        tokens <span class="op">=</span> word_tokenize(text)</span>
+<span id="cb49-8"><a href="#cb49-8" tabindex="-1"></a>        nltk_text <span class="op">=</span> Text(tokens)</span>
+<span id="cb49-9"><a href="#cb49-9" tabindex="-1"></a>        nltk_text.concordance(keyword, width<span class="op">=</span>width, lines<span class="op">=</span>lines)</span>
+<span id="cb49-10"><a href="#cb49-10" tabindex="-1"></a>    </span>
+<span id="cb49-11"><a href="#cb49-11" tabindex="-1"></a>    <span class="cf">for</span> title, text <span class="kw">in</span> texts_dict.items():</span>
+<span id="cb49-12"><a href="#cb49-12" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Context for '</span><span class="sc">{</span>keyword<span class="sc">}</span><span class="ss">' in '</span><span class="sc">{</span>title<span class="sc">}</span><span class="ss">':"</span>)</span>
+<span id="cb49-13"><a href="#cb49-13" tabindex="-1"></a>        <span class="bu">print</span>()</span>
+<span id="cb49-14"><a href="#cb49-14" tabindex="-1"></a>        kwic_analyze(text, keyword, width, lines)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="reflect" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="reflect" class="callout-inner">
+<h3 class="callout-title">Reflect</h3>
+<div class="callout-content">
+<p>Examine other plays by both authors and display the keyword “lord” in
+its context within these texts. Does the word, in each context, refer to
+“God,” or is it used to address a person of higher social rank?</p>
+<p>Is there a relationship between these use cases and the genre and
+topic of the plays?</p>
+</div>
+</div>
+</div>
+<p>KWIC analysis allows you to see the context in which each keyword
+appears. It is helpful when you want to quickly examine the texts you
+are analyzing and the context of individual keywords without performing
+a close reading of the text.</p>
+<p>If these contexts seem relevant to you as a researcher, you can
+consider reading the entire text to gain an even better understanding of
 the contexts of the keywords on which your research is focused.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -2956,11 +3021,12 @@ the contexts of the keywords on which your research is focused.</p>
 <ul>
 <li>Formulate appropriate quantitative research questions when working
 with data composed of literary texts.</li>
-<li>Learn about lists, for loops, and f-strings in Python.</li>
-<li>Get to know and use the Python libraries spaCy and NLTK.</li>
+<li>Learn about lists, for loops, f-strings, and tuples in Python.</li>
+<li>Get to know and use the Python libraries spaCy, wordcloud, and
+NLTK.</li>
 <li>Perform word frequency analysis using spaCy.</li>
 <li>Generate word clouds using worldcloud.</li>
-<li>Perform KWIC analysis using nltk.</li>
+<li>Perform keywprd-in-context analysis using NLTK.</li>
 </ul>
 </div>
 </div>
@@ -3017,8 +3083,8 @@ any links that you are not going to use.
   "url": "https://Goli-SF.github.io/python_101_humanities/instructor/aio.html",
   "identifier": "https://Goli-SF.github.io/python_101_humanities/instructor/aio.html",
   "dateCreated": "2025-07-30",
-  "dateModified": "2025-07-31",
-  "datePublished": "2025-07-31"
+  "dateModified": "2025-08-01",
+  "datePublished": "2025-08-01"
 }
 
   </script><script>
