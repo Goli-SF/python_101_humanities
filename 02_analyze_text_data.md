@@ -799,6 +799,8 @@ visual representation of the words.
 ::::::::::::::::::
 
 :::::::::::::::: callout
+#### Reflect
+
 Look again at the word cloud we have created. Can you identify the names of
 the play's main characters?
 ::::::::::::::::::
