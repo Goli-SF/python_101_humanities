@@ -28,8 +28,8 @@ and Christopher Marlowe (1564–1593). We’ll learn how to perform the followin
 analysis on these texts using Python:
 
 1. Word frequency analysis
-2. Keyword-in-context analysis
-3. Collocation analysis
+2. Creating a word cloud
+3. Keyword-in-context (KWIC) analysis
 
 
 Because text fundamentally differs from tabular data, we’ll take a completely 
