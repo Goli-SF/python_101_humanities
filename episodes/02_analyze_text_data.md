@@ -36,16 +36,54 @@ Because text fundamentally differs from tabular data, we’ll take a completely
 different approach in this episode compared to the previous one, using distinct 
 Python libraries and syntax to carry out analytical tasks. 
 
-To save the data locally on your computer, create a directory named
-`data` in your working directory. Inside the `data` directory, create two
-further directories named `marlowe` and `shakespeare`. Download the works by
-each playwright from the GitHub links provided in the **Summary and
-Setup** episode, and save them in the corresponding folders you’ve
-just created.
+To save the data locally on your computer, go ahead and run the following Python code. 
+It creates a directory named `data` in the same path where your Jupyter Notebook is 
+located, if the directory doesn't exist already. Then, it downloads the directories
+`shakespeare` and `marlowe` and their contents from GitHub and saves them in 
+`data`. 
 
-In Jupyter Notebook, go ahead and save the path to each directory in a variable 
-like this: 
+```python
 
+import os
+import requests
+
+# Base URLs for each directory
+base_urls = {
+    "shakespeare": "https://raw.githubusercontent.com/HERMES-DKZ/python_101_humanities/main/episodes/data/shakespeare",
+    "marlowe": "https://raw.githubusercontent.com/HERMES-DKZ/python_101_humanities/main/episodes/data/marlowe"
+}
+
+# Files to download
+file_lists = {
+    "shakespeare": ['alls_well_ends_well.txt', 'comedy_of_errors.txt', 'hamlet.txt', 'julius_caesar.txt',
+                    'king_lear.txt', 'macbeth.txt', 'othello.txt', 'romeo_and_juliet.txt', 'winters_tale.txt'],
+    "marlowe": ['doctor_faustus.txt', 'edward_the_second.txt', 'jew_of_malta.txt', 'massacre_at_paris.txt']
+}
+
+# Create 'data' folder and subfolders
+os.makedirs("data/shakespeare", exist_ok=True)
+os.makedirs("data/marlowe", exist_ok=True)
+
+# Download each file
+for author, files in file_lists.items():
+    for file_name in files:
+        url = f"{base_urls[author]}/{file_name}"
+        local_path = f"data/{author}/{file_name}"
+        
+        response = requests.get(url)
+        if response.status_code == 200:
+            with open(local_path, "w", encoding="utf-8") as f:
+                f.write(response.text)
+            print(f"Downloaded: {local_path}")
+        else:
+            print(f"Failed to download {url} (status code: {response.status_code})")
+
+```
+
+For now, it's not necessary to go into details about how the above code functions. You'll learn more
+about web scraping in later episodes. 
+
+In Jupyter Notebook, save the path to each directory in a variable like this: 
 
 ``` python
 shakespeare_path = './data/shakespeare'
