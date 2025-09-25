@@ -300,7 +300,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Analyzing Tabular Data</h1>
-        <p>Last updated on 2025-07-29 |
+        <p>Last updated on 2025-09-25 |
 
         <a href="https://github.com/Goli-SF/python_101_humanities/edit/main/episodes/01_analyze_tabular_data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -1244,15 +1244,20 @@ eight most common artistic media found in <code>moma_df</code>.</p>
 <div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>moma_df[<span class="st">'Date'</span>] <span class="op">=</span> pd.to_numeric(moma_df[<span class="st">'Date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>top_media <span class="op">=</span> moma_df[<span class="st">'Medium'</span>].value_counts().nlargest(<span class="dv">8</span>).index</span>
-<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>medium_df <span class="op">=</span> moma_df[moma_df[<span class="st">'Medium'</span>].isin(top_media)]</span>
-<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a></span>
-<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a>fig <span class="op">=</span> px.histogram(medium_df, x<span class="op">=</span><span class="st">'Date'</span>, color<span class="op">=</span><span class="st">'Medium'</span>,</span>
-<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a>                   nbins<span class="op">=</span><span class="dv">50</span>,</span>
-<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a>                   title<span class="op">=</span><span class="st">'Trends in Medium Usage Over Time'</span>,</span>
-<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a>                   labels<span class="op">=</span>{<span class="st">'Date'</span>: <span class="st">'Year'</span>})</span>
-<span id="cb28-9"><a href="#cb28-9" tabindex="-1"></a>fig.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>df <span class="op">=</span> moma_df.copy()</span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>df[<span class="st">'Date'</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">'Date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a>top_media <span class="op">=</span> df[<span class="st">'Medium'</span>].value_counts().nlargest(<span class="dv">8</span>).index</span>
+<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a>medium_df <span class="op">=</span> df[df[<span class="st">'Medium'</span>].isin(top_media)]</span>
+<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a>fig <span class="op">=</span> px.histogram(medium_df, x<span class="op">=</span><span class="st">'Date'</span>, color<span class="op">=</span><span class="st">'Medium'</span>,</span>
+<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a>                   nbins<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb28-9"><a href="#cb28-9" tabindex="-1"></a>                   title<span class="op">=</span><span class="st">'Trends in Medium Usage Over Time: the Top 8 Media'</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" tabindex="-1"></a>fig.update_xaxes(title_text<span class="op">=</span><span class="st">'Year'</span>)</span>
+<span id="cb28-12"><a href="#cb28-12" tabindex="-1"></a>fig.update_yaxes(title_text<span class="op">=</span><span class="st">'Number of Artworks'</span>)</span>
+<span id="cb28-13"><a href="#cb28-13" tabindex="-1"></a></span>
+<span id="cb28-14"><a href="#cb28-14" tabindex="-1"></a>fig.show()</span></code></pre>
 </div>
 <figure><img src="../fig/output_11.png" class="figure mx-auto d-block"></figure><div id="challenge7" class="callout challenge">
 <div class="callout-square">
@@ -1295,17 +1300,30 @@ in your own code.</p>
 <div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <p>Here’s a line-by-line explanation of the above code:</p>
-<pre><code><span><span class="va">moma_df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span> <span class="op">=</span> <span class="fu">pd.to_numeric</span><span class="op">(</span><span class="va">moma_df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span>, errors<span class="op">=</span><span class="st">'coerce'</span><span class="op">)</span></span></code></pre>
+<pre><code><span><span class="va">df</span> <span class="op">=</span> <span class="fu">moma_df.copy</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+<ul><li>Creates a copy of the DataFrame <code>moma_df</code> and assigns it
+to <code>df</code>. This is often done to preserve the original
+DataFrame in case you want to modify it without affecting the source.
+Here, because we are going to manipulate some values in
+<code>moma_df</code>, changing their data types and removing rows that
+contain empty values, we create a copy of it to keep the original
+DataFrame unchanged.</li>
+</ul><pre><code><span><span class="va">df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span> <span class="op">=</span> <span class="fu">pd.to_numeric</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span>, errors<span class="op">=</span><span class="st">'coerce'</span><span class="op">)</span></span></code></pre>
+<ul><li>The dates in the “Date” column are objects. This line of code
+converts the values in the ‘Date’ column to numeric format.</li>
+<li>Any values that can’t be converted (like strings or invalid dates)
+are set to NaN (missing values) by <code>errors='coerce'</code>.</li>
+</ul><pre><code><span><span class="va">df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span> <span class="op">=</span> <span class="fu">pd.to_numeric</span><span class="op">(</span><span class="va">moma_df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span>, errors<span class="op">=</span><span class="st">'coerce'</span><span class="op">)</span></span></code></pre>
 <ul><li>If you remember, the dates in the ‘Date’ column were objects as
 <code>moma_df.info()</code> showed. This line of code converts the
 values in the ‘Date’ column to numeric format.</li>
 <li>Any values that can’t be converted (like strings or invalid dates)
 are set to NaN (missing values) by <code>errors='coerce'</code>.</li>
-</ul><pre><code>top_media = moma_df['Medium'].value_counts().nlargest(8).index</code></pre>
+</ul><pre><code>top_media = df['Medium'].value_counts().nlargest(8).index</code></pre>
 <ul><li>
-<code>moma_df['Medium']</code> selects the “Medium” column from the
-DataFrame <code>moma_df</code>, which contains the artistic media for
-each artwork.</li>
+<code>df['Medium']</code> selects the “Medium” column from the
+DataFrame <code>df</code>, which contains the artistic media for each
+artwork.</li>
 <li>
 <code>.value_counts()</code> counts the number of occurrences of
 each unique value in the “Medium” column (i.e., how many artworks belong
@@ -1317,11 +1335,11 @@ types based on their counts.</li>
 <code>.index</code> extracts the index (the actual medium types)
 from the result of <code>nlargest</code>, which gives us the top 8
 artistic media.</li>
-</ul><pre><code>medium_df = moma_df[moma_df['Medium'].isin(top_media)]</code></pre>
+</ul><pre><code>medium_df = df[moma_df['Medium'].isin(top_media)]</code></pre>
 <ul><li>
-<code>moma_df['Medium'].isin(top_media)</code> checks which rows in
-the “Medium” column of <code>moma_df</code> contain one of the top 8
-media from the <code>top_media</code> list.</li>
+<code>df['Medium'].isin(top_media)</code> checks which rows in the
+“Medium” column of <code>moma_df</code> contain one of the top 8 media
+from the <code>top_media</code> list.</li>
 <li>The result is stored in a new DataFrame called
 <code>medium_df</code>, which contains only the artworks with the top 8
 most frequent media.</li>
@@ -1341,77 +1359,22 @@ created.</li>
 <code>color='Medium'</code>: This argument colors the bars by the
 “Medium” column, so you can distinguish between the different artistic
 media.</li>
+<li>When you set the X-axis to the <code>Date</code> column in
+<code>medium_df</code> and the bar colors to the top 8 media,
+<code>Plotly Express</code> automatically counts the occurrences of each
+artistic medium and plots them on the Y-axis. Therefore, it is not
+necessary to explicitly specify the column from <code>medium_df</code>
+that should be plotted on the Y-axis.</li>
 <li>
 <code>nbins=50</code>: Specifies the number of bins for the
 histogram (i.e., how the years will be grouped).</li>
 <li>
 <code>title='Trends in Medium Usage Over Time'</code>: The title of
 the plot.</li>
-<li>
-<code>labels={'Date': 'Year'}</code>: Customizes the label of the
-X-axis in a <em>Python dictionary</em> for better clarity.</li>
-</ul><div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
-  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a Python dictionary? </h3>
-</button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
-<div class="accordion-body">
-<p>Python dictionaries are enclosed in curly brackets: <strong>{
-}</strong>. A Python dictionary is a built-in data structure used to
-store pairs of related information. One part of the pair is called the
-<em>key</em>, and the other part is the <em>value</em>. Each key is
-linked to a specific value, and you can use the key to quickly access
-the value associated with it. A Python dictionary is structured exactly
-like a linguistic dictionary: just as you look up a word in a linguistic
-dictionary to find its definition, you can store values under keys in a
-Python dictionary to be able to use the keys to retrieve the values
-later.</p>
-<p>Here’s how you might define a Python dictionary:</p>
-<div class="codewrapper sourceCode" id="cb33">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>my_vacation_plan<span class="op">=</span> {</span>
-<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>    <span class="st">'budget'</span>: <span class="dv">100</span>,</span>
-<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a>    <span class="st">'destination'</span>: <span class="st">'Johannesburg'</span>,</span>
-<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a>    <span class="st">'accomodation'</span>: <span class="st">'Sunset Hotel'</span>,</span>
-<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a>    <span class="st">'activities'</span>: [<span class="st">'hiking'</span>, <span class="st">'swimming'</span>, <span class="st">'biking'</span>],</span>
-<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a>    <span class="st">'travel by plane'</span>: TRUE</span>
-<span id="cb33-7"><a href="#cb33-7" tabindex="-1"></a>}</span></code></pre>
-</div>
-<p>In a Python dictionary, both keys and values can be a variety of data
-types, but with some important rules:</p>
-<div class="section level5">
-<h5 id="keys">Keys:<a class="anchor" aria-label="anchor" href="#keys"></a></h5>
-<p>There are two main things to know about keys:</p>
-<ol style="list-style-type: decimal"><li>They must be unique: You can’t have two identical keys in the same
-dictionary.</li>
-<li>They must be immutable: This means they have to be data types that
-cannot change.</li>
-</ol><p>Valid key types include:</p>
-<ul><li>Strings (e.g., ‘budget’)</li>
-<li>Numbers (e.g., 1, 3.14)</li>
-<li>Tuples (e.g., (1, 2)), as long as the tuple itself doesn’t contain
-mutable objects</li>
-</ul><p>You cannot use lists, dictionaries, or other mutable types as
-keys.</p>
-</div>
-<div class="section level5">
-<h5 id="values">Values:<a class="anchor" aria-label="anchor" href="#values"></a></h5>
-<p>Values can be any type of Python object, including:</p>
-<ul><li>Strings</li>
-<li>Numbers</li>
-<li>Lists</li>
-<li>Booleans</li>
-<li>Functions</li>
-<li>Even other dictionaries or complex objects</li>
-</ul><p>Python places no restriction on the types of values you can
-store.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
+</ul><pre><code><span><span class="fu">fig.update_xaxes</span><span class="op">(</span>title_text<span class="op">=</span><span class="st">'Year'</span><span class="op">)</span></span>
+<span><span class="fu">fig.update_yaxes</span><span class="op">(</span>title_text<span class="op">=</span><span class="st">'Number of Artworks'</span><span class="op">)</span></span></code></pre>
+<p>These lines set the title of the X-axis to “Year” and the title of
+the Y-axia to “Number of Artworks.”</p>
 <pre><code><span><span class="fu">fig.show</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 <ul><li>This line displays the plot created by <code>plotly.express</code>.
 It renders the histogram in an interactive format, allowing you to hover
@@ -1435,21 +1398,24 @@ MoMA’s collection.</p>
 time, the process will be a bit more complex. It’s up to you to
 understand the functionality of the code and what information the
 resulting graph represents.</p>
-<div class="codewrapper sourceCode" id="cb35">
+<div class="codewrapper sourceCode" id="cb37">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>df <span class="op">=</span> moma_df.copy()</span>
-<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>df[<span class="st">'Date'</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">'Date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
-<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a>df <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">'Date'</span>, <span class="st">'Nationality'</span>])</span>
-<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a></span>
-<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a>grouped <span class="op">=</span> df.groupby([<span class="st">'Date'</span>, <span class="st">'Nationality'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'Count'</span>)</span>
-<span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a>top_nationalities <span class="op">=</span> df[<span class="st">'Nationality'</span>].value_counts().nlargest(<span class="dv">7</span>).index</span>
-<span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a>grouped <span class="op">=</span> grouped[grouped[<span class="st">'Nationality'</span>].isin(top_nationalities)]</span>
-<span id="cb35-8"><a href="#cb35-8" tabindex="-1"></a></span>
-<span id="cb35-9"><a href="#cb35-9" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(grouped, x<span class="op">=</span><span class="st">'Date'</span>, y<span class="op">=</span><span class="st">'Nationality'</span>, size<span class="op">=</span><span class="st">'Count'</span>, color<span class="op">=</span><span class="st">'Nationality'</span>,</span>
-<span id="cb35-10"><a href="#cb35-10" tabindex="-1"></a>                 title<span class="op">=</span><span class="st">'Frequency of Artworks by Nationality Over Time'</span>,</span>
-<span id="cb35-11"><a href="#cb35-11" tabindex="-1"></a>                 labels<span class="op">=</span>{<span class="st">'Date'</span>: <span class="st">'Year'</span>})</span>
-<span id="cb35-12"><a href="#cb35-12" tabindex="-1"></a>fig.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>df <span class="op">=</span> moma_df.copy()</span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a>df[<span class="st">'Date'</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">'Date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a>df <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">'Date'</span>, <span class="st">'Nationality'</span>])</span>
+<span id="cb37-4"><a href="#cb37-4" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a>grouped <span class="op">=</span> df.groupby([<span class="st">'Date'</span>, <span class="st">'Nationality'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'Count'</span>)</span>
+<span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a>top_nationalities <span class="op">=</span> df[<span class="st">'Nationality'</span>].value_counts().nlargest(<span class="dv">7</span>).index</span>
+<span id="cb37-7"><a href="#cb37-7" tabindex="-1"></a>grouped <span class="op">=</span> grouped[grouped[<span class="st">'Nationality'</span>].isin(top_nationalities)]</span>
+<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="#cb37-9" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(grouped, x<span class="op">=</span><span class="st">'Date'</span>, y<span class="op">=</span><span class="st">'Nationality'</span>, size<span class="op">=</span><span class="st">'Count'</span>, color<span class="op">=</span><span class="st">'Nationality'</span>,</span>
+<span id="cb37-10"><a href="#cb37-10" tabindex="-1"></a>                 title<span class="op">=</span><span class="st">'Frequency of Artworks by Nationality Over Time'</span>)</span>
+<span id="cb37-11"><a href="#cb37-11" tabindex="-1"></a></span>
+<span id="cb37-12"><a href="#cb37-12" tabindex="-1"></a>fig.update_xaxes(title_text<span class="op">=</span><span class="st">'Year'</span>)</span>
+<span id="cb37-13"><a href="#cb37-13" tabindex="-1"></a>fig.update_yaxes(title_text<span class="op">=</span><span class="st">'Nationality'</span>)</span>
+<span id="cb37-14"><a href="#cb37-14" tabindex="-1"></a></span>
+<span id="cb37-15"><a href="#cb37-15" tabindex="-1"></a>fig.show()</span></code></pre>
 </div>
 <figure><img src="../fig/output_12.png" class="figure mx-auto d-block"></figure></div>
 </div>
@@ -1461,20 +1427,7 @@ resulting graph represents.</p>
 </button>
 <div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
 <div class="accordion-body">
-<pre><code><span><span class="va">df</span> <span class="op">=</span> <span class="fu">moma_df.copy</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-<ul><li>Creates a copy of the DataFrame <code>moma_df</code> and assigns it
-to <code>df</code>. This is often done to preserve the original
-DataFrame in case you want to modify it without affecting the source.
-Here, because we are going to manipulate some values in
-<code>moma_df</code>, changing their data types and removing rows that
-contain empty values, we create a copy of it to keep the original
-DataFrame unchanged.</li>
-</ul><pre><code><span><span class="va">df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span> <span class="op">=</span> <span class="fu">pd.to_numeric</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span>, errors<span class="op">=</span><span class="st">'coerce'</span><span class="op">)</span></span></code></pre>
-<ul><li>The dates in the ‘Date’ column are objects. This line of code
-converts the values in the ‘Date’ column to numeric format.</li>
-<li>Any values that can’t be converted (like strings or invalid dates)
-are set to NaN (missing values) by <code>errors='coerce'</code>.</li>
-</ul><pre><code>df = df.dropna(subset=['Date', 'Nationality'])</code></pre>
+<pre><code>df = df.dropna(subset=['Date', 'Nationality'])</code></pre>
 <ul><li>Removes rows from <code>df</code> where either ‘Date’ or
 ‘Nationality’ is missing (NaN).</li>
 <li>Ensures that the data used for analysis is clean and has valid date
@@ -1520,12 +1473,12 @@ different nationalities.</li>
 <code>labels={'Date': 'Year'}</code>: renames the x-axis label.</li>
 <li>
 <code>fig.show()</code>: displays the interactive plot.</li>
-</ul><div id="accordionSpoiler4" class="accordion spoiler-accordion accordion-flush">
+</ul><div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler4" aria-expanded="false" aria-controls="collapseSpoiler4">
-  <h3 class="accordion-header" id="headingSpoiler4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> what is a Scatterplot? </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> what is a Scatterplot? </h3>
 </button>
-<div id="collapseSpoiler4" class="accordion-collapse collapse" aria-labelledby="headingSpoiler4" data-bs-parent="#accordionSpoiler4">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
 <div class="accordion-body">
 <p>A scatter plot is a type of chart that shows the relationship between
 two numerical variables. Each point on the plot represents one
@@ -1653,8 +1606,8 @@ any links that you are not going to use.
   "url": "https://Goli-SF.github.io/python_101_humanities/instructor/01_analyze_tabular_data.html",
   "identifier": "https://Goli-SF.github.io/python_101_humanities/instructor/01_analyze_tabular_data.html",
   "dateCreated": "2025-07-30",
-  "dateModified": "2025-07-29",
-  "datePublished": "2025-09-23"
+  "dateModified": "2025-09-25",
+  "datePublished": "2025-09-25"
 }
 
   </script><script>

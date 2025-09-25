@@ -571,7 +571,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-01_analyze_tabular_data"><p>Content from <a href="01_analyze_tabular_data.html">Analyzing Tabular Data</a></p>
 <hr>
-<p>Last updated on 2025-07-29 |
+<p>Last updated on 2025-09-25 |
 
         <a href="https://github.com/Goli-SF/python_101_humanities/edit/main/episodes/01_analyze_tabular_data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 128 minutes</p>
@@ -1573,15 +1573,20 @@ eight most common artistic media found in <code>moma_df</code>.</p>
 <div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>moma_df[<span class="st">'Date'</span>] <span class="op">=</span> pd.to_numeric(moma_df[<span class="st">'Date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>top_media <span class="op">=</span> moma_df[<span class="st">'Medium'</span>].value_counts().nlargest(<span class="dv">8</span>).index</span>
-<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>medium_df <span class="op">=</span> moma_df[moma_df[<span class="st">'Medium'</span>].isin(top_media)]</span>
-<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a></span>
-<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a>fig <span class="op">=</span> px.histogram(medium_df, x<span class="op">=</span><span class="st">'Date'</span>, color<span class="op">=</span><span class="st">'Medium'</span>,</span>
-<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a>                   nbins<span class="op">=</span><span class="dv">50</span>,</span>
-<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a>                   title<span class="op">=</span><span class="st">'Trends in Medium Usage Over Time'</span>,</span>
-<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a>                   labels<span class="op">=</span>{<span class="st">'Date'</span>: <span class="st">'Year'</span>})</span>
-<span id="cb28-9"><a href="#cb28-9" tabindex="-1"></a>fig.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>df <span class="op">=</span> moma_df.copy()</span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>df[<span class="st">'Date'</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">'Date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a>top_media <span class="op">=</span> df[<span class="st">'Medium'</span>].value_counts().nlargest(<span class="dv">8</span>).index</span>
+<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a>medium_df <span class="op">=</span> df[df[<span class="st">'Medium'</span>].isin(top_media)]</span>
+<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a>fig <span class="op">=</span> px.histogram(medium_df, x<span class="op">=</span><span class="st">'Date'</span>, color<span class="op">=</span><span class="st">'Medium'</span>,</span>
+<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a>                   nbins<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb28-9"><a href="#cb28-9" tabindex="-1"></a>                   title<span class="op">=</span><span class="st">'Trends in Medium Usage Over Time: the Top 8 Media'</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" tabindex="-1"></a>fig.update_xaxes(title_text<span class="op">=</span><span class="st">'Year'</span>)</span>
+<span id="cb28-12"><a href="#cb28-12" tabindex="-1"></a>fig.update_yaxes(title_text<span class="op">=</span><span class="st">'Number of Artworks'</span>)</span>
+<span id="cb28-13"><a href="#cb28-13" tabindex="-1"></a></span>
+<span id="cb28-14"><a href="#cb28-14" tabindex="-1"></a>fig.show()</span></code></pre>
 </div>
 <figure><img src="../fig/output_11.png" class="figure mx-auto d-block"></figure><div id="challenge7" class="callout challenge">
 <div class="callout-square">
@@ -1624,7 +1629,24 @@ in your own code.</p>
 <div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <p>Here’s a line-by-line explanation of the above code:</p>
-<pre><code><span><span class="va">moma_df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span> <span class="op">=</span> <span class="fu">pd.to_numeric</span><span class="op">(</span><span class="va">moma_df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span>, errors<span class="op">=</span><span class="st">'coerce'</span><span class="op">)</span></span></code></pre>
+<pre><code><span><span class="va">df</span> <span class="op">=</span> <span class="fu">moma_df.copy</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+<ul>
+<li>Creates a copy of the DataFrame <code>moma_df</code> and assigns it
+to <code>df</code>. This is often done to preserve the original
+DataFrame in case you want to modify it without affecting the source.
+Here, because we are going to manipulate some values in
+<code>moma_df</code>, changing their data types and removing rows that
+contain empty values, we create a copy of it to keep the original
+DataFrame unchanged.</li>
+</ul>
+<pre><code><span><span class="va">df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span> <span class="op">=</span> <span class="fu">pd.to_numeric</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span>, errors<span class="op">=</span><span class="st">'coerce'</span><span class="op">)</span></span></code></pre>
+<ul>
+<li>The dates in the “Date” column are objects. This line of code
+converts the values in the ‘Date’ column to numeric format.</li>
+<li>Any values that can’t be converted (like strings or invalid dates)
+are set to NaN (missing values) by <code>errors='coerce'</code>.</li>
+</ul>
+<pre><code><span><span class="va">df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span> <span class="op">=</span> <span class="fu">pd.to_numeric</span><span class="op">(</span><span class="va">moma_df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span>, errors<span class="op">=</span><span class="st">'coerce'</span><span class="op">)</span></span></code></pre>
 <ul>
 <li>If you remember, the dates in the ‘Date’ column were objects as
 <code>moma_df.info()</code> showed. This line of code converts the
@@ -1632,12 +1654,12 @@ values in the ‘Date’ column to numeric format.</li>
 <li>Any values that can’t be converted (like strings or invalid dates)
 are set to NaN (missing values) by <code>errors='coerce'</code>.</li>
 </ul>
-<pre><code>top_media = moma_df['Medium'].value_counts().nlargest(8).index</code></pre>
+<pre><code>top_media = df['Medium'].value_counts().nlargest(8).index</code></pre>
 <ul>
 <li>
-<code>moma_df['Medium']</code> selects the “Medium” column from the
-DataFrame <code>moma_df</code>, which contains the artistic media for
-each artwork.</li>
+<code>df['Medium']</code> selects the “Medium” column from the
+DataFrame <code>df</code>, which contains the artistic media for each
+artwork.</li>
 <li>
 <code>.value_counts()</code> counts the number of occurrences of
 each unique value in the “Medium” column (i.e., how many artworks belong
@@ -1650,12 +1672,12 @@ types based on their counts.</li>
 from the result of <code>nlargest</code>, which gives us the top 8
 artistic media.</li>
 </ul>
-<pre><code>medium_df = moma_df[moma_df['Medium'].isin(top_media)]</code></pre>
+<pre><code>medium_df = df[moma_df['Medium'].isin(top_media)]</code></pre>
 <ul>
 <li>
-<code>moma_df['Medium'].isin(top_media)</code> checks which rows in
-the “Medium” column of <code>moma_df</code> contain one of the top 8
-media from the <code>top_media</code> list.</li>
+<code>df['Medium'].isin(top_media)</code> checks which rows in the
+“Medium” column of <code>moma_df</code> contain one of the top 8 media
+from the <code>top_media</code> list.</li>
 <li>The result is stored in a new DataFrame called
 <code>medium_df</code>, which contains only the artworks with the top 8
 most frequent media.</li>
@@ -1677,86 +1699,23 @@ created.</li>
 <code>color='Medium'</code>: This argument colors the bars by the
 “Medium” column, so you can distinguish between the different artistic
 media.</li>
+<li>When you set the X-axis to the <code>Date</code> column in
+<code>medium_df</code> and the bar colors to the top 8 media,
+<code>Plotly Express</code> automatically counts the occurrences of each
+artistic medium and plots them on the Y-axis. Therefore, it is not
+necessary to explicitly specify the column from <code>medium_df</code>
+that should be plotted on the Y-axis.</li>
 <li>
 <code>nbins=50</code>: Specifies the number of bins for the
 histogram (i.e., how the years will be grouped).</li>
 <li>
 <code>title='Trends in Medium Usage Over Time'</code>: The title of
 the plot.</li>
-<li>
-<code>labels={'Date': 'Year'}</code>: Customizes the label of the
-X-axis in a <em>Python dictionary</em> for better clarity.</li>
 </ul>
-<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
-  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a Python dictionary? </h3>
-</button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
-<div class="accordion-body">
-<p>Python dictionaries are enclosed in curly brackets: <strong>{
-}</strong>. A Python dictionary is a built-in data structure used to
-store pairs of related information. One part of the pair is called the
-<em>key</em>, and the other part is the <em>value</em>. Each key is
-linked to a specific value, and you can use the key to quickly access
-the value associated with it. A Python dictionary is structured exactly
-like a linguistic dictionary: just as you look up a word in a linguistic
-dictionary to find its definition, you can store values under keys in a
-Python dictionary to be able to use the keys to retrieve the values
-later.</p>
-<p>Here’s how you might define a Python dictionary:</p>
-<div class="codewrapper sourceCode" id="cb33">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>my_vacation_plan<span class="op">=</span> {</span>
-<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>    <span class="st">'budget'</span>: <span class="dv">100</span>,</span>
-<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a>    <span class="st">'destination'</span>: <span class="st">'Johannesburg'</span>,</span>
-<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a>    <span class="st">'accomodation'</span>: <span class="st">'Sunset Hotel'</span>,</span>
-<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a>    <span class="st">'activities'</span>: [<span class="st">'hiking'</span>, <span class="st">'swimming'</span>, <span class="st">'biking'</span>],</span>
-<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a>    <span class="st">'travel by plane'</span>: TRUE</span>
-<span id="cb33-7"><a href="#cb33-7" tabindex="-1"></a>}</span></code></pre>
-</div>
-<p>In a Python dictionary, both keys and values can be a variety of data
-types, but with some important rules:</p>
-<div class="section level5">
-<h5 id="keys">Keys:<a class="anchor" aria-label="anchor" href="#keys"></a>
-</h5>
-<p>There are two main things to know about keys:</p>
-<ol style="list-style-type: decimal">
-<li>They must be unique: You can’t have two identical keys in the same
-dictionary.</li>
-<li>They must be immutable: This means they have to be data types that
-cannot change.</li>
-</ol>
-<p>Valid key types include:</p>
-<ul>
-<li>Strings (e.g., ‘budget’)</li>
-<li>Numbers (e.g., 1, 3.14)</li>
-<li>Tuples (e.g., (1, 2)), as long as the tuple itself doesn’t contain
-mutable objects</li>
-</ul>
-<p>You cannot use lists, dictionaries, or other mutable types as
-keys.</p>
-</div>
-<div class="section level5">
-<h5 id="values">Values:<a class="anchor" aria-label="anchor" href="#values"></a>
-</h5>
-<p>Values can be any type of Python object, including:</p>
-<ul>
-<li>Strings</li>
-<li>Numbers</li>
-<li>Lists</li>
-<li>Booleans</li>
-<li>Functions</li>
-<li>Even other dictionaries or complex objects</li>
-</ul>
-<p>Python places no restriction on the types of values you can
-store.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
+<pre><code><span><span class="fu">fig.update_xaxes</span><span class="op">(</span>title_text<span class="op">=</span><span class="st">'Year'</span><span class="op">)</span></span>
+<span><span class="fu">fig.update_yaxes</span><span class="op">(</span>title_text<span class="op">=</span><span class="st">'Number of Artworks'</span><span class="op">)</span></span></code></pre>
+<p>These lines set the title of the X-axis to “Year” and the title of
+the Y-axia to “Number of Artworks.”</p>
 <pre><code><span><span class="fu">fig.show</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 <ul>
 <li>This line displays the plot created by <code>plotly.express</code>.
@@ -1782,21 +1741,24 @@ MoMA’s collection.</p>
 time, the process will be a bit more complex. It’s up to you to
 understand the functionality of the code and what information the
 resulting graph represents.</p>
-<div class="codewrapper sourceCode" id="cb35">
+<div class="codewrapper sourceCode" id="cb37">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>df <span class="op">=</span> moma_df.copy()</span>
-<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>df[<span class="st">'Date'</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">'Date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
-<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a>df <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">'Date'</span>, <span class="st">'Nationality'</span>])</span>
-<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a></span>
-<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a>grouped <span class="op">=</span> df.groupby([<span class="st">'Date'</span>, <span class="st">'Nationality'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'Count'</span>)</span>
-<span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a>top_nationalities <span class="op">=</span> df[<span class="st">'Nationality'</span>].value_counts().nlargest(<span class="dv">7</span>).index</span>
-<span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a>grouped <span class="op">=</span> grouped[grouped[<span class="st">'Nationality'</span>].isin(top_nationalities)]</span>
-<span id="cb35-8"><a href="#cb35-8" tabindex="-1"></a></span>
-<span id="cb35-9"><a href="#cb35-9" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(grouped, x<span class="op">=</span><span class="st">'Date'</span>, y<span class="op">=</span><span class="st">'Nationality'</span>, size<span class="op">=</span><span class="st">'Count'</span>, color<span class="op">=</span><span class="st">'Nationality'</span>,</span>
-<span id="cb35-10"><a href="#cb35-10" tabindex="-1"></a>                 title<span class="op">=</span><span class="st">'Frequency of Artworks by Nationality Over Time'</span>,</span>
-<span id="cb35-11"><a href="#cb35-11" tabindex="-1"></a>                 labels<span class="op">=</span>{<span class="st">'Date'</span>: <span class="st">'Year'</span>})</span>
-<span id="cb35-12"><a href="#cb35-12" tabindex="-1"></a>fig.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>df <span class="op">=</span> moma_df.copy()</span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a>df[<span class="st">'Date'</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">'Date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a>df <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">'Date'</span>, <span class="st">'Nationality'</span>])</span>
+<span id="cb37-4"><a href="#cb37-4" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a>grouped <span class="op">=</span> df.groupby([<span class="st">'Date'</span>, <span class="st">'Nationality'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'Count'</span>)</span>
+<span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a>top_nationalities <span class="op">=</span> df[<span class="st">'Nationality'</span>].value_counts().nlargest(<span class="dv">7</span>).index</span>
+<span id="cb37-7"><a href="#cb37-7" tabindex="-1"></a>grouped <span class="op">=</span> grouped[grouped[<span class="st">'Nationality'</span>].isin(top_nationalities)]</span>
+<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="#cb37-9" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(grouped, x<span class="op">=</span><span class="st">'Date'</span>, y<span class="op">=</span><span class="st">'Nationality'</span>, size<span class="op">=</span><span class="st">'Count'</span>, color<span class="op">=</span><span class="st">'Nationality'</span>,</span>
+<span id="cb37-10"><a href="#cb37-10" tabindex="-1"></a>                 title<span class="op">=</span><span class="st">'Frequency of Artworks by Nationality Over Time'</span>)</span>
+<span id="cb37-11"><a href="#cb37-11" tabindex="-1"></a></span>
+<span id="cb37-12"><a href="#cb37-12" tabindex="-1"></a>fig.update_xaxes(title_text<span class="op">=</span><span class="st">'Year'</span>)</span>
+<span id="cb37-13"><a href="#cb37-13" tabindex="-1"></a>fig.update_yaxes(title_text<span class="op">=</span><span class="st">'Nationality'</span>)</span>
+<span id="cb37-14"><a href="#cb37-14" tabindex="-1"></a></span>
+<span id="cb37-15"><a href="#cb37-15" tabindex="-1"></a>fig.show()</span></code></pre>
 </div>
 <figure><img src="../fig/output_12.png" class="figure mx-auto d-block"></figure>
 </div>
@@ -1809,23 +1771,6 @@ resulting graph represents.</p>
 </button>
 <div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
 <div class="accordion-body">
-<pre><code><span><span class="va">df</span> <span class="op">=</span> <span class="fu">moma_df.copy</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-<ul>
-<li>Creates a copy of the DataFrame <code>moma_df</code> and assigns it
-to <code>df</code>. This is often done to preserve the original
-DataFrame in case you want to modify it without affecting the source.
-Here, because we are going to manipulate some values in
-<code>moma_df</code>, changing their data types and removing rows that
-contain empty values, we create a copy of it to keep the original
-DataFrame unchanged.</li>
-</ul>
-<pre><code><span><span class="va">df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span> <span class="op">=</span> <span class="fu">pd.to_numeric</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="st">'Date'</span><span class="op">]</span>, errors<span class="op">=</span><span class="st">'coerce'</span><span class="op">)</span></span></code></pre>
-<ul>
-<li>The dates in the ‘Date’ column are objects. This line of code
-converts the values in the ‘Date’ column to numeric format.</li>
-<li>Any values that can’t be converted (like strings or invalid dates)
-are set to NaN (missing values) by <code>errors='coerce'</code>.</li>
-</ul>
 <pre><code>df = df.dropna(subset=['Date', 'Nationality'])</code></pre>
 <ul>
 <li>Removes rows from <code>df</code> where either ‘Date’ or
@@ -1884,12 +1829,12 @@ different nationalities.</li>
 <li>
 <code>fig.show()</code>: displays the interactive plot.</li>
 </ul>
-<div id="accordionSpoiler4" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler4" aria-expanded="false" aria-controls="collapseSpoiler4">
-  <h3 class="accordion-header" id="headingSpoiler4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> what is a Scatterplot? </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> what is a Scatterplot? </h3>
 </button>
-<div id="collapseSpoiler4" class="accordion-collapse collapse" aria-labelledby="headingSpoiler4" data-bs-parent="#accordionSpoiler4">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
 <div class="accordion-body">
 <p>A scatter plot is a type of chart that shows the relationship between
 two numerical variables. Each point on the plot represents one
@@ -1970,7 +1915,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-02_analyze_text_data"><p>Content from <a href="02_analyze_text_data.html">Analyzing Text Data</a></p>
 <hr>
-<p>Last updated on 2025-09-22 |
+<p>Last updated on 2025-09-25 |
 
         <a href="https://github.com/Goli-SF/python_101_humanities/edit/main/episodes/02_analyze_text_data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 192 minutes</p>
@@ -2116,26 +2061,96 @@ England.</p>
 thirteen separate <code>.txt</code> files. To store multiple texts in a
 single Python variable, we can construct a <em>Python
 dictionary</em>.</p>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a Python dictionary? </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div class="accordion-body">
+<p>Python dictionaries are enclosed in curly brackets: <strong>{
+}</strong>. A Python dictionary is a built-in data structure used to
+store pairs of related information. One part of the pair is called the
+<em>key</em>, and the other part is the <em>value</em>. Each key is
+linked to a specific value, and you can use the key to quickly access
+the value associated with it. A Python dictionary is structured exactly
+like a linguistic dictionary: just as you look up a word in a linguistic
+dictionary to find its definition, you can store values under keys in a
+Python dictionary to be able to use the keys to retrieve the values
+later.</p>
+<p>Here’s how you might define a Python dictionary:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>my_vacation_plan<span class="op">=</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>    <span class="st">'budget'</span>: <span class="dv">100</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    <span class="st">'destination'</span>: <span class="st">'Johannesburg'</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>    <span class="st">'accomodation'</span>: <span class="st">'Sunset Hotel'</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    <span class="st">'activities'</span>: [<span class="st">'hiking'</span>, <span class="st">'swimming'</span>, <span class="st">'biking'</span>],</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>    <span class="st">'travel by plane'</span>: TRUE</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>}</span></code></pre>
+</div>
+<p>In a Python dictionary, both keys and values can be a variety of data
+types, but with some important rules:</p>
+<div class="section level5">
+<h5 id="keys">Keys:<a class="anchor" aria-label="anchor" href="#keys"></a>
+</h5>
+<p>There are two main things to know about keys:</p>
+<ol style="list-style-type: decimal">
+<li>They must be unique: You can’t have two identical keys in the same
+dictionary.</li>
+<li>They must be immutable: This means they have to be data types that
+cannot change.</li>
+</ol>
+<p>Valid key types include:</p>
+<ul>
+<li>Strings (e.g., ‘budget’)</li>
+<li>Numbers (e.g., 1, 3.14)</li>
+<li>Tuples (e.g., (1, 2)), as long as the tuple itself doesn’t contain
+mutable objects</li>
+</ul>
+<p>You cannot use lists, dictionaries, or other mutable types as
+keys.</p>
+</div>
+<div class="section level5">
+<h5 id="values">Values:<a class="anchor" aria-label="anchor" href="#values"></a>
+</h5>
+<p>Values can be any type of Python object, including:</p>
+<ul>
+<li>Strings</li>
+<li>Numbers</li>
+<li>Lists</li>
+<li>Booleans</li>
+<li>Functions</li>
+<li>Even other dictionaries or complex objects</li>
+</ul>
+<p>Python places no restriction on the types of values you can
+store.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 <p>We’re going to create two dictionaries: one for Marlowe’s plays, and
 one for Shakespeare’s. The keys in each dictionary will be the names of
 the <code>.txt</code> files — which correspond to the play titles — and
 the values will be the full texts of the plays. First, let’s build a
 list of keys for each dictionary:</p>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>shakespeare_files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(shakespeare_path)]</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>marlowe_files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(marlowe_path)]</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"File names corresponding to Shakespeare:"</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> shakespeare_files: </span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>    <span class="bu">print</span> (<span class="st">"*"</span>, <span class="bu">file</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="bu">print</span>()</span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"File names corresponding to Marlowe:"</span>)</span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> marlowe_files: </span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>    <span class="bu">print</span> (<span class="st">"*"</span>, <span class="bu">file</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>shakespeare_files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(shakespeare_path)]</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>marlowe_files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(marlowe_path)]</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"File names corresponding to Shakespeare:"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> shakespeare_files: </span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>    <span class="bu">print</span> (<span class="st">"*"</span>, <span class="bu">file</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"File names corresponding to Marlowe:"</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> marlowe_files: </span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>    <span class="bu">print</span> (<span class="st">"*"</span>, <span class="bu">file</span>)</span></code></pre>
 </div>
 <figure><img src="../fig/output_13.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-line-by-line" class="callout discussion">
 <div class="callout-square">
@@ -2147,12 +2162,12 @@ list of keys for each dictionary:</p>
 <div class="callout-content">
 <p>In the above code, we’re defining two lists:
 <code>shakespeare_files</code> and <code>marlowe_files</code>.</p>
-<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
-  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a Python list? </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
+  <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a Python list? </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
 <div class="accordion-body">
 <p>A list in Python is a type of data structure used to store multiple
 items in a single variable. Lists can hold different types of data like
@@ -2161,10 +2176,10 @@ changeable (mutable), and allow duplicate values- meaning that the same
 value can appear multiple times in the list without any issue.</p>
 <p>Python lists are enclosed in square brackets: <strong>[ ]</strong>. A
 Python list could look like this:</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>my_list <span class="op">=</span> [<span class="st">'apples'</span>, <span class="st">'oranges'</span>, <span class="dv">12</span>, [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], <span class="st">'bananas'</span>]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>my_list <span class="op">=</span> [<span class="st">'apples'</span>, <span class="st">'oranges'</span>, <span class="dv">12</span>, [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], <span class="st">'bananas'</span>]</span></code></pre>
 </div>
 </div>
 </div>
@@ -2178,12 +2193,12 @@ includes functions to work with files and directories.</p>
 marlowe_files = [f for f in os.listdir(marlowe_path)]</code></pre>
 <p>This is a list comprehension, which is a short way to create a new
 list using a <code>for</code> loop.</p>
-<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
-  <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a for loop? </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a for loop? </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
 <div class="accordion-body">
 <p>A for loop is used in Python to repeat an action for every item in a
 group (like a list). You can think of it as a way to go through a
@@ -2236,26 +2251,26 @@ of their <code>.txt</code> extension. To do so, let’s write a function
 that does exactly this for us. The function takes a list of file names,
 removes their <code>.txt</code> extensions, and returns a list of file
 names without extension:</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="kw">def</span> extention_remover (file_names):</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>    filenames_without_extention <span class="op">=</span> [<span class="bu">file</span>.removesuffix(<span class="st">".txt"</span>) <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> file_names]</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>    <span class="cf">return</span> filenames_without_extention</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="kw">def</span> extention_remover (file_names):</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>    filenames_without_extention <span class="op">=</span> [<span class="bu">file</span>.removesuffix(<span class="st">".txt"</span>) <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> file_names]</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>    <span class="cf">return</span> filenames_without_extention</span></code></pre>
 </div>
 <p>Now let’s apply the function to <code>shakespeare_files</code> and
 <code>marlowe_files</code> and store the results in two new lists,
 <code>shakespeare_works</code> and <code>marlowe_works</code>. We’ll
 print the resulting lists to make sure that the file extensions have
 been successfully removed from them:</p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>shakespeare_works<span class="op">=</span> extention_remover(shakespeare_files)</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>marlowe_works<span class="op">=</span> extention_remover(marlowe_files)</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="bu">print</span> (shakespeare_works)</span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="bu">print</span> (marlowe_works)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>shakespeare_works<span class="op">=</span> extention_remover(shakespeare_files)</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>marlowe_works<span class="op">=</span> extention_remover(marlowe_files)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="bu">print</span> (shakespeare_works)</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="bu">print</span> (marlowe_works)</span></code></pre>
 </div>
 <figure><img src="../fig/output_14.png" class="figure mx-auto d-block"></figure><p>So far, so good! Now we can create dictionaries containing all the
 works by each author. To do this, we’ll define a function that handles
@@ -2266,26 +2281,26 @@ way, the new function can take the path to a folder containing our
 literary works and return a dictionary where each file name (without the
 extension) becomes a key, and the corresponding literary text becomes
 the value:</p>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="kw">def</span> literary_work_loader (path):</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>    </span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>    <span class="kw">def</span> extention_remover (file_names):</span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>        filenames_without_extention <span class="op">=</span> [<span class="bu">file</span>.removesuffix(<span class="st">".txt"</span>) <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> file_names]</span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>        <span class="cf">return</span> filenames_without_extention</span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>        </span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>    file_names<span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(path)]</span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>    work_names<span class="op">=</span> extention_remover (file_names)</span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>    full_text_dict<span class="op">=</span> {}</span>
-<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>    </span>
-<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>    <span class="cf">for</span> <span class="bu">file</span>, work <span class="kw">in</span> <span class="bu">zip</span>(file_names, work_names): </span>
-<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(<span class="ss">f"</span><span class="sc">{</span>path<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="bu">file</span><span class="sc">}</span><span class="ss">"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
-<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>            full_text <span class="op">=</span> f.read().replace(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">""</span>)</span>
-<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>            full_text_dict[work]<span class="op">=</span> full_text</span>
-<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a>    </span>
-<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>    <span class="cf">return</span> full_text_dict</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="kw">def</span> literary_work_loader (path):</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>    </span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>    <span class="kw">def</span> extention_remover (file_names):</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>        filenames_without_extention <span class="op">=</span> [<span class="bu">file</span>.removesuffix(<span class="st">".txt"</span>) <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> file_names]</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>        <span class="cf">return</span> filenames_without_extention</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>        </span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>    file_names<span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(path)]</span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>    work_names<span class="op">=</span> extention_remover (file_names)</span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a>    full_text_dict<span class="op">=</span> {}</span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>    </span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>    <span class="cf">for</span> <span class="bu">file</span>, work <span class="kw">in</span> <span class="bu">zip</span>(file_names, work_names): </span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(<span class="ss">f"</span><span class="sc">{</span>path<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="bu">file</span><span class="sc">}</span><span class="ss">"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a>            full_text <span class="op">=</span> f.read().replace(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">""</span>)</span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a>            full_text_dict[work]<span class="op">=</span> full_text</span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a>    </span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a>    <span class="cf">return</span> full_text_dict</span></code></pre>
 </div>
 <div id="lets-analyze-the-code-line-by-line-1" class="callout discussion">
 <div class="callout-square">
@@ -2322,12 +2337,12 @@ part (like “hamlet”).</li>
 <code>f"{path}/{file}"</code> is an f-string that builds the
 complete path to the file.</li>
 </ul>
-<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler4" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
-  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is an f-string? </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler4" aria-expanded="false" aria-controls="collapseSpoiler4">
+  <h3 class="accordion-header" id="headingSpoiler4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is an f-string? </h3>
 </button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler3" aria-labelledby="headingSpoiler3">
+<div id="collapseSpoiler4" class="accordion-collapse collapse" aria-labelledby="headingSpoiler4" data-bs-parent="#accordionSpoiler4">
 <div class="accordion-body">
 <p>An <em>f-string</em> (short for <em>formatted string</em>) is a way
 to create strings that include variables inside them. It makes it easier
@@ -2395,11 +2410,11 @@ will get back a dictionary with all the file names (without
 </div>
 <p>Now that we have the function, we can use it to create two
 dictionaries containing the works of Shakespeare and Marlowe:</p>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>shakespeare_texts<span class="op">=</span> literary_work_loader (shakespeare_path)</span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>marlowe_texts<span class="op">=</span> literary_work_loader (marlowe_path)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>shakespeare_texts<span class="op">=</span> literary_work_loader (shakespeare_path)</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>marlowe_texts<span class="op">=</span> literary_work_loader (marlowe_path)</span></code></pre>
 </div>
 <p>Try printing the <code>marlowe_texts</code> dictionary, which is
 shorter, to get an overview of its structure and content.</p>
@@ -2411,12 +2426,12 @@ shorter, to get an overview of its structure and content.</p>
 think. This has become possible thanks to <em>pretrained machine
 learning models</em> that the Python library <code>spaCy</code>
 offers.</p>
-<div id="accordionSpoiler4" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler5" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler4" aria-expanded="false" aria-controls="collapseSpoiler4">
-  <h3 class="accordion-header" id="headingSpoiler4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a pretrained machine learning model? </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler5" aria-expanded="false" aria-controls="collapseSpoiler5">
+  <h3 class="accordion-header" id="headingSpoiler5">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a pretrained machine learning model? </h3>
 </button>
-<div id="collapseSpoiler4" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler4" aria-labelledby="headingSpoiler4">
+<div id="collapseSpoiler5" class="accordion-collapse collapse" aria-labelledby="headingSpoiler5" data-bs-parent="#accordionSpoiler5">
 <div class="accordion-body">
 <p>A pretrained machine learning model is a model that has already been
 trained on a large dataset by other developers. Instead of starting from
@@ -2435,10 +2450,10 @@ data.</p>
 <p>We are going to use <code>spaCy</code>’s <code>en_core_web_md</code>
 model for this exercise. You can directly download the model from your
 Jupyter Notebook by running the following code:</p>
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="op">!</span> python <span class="op">-</span>m spacy download en_core_web_md</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="op">!</span> python <span class="op">-</span>m spacy download en_core_web_md</span></code></pre>
 </div>
 <p>Once you have downloaded the en_core_web_md model, it remains on your
 computer, ensuring you don’t need to download it again the next time you
@@ -2446,12 +2461,12 @@ run the following lines of code in Jupyter Notebook.</p>
 <p>Now, we will write a function that takes the full text of each play,
 tokenizes it, and counts the number of times each word appears in that
 text.</p>
-<div id="accordionSpoiler5" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler6" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler5" aria-expanded="false" aria-controls="collapseSpoiler5">
-  <h3 class="accordion-header" id="headingSpoiler5">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What does tokenizing mean? </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler6" aria-expanded="false" aria-controls="collapseSpoiler6">
+  <h3 class="accordion-header" id="headingSpoiler6">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What does tokenizing mean? </h3>
 </button>
-<div id="collapseSpoiler5" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler5" aria-labelledby="headingSpoiler5">
+<div id="collapseSpoiler6" class="accordion-collapse collapse" aria-labelledby="headingSpoiler6" data-bs-parent="#accordionSpoiler6">
 <div class="accordion-body">
 <p>Tokenizing a text means breaking a piece of text into smaller parts —
 usually words, subwords, or sentences — so that a computer can work with
@@ -2472,25 +2487,25 @@ raw text.</p>
 </div>
 </div>
 </div>
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="im">import</span> spacy</span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="kw">def</span> token_count(text):</span>
-<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>    nlp <span class="op">=</span> spacy.load(<span class="st">"en_core_web_md"</span>)</span>
-<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>    doc <span class="op">=</span> nlp(text)</span>
-<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a>    </span>
-<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a>    words <span class="op">=</span> [</span>
-<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a>        token.lemma_.lower()</span>
-<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a>        <span class="cf">for</span> token <span class="kw">in</span> doc</span>
-<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a>        <span class="cf">if</span> token.is_alpha               <span class="co"># Keep alphabetic tokens only</span></span>
-<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a>        <span class="kw">and</span> <span class="kw">not</span> token.is_stop           <span class="co"># Exclude stop words</span></span>
-<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a>        <span class="kw">and</span> token.pos_ <span class="op">!=</span> <span class="st">"VERB"</span>        <span class="co"># Exclude verbs</span></span>
-<span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a>    ]</span>
-<span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a>    </span>
-<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a>    <span class="cf">return</span> Counter(words)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="im">import</span> spacy</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a><span class="kw">def</span> token_count(text):</span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>    nlp <span class="op">=</span> spacy.load(<span class="st">"en_core_web_md"</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>    doc <span class="op">=</span> nlp(text)</span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a>    </span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>    words <span class="op">=</span> [</span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a>        token.lemma_.lower()</span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a>        <span class="cf">for</span> token <span class="kw">in</span> doc</span>
+<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a>        <span class="cf">if</span> token.is_alpha               <span class="co"># Keep alphabetic tokens only</span></span>
+<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a>        <span class="kw">and</span> <span class="kw">not</span> token.is_stop           <span class="co"># Exclude stop words</span></span>
+<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a>        <span class="kw">and</span> token.pos_ <span class="op">!=</span> <span class="st">"VERB"</span>        <span class="co"># Exclude verbs</span></span>
+<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a>    ]</span>
+<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a>    </span>
+<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a>    <span class="cf">return</span> Counter(words)</span></code></pre>
 </div>
 <div id="challenge1" class="callout challenge">
 <div class="callout-square">
@@ -2518,7 +2533,7 @@ possibly have?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Let’s analyze the code line by line and answer the above
 questions:</p>
@@ -2618,28 +2633,28 @@ written by a single author.</p>
 <p>Writing this new function will be relatively easy, as we will
 integrate the <code>token_count</code> function within it, which handles
 most of the work for us.</p>
-<div class="codewrapper sourceCode" id="cb28">
+<div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="kw">def</span> token_frequency_count (text_dict):</span>
-<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>    </span>
-<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>    <span class="kw">def</span> token_count(text):</span>
-<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a>        nlp <span class="op">=</span> spacy.load(<span class="st">"en_core_web_md"</span>)</span>
-<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a>        doc <span class="op">=</span> nlp(text)</span>
-<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a>        words <span class="op">=</span> [</span>
-<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a>            token.lemma_.lower()</span>
-<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a>            <span class="cf">for</span> token <span class="kw">in</span> doc</span>
-<span id="cb28-9"><a href="#cb28-9" tabindex="-1"></a>            <span class="cf">if</span> token.is_alpha </span>
-<span id="cb28-10"><a href="#cb28-10" tabindex="-1"></a>            <span class="kw">and</span> <span class="kw">not</span> token.is_stop  </span>
-<span id="cb28-11"><a href="#cb28-11" tabindex="-1"></a>            <span class="kw">and</span> token.pos_ <span class="op">!=</span> <span class="st">"VERB"</span></span>
-<span id="cb28-12"><a href="#cb28-12" tabindex="-1"></a>        ]</span>
-<span id="cb28-13"><a href="#cb28-13" tabindex="-1"></a>        <span class="cf">return</span> Counter(words)</span>
-<span id="cb28-14"><a href="#cb28-14" tabindex="-1"></a></span>
-<span id="cb28-15"><a href="#cb28-15" tabindex="-1"></a>    total_counts <span class="op">=</span> Counter()</span>
-<span id="cb28-16"><a href="#cb28-16" tabindex="-1"></a>    <span class="cf">for</span> key, value <span class="kw">in</span> text_dict.items(): </span>
-<span id="cb28-17"><a href="#cb28-17" tabindex="-1"></a>        total_counts <span class="op">+=</span> token_count (value)</span>
-<span id="cb28-18"><a href="#cb28-18" tabindex="-1"></a></span>
-<span id="cb28-19"><a href="#cb28-19" tabindex="-1"></a>    <span class="cf">return</span> total_counts</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="kw">def</span> token_frequency_count (text_dict):</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>    </span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a>    <span class="kw">def</span> token_count(text):</span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a>        nlp <span class="op">=</span> spacy.load(<span class="st">"en_core_web_md"</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>        doc <span class="op">=</span> nlp(text)</span>
+<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>        words <span class="op">=</span> [</span>
+<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>            token.lemma_.lower()</span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>            <span class="cf">for</span> token <span class="kw">in</span> doc</span>
+<span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a>            <span class="cf">if</span> token.is_alpha </span>
+<span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a>            <span class="kw">and</span> <span class="kw">not</span> token.is_stop  </span>
+<span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a>            <span class="kw">and</span> token.pos_ <span class="op">!=</span> <span class="st">"VERB"</span></span>
+<span id="cb29-12"><a href="#cb29-12" tabindex="-1"></a>        ]</span>
+<span id="cb29-13"><a href="#cb29-13" tabindex="-1"></a>        <span class="cf">return</span> Counter(words)</span>
+<span id="cb29-14"><a href="#cb29-14" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" tabindex="-1"></a>    total_counts <span class="op">=</span> Counter()</span>
+<span id="cb29-16"><a href="#cb29-16" tabindex="-1"></a>    <span class="cf">for</span> key, value <span class="kw">in</span> text_dict.items(): </span>
+<span id="cb29-17"><a href="#cb29-17" tabindex="-1"></a>        total_counts <span class="op">+=</span> token_count (value)</span>
+<span id="cb29-18"><a href="#cb29-18" tabindex="-1"></a></span>
+<span id="cb29-19"><a href="#cb29-19" tabindex="-1"></a>    <span class="cf">return</span> total_counts</span></code></pre>
 </div>
 <div id="lets-analyze-the-codes-last-lines" class="callout discussion">
 <div class="callout-square">
@@ -2679,13 +2694,13 @@ in <code>text_dict</code>.</li>
 dictionaries we have created from the Marlowe and Shakespeare texts and
 take a look at the frequency of words used in the texts written by
 Marlowe as an example:</p>
-<div class="codewrapper sourceCode" id="cb29">
+<div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>shakespeare_frequency <span class="op">=</span> token_frequency_count (shakespeare_texts)</span>
-<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>marlowe_frequency <span class="op">=</span> token_frequency_count (marlowe_texts)</span>
-<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a>marlowe_frequency</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>shakespeare_frequency <span class="op">=</span> token_frequency_count (shakespeare_texts)</span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>marlowe_frequency <span class="op">=</span> token_frequency_count (marlowe_texts)</span>
+<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a>marlowe_frequency</span></code></pre>
 </div>
 <figure><img src="../fig/output_15.png" class="figure mx-auto d-block"></figure><p>The output above displays some of the most frequent words used by
 Christopher Marlowe in the four plays we are analyzing.</p>
@@ -2711,19 +2726,19 @@ the number of the most frequent words to display in the graph
 (<code>top_n</code>), and the title of the graph (<code>title</code>) as
 parameters. This function will create a bar chart of the frequency of
 the selected words within the <code>Counter</code> object:</p>
-<div class="codewrapper sourceCode" id="cb30">
+<div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
-<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a></span>
-<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a><span class="kw">def</span> plot_frequencies (freq_dict, top_n, title):</span>
-<span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a>    </span>
-<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a>    most_common <span class="op">=</span> freq_dict.most_common(top_n)</span>
-<span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame(most_common, columns<span class="op">=</span>[<span class="st">'word'</span>, <span class="st">'frequency'</span>])</span>
-<span id="cb30-8"><a href="#cb30-8" tabindex="-1"></a>    fig <span class="op">=</span> px.bar(df, x<span class="op">=</span><span class="st">'word'</span>, y<span class="op">=</span><span class="st">'frequency'</span>, title<span class="op">=</span>title, text<span class="op">=</span><span class="st">'frequency'</span>)</span>
-<span id="cb30-9"><a href="#cb30-9" tabindex="-1"></a>    </span>
-<span id="cb30-10"><a href="#cb30-10" tabindex="-1"></a>    fig.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a><span class="kw">def</span> plot_frequencies (freq_dict, top_n, title):</span>
+<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a>    </span>
+<span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a>    most_common <span class="op">=</span> freq_dict.most_common(top_n)</span>
+<span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame(most_common, columns<span class="op">=</span>[<span class="st">'word'</span>, <span class="st">'frequency'</span>])</span>
+<span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a>    fig <span class="op">=</span> px.bar(df, x<span class="op">=</span><span class="st">'word'</span>, y<span class="op">=</span><span class="st">'frequency'</span>, title<span class="op">=</span>title, text<span class="op">=</span><span class="st">'frequency'</span>)</span>
+<span id="cb31-9"><a href="#cb31-9" tabindex="-1"></a>    </span>
+<span id="cb31-10"><a href="#cb31-10" tabindex="-1"></a>    fig.show()</span></code></pre>
 </div>
 <div id="lets-analyze-the-codes-last-lines-1" class="callout discussion">
 <div class="callout-square">
@@ -2741,12 +2756,12 @@ like this: <strong>(word, frequency)</strong>. So, for example, the
 value stored in <code>most_common</code> for the top three words that
 appear in Shakespeare plays would be:</p>
 <p><code>[('thou', 1136), ('shall', 759), ('thy', 725)]</code></p>
-<div id="accordionSpoiler6" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler7" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler6" aria-expanded="false" aria-controls="collapseSpoiler6">
-  <h3 class="accordion-header" id="headingSpoiler6">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a tuple? </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler7" aria-expanded="false" aria-controls="collapseSpoiler7">
+  <h3 class="accordion-header" id="headingSpoiler7">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a tuple? </h3>
 </button>
-<div id="collapseSpoiler6" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler6" aria-labelledby="headingSpoiler6">
+<div id="collapseSpoiler7" class="accordion-collapse collapse" aria-labelledby="headingSpoiler7" data-bs-parent="#accordionSpoiler7">
 <div class="accordion-body">
 <p>A tuple in Python is a collection data type used to store multiple
 items in a single variable, characterized by its immutability, meaning
@@ -2793,11 +2808,11 @@ Notebook.</p>
 <p>Now that we have the function, let’s pass the necessary arguments to
 it and visualize two bar charts displaying the 20 most frequent words
 that appear in the Marlowe and Shakespeare plays:</p>
-<div class="codewrapper sourceCode" id="cb34">
+<div class="codewrapper sourceCode" id="cb35">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a>plot_frequencies(shakespeare_frequency, <span class="dv">20</span>, <span class="st">"Top 20 Words in Shakespeare's Works"</span>)</span>
-<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a>plot_frequencies(marlowe_frequency, <span class="dv">20</span>, <span class="st">"Top 20 Words in Marlowe's Works"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>plot_frequencies(shakespeare_frequency, <span class="dv">20</span>, <span class="st">"Top 20 Words in Shakespeare's Works"</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>plot_frequencies(marlowe_frequency, <span class="dv">20</span>, <span class="st">"Top 20 Words in Marlowe's Works"</span>)</span></code></pre>
 </div>
 <figure><img src="../fig/output_16.png" class="figure mx-auto d-block"></figure><div id="discussion5" class="callout discussion">
 <div class="callout-square">
@@ -2832,20 +2847,20 @@ does exactly this for you. To visualize a word cloud, we will use single
 texts rather than the entire text collection by each author. Let’s write
 code that visualizes a word cloud for Shakespeare’s early play, “Comedy
 of Errors”:</p>
-<div class="codewrapper sourceCode" id="cb35">
+<div class="codewrapper sourceCode" id="cb36">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a><span class="im">from</span> wordcloud <span class="im">import</span> WordCloud</span>
-<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a>text <span class="op">=</span> shakespeare_texts[<span class="st">'comedy_of_errors'</span>]</span>
-<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a></span>
-<span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a>wordcloud <span class="op">=</span> WordCloud(width<span class="op">=</span><span class="dv">800</span>, height<span class="op">=</span><span class="dv">400</span>, background_color<span class="op">=</span><span class="st">'white'</span>).generate(text)</span>
-<span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a></span>
-<span id="cb35-8"><a href="#cb35-8" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
-<span id="cb35-9"><a href="#cb35-9" tabindex="-1"></a>plt.imshow(wordcloud, interpolation<span class="op">=</span><span class="st">'bilinear'</span>)</span>
-<span id="cb35-10"><a href="#cb35-10" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>) </span>
-<span id="cb35-11"><a href="#cb35-11" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a><span class="im">from</span> wordcloud <span class="im">import</span> WordCloud</span>
+<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a>text <span class="op">=</span> shakespeare_texts[<span class="st">'comedy_of_errors'</span>]</span>
+<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a>wordcloud <span class="op">=</span> WordCloud(width<span class="op">=</span><span class="dv">800</span>, height<span class="op">=</span><span class="dv">400</span>, background_color<span class="op">=</span><span class="st">'white'</span>).generate(text)</span>
+<span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a>plt.imshow(wordcloud, interpolation<span class="op">=</span><span class="st">'bilinear'</span>)</span>
+<span id="cb36-10"><a href="#cb36-10" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>) </span>
+<span id="cb36-11"><a href="#cb36-11" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 <figure><img src="../fig/output_18.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-line-by-line-2" class="callout discussion">
 <div class="callout-square">
@@ -2921,20 +2936,20 @@ in. Keyword-in-context (kwic) analysis allows you to automate the search
 for the context in which each word appears.</p>
 <p>In this section, I’m going to present you with a simple code that
 does exactly this for you:</p>
-<div class="codewrapper sourceCode" id="cb41">
+<div class="codewrapper sourceCode" id="cb42">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="im">import</span> nltk</span>
-<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a><span class="im">from</span> nltk.text <span class="im">import</span> Text</span>
-<span id="cb41-3"><a href="#cb41-3" tabindex="-1"></a><span class="im">from</span> nltk.tokenize <span class="im">import</span> word_tokenize</span>
-<span id="cb41-4"><a href="#cb41-4" tabindex="-1"></a>nltk.download(<span class="st">'punkt'</span>)      <span class="co">#run this line only once and then comment it out. </span></span>
-<span id="cb41-5"><a href="#cb41-5" tabindex="-1"></a></span>
-<span id="cb41-6"><a href="#cb41-6" tabindex="-1"></a><span class="kw">def</span> kwic_analyze (text, keyword, width<span class="op">=</span><span class="dv">140</span>, lines<span class="op">=</span><span class="dv">20</span>):</span>
-<span id="cb41-7"><a href="#cb41-7" tabindex="-1"></a>    tokens <span class="op">=</span> word_tokenize(text)</span>
-<span id="cb41-8"><a href="#cb41-8" tabindex="-1"></a>    nltk_text <span class="op">=</span> Text(tokens)</span>
-<span id="cb41-9"><a href="#cb41-9" tabindex="-1"></a>    nltk_text.concordance(keyword, width<span class="op">=</span>width, lines<span class="op">=</span>lines)</span>
-<span id="cb41-10"><a href="#cb41-10" tabindex="-1"></a>    </span>
-<span id="cb41-11"><a href="#cb41-11" tabindex="-1"></a>kwic_analyze (marlowe_texts[<span class="st">'jew_of_malta'</span>], <span class="st">"lord"</span>, width<span class="op">=</span><span class="dv">120</span>, lines<span class="op">=</span> <span class="dv">20</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a><span class="im">from</span> nltk.text <span class="im">import</span> Text</span>
+<span id="cb42-3"><a href="#cb42-3" tabindex="-1"></a><span class="im">from</span> nltk.tokenize <span class="im">import</span> word_tokenize</span>
+<span id="cb42-4"><a href="#cb42-4" tabindex="-1"></a>nltk.download(<span class="st">'punkt'</span>)      <span class="co">#run this line only once and then comment it out. </span></span>
+<span id="cb42-5"><a href="#cb42-5" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="#cb42-6" tabindex="-1"></a><span class="kw">def</span> kwic_analyze (text, keyword, width<span class="op">=</span><span class="dv">140</span>, lines<span class="op">=</span><span class="dv">20</span>):</span>
+<span id="cb42-7"><a href="#cb42-7" tabindex="-1"></a>    tokens <span class="op">=</span> word_tokenize(text)</span>
+<span id="cb42-8"><a href="#cb42-8" tabindex="-1"></a>    nltk_text <span class="op">=</span> Text(tokens)</span>
+<span id="cb42-9"><a href="#cb42-9" tabindex="-1"></a>    nltk_text.concordance(keyword, width<span class="op">=</span>width, lines<span class="op">=</span>lines)</span>
+<span id="cb42-10"><a href="#cb42-10" tabindex="-1"></a>    </span>
+<span id="cb42-11"><a href="#cb42-11" tabindex="-1"></a>kwic_analyze (marlowe_texts[<span class="st">'jew_of_malta'</span>], <span class="st">"lord"</span>, width<span class="op">=</span><span class="dv">120</span>, lines<span class="op">=</span> <span class="dv">20</span>)</span></code></pre>
 </div>
 <figure><img src="../fig/output_17.png" class="figure mx-auto d-block"></figure><div id="can-you-tell-how-the-above-code-works" class="callout challenge">
 <div class="callout-square">
@@ -2958,7 +2973,7 @@ each argument do within the function?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <pre><code>import nltk</code></pre>
 <p>This imports the Natural Language Toolkit (<code>NLTK</code>)
@@ -3035,25 +3050,25 @@ the function that you are writing.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb50">
+<div class="codewrapper sourceCode" id="cb51">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" tabindex="-1"></a><span class="im">import</span> nltk</span>
-<span id="cb50-2"><a href="#cb50-2" tabindex="-1"></a><span class="im">from</span> nltk.text <span class="im">import</span> Text</span>
-<span id="cb50-3"><a href="#cb50-3" tabindex="-1"></a><span class="im">from</span> nltk.tokenize <span class="im">import</span> word_tokenize</span>
-<span id="cb50-4"><a href="#cb50-4" tabindex="-1"></a></span>
-<span id="cb50-5"><a href="#cb50-5" tabindex="-1"></a><span class="kw">def</span> kwic_analyze_all(texts_dict, keyword, width<span class="op">=</span><span class="dv">140</span>, lines<span class="op">=</span><span class="dv">20</span>):</span>
-<span id="cb50-6"><a href="#cb50-6" tabindex="-1"></a>    <span class="kw">def</span> kwic_analyze(text, keyword, width<span class="op">=</span>width, lines<span class="op">=</span>lines):</span>
-<span id="cb50-7"><a href="#cb50-7" tabindex="-1"></a>        tokens <span class="op">=</span> word_tokenize(text)</span>
-<span id="cb50-8"><a href="#cb50-8" tabindex="-1"></a>        nltk_text <span class="op">=</span> Text(tokens)</span>
-<span id="cb50-9"><a href="#cb50-9" tabindex="-1"></a>        nltk_text.concordance(keyword, width<span class="op">=</span>width, lines<span class="op">=</span>lines)</span>
-<span id="cb50-10"><a href="#cb50-10" tabindex="-1"></a>    </span>
-<span id="cb50-11"><a href="#cb50-11" tabindex="-1"></a>    <span class="cf">for</span> title, text <span class="kw">in</span> texts_dict.items():</span>
-<span id="cb50-12"><a href="#cb50-12" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Context for '</span><span class="sc">{</span>keyword<span class="sc">}</span><span class="ss">' in '</span><span class="sc">{</span>title<span class="sc">}</span><span class="ss">':"</span>)</span>
-<span id="cb50-13"><a href="#cb50-13" tabindex="-1"></a>        <span class="bu">print</span>()</span>
-<span id="cb50-14"><a href="#cb50-14" tabindex="-1"></a>        kwic_analyze(text, keyword, width, lines)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb51-2"><a href="#cb51-2" tabindex="-1"></a><span class="im">from</span> nltk.text <span class="im">import</span> Text</span>
+<span id="cb51-3"><a href="#cb51-3" tabindex="-1"></a><span class="im">from</span> nltk.tokenize <span class="im">import</span> word_tokenize</span>
+<span id="cb51-4"><a href="#cb51-4" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="#cb51-5" tabindex="-1"></a><span class="kw">def</span> kwic_analyze_all(texts_dict, keyword, width<span class="op">=</span><span class="dv">140</span>, lines<span class="op">=</span><span class="dv">20</span>):</span>
+<span id="cb51-6"><a href="#cb51-6" tabindex="-1"></a>    <span class="kw">def</span> kwic_analyze(text, keyword, width<span class="op">=</span>width, lines<span class="op">=</span>lines):</span>
+<span id="cb51-7"><a href="#cb51-7" tabindex="-1"></a>        tokens <span class="op">=</span> word_tokenize(text)</span>
+<span id="cb51-8"><a href="#cb51-8" tabindex="-1"></a>        nltk_text <span class="op">=</span> Text(tokens)</span>
+<span id="cb51-9"><a href="#cb51-9" tabindex="-1"></a>        nltk_text.concordance(keyword, width<span class="op">=</span>width, lines<span class="op">=</span>lines)</span>
+<span id="cb51-10"><a href="#cb51-10" tabindex="-1"></a>    </span>
+<span id="cb51-11"><a href="#cb51-11" tabindex="-1"></a>    <span class="cf">for</span> title, text <span class="kw">in</span> texts_dict.items():</span>
+<span id="cb51-12"><a href="#cb51-12" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Context for '</span><span class="sc">{</span>keyword<span class="sc">}</span><span class="ss">' in '</span><span class="sc">{</span>title<span class="sc">}</span><span class="ss">':"</span>)</span>
+<span id="cb51-13"><a href="#cb51-13" tabindex="-1"></a>        <span class="bu">print</span>()</span>
+<span id="cb51-14"><a href="#cb51-14" tabindex="-1"></a>        kwic_analyze(text, keyword, width, lines)</span></code></pre>
 </div>
 </div>
 </div>
@@ -3154,8 +3169,8 @@ any links that you are not going to use.
   "url": "https://Goli-SF.github.io/python_101_humanities/instructor/aio.html",
   "identifier": "https://Goli-SF.github.io/python_101_humanities/instructor/aio.html",
   "dateCreated": "2025-07-30",
-  "dateModified": "2025-09-23",
-  "datePublished": "2025-09-23"
+  "dateModified": "2025-09-25",
+  "datePublished": "2025-09-25"
 }
 
   </script><script>
