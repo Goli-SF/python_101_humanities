@@ -731,14 +731,19 @@ To keep the graph clear and easy to read, we'll focus only on the top eight most
 artistic media found in `moma_df`.
 
 ``` Python
-moma_df['Date'] = pd.to_numeric(moma_df['Date'], errors='coerce')
-top_media = moma_df['Medium'].value_counts().nlargest(8).index
-medium_df = moma_df[moma_df['Medium'].isin(top_media)]
+df = moma_df.copy()
+df['Date'] = pd.to_numeric(df['Date'], errors='coerce')
+
+top_media = df['Medium'].value_counts().nlargest(8).index
+medium_df = df[df['Medium'].isin(top_media)]
 
 fig = px.histogram(medium_df, x='Date', color='Medium',
                    nbins=50,
-                   title='Trends in Medium Usage Over Time',
-                   labels={'Date': 'Year'})
+                   title='Trends in Medium Usage Over Time: the Top 8 Media')
+
+fig.update_xaxes(title_text='Year')
+fig.update_yaxes(title_text='Number of Artworks')
+
 fig.show()
 ``` 
 
@@ -764,7 +769,28 @@ out the documentation of `plotly.express.histogram`
 Here's a line-by-line explanation of the above code: 
 
 ```
-moma_df['Date'] = pd.to_numeric(moma_df['Date'], errors='coerce')
+df = moma_df.copy()
+```
+
+- Creates a copy of the DataFrame `moma_df` and assigns it to `df`. This is often done to 
+preserve the original DataFrame in case you want to modify it without affecting the source.
+Here, because we are going to manipulate some values in `moma_df`, changing their data types and 
+removing rows that contain empty values, we create a copy of it to keep the original DataFrame 
+unchanged. 
+
+
+```
+df['Date'] = pd.to_numeric(df['Date'], errors='coerce')
+```
+
+- The dates in the "Date" column are objects. This line of code converts the values in the 
+'Date' column to numeric format. 
+- Any values that can't be converted (like strings or invalid dates) are set to NaN 
+(missing values) by `errors='coerce'`.
+
+
+```
+df['Date'] = pd.to_numeric(moma_df['Date'], errors='coerce')
 ```
 - If you remember, the dates in the 'Date' column were objects as `moma_df.info()` showed. 
 This line of code converts the values in the 'Date' column to numeric format.
@@ -773,9 +799,9 @@ This line of code converts the values in the 'Date' column to numeric format.
 
 
 ```
-top_media = moma_df['Medium'].value_counts().nlargest(8).index
+top_media = df['Medium'].value_counts().nlargest(8).index
 ```
-- `moma_df['Medium']` selects the "Medium" column from the DataFrame `moma_df`, which contains 
+- `df['Medium']` selects the "Medium" column from the DataFrame `df`, which contains 
 the artistic media for each artwork. 
 - `.value_counts()` counts the number of occurrences of each unique value in the "Medium" 
 column (i.e., how many artworks belong to each medium).
@@ -784,10 +810,10 @@ column (i.e., how many artworks belong to each medium).
 gives us the top 8 artistic media.
 
 ```
-medium_df = moma_df[moma_df['Medium'].isin(top_media)]
+medium_df = df[moma_df['Medium'].isin(top_media)]
 ```
 
-- `moma_df['Medium'].isin(top_media)` checks which rows in the "Medium" column of `moma_df` 
+- `df['Medium'].isin(top_media)` checks which rows in the "Medium" column of `moma_df` 
 contain one of the top 8 media from the `top_media` list.
 - The result is stored in a new DataFrame called `medium_df`, which contains only the artworks 
 with the top 8 most frequent media.
@@ -805,67 +831,18 @@ following arguments:
 This represents the year each artwork was created.
 - `color='Medium'`: This argument colors the bars by the "Medium" column, so you can 
 distinguish between the different artistic media.
+- When you set the X-axis to the `Date` column in `medium_df` and the bar colors to the 
+top 8 media, `Plotly Express` automatically counts the occurrences of each artistic medium 
+and plots them on the Y-axis. Therefore, it is not necessary to explicitly specify the column 
+from `medium_df` that should be plotted on the Y-axis. 
 - `nbins=50`: Specifies the number of bins for the histogram (i.e., how the years will be grouped).
 - `title='Trends in Medium Usage Over Time'`: The title of the plot.
-- `labels={'Date': 'Year'}`: Customizes the label of the X-axis 
-in a *Python dictionary* for better clarity.
 
-:::::::::::::::::::::::::::::::::::::::::: spoiler
-#### What is a Python dictionary?
-
-Python dictionaries are enclosed in curly brackets: **{ }**.
-A Python dictionary is a built-in data structure used to store pairs of related information. 
-One part of the pair is called the *key*, and the other part is the *value*. 
-Each key is linked to a specific value, and you can use the key to quickly access the 
-value associated with it. A Python dictionary is structured exactly like a linguistic
-dictionary: just as you look up a word in a linguistic dictionary to find its definition, 
-you can store values under keys in a Python dictionary to be able to use the keys to 
-retrieve the values later. 
-
-Here’s how you might define a Python dictionary:
-
-``` python
-my_vacation_plan= {
-    'budget': 100,
-    'destination': 'Johannesburg',
-    'accomodation': 'Sunset Hotel',
-    'activities': ['hiking', 'swimming', 'biking'],
-    'travel by plane': TRUE
-}
 ```
-
-In a Python dictionary, both keys and values can be a variety of data types, 
-but with some important rules:
-
-##### Keys:
-
-There are two main things to know about keys:
-
-1. They must be unique: You can’t have two identical keys in the same dictionary.
-2. They must be immutable: This means they have to be data types that cannot change.
-
-Valid key types include:
-
-- Strings (e.g., 'budget')
-- Numbers (e.g., 1, 3.14)
-- Tuples (e.g., (1, 2)), as long as the tuple itself doesn’t contain mutable objects
-
-You cannot use lists, dictionaries, or other mutable types as keys.
-
-##### Values:
-
-Values can be any type of Python object, including:
-
-- Strings
-- Numbers
-- Lists
-- Booleans
-- Functions
-- Even other dictionaries or complex objects
-
-Python places no restriction on the types of values you can store.
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
+fig.update_xaxes(title_text='Year')
+fig.update_yaxes(title_text='Number of Artworks')
+```
+These lines set the title of the X-axis to "Year" and the title of the Y-axia to "Number of Artworks."
 
 ```
 fig.show()
@@ -895,33 +872,17 @@ top_nationalities = df['Nationality'].value_counts().nlargest(7).index
 grouped = grouped[grouped['Nationality'].isin(top_nationalities)]
 
 fig = px.scatter(grouped, x='Date', y='Nationality', size='Count', color='Nationality',
-                 title='Frequency of Artworks by Nationality Over Time',
-                 labels={'Date': 'Year'})
+                 title='Frequency of Artworks by Nationality Over Time')
+
+fig.update_xaxes(title_text='Year')
+fig.update_yaxes(title_text='Nationality')
+
 fig.show()
 ```
 
 ![](fig/output_12.png)
 
 :::: solution
-```
-df = moma_df.copy()
-```
-
-- Creates a copy of the DataFrame `moma_df` and assigns it to `df`. This is often done to 
-preserve the original DataFrame in case you want to modify it without affecting the source.
-Here, because we are going to manipulate some values in `moma_df`, changing their data types and 
-removing rows that contain empty values, we create a copy of it to keep the original DataFrame 
-unchanged. 
-
-
-```
-df['Date'] = pd.to_numeric(df['Date'], errors='coerce')
-```
-
-- The dates in the 'Date' column are objects. This line of code converts the values in the 
-'Date' column to numeric format. 
-- Any values that can't be converted (like strings or invalid dates) are set to NaN 
-(missing values) by `errors='coerce'`.
 
 ```
 df = df.dropna(subset=['Date', 'Nationality'])
