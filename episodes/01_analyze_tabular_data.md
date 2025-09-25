@@ -1,6 +1,6 @@
 ---
 title: "Analyzing Tabular Data"
-teaching: 120
+teaching: 240
 exercises: 8
 ---
 
