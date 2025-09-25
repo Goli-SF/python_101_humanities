@@ -123,6 +123,62 @@ file, the dataset for this episode is stored in thirteen separate `.txt` files.
 To store multiple texts in a single Python variable, we can construct
 a *Python dictionary*.
 
+:::::::::::::::::::::::::::::::::::::::::: spoiler
+#### What is a Python dictionary?
+
+Python dictionaries are enclosed in curly brackets: **{ }**.
+A Python dictionary is a built-in data structure used to store pairs of related information. 
+One part of the pair is called the *key*, and the other part is the *value*. 
+Each key is linked to a specific value, and you can use the key to quickly access the 
+value associated with it. A Python dictionary is structured exactly like a linguistic
+dictionary: just as you look up a word in a linguistic dictionary to find its definition, 
+you can store values under keys in a Python dictionary to be able to use the keys to 
+retrieve the values later. 
+
+Here’s how you might define a Python dictionary:
+
+``` python
+my_vacation_plan= {
+    'budget': 100,
+    'destination': 'Johannesburg',
+    'accomodation': 'Sunset Hotel',
+    'activities': ['hiking', 'swimming', 'biking'],
+    'travel by plane': TRUE
+}
+```
+
+In a Python dictionary, both keys and values can be a variety of data types, 
+but with some important rules:
+
+##### Keys:
+
+There are two main things to know about keys:
+
+1. They must be unique: You can’t have two identical keys in the same dictionary.
+2. They must be immutable: This means they have to be data types that cannot change.
+
+Valid key types include:
+
+- Strings (e.g., 'budget')
+- Numbers (e.g., 1, 3.14)
+- Tuples (e.g., (1, 2)), as long as the tuple itself doesn’t contain mutable objects
+
+You cannot use lists, dictionaries, or other mutable types as keys.
+
+##### Values:
+
+Values can be any type of Python object, including:
+
+- Strings
+- Numbers
+- Lists
+- Booleans
+- Functions
+- Even other dictionaries or complex objects
+
+Python places no restriction on the types of values you can store.
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 We’re going to create two dictionaries: one for Marlowe’s plays, and one
 for Shakespeare’s. The keys in each dictionary will be the names of the
 `.txt` files — which correspond to the play titles — and the values will be the
