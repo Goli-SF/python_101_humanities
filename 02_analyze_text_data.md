@@ -89,6 +89,16 @@ In Jupyter Notebook, save the path to each directory in a variable like this:
 shakespeare_path = './data/shakespeare'
 marlowe_path = './data/marlowe'
 ```
+::::::::::::::::::::::::::::::::::: caution
+When working with text data, it's essential to *clean* the text before beginning the 
+analysis. During this cleaning process, you will remove characters that indicate line 
+breaks and other unwanted symbols that might affect your analysis. I've performed some 
+minimal cleaning on the text data we will be using in this episode.
+
+Unfortunately, we won't be able to cover text cleaning in detail in this lesson. 
+However, you'll find a wealth of helpful video tutorials online that can guide you 
+through the process of cleaning text data on your own.
+:::::::::::::::::::::::::::::::::::::::::::
 
 ## 1. Word Frequency Analysis
 
