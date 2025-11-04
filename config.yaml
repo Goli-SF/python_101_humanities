@@ -70,6 +70,7 @@ episodes:
 - 00_introduction.md
 - 01_analyze_tabular_data.md
 - 02_analyze_text_data.md
+- 03_analyze_network_data.md
 
 # Information for Learners
 learners: 
