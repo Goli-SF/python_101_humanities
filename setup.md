@@ -27,7 +27,7 @@ version previously downloaded on April 9, 2025. This version is stored in the Gi
 repository for this lesson, ensuring that the results you see during live coding match 
 exactly what is demonstrated in the lesson.
 
-To load the data from this lesson’s repository into your code, use the following URLs:
+To load the data from this lesson’s repository into your code, use the following URL:
 
 ```
 https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/moma_artworks.csv
@@ -68,6 +68,19 @@ You can download each set of works from the folders provided below:
 https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/shakespeare
 
 https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/marlowe
+```
+
+### Data for Episode 4 (Analyzing Network Data): The Marxist Influence Network
+
+The .csv file that we will work with in this episode was derived from 
+[Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page). 
+It includes the names of all individuals who either influenced Karl Marx and Georg Wilhelm Friedrich Hegel 
+or were influenced by them. 
+
+To load the data from this lesson’s repository into your code, use the following URL:
+
+```
+https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/marxist_influence_network.csv
 ```
 
 ## Software Setup
