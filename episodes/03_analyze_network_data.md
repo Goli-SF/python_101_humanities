@@ -20,6 +20,8 @@ exercises: 12
 
 *** In this lesson, we are going to learn. 
 
+
+
 :::::::::::::::::::::::::::::::::::::::: keypoints
 - Understand the use cases of network analysis. 
 - Visualize networks using the Python library Pyvis.
