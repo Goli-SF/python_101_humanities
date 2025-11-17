@@ -80,7 +80,7 @@ or were influenced by them.
 To load the data from this lesson’s repository into your code, use the following URL:
 
 ```
-https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/marxist_influence_network_updated.csv
+https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/influence_network.csv
 ```
 
 ## Software Setup
