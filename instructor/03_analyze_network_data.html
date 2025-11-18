@@ -232,12 +232,19 @@
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         4. Analyzing Network Data
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#basics-of-network-analysis">1. Basics of Network Analysis</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -299,7 +306,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Analyzing Network Data</h1>
-        <p>Last updated on 2025-11-17 |
+        <p>Last updated on 2025-11-18 |
 
         <a href="https://github.com/Goli-SF/python_101_humanities/edit/main/episodes/03_analyze_network_data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -343,7 +350,77 @@ visualization?</li>
 </div>
 </div>
 </div>
-<p>*** In this lesson, we are going to learn.</p>
+<section><h2 class="section-heading" id="basics-of-network-analysis">1. Basics of Network Analysis<a class="anchor" aria-label="anchor" href="#basics-of-network-analysis"></a></h2>
+<hr class="half-width"><div class="section level3">
+<h3 id="what-are-network-science-and-network-analysis">What are Network Science and Network Analysis?<a class="anchor" aria-label="anchor" href="#what-are-network-science-and-network-analysis"></a></h3>
+<p><strong>Network Science</strong> is an interdisciplinary field that
+studies complex networks, which are structures comprised of
+interconnected nodes (or vertices) and edges (or links). These networks
+can represent various real-world systems such as social networks (for
+example on social media), transportation networks, biological networks,
+and more. The aim of network science is to understand the topological
+structure of networks and the relationships that can be discovered
+within them.</p>
+<p><strong>Network Analysis</strong> refers to the methods and
+techniques used to study and evaluate<br>
+networks. It involves identifying patterns, measuring node importance,
+analyzing connectivity, and understanding the underlying structure and
+function of the network.</p>
+</div>
+<div class="section level3">
+<h3 id="when-and-with-which-type-of-data-is-network-analysis-useful">When and With Which Type of Data is Network Analysis Useful?<a class="anchor" aria-label="anchor" href="#when-and-with-which-type-of-data-is-network-analysis-useful"></a></h3>
+<p>Network analysis is particularly useful when the data can be
+represented as relationships or interactions between entities. Any type
+of data with this quality can be transformed into network data. Network
+data is nothing but a tabular dataset with at least two columns: a
+<code>source</code> column and a <code>target</code> column. Each of
+these columns contains the names of the entities that are connected to
+each other in the network. Other columns can contain more information
+about the connection between <code>source</code> and
+<code>target</code>, including the weight of this connection
+(identifying how strong it is) or its type (for example, whether it is a
+connection between a human and a work of art, or one between two
+humans).</p>
+</div>
+<div class="section level3">
+<h3 id="major-types-of-networks">Major Types of Networks<a class="anchor" aria-label="anchor" href="#major-types-of-networks"></a></h3>
+<p>There are many different network types. Familiarity with them helps
+you decide in the future, when working with your own data, what network
+type your data can be converted to optimally analyze its different
+features.</p>
+<p>Some important network types include:</p>
+<p><strong>1. Directed vs. Undirected Networks</strong></p>
+<ul><li><p>Directed Networks: In these networks, the edges have a direction,
+indicating a one-way relationship between nodes. For example, in a
+citation network, if Paper A cites Paper B, the link goes from A to B
+but not necessarily in the reverse direction.</p></li>
+<li><p>Undirected Networks: Here, the edges do not have a direction,
+representing a symmetric relationship. An example would be a friendship
+network where two people are friends with each other, and the
+relationship is mutual.</p></li>
+</ul><p><strong>2. Weighted vs. Unweighted Networks</strong></p>
+<ul><li><p>Weighted Networks: In weighted networks, edges have weights
+assigned to them, indicating the strength or capacity of the
+relationship. For instance, in a transportation network, the weights
+could represent distances or travel times.</p></li>
+<li><p>Unweighted Networks: These networks have edges that are simply
+present or absent, with no additional information about the strength of
+connections. An example is a simple social network where the only
+consideration is whether or not a connection exists.</p></li>
+</ul><p><strong>3. Bipartite Networks</strong></p>
+<p>Bipartite networks consist of two distinct sets of nodes, and edges
+only connect nodes from different sets. An example is a movie
+recommendation system, where one set consists of users and the other set
+consists of movies.</p>
+<p><strong>4. Homogeneous vs. Heterogeneous Networks</strong></p>
+<ul><li><p>Homogeneous Networks: These networks consist of nodes of the same
+type. An example is a social network where all nodes represent
+people.</p></li>
+<li><p>Heterogeneous Networks: In these networks, nodes can represent
+different types of entities. For instance, a scientific citation network
+can include papers, authors, and journals as different types of
+nodes.</p></li>
+</ul><p><span style="color:red">WE ARE HERE </span></p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -360,10 +437,8 @@ visualization?</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-
-
-
-      </div> <!-- / div.lesson-content -->
+</div>
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/02_analyze_text_data.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="../instructor/index.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
@@ -421,7 +496,7 @@ any links that you are not going to use.
   "url": "https://Goli-SF.github.io/python_101_humanities/instructor/03_analyze_network_data.html",
   "identifier": "https://Goli-SF.github.io/python_101_humanities/instructor/03_analyze_network_data.html",
   "dateCreated": "2025-07-30",
-  "dateModified": "2025-11-17",
+  "dateModified": "2025-11-18",
   "datePublished": "2025-11-18"
 }
 
