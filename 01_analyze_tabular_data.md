@@ -672,6 +672,23 @@ methods serve different analytic purposes, such as:
 among others. To dive deeper into data visualization for statistical inference and storytelling, 
 see [this Carpentries lesson](https://carpentries-incubator.github.io/hermes_stat_inf_data_vis/).
 
+:::::::::::::::: callout
+#### Reverse engineering the code
+
+To learn how to code effectively, it helps to approach the process from two directions at once:
+
+1. Build your skills step by step, starting from the basics—as we’ve been doing so far in this episode.
+2. Learn to reverse-engineer code written by others, even if it’s more advanced than your current 
+evel.
+
+Reverse-engineering means trying to decipher and understand someone else’s code, using it as 
+a learning tool. Although this can be challenging, it’s one of the fastest ways to improve.
+
+In this section, we’re going to examine two pieces of code that generate graphs using the 
+MoMA dataset. Our goal is to understand how they work so that we can adapt similar techniques 
+in our own projects later.
+::::::::::::::::::
+
 Let's do two data visualization exercises using `moma_df`. But before we create the 
 visualizations, it's essential to define why we're making them, because the purpose of a 
 visualization guides how we build it. 
