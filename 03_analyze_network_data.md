@@ -87,7 +87,41 @@ social network where all nodes represent people.
 For instance, a scientific citation network can include papers, authors, and journals as 
 different types of nodes.
 
-<span style="color:red">WE ARE HERE </span>
+## 2. Visualizing Network Data
+
+<span style="color:red">WE ARE HERE. Everything below should be edited and complemented. </span>
+
+``` python
+import pandas as pd
+from pyvis.network import Network
+
+data_url='https://raw.githubusercontent.com/HERMES-DKZ/python_101_humanities/main/episodes/data/influence_network.csv'
+influence_df = pd.read_csv(data_url)
+
+# Step 2: Create a PyVis network
+net = Network(directed=True, height='1000px', width='100%')
+
+# Step 3: Add nodes
+all_nodes = set(influence_df['source']).union(set(df['target']))
+
+for node in all_nodes:
+    color = 'orangered' if node in ['Karl Marx', 'Georg Wilhelm Friedrich Hegel', 
+                                    'Immanuel Kant', 'Benedictus de Spinoza', 
+                                    'René Descartes', 'Plato', 'Friedrich Nietzsche', 
+                                    'Aristotle'] else 'slategrey'
+    net.add_node(node, label=node, color=color)
+
+# Step 4: Add edges
+for _, row in influence_df.iterrows():
+    net.add_edge(row['source'], row['target'], color='darkseagreen', arrows='to')
+
+# Step 5: Generate and save the network visualization
+net.save_graph("influence_network.html")
+print("FINISHED! Network saved as 'influence_network.html'.")
+```
+
+![](fig/output_19.png)
+
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 - Understand the use cases of network analysis. 
