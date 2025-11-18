@@ -70,11 +70,12 @@ https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/shak
 https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/marlowe
 ```
 
-### Data for Episode 4 (Analyzing Network Data): The Marxist Influence Network
+### Data for Episode 4 (Analyzing Network Data): The Intellectual Influence Network
 
 The .csv file that we will work with in this episode was derived from 
 [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page). 
-It includes the names of all individuals who either influenced Karl Marx and Georg Wilhelm Friedrich Hegel 
+It includes the names of all individuals who either influenced Karl Marx, Georg Wilhelm 
+Friedrich Hegel, Emanuel Kant, Benedictus de Spinoza, René Descartes, Plato, or Aristotle
 or were influenced by them. 
 
 To load the data from this lesson’s repository into your code, use the following URL:
