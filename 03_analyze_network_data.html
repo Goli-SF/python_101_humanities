@@ -243,6 +243,7 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#basics-of-network-analysis">1. Basics of Network Analysis</a></li>
+<li><a href="#visualizing-network-data">2. Visualizing Network Data</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -419,8 +420,41 @@ people.</p></li>
 different types of entities. For instance, a scientific citation network
 can include papers, authors, and journals as different types of
 nodes.</p></li>
-</ul><p><span style="color:red">WE ARE HERE </span></p>
-<div id="keypoints1" class="callout keypoints">
+</ul></div>
+</section><section><h2 class="section-heading" id="visualizing-network-data">2. Visualizing Network Data<a class="anchor" aria-label="anchor" href="#visualizing-network-data"></a></h2>
+<hr class="half-width"><p><span style="color:red">WE ARE HERE. Everything below should be
+edited and complemented. </span></p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">from</span> pyvis.network <span class="im">import</span> Network</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>data_url<span class="op">=</span><span class="st">'https://raw.githubusercontent.com/HERMES-DKZ/python_101_humanities/main/episodes/data/influence_network.csv'</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>influence_df <span class="op">=</span> pd.read_csv(data_url)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co"># Step 2: Create a PyVis network</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>net <span class="op">=</span> Network(directed<span class="op">=</span><span class="va">True</span>, height<span class="op">=</span><span class="st">'1000px'</span>, width<span class="op">=</span><span class="st">'100%'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="co"># Step 3: Add nodes</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>all_nodes <span class="op">=</span> <span class="bu">set</span>(influence_df[<span class="st">'source'</span>]).union(<span class="bu">set</span>(df[<span class="st">'target'</span>]))</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="cf">for</span> node <span class="kw">in</span> all_nodes:</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    color <span class="op">=</span> <span class="st">'orangered'</span> <span class="cf">if</span> node <span class="kw">in</span> [<span class="st">'Karl Marx'</span>, <span class="st">'Georg Wilhelm Friedrich Hegel'</span>, </span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>                                    <span class="st">'Immanuel Kant'</span>, <span class="st">'Benedictus de Spinoza'</span>, </span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>                                    <span class="st">'René Descartes'</span>, <span class="st">'Plato'</span>, <span class="st">'Friedrich Nietzsche'</span>, </span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>                                    <span class="st">'Aristotle'</span>] <span class="cf">else</span> <span class="st">'slategrey'</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>    net.add_node(node, label<span class="op">=</span>node, color<span class="op">=</span>color)</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="co"># Step 4: Add edges</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="cf">for</span> _, row <span class="kw">in</span> influence_df.iterrows():</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>    net.add_edge(row[<span class="st">'source'</span>], row[<span class="st">'target'</span>], color<span class="op">=</span><span class="st">'darkseagreen'</span>, arrows<span class="op">=</span><span class="st">'to'</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="co"># Step 5: Generate and save the network visualization</span></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>net.save_graph(<span class="st">"influence_network.html"</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"FINISHED! Network saved as 'influence_network.html'."</span>)</span></code></pre>
+</div>
+<figure><img src="fig/output_19.png" class="figure mx-auto d-block"></figure><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -436,7 +470,6 @@ nodes.</p></li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="02_analyze_text_data.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
