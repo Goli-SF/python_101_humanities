@@ -27,7 +27,7 @@ version previously downloaded on April 9, 2025. This version is stored in the Gi
 repository for this lesson, ensuring that the results you see during live coding match 
 exactly what is demonstrated in the lesson.
 
-To load the data from this lesson’s repository into your code, use the following URL:
+To download the data from this lesson’s repository onto your computer, use the following URL:
 
 ```
 https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/moma_artworks.csv
@@ -78,7 +78,7 @@ It includes the names of all individuals who either influenced Karl Marx, Georg 
 Friedrich Hegel, Emanuel Kant, Benedictus de Spinoza, René Descartes, Plato, or Aristotle
 or were influenced by them. 
 
-To load the data from this lesson’s repository into your code, use the following URL:
+To download the data from this lesson’s repository onto your computer, use the following URL:
 
 ```
 https://github.com/HERMES-DKZ/python_101_humanities/blob/main/episodes/data/influence_network.csv
