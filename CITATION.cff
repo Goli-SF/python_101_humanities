@@ -5,18 +5,20 @@
 # ensuring that the author list and other fields remain accurate.
 
 cff-version: 1.2.0
-title: FIXME
+title: Introduction to data analysis basics with Python for the humanities
 message: >-
   Please cite this lesson using the information in this file
   when you refer to it in publications, and/or if you
   re-use, adapt, or expand on the content in your own
   training material.
-type: dataset
+type: lesson
 authors:
-  - given-names: FIXME
-    family-names: FIXME
+  - given-names: Golnaz
+    family-names: Sarkar Farshi
 abstract: >-
-  FIXME Replace this with a short abstract describing the
-  lesson, e.g. its target audience and main intended
-  learning objectives.
+  The main goal of this lesson is to familiarize Humanities students and scholars with quantitative methods 
+  and data analysis basics. To make the concepts and methods of digital data analysis more concrete and 
+  demonstrate their use case, this lesson also introduces the learners to the programming language Python. 
+  Using Python on different datasets consisting of tables, text, images and sounds, learners explore 
+  the possibilities of digital data analysis for the purpose of humanities research.
 license: CC-BY-4.0
