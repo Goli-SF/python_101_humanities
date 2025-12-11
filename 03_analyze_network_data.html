@@ -245,6 +245,9 @@
       <div class="accordion-body">
         <ul><li><a href="#basics-of-network-analysis">1. Basics of Network Analysis</a></li>
 <li><a href="#visualizing-network-data">2. Visualizing Network Data</a></li>
+<li><a href="#measuring-the-out-degree">2. Measuring the out-degree</a></li>
+<li><a href="#measuring-the-in-degree">3. Measuring the in-degree</a></li>
+<li><a href="#measuring-centrality-degrees">4. Measuring centrality degrees</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -309,7 +312,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Analyzing Network Data</h1>
-        <p>Last updated on 2025-12-09 |
+        <p>Last updated on 2025-12-11 |
 
         <a href="https://github.com/Goli-SF/python_101_humanities/edit/main/episodes/03_analyze_network_data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -438,10 +441,10 @@ philosophers and thinkers that appear in the <code>source</code> column
 have influenced the work of those in the <code>target</code> column.</p>
 <p>To construct this dataset, I have searched Wikidata for people whose
 work has been influenced by Karl Marx, Georg Wilhelm Friedrich Hegel,
-Immanuel Kant, Benedictus de Spinoza, René Descartes Plato, Friedrich
-Nietzsche, or Aristotle, as well as those who have influenced the work
-of these philosophers. Therefore, these seven personalities make up the
-most important nodes in the network.</p>
+Immanuel Kant, Benedictus de Spinoza, René Descartes, Plato, or
+Aristotle, as well as those who have influenced the work of these
+philosophers. Therefore, these seven personalities make up the most
+important nodes in the network.</p>
 <p>Let’s read the data into Jupyter Notebook, convert it to a Pandas
 dataframe, and display a sample of that dataframe with ten rows:</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -487,35 +490,34 @@ for us:</p>
 <span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>    <span class="st">'Benedictus de Spinoza'</span>,</span>
 <span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a>    <span class="st">'René Descartes'</span>,</span>
 <span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>    <span class="st">'Plato'</span>,</span>
-<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a>    <span class="st">'Friedrich Nietzsche'</span>,</span>
-<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a>    <span class="st">'Aristotle'</span></span>
-<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a>}</span>
-<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a></span>
-<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a><span class="cf">for</span> node <span class="kw">in</span> net.nodes:</span>
-<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a>    <span class="cf">if</span> node[<span class="st">'id'</span>] <span class="kw">in</span> highlighted:</span>
-<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a>        node[<span class="st">'color'</span>] <span class="op">=</span> <span class="st">'orangered'</span></span>
-<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a>        node[<span class="st">'color'</span>] <span class="op">=</span> <span class="st">'slategrey'</span></span>
-<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a></span>
-<span id="cb2-40"><a href="#cb2-40" tabindex="-1"></a><span class="cf">for</span> edge <span class="kw">in</span> net.edges:</span>
-<span id="cb2-41"><a href="#cb2-41" tabindex="-1"></a>    edge[<span class="st">'color'</span>] <span class="op">=</span> <span class="st">'darkseagreen'</span></span>
-<span id="cb2-42"><a href="#cb2-42" tabindex="-1"></a>    edge[<span class="st">'arrows'</span>] <span class="op">=</span> <span class="st">'to'</span></span>
-<span id="cb2-43"><a href="#cb2-43" tabindex="-1"></a></span>
-<span id="cb2-44"><a href="#cb2-44" tabindex="-1"></a><span class="co"># Step 4: Save output</span></span>
-<span id="cb2-45"><a href="#cb2-45" tabindex="-1"></a>net.save_graph(<span class="st">"influence_network.html"</span>)</span>
-<span id="cb2-46"><a href="#cb2-46" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"FINISHED! Network saved as 'influence_network.html'."</span>)</span></code></pre>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a>    <span class="st">'Aristotle'</span></span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a>}</span>
+<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a><span class="cf">for</span> node <span class="kw">in</span> net.nodes:</span>
+<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a>    <span class="cf">if</span> node[<span class="st">'id'</span>] <span class="kw">in</span> highlighted:</span>
+<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a>        node[<span class="st">'color'</span>] <span class="op">=</span> <span class="st">'orangered'</span></span>
+<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a>        node[<span class="st">'color'</span>] <span class="op">=</span> <span class="st">'slategrey'</span></span>
+<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a><span class="cf">for</span> edge <span class="kw">in</span> net.edges:</span>
+<span id="cb2-40"><a href="#cb2-40" tabindex="-1"></a>    edge[<span class="st">'color'</span>] <span class="op">=</span> <span class="st">'darkseagreen'</span></span>
+<span id="cb2-41"><a href="#cb2-41" tabindex="-1"></a>    edge[<span class="st">'arrows'</span>] <span class="op">=</span> <span class="st">'to'</span></span>
+<span id="cb2-42"><a href="#cb2-42" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" tabindex="-1"></a><span class="co"># Step 4: Save output</span></span>
+<span id="cb2-44"><a href="#cb2-44" tabindex="-1"></a>net.save_graph(<span class="st">"influence_network.html"</span>)</span>
+<span id="cb2-45"><a href="#cb2-45" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"FINISHED! Network saved as 'influence_network.html'."</span>)</span></code></pre>
 </div>
 <figure><img src="fig/output_20.png" class="figure mx-auto d-block"></figure><p>Don’t worry if the network that you have visualized in your code
 doesn’t look exactly like the one displayed here. <code>Pyvis</code>
 creates interactive network graphs, so that you can pull the nodes
 around with the mouse and change their constellation.</p>
-<div id="lets-analyze-the-codes-last-lines" class="callout discussion">
+<div id="lets-analyze-the-code-line-by-line" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
 <span class="callout-header">Discussion</span>
-<div id="lets-analyze-the-codes-last-lines" class="callout-inner">
-<h3 class="callout-title">Let’s analyze the code’s last lines</h3>
+<div id="lets-analyze-the-code-line-by-line" class="callout-inner">
+<h3 class="callout-title">Let’s analyze the code line by line</h3>
 <div class="callout-content">
 <p>First, let’s look at what is happening at each step:</p>
 <ol style="list-style-type: decimal"><li>Build the <code>NetworkX</code> graph: Creates a directed graph
@@ -576,7 +578,6 @@ highlighted = {
     'Benedictus de Spinoza',
     'René Descartes',
     'Plato',
-    'Friedrich Nietzsche',
     'Aristotle'
 }</code></pre>
 <p>Defines a Python <code>set</code> named <code>highlighted</code>
@@ -613,7 +614,536 @@ shows the network with the applied styling.</p>
 </div>
 </div>
 </div>
-<p><span style="color:red">WE ARE HERE. </span></p>
+<p>Visualizing network data is very helpful, because it helps you
+understand the dataset better and decide what insights it can offer you
+in your research.</p>
+<div id="challenge1" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Study the visualized graph more closely. This is a directional graph
+of influence in the realm of European philosophy. With a partner,
+discuss what questions the visualized dataset can answer. These
+questions guide the further analytic actions that we will undertake in
+this lesson.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>Below are some of the questions that we could answer using this
+dataset:</p>
+<ol style="list-style-type: decimal"><li>Among the seven highlighted thinkers based on whom the dataset has
+been curated, which one has been more influential? Which one has had the
+least among of influence?</li>
+<li>Which thinkers have been influenced by the largest number of the
+highlighted thinkers?</li>
+<li>How can the influence of the highlighted thinkers be quantitatively
+measured?</li>
+</ol></div>
+</div>
+</div>
+</div>
+<p>In the following sections, we will answer the questions above using
+different network analysis techniques.</p>
+</section><section><h2 class="section-heading" id="measuring-the-out-degree">2. Measuring the out-degree<a class="anchor" aria-label="anchor" href="#measuring-the-out-degree"></a></h2>
+<hr class="half-width"><p>The out-degree of a node is the number of arrows going out from that
+node. In our influence graph, if a philosopher is connected to many
+others with arrows pointing from them to others, that means they
+influenced many people. So:</p>
+<div style="margin-left: 30px;">
+<p>out-degree = how many people a thinker influenced (according to our
+dataset).</p>
+</div>
+<p>Let’s write a python code that calculates the out-degree of the
+highlighted seven thinkers:</p>
+<div class="codewrapper sourceCode" id="cb14">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># List of highlighted thinkers</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>highlighted <span class="op">=</span> [</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>    <span class="st">'Karl Marx'</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>    <span class="st">'Georg Wilhelm Friedrich Hegel'</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>    <span class="st">'Immanuel Kant'</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>    <span class="st">'Benedictus de Spinoza'</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>    <span class="st">'René Descartes'</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>    <span class="st">'Plato'</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>    <span class="st">'Aristotle'</span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>]</span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="co"># Compute integer out-degree safely</span></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>influence_counts <span class="op">=</span> {}</span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="cf">for</span> thinker <span class="kw">in</span> highlighted:</span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a>    influence_counts[thinker] <span class="op">=</span> <span class="bu">int</span>(G.out_degree(thinker))</span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a><span class="co"># Identify most and least influential</span></span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a>most_influential <span class="op">=</span> <span class="bu">max</span>(influence_counts, key<span class="op">=</span><span class="kw">lambda</span> k: influence_counts[k])</span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a>least_influential <span class="op">=</span> <span class="bu">min</span>(influence_counts, key<span class="op">=</span><span class="kw">lambda</span> k: influence_counts[k])</span>
+<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a></span>
+<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Influence counts among highlighted thinkers:"</span>)</span>
+<span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a><span class="cf">for</span> k, v <span class="kw">in</span> influence_counts.items():</span>
+<span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>v<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a></span>
+<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Most influential thinker:"</span>, most_influential)</span>
+<span id="cb14-27"><a href="#cb14-27" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Least influential thinker:"</span>, least_influential)</span></code></pre>
+</div>
+<figure><img src="fig/output_21.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-line-by-line-1" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div id="lets-analyze-the-code-line-by-line-1" class="callout-inner">
+<h3 class="callout-title">Let’s analyze the code line by line</h3>
+<div class="callout-content">
+<pre><code>highlighted = [
+    'Karl Marx',
+    'Georg Wilhelm Friedrich Hegel',
+    'Immanuel Kant',
+    'Benedictus de Spinoza',
+    'René Descartes',
+    'Plato',
+    'Aristotle'
+]</code></pre>
+<p>This line re-defines the <code>highlighted</code> list from the
+previous code chunk. The list will be used to loop through these
+thinkers later.</p>
+<pre><code><span><span class="va">influence_counts</span> <span class="op">=</span> <span class="op">{</span><span class="op">}</span></span></code></pre>
+<p>This line creates an empty dictionary called
+<code>influence_counts</code>.</p>
+<pre><code>for thinker in highlighted:
+    influence_counts[thinker] = int(G.out_degree(thinker))</code></pre>
+<p>These lines create a For loop. The loop goes through the
+<code>highlighted</code> list one thinker at a time. During each cycle,
+the variable <code>thinker</code> holds one name from the list.</p>
+<p><code>influence_counts[thinker] = int(G.out_degree(thinker))</code>
+retrieves the thinker’s out-degree from the graph <code>G</code>.</p>
+<p><code>G.out_degree(thinker)</code> returns how many edges point
+outward from that thinker.</p>
+<p><code>int(...)</code> ensures that the result is stored as a plain
+integer.</p>
+<p>The dictionary <code>influence_counts</code> stores this value under
+the thinker’s name.</p>
+<pre><code>most_influential = max(influence_counts, key=lambda k: influence_counts[k])</code></pre>
+<p>This line finds the thinker with the highest out-degree.
+<code>max(...)</code> selects the key (the thinker) whose value in the
+dictionary is largest.</p>
+<p><code>key=lambda k: influence_counts[k]</code> uses a lambda function
+that tells Python to compare items based on their stored influence
+number.</p>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What is a lambda function? </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div class="accordion-body">
+<p>A lambda function in Python is a very small, short function that you
+create without giving it a name. Because it has no name, it is called an
+<em>anonymous</em> function.</p>
+<p>It is used when you need a simple function for a short amount of time
+and do not want to write a full function with <code>def</code>.</p>
+<p>A simple lambda function looks like this:</p>
+<pre><code>lambda x: x + 1</code></pre>
+<p>This means:</p>
+<ul><li>take an input called x</li>
+<li>return x + 1</li>
+</ul><p>So if you used it like this:</p>
+<pre><code>f = lambda x: x + 1</code></pre>
+<p>then <code>f(5)</code> would return 6.</p>
+<p>In our code, we have:</p>
+<pre><code>key=lambda k: influence_counts[k]</code></pre>
+<p>This means:</p>
+<ul><li>Python is given a tiny function</li>
+<li>The function takes one input, <code>k</code>
+</li>
+<li>The function returns `influence_counts[k]```</li>
+</ul><p>In other words, when Python tries to find the maximum value in the
+dictionary, it uses the lambda function to tell it: “Look up the value
+for each thinker and compare those values.”</p>
+</div>
+</div>
+</div>
+</div>
+<pre><code>least_influential = min(influence_counts, key=lambda k: influence_counts[k])</code></pre>
+<p>This line works the same way as the previous one, but uses
+<code>min(...)</code> to find the smallest out-degree. The result is the
+thinker who influenced the fewest people in the dataset.</p>
+<p>Finally, the last code lines implement functions that you have
+already learned in the previoius episodes.</p>
+</div>
+</div>
+</div>
+<p>So far, we know that Karl Marx has been the most influential among
+the highlighted personalities in our dataset, whereas the least
+influential person has been René Descartes. Let’s draw a bar chart to
+better understand the out-degrees of the seven selected nodes, which
+gives us a measure of how influential they have been in the world of
+philosophy and literature.</p>
+<div class="codewrapper sourceCode" id="cb23">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="co"># Sort philosophers by out-degree (highest → lowest)</span></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>sorted_items <span class="op">=</span> <span class="bu">sorted</span>(influence_counts.items(), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a><span class="co"># Unpack the sorted items back into two lists</span></span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a>philosophers <span class="op">=</span> [item[<span class="dv">0</span>] <span class="cf">for</span> item <span class="kw">in</span> sorted_items]</span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>out_degrees <span class="op">=</span> [item[<span class="dv">1</span>] <span class="cf">for</span> item <span class="kw">in</span> sorted_items]</span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a><span class="co"># Create bar plot</span></span>
+<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a>    x<span class="op">=</span>philosophers,</span>
+<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a>    y<span class="op">=</span>out_degrees,</span>
+<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a>    labels<span class="op">=</span>{<span class="st">'x'</span>: <span class="st">'Philosopher'</span>, <span class="st">'y'</span>: <span class="st">'Out-degree'</span>},</span>
+<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Out-degree (Influence Count) of Highlighted Philosophers'</span></span>
+<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a>)</span>
+<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a>fig.show()</span></code></pre>
+</div>
+<figure><img src="fig/output_22.png" class="figure mx-auto d-block"></figure><p>In the above code, only the few first lines merit a brief
+explanation.</p>
+<div id="lets-analyze-a-few-code-lines" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div id="lets-analyze-a-few-code-lines" class="callout-inner">
+<h3 class="callout-title">Let’s analyze a few code lines</h3>
+<div class="callout-content">
+<pre><code>sorted_items = sorted(influence_counts.items(), key=lambda x: x[1], reverse=True)</code></pre>
+<p><code>influence_counts.items()</code> produces all key–value pairs
+from the dictionary. Each item looks like: (‘Plato’, 9) or (‘Aristotle’,
+6).</p>
+<p><code>sorted(..., key=lambda x: x[1], reverse=True)</code> Sorts
+those key–value pairs based on the value (the out-degree).
+<code>x</code> represents one pair, such as (‘Plato’, 9).
+<code>x[1]</code> selects the second part of the pair, the
+out-degree.</p>
+<p><code>reverse=True</code> makes the list sorted from highest to
+lowest.</p>
+<p>The result, stored in <code>sorted_items</code>, is a list of tuples
+ordered by out-degree.</p>
+<pre><code>philosophers = [item[0] for item in sorted_items]</code></pre>
+<p>This creates a new list containing only the names of the
+philosophers, in the sorted order. <code>item[0]</code> means “take the
+first part of each tuple,” which is the philosopher’s name.</p>
+<pre><code>out_degrees = [item[1] for item in sorted_items]</code></pre>
+<p>This creates another list containing only the out-degree numbers, in
+the same sorted order. <code>item[1]</code> means “take the second part
+of each tuple,” which is the out-degree.</p>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="measuring-the-in-degree">3. Measuring the in-degree<a class="anchor" aria-label="anchor" href="#measuring-the-in-degree"></a></h2>
+<hr class="half-width"><p>In the previous section, we measured the out-degrees. In this one, we
+want to measure the in-degrees to see which thinkers have been
+influenced by the largest number of the highlighted thinkers, which
+translates into: which nodes have the highest number of arrows pointing
+at them. We count, for each node, how many of its incoming edges come
+from the highlighted thinkers.</p>
+<p>Let’s write a Python code that performs the in-degree count for
+us:</p>
+<div class="codewrapper sourceCode" id="cb27">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co"># Step 1: Create a dictionary to count influences from highlighted thinkers</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>influence_count <span class="op">=</span> {node: <span class="dv">0</span> <span class="cf">for</span> node <span class="kw">in</span> G.nodes}</span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co"># Step 2: Count how many highlighted thinkers influence each node</span></span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a><span class="cf">for</span> target <span class="kw">in</span> G.nodes:</span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a>    predecessors <span class="op">=</span> <span class="bu">set</span>(G.predecessors(target))  <span class="co"># thinkers influencing this target</span></span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a>    influence_count[target] <span class="op">=</span> <span class="bu">len</span>(predecessors.intersection(highlighted))</span>
+<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" tabindex="-1"></a><span class="co"># Step 3: Find the maximum count</span></span>
+<span id="cb27-10"><a href="#cb27-10" tabindex="-1"></a>max_influence <span class="op">=</span> <span class="bu">max</span>(influence_count.values())</span>
+<span id="cb27-11"><a href="#cb27-11" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" tabindex="-1"></a><span class="co"># Step 4: Find the non-highlighted thinkers influenced by the maximum number of highlighted thinkers</span></span>
+<span id="cb27-13"><a href="#cb27-13" tabindex="-1"></a>most_influenced_thinkers <span class="op">=</span> [</span>
+<span id="cb27-14"><a href="#cb27-14" tabindex="-1"></a>    node <span class="cf">for</span> node, count <span class="kw">in</span> influence_count.items()</span>
+<span id="cb27-15"><a href="#cb27-15" tabindex="-1"></a>    <span class="cf">if</span> count <span class="op">==</span> max_influence <span class="kw">and</span> node <span class="kw">not</span> <span class="kw">in</span> highlighted</span>
+<span id="cb27-16"><a href="#cb27-16" tabindex="-1"></a>]</span>
+<span id="cb27-17"><a href="#cb27-17" tabindex="-1"></a></span>
+<span id="cb27-18"><a href="#cb27-18" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Thinkers influenced by the maximum number of highlighted thinkers:"</span>, most_influenced_thinkers)</span>
+<span id="cb27-19"><a href="#cb27-19" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Number of highlighted thinkers influencing them:"</span>, max_influence)</span></code></pre>
+</div>
+<figure><img src="fig/output_23.png" class="figure mx-auto d-block"></figure><div id="lets-analyze-the-code-line-by-line-2" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div id="lets-analyze-the-code-line-by-line-2" class="callout-inner">
+<h3 class="callout-title">Let’s analyze the code line by line</h3>
+<div class="callout-content">
+<pre><code>influence_count = {node: 0 for node in G.nodes}</code></pre>
+<p><code>G.nodes</code> gives a list of all thinkers (nodes) in the
+network.</p>
+<p><code>{node: 0 for node in G.nodes}</code> is a dictionary
+comprehension. It creates a dictionary where each thinker starts with a
+count of 0, meaning initially we assume no highlighted thinkers
+influence them.</p>
+<pre><code>for target in G.nodes:
+    predecessors = set(G.predecessors(target))  # thinkers influencing this target
+    influence_count[target] = len(predecessors.intersection(highlighted))</code></pre>
+<p><code>for target in G.nodes:</code> loops over every thinker in the
+network.</p>
+<p><code>G.predecessors(target)</code> gives a list of thinkers who have
+an arrow pointing to this thinker — in other words, thinkers who
+influenced them.</p>
+<p><code>set(predecessors)</code> converts the list of influencers into
+a set for easy comparison.</p>
+<p><code>predecessors.intersection(highlighted)</code> finds which of
+the influencers are in our highlighted thinkers set.</p>
+<p><code>len(...)</code> counts how many highlighted thinkers influence
+this node.</p>
+<p><code>influence_count[target] = ...</code> updates the dictionary
+with this number.</p>
+<pre><code><span><span class="va">max_influence</span> <span class="op">=</span> <span class="fu">max</span><span class="op">(</span><span class="fu">influence_count.values</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<p><code>influence_count.values()</code> gives all the counts of
+highlighted thinkers for each node.</p>
+<p><code>max(...)</code> finds the largest number, i.e., the highest
+number of highlighted thinkers influencing a single thinker.</p>
+<pre><code>most_influenced_thinkers = [
+    node for node, count in influence_count.items()
+    if count == max_influence and node not in highlighted
+]</code></pre>
+<p>The list comprehension
+<code>[node for node, count in ... if count == max_influence and node not in highlighted]</code>
+creates a list of thinkers whose count equals the maximum. It also makes
+sure that the nodes in this list, whose in-degrees are being measured,
+do not belong to the highlighted list.</p>
+<p>The thinkers in the list <code>most_influenced_thinkers</code> are
+those influenced by the highest number of highlighted thinkers.</p>
+</div>
+</div>
+</div>
+<p>Wonderful! We now know that Michel Foucault, Alain, and Evald
+Ilyenkov have taken the greatest influence from the highlighted
+thinkers. Let’s now create a filtered network dataset, consisting only
+of these three nodes and the seven highlighted thinkers, and visualize
+it. This visualization should give us a better understanding of European
+philosophy’s landscape concerning the seven highlighted thinkers:</p>
+<div class="codewrapper sourceCode" id="cb32">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="im">from</span> pyvis.network <span class="im">import</span> Network</span>
+<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a><span class="co"># Combine nodes to include in the smaller network</span></span>
+<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a>nodes_to_include <span class="op">=</span> highlighted.union(most_influenced_thinkers)</span>
+<span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a><span class="co"># Step 1: Build the filtered NetworkX graph</span></span>
+<span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a>G_filtered <span class="op">=</span> nx.DiGraph()</span>
+<span id="cb32-10"><a href="#cb32-10" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="#cb32-11" tabindex="-1"></a><span class="co"># Add only the relevant nodes</span></span>
+<span id="cb32-12"><a href="#cb32-12" tabindex="-1"></a>G_filtered.add_nodes_from(nodes_to_include)</span>
+<span id="cb32-13"><a href="#cb32-13" tabindex="-1"></a></span>
+<span id="cb32-14"><a href="#cb32-14" tabindex="-1"></a><span class="co"># Add edges only if both source and target are in nodes_to_include</span></span>
+<span id="cb32-15"><a href="#cb32-15" tabindex="-1"></a><span class="cf">for</span> _, row <span class="kw">in</span> influence_df.iterrows():</span>
+<span id="cb32-16"><a href="#cb32-16" tabindex="-1"></a>    <span class="cf">if</span> row[<span class="st">'source'</span>] <span class="kw">in</span> nodes_to_include <span class="kw">and</span> row[<span class="st">'target'</span>] <span class="kw">in</span> nodes_to_include:</span>
+<span id="cb32-17"><a href="#cb32-17" tabindex="-1"></a>        G_filtered.add_edge(row[<span class="st">'source'</span>], row[<span class="st">'target'</span>])</span>
+<span id="cb32-18"><a href="#cb32-18" tabindex="-1"></a></span>
+<span id="cb32-19"><a href="#cb32-19" tabindex="-1"></a><span class="co"># Step 2: Create a PyVis network</span></span>
+<span id="cb32-20"><a href="#cb32-20" tabindex="-1"></a>net <span class="op">=</span> Network(directed<span class="op">=</span><span class="va">True</span>, height<span class="op">=</span><span class="st">'1000px'</span>, width<span class="op">=</span><span class="st">'100%'</span>)</span>
+<span id="cb32-21"><a href="#cb32-21" tabindex="-1"></a></span>
+<span id="cb32-22"><a href="#cb32-22" tabindex="-1"></a><span class="co"># Import the filtered NetworkX graph</span></span>
+<span id="cb32-23"><a href="#cb32-23" tabindex="-1"></a>net.from_nx(G_filtered)</span>
+<span id="cb32-24"><a href="#cb32-24" tabindex="-1"></a></span>
+<span id="cb32-25"><a href="#cb32-25" tabindex="-1"></a><span class="co"># Step 3: Apply the same visual styling</span></span>
+<span id="cb32-26"><a href="#cb32-26" tabindex="-1"></a><span class="cf">for</span> node <span class="kw">in</span> net.nodes:</span>
+<span id="cb32-27"><a href="#cb32-27" tabindex="-1"></a>    <span class="cf">if</span> node[<span class="st">'id'</span>] <span class="kw">in</span> highlighted:</span>
+<span id="cb32-28"><a href="#cb32-28" tabindex="-1"></a>        node[<span class="st">'color'</span>] <span class="op">=</span> <span class="st">'orangered'</span></span>
+<span id="cb32-29"><a href="#cb32-29" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb32-30"><a href="#cb32-30" tabindex="-1"></a>        node[<span class="st">'color'</span>] <span class="op">=</span> <span class="st">'slategrey'</span></span>
+<span id="cb32-31"><a href="#cb32-31" tabindex="-1"></a></span>
+<span id="cb32-32"><a href="#cb32-32" tabindex="-1"></a><span class="cf">for</span> edge <span class="kw">in</span> net.edges:</span>
+<span id="cb32-33"><a href="#cb32-33" tabindex="-1"></a>    edge[<span class="st">'color'</span>] <span class="op">=</span> <span class="st">'darkseagreen'</span></span>
+<span id="cb32-34"><a href="#cb32-34" tabindex="-1"></a>    edge[<span class="st">'arrows'</span>] <span class="op">=</span> <span class="st">'to'</span></span>
+<span id="cb32-35"><a href="#cb32-35" tabindex="-1"></a></span>
+<span id="cb32-36"><a href="#cb32-36" tabindex="-1"></a><span class="co"># Step 4: Save the filtered network</span></span>
+<span id="cb32-37"><a href="#cb32-37" tabindex="-1"></a>net.save_graph(<span class="st">"filtered_influence_network.html"</span>)</span>
+<span id="cb32-38"><a href="#cb32-38" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"FINISHED! Filtered network saved as 'filtered_influence_network.html'."</span>)</span></code></pre>
+</div>
+<figure><img src="fig/output_24.png" class="figure mx-auto d-block"></figure><p>With a peer, study the visualized graph carefully and discuss what
+information it provides about European philosophy.</p>
+</section><section><h2 class="section-heading" id="measuring-centrality-degrees">4. Measuring centrality degrees<a class="anchor" aria-label="anchor" href="#measuring-centrality-degrees"></a></h2>
+<hr class="half-width"><p>Finally in this episode, let’s answer the third question we stated
+above: How can the influence of the highlighted thinkers be
+quantitatively measured? To do so, we can measure three so-called
+<em>centrality degrees</em> for the nodes in the highlighted list. These
+are:</p>
+<ul><li>Degree Centrality</li>
+<li>Betweenness Centrality</li>
+<li>Closeness Centrality</li>
+</ul><div class="section level3">
+<h3 id="degree-centrality">Degree Centrality<a class="anchor" aria-label="anchor" href="#degree-centrality"></a></h3>
+<p><strong>Definition:</strong></p>
+<ul><li>Measures the number of direct connections a node has to other
+nodes.</li>
+<li>In a directed graph, degree centrality usually counts both incoming
+and outgoing edges unless specifically split into in-degree and
+out-degree centrality.</li>
+</ul><p><strong>Why we measure it:</strong></p>
+<ul><li>It shows how “connected” a node is in the network.</li>
+<li>In a social or influence network, a thinker with a high degree
+centrality either influences many thinkers (high out-degree) or is
+influenced by many thinkers (high in-degree).</li>
+<li>It is a simple and intuitive measure of a node’s importance in terms
+of direct connections.</li>
+</ul><p><strong>Unit and Range:</strong></p>
+<ul><li>Normalized unitless number that ranges from 0 to 1:</li>
+</ul><figure><img src="fig/output_25.png" class="figure mx-auto d-block"></figure><ul><li>0 means no connections, 1 means connected to all other nodes in the
+network.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="betweenness-centrality">Betweenness Centrality<a class="anchor" aria-label="anchor" href="#betweenness-centrality"></a></h3>
+<p><strong>Definition:</strong></p>
+<ul><li>Measures how often a node lies on the shortest paths between other
+pairs of nodes.</li>
+<li>A node with high betweenness acts as a “bridge” or bottleneck
+connecting different parts of the network.</li>
+</ul><p><strong>Why we measure it:</strong></p>
+<ul><li>Identifies thinkers who are key intermediaries.</li>
+<li>Even if a thinker is not highly connected (low degree), they may
+control the flow of influence in the network if many shortest paths pass
+through them.</li>
+</ul><p><strong>Unit and Range:</strong></p>
+<ul><li>Normalized unitless number that ranges from 0 to 1:</li>
+</ul><figure><img src="fig/output_26.png" class="figure mx-auto d-block"></figure><ul><li>0 means the node is never on a shortest path between any two other
+nodes.</li>
+<li>1 means the node is on all shortest paths (rare in real
+networks).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="closeness-centrality">Closeness Centrality<a class="anchor" aria-label="anchor" href="#closeness-centrality"></a></h3>
+<p><strong>Definition:</strong></p>
+<ul><li>Measures how close a node is to all other nodes in the network,
+based on the shortest paths.</li>
+<li>High closeness means a node can quickly interact with (or influence)
+all other nodes.</li>
+</ul><p><strong>Why we measure it:</strong></p>
+<ul><li>Shows which thinkers are “centrally located” in the network.</li>
+<li>A thinker with high closeness can reach many others efficiently,
+making them influential even without high degree or betweenness.</li>
+</ul><p><strong>Unit and Range:</strong></p>
+<ul><li>Normalized unitless number that ranges from 0 to 1:</li>
+</ul><figure><img src="fig/output_27.png" class="figure mx-auto d-block"></figure><ul><li>0 means the node is very far from others (or disconnected).</li>
+<li>1 means the node is as close as possible to all others (rare).</li>
+</ul><div id="testimonial1" class="callout testimonial">
+<div class="callout-square">
+<i class="callout-icon" data-feather="heart"></i>
+</div>
+<span class="callout-header">Testimonial</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>At this stage, you should be at a point where you can understand the
+following code without any explanation. Congratulations! You’re becoming
+a profi in Python programming!</p>
+</div>
+</div>
+</div>
+<p>Now that you know what information these centrality degrees reveal,
+let’s measure them for the nodes in the list of highlighted
+thinkers.</p>
+<div class="codewrapper sourceCode" id="cb33">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a><span class="co"># Step 1: Calculate centralities</span></span>
+<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a>degree_centrality <span class="op">=</span> nx.degree_centrality(G)       </span>
+<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a>betweenness_centrality <span class="op">=</span> nx.betweenness_centrality(G)</span>
+<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a>closeness_centrality <span class="op">=</span> nx.closeness_centrality(G)     </span>
+<span id="cb33-7"><a href="#cb33-7" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" tabindex="-1"></a><span class="co"># Step 2: Collect centralities only for highlighted thinkers</span></span>
+<span id="cb33-9"><a href="#cb33-9" tabindex="-1"></a>data <span class="op">=</span> []</span>
+<span id="cb33-10"><a href="#cb33-10" tabindex="-1"></a><span class="cf">for</span> node <span class="kw">in</span> highlighted:</span>
+<span id="cb33-11"><a href="#cb33-11" tabindex="-1"></a>    data.append({</span>
+<span id="cb33-12"><a href="#cb33-12" tabindex="-1"></a>        <span class="st">'Thinker'</span>: node,</span>
+<span id="cb33-13"><a href="#cb33-13" tabindex="-1"></a>        <span class="st">'Degree Centrality'</span>: <span class="bu">round</span> (degree_centrality[node], <span class="dv">2</span>),</span>
+<span id="cb33-14"><a href="#cb33-14" tabindex="-1"></a>        <span class="st">'Betweenness Centrality'</span>: <span class="bu">round</span> (betweenness_centrality[node], <span class="dv">2</span>),</span>
+<span id="cb33-15"><a href="#cb33-15" tabindex="-1"></a>        <span class="st">'Closeness Centrality'</span>: <span class="bu">round</span> (closeness_centrality[node], <span class="dv">2</span>)</span>
+<span id="cb33-16"><a href="#cb33-16" tabindex="-1"></a>    })</span>
+<span id="cb33-17"><a href="#cb33-17" tabindex="-1"></a></span>
+<span id="cb33-18"><a href="#cb33-18" tabindex="-1"></a><span class="co"># Step 3: Create a pandas DataFrame</span></span>
+<span id="cb33-19"><a href="#cb33-19" tabindex="-1"></a>centrality_df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb33-20"><a href="#cb33-20" tabindex="-1"></a></span>
+<span id="cb33-21"><a href="#cb33-21" tabindex="-1"></a><span class="co"># Step 4: Sort by Degree Centrality (optional)</span></span>
+<span id="cb33-22"><a href="#cb33-22" tabindex="-1"></a>centrality_df <span class="op">=</span> centrality_df.sort_values(by<span class="op">=</span><span class="st">'Degree Centrality'</span>, ascending<span class="op">=</span><span class="va">False</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb33-23"><a href="#cb33-23" tabindex="-1"></a></span>
+<span id="cb33-24"><a href="#cb33-24" tabindex="-1"></a>centrality_df</span></code></pre>
+</div>
+<figure><img src="fig/output_28.png" class="figure mx-auto d-block"></figure><p>To develop a better understanding of the degree centralities in the
+dataframe, let’s visualize them in a stacked bar chart:</p>
+<div class="codewrapper sourceCode" id="cb34">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="co"># Step 1: Transform the DataFrame to long format</span></span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a>centrality_long <span class="op">=</span> centrality_df.melt(</span>
+<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a>    id_vars<span class="op">=</span><span class="st">'Thinker'</span>, </span>
+<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a>    value_vars<span class="op">=</span>[<span class="st">'Degree Centrality'</span>, <span class="st">'Betweenness Centrality'</span>, <span class="st">'Closeness Centrality'</span>],</span>
+<span id="cb34-5"><a href="#cb34-5" tabindex="-1"></a>    var_name<span class="op">=</span><span class="st">'Centrality'</span>, </span>
+<span id="cb34-6"><a href="#cb34-6" tabindex="-1"></a>    value_name<span class="op">=</span><span class="st">'Value'</span></span>
+<span id="cb34-7"><a href="#cb34-7" tabindex="-1"></a>)</span>
+<span id="cb34-8"><a href="#cb34-8" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" tabindex="-1"></a><span class="co"># Step 2: Create a grouped bar chart with text above the bars</span></span>
+<span id="cb34-10"><a href="#cb34-10" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb34-11"><a href="#cb34-11" tabindex="-1"></a>    centrality_long,</span>
+<span id="cb34-12"><a href="#cb34-12" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Thinker'</span>,</span>
+<span id="cb34-13"><a href="#cb34-13" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'Value'</span>,</span>
+<span id="cb34-14"><a href="#cb34-14" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'Centrality'</span>,</span>
+<span id="cb34-15"><a href="#cb34-15" tabindex="-1"></a>    barmode<span class="op">=</span><span class="st">'group'</span>,</span>
+<span id="cb34-16"><a href="#cb34-16" tabindex="-1"></a>    text<span class="op">=</span><span class="st">'Value'</span>,       <span class="co"># Show numeric values</span></span>
+<span id="cb34-17"><a href="#cb34-17" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Comparison of Centralities for Highlighted Thinkers'</span>,</span>
+<span id="cb34-18"><a href="#cb34-18" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">700</span></span>
+<span id="cb34-19"><a href="#cb34-19" tabindex="-1"></a>)</span>
+<span id="cb34-20"><a href="#cb34-20" tabindex="-1"></a></span>
+<span id="cb34-21"><a href="#cb34-21" tabindex="-1"></a><span class="co"># Step 3: Ensure all text values are horizontally above the bars</span></span>
+<span id="cb34-22"><a href="#cb34-22" tabindex="-1"></a>fig.update_traces(textposition<span class="op">=</span><span class="st">'outside'</span>)  <span class="co"># Forces all values above bars</span></span>
+<span id="cb34-23"><a href="#cb34-23" tabindex="-1"></a></span>
+<span id="cb34-24"><a href="#cb34-24" tabindex="-1"></a><span class="co"># Step 4: Customize layout</span></span>
+<span id="cb34-25"><a href="#cb34-25" tabindex="-1"></a>fig.update_layout(</span>
+<span id="cb34-26"><a href="#cb34-26" tabindex="-1"></a>    xaxis_title<span class="op">=</span><span class="st">'Thinker'</span>,</span>
+<span id="cb34-27"><a href="#cb34-27" tabindex="-1"></a>    yaxis_title<span class="op">=</span><span class="st">'Centrality (normalized 0-1)'</span>,</span>
+<span id="cb34-28"><a href="#cb34-28" tabindex="-1"></a>    legend_title<span class="op">=</span><span class="st">'Centrality Measure'</span>,</span>
+<span id="cb34-29"><a href="#cb34-29" tabindex="-1"></a>    yaxis<span class="op">=</span><span class="bu">dict</span>(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>]),</span>
+<span id="cb34-30"><a href="#cb34-30" tabindex="-1"></a>    template<span class="op">=</span><span class="st">'plotly_white'</span></span>
+<span id="cb34-31"><a href="#cb34-31" tabindex="-1"></a>)</span>
+<span id="cb34-32"><a href="#cb34-32" tabindex="-1"></a></span>
+<span id="cb34-33"><a href="#cb34-33" tabindex="-1"></a><span class="co"># Step 5: Show figure</span></span>
+<span id="cb34-34"><a href="#cb34-34" tabindex="-1"></a>fig.show()</span></code></pre>
+</div>
+<figure><img src="fig/output_29.png" class="figure mx-auto d-block"></figure><div id="discussion5" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>Now that you know what each centrality degree means and you have the
+measures and graphs regarding the centrality degrees of the seven
+highlighted thinkers in the network data, discuss with a partner:</p>
+<ul><li>What do these measures mean for the seven selected thinkers?</li>
+<li>Which thinker among the highlighted ones has the highest number of
+connections?</li>
+<li>Which thinker has most effectively served as a bridge between other
+thinkers in the network data?</li>
+<li>Which thinker has likely most influenced or been influenced by
+others in the network?</li>
+</ul></div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -630,6 +1160,7 @@ shows the network with the applied styling.</p>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="02_analyze_text_data.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
@@ -690,8 +1221,8 @@ any links that you are not going to use.
   "url": "https://Goli-SF.github.io/python_101_humanities/03_analyze_network_data.html",
   "identifier": "https://Goli-SF.github.io/python_101_humanities/03_analyze_network_data.html",
   "dateCreated": "2025-07-30",
-  "dateModified": "2025-12-09",
-  "datePublished": "2025-12-09"
+  "dateModified": "2025-12-11",
+  "datePublished": "2025-12-11"
 }
 
   </script><script>
