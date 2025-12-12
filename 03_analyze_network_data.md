@@ -314,7 +314,7 @@ been more influential? Which one has had the least among of influence?
 
 In the following sections, we will answer the questions above using different network analysis techniques. 
 
-## 2. Measuring the out-degree
+## 3. Measuring the out-degree
 
 The out-degree of a node is the number of arrows going out from that node. In our influence graph, if 
 a philosopher is connected to many others with arrows pointing from them to others, that means they 
@@ -521,7 +521,7 @@ means "take the second part of each tuple," which is the out-degree.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## 3. Measuring the in-degree
+## 4. Measuring the in-degree
 
 In the previous section, we measured the out-degrees. In this one, we want to measure the in-degrees 
 to see which thinkers have been influenced by the largest number of the highlighted thinkers, which
@@ -659,7 +659,7 @@ print("FINISHED! Filtered network saved as 'filtered_influence_network.html'.")
 With a peer, study the visualized graph carefully and discuss what information it provides 
 about European philosophy. 
 
-## 4. Measuring centrality degrees
+## 5. Measuring centrality degrees
 
 Finally in this episode, let's answer the third question we stated above: How can the influence of 
 the highlighted thinkers be quantitatively measured? To do so, we can measure three so-called
