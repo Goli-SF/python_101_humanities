@@ -114,6 +114,7 @@ Data used for quantitative analysis can take various forms, including:
 
 - Tabular data (containing text, numbers, dates, etc.)
 - Text
+- Network data
 - Images
 - Sound
 - Audiovisual data
